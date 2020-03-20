@@ -25,6 +25,9 @@ v1_pod_list_t *v1_pod_list_create(
 
 
 void v1_pod_list_free(v1_pod_list_t *v1_pod_list) {
+    if(NULL == v1_pod_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod_list->api_version);
     list_ForEach(listEntry, v1_pod_list->items) {

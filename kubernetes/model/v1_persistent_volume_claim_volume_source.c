@@ -21,6 +21,9 @@ v1_persistent_volume_claim_volume_source_t *v1_persistent_volume_claim_volume_so
 
 
 void v1_persistent_volume_claim_volume_source_free(v1_persistent_volume_claim_volume_source_t *v1_persistent_volume_claim_volume_source) {
+    if(NULL == v1_persistent_volume_claim_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_persistent_volume_claim_volume_source->claim_name);
     free(v1_persistent_volume_claim_volume_source);

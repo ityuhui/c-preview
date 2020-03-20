@@ -21,6 +21,9 @@ v1_sysctl_t *v1_sysctl_create(
 
 
 void v1_sysctl_free(v1_sysctl_t *v1_sysctl) {
+    if(NULL == v1_sysctl){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_sysctl->name);
     free(v1_sysctl->value);

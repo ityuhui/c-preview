@@ -21,6 +21,9 @@ v1_custom_resource_conversion_t *v1_custom_resource_conversion_create(
 
 
 void v1_custom_resource_conversion_free(v1_custom_resource_conversion_t *v1_custom_resource_conversion) {
+    if(NULL == v1_custom_resource_conversion){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_custom_resource_conversion->strategy);
     v1_webhook_conversion_free(v1_custom_resource_conversion->webhook);

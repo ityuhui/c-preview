@@ -25,6 +25,9 @@ v1alpha1_runtime_class_t *v1alpha1_runtime_class_create(
 
 
 void v1alpha1_runtime_class_free(v1alpha1_runtime_class_t *v1alpha1_runtime_class) {
+    if(NULL == v1alpha1_runtime_class){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_runtime_class->api_version);
     free(v1alpha1_runtime_class->kind);

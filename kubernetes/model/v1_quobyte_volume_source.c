@@ -29,6 +29,9 @@ v1_quobyte_volume_source_t *v1_quobyte_volume_source_create(
 
 
 void v1_quobyte_volume_source_free(v1_quobyte_volume_source_t *v1_quobyte_volume_source) {
+    if(NULL == v1_quobyte_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_quobyte_volume_source->group);
     free(v1_quobyte_volume_source->registry);

@@ -37,6 +37,9 @@ v1beta1_daemon_set_status_t *v1beta1_daemon_set_status_create(
 
 
 void v1beta1_daemon_set_status_free(v1beta1_daemon_set_status_t *v1beta1_daemon_set_status) {
+    if(NULL == v1beta1_daemon_set_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_daemon_set_status->conditions) {
         v1beta1_daemon_set_condition_free(listEntry->data);

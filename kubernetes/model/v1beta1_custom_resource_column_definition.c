@@ -29,6 +29,9 @@ v1beta1_custom_resource_column_definition_t *v1beta1_custom_resource_column_defi
 
 
 void v1beta1_custom_resource_column_definition_free(v1beta1_custom_resource_column_definition_t *v1beta1_custom_resource_column_definition) {
+    if(NULL == v1beta1_custom_resource_column_definition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_custom_resource_column_definition->json_path);
     free(v1beta1_custom_resource_column_definition->description);

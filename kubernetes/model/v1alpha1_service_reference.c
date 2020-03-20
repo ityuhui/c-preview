@@ -25,6 +25,9 @@ v1alpha1_service_reference_t *v1alpha1_service_reference_create(
 
 
 void v1alpha1_service_reference_free(v1alpha1_service_reference_t *v1alpha1_service_reference) {
+    if(NULL == v1alpha1_service_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_service_reference->name);
     free(v1alpha1_service_reference->namespace);

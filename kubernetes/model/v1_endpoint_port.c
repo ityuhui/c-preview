@@ -23,6 +23,9 @@ v1_endpoint_port_t *v1_endpoint_port_create(
 
 
 void v1_endpoint_port_free(v1_endpoint_port_t *v1_endpoint_port) {
+    if(NULL == v1_endpoint_port){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_endpoint_port->name);
     free(v1_endpoint_port->protocol);

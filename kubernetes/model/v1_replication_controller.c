@@ -27,6 +27,9 @@ v1_replication_controller_t *v1_replication_controller_create(
 
 
 void v1_replication_controller_free(v1_replication_controller_t *v1_replication_controller) {
+    if(NULL == v1_replication_controller){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_replication_controller->api_version);
     free(v1_replication_controller->kind);

@@ -19,6 +19,9 @@ v1_aggregation_rule_t *v1_aggregation_rule_create(
 
 
 void v1_aggregation_rule_free(v1_aggregation_rule_t *v1_aggregation_rule) {
+    if(NULL == v1_aggregation_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_aggregation_rule->cluster_role_selectors) {
         v1_label_selector_free(listEntry->data);

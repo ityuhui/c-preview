@@ -11,10 +11,11 @@
     snprintf(dst, 256, "%ld", (long int)(src));\
 }while(0)
 
+
 // create a ClusterRole
 //
 v1beta1_cluster_role_t*
-RbacAuthorizationV1beta1API_createClusterRole(apiClient_t *apiClient ,v1beta1_cluster_role_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_createClusterRole(apiClient_t *apiClient, v1beta1_cluster_role_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -165,7 +166,7 @@ end:
 // create a ClusterRoleBinding
 //
 v1beta1_cluster_role_binding_t*
-RbacAuthorizationV1beta1API_createClusterRoleBinding(apiClient_t *apiClient ,v1beta1_cluster_role_binding_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_createClusterRoleBinding(apiClient_t *apiClient, v1beta1_cluster_role_binding_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -316,7 +317,7 @@ end:
 // create a Role
 //
 v1beta1_role_t*
-RbacAuthorizationV1beta1API_createNamespacedRole(apiClient_t *apiClient ,char * namespace ,v1beta1_role_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_createNamespacedRole(apiClient_t *apiClient, char * namespace, v1beta1_role_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -478,7 +479,7 @@ end:
 // create a RoleBinding
 //
 v1beta1_role_binding_t*
-RbacAuthorizationV1beta1API_createNamespacedRoleBinding(apiClient_t *apiClient ,char * namespace ,v1beta1_role_binding_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_createNamespacedRoleBinding(apiClient_t *apiClient, char * namespace, v1beta1_role_binding_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -640,7 +641,7 @@ end:
 // delete a ClusterRole
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteClusterRole(apiClient_t *apiClient ,char * name ,char * pretty ,char * dryRun ,int gracePeriodSeconds ,int orphanDependents ,char * propagationPolicy ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteClusterRole(apiClient_t *apiClient, char * name, char * pretty, char * dryRun, int gracePeriodSeconds, int orphanDependents, char * propagationPolicy, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -839,7 +840,7 @@ end:
 // delete a ClusterRoleBinding
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteClusterRoleBinding(apiClient_t *apiClient ,char * name ,char * pretty ,char * dryRun ,int gracePeriodSeconds ,int orphanDependents ,char * propagationPolicy ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteClusterRoleBinding(apiClient_t *apiClient, char * name, char * pretty, char * dryRun, int gracePeriodSeconds, int orphanDependents, char * propagationPolicy, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1038,7 +1039,7 @@ end:
 // delete collection of ClusterRole
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * dryRun ,char * fieldSelector ,int gracePeriodSeconds ,char * labelSelector ,int limit ,int orphanDependents ,char * propagationPolicy ,char * resourceVersion ,int timeoutSeconds ,int watch ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, char * pretty, int allowWatchBookmarks, char * _continue, char * dryRun, char * fieldSelector, int gracePeriodSeconds, char * labelSelector, int limit, int orphanDependents, char * propagationPolicy, char * resourceVersion, int timeoutSeconds, int watch, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1399,7 +1400,7 @@ end:
 // delete collection of ClusterRoleBinding
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiClient ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * dryRun ,char * fieldSelector ,int gracePeriodSeconds ,char * labelSelector ,int limit ,int orphanDependents ,char * propagationPolicy ,char * resourceVersion ,int timeoutSeconds ,int watch ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiClient, char * pretty, int allowWatchBookmarks, char * _continue, char * dryRun, char * fieldSelector, int gracePeriodSeconds, char * labelSelector, int limit, int orphanDependents, char * propagationPolicy, char * resourceVersion, int timeoutSeconds, int watch, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1760,7 +1761,7 @@ end:
 // delete collection of Role
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClient ,char * namespace ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * dryRun ,char * fieldSelector ,int gracePeriodSeconds ,char * labelSelector ,int limit ,int orphanDependents ,char * propagationPolicy ,char * resourceVersion ,int timeoutSeconds ,int watch ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClient, char * namespace, char * pretty, int allowWatchBookmarks, char * _continue, char * dryRun, char * fieldSelector, int gracePeriodSeconds, char * labelSelector, int limit, int orphanDependents, char * propagationPolicy, char * resourceVersion, int timeoutSeconds, int watch, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -2132,7 +2133,7 @@ end:
 // delete collection of RoleBinding
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *apiClient ,char * namespace ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * dryRun ,char * fieldSelector ,int gracePeriodSeconds ,char * labelSelector ,int limit ,int orphanDependents ,char * propagationPolicy ,char * resourceVersion ,int timeoutSeconds ,int watch ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *apiClient, char * namespace, char * pretty, int allowWatchBookmarks, char * _continue, char * dryRun, char * fieldSelector, int gracePeriodSeconds, char * labelSelector, int limit, int orphanDependents, char * propagationPolicy, char * resourceVersion, int timeoutSeconds, int watch, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -2504,7 +2505,7 @@ end:
 // delete a Role
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteNamespacedRole(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty ,char * dryRun ,int gracePeriodSeconds ,int orphanDependents ,char * propagationPolicy ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteNamespacedRole(apiClient_t *apiClient, char * name, char * namespace, char * pretty, char * dryRun, int gracePeriodSeconds, int orphanDependents, char * propagationPolicy, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -2714,7 +2715,7 @@ end:
 // delete a RoleBinding
 //
 v1_status_t*
-RbacAuthorizationV1beta1API_deleteNamespacedRoleBinding(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty ,char * dryRun ,int gracePeriodSeconds ,int orphanDependents ,char * propagationPolicy ,v1_delete_options_t * body)
+RbacAuthorizationV1beta1API_deleteNamespacedRoleBinding(apiClient_t *apiClient, char * name, char * namespace, char * pretty, char * dryRun, int gracePeriodSeconds, int orphanDependents, char * propagationPolicy, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -2986,7 +2987,7 @@ end:
 // list or watch objects of kind ClusterRole
 //
 v1beta1_cluster_role_list_t*
-RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * resourceVersion ,int timeoutSeconds ,int watch)
+RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient, char * pretty, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -3250,7 +3251,7 @@ end:
 // list or watch objects of kind ClusterRoleBinding
 //
 v1beta1_cluster_role_binding_list_t*
-RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * resourceVersion ,int timeoutSeconds ,int watch)
+RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient, char * pretty, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -3514,7 +3515,7 @@ end:
 // list or watch objects of kind Role
 //
 v1beta1_role_list_t*
-RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient ,char * namespace ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * resourceVersion ,int timeoutSeconds ,int watch)
+RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient, char * namespace, char * pretty, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -3789,7 +3790,7 @@ end:
 // list or watch objects of kind RoleBinding
 //
 v1beta1_role_binding_list_t*
-RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient ,char * namespace ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * resourceVersion ,int timeoutSeconds ,int watch)
+RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient, char * namespace, char * pretty, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -4064,7 +4065,7 @@ end:
 // list or watch objects of kind RoleBinding
 //
 v1beta1_role_binding_list_t*
-RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClient ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * pretty ,char * resourceVersion ,int timeoutSeconds ,int watch)
+RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClient, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * pretty, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -4328,7 +4329,7 @@ end:
 // list or watch objects of kind Role
 //
 v1beta1_role_list_t*
-RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * pretty ,char * resourceVersion ,int timeoutSeconds ,int watch)
+RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * pretty, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -4592,7 +4593,7 @@ end:
 // partially update the specified ClusterRole
 //
 v1beta1_cluster_role_t*
-RbacAuthorizationV1beta1API_patchClusterRole(apiClient_t *apiClient ,char * name ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+RbacAuthorizationV1beta1API_patchClusterRole(apiClient_t *apiClient, char * name, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -4772,7 +4773,7 @@ end:
 // partially update the specified ClusterRoleBinding
 //
 v1beta1_cluster_role_binding_t*
-RbacAuthorizationV1beta1API_patchClusterRoleBinding(apiClient_t *apiClient ,char * name ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+RbacAuthorizationV1beta1API_patchClusterRoleBinding(apiClient_t *apiClient, char * name, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -4952,7 +4953,7 @@ end:
 // partially update the specified Role
 //
 v1beta1_role_t*
-RbacAuthorizationV1beta1API_patchNamespacedRole(apiClient_t *apiClient ,char * name ,char * namespace ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+RbacAuthorizationV1beta1API_patchNamespacedRole(apiClient_t *apiClient, char * name, char * namespace, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5143,7 +5144,7 @@ end:
 // partially update the specified RoleBinding
 //
 v1beta1_role_binding_t*
-RbacAuthorizationV1beta1API_patchNamespacedRoleBinding(apiClient_t *apiClient ,char * name ,char * namespace ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+RbacAuthorizationV1beta1API_patchNamespacedRoleBinding(apiClient_t *apiClient, char * name, char * namespace, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5334,7 +5335,7 @@ end:
 // read the specified ClusterRole
 //
 v1beta1_cluster_role_t*
-RbacAuthorizationV1beta1API_readClusterRole(apiClient_t *apiClient ,char * name ,char * pretty)
+RbacAuthorizationV1beta1API_readClusterRole(apiClient_t *apiClient, char * name, char * pretty)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5431,7 +5432,7 @@ end:
 // read the specified ClusterRoleBinding
 //
 v1beta1_cluster_role_binding_t*
-RbacAuthorizationV1beta1API_readClusterRoleBinding(apiClient_t *apiClient ,char * name ,char * pretty)
+RbacAuthorizationV1beta1API_readClusterRoleBinding(apiClient_t *apiClient, char * name, char * pretty)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5528,7 +5529,7 @@ end:
 // read the specified Role
 //
 v1beta1_role_t*
-RbacAuthorizationV1beta1API_readNamespacedRole(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty)
+RbacAuthorizationV1beta1API_readNamespacedRole(apiClient_t *apiClient, char * name, char * namespace, char * pretty)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5636,7 +5637,7 @@ end:
 // read the specified RoleBinding
 //
 v1beta1_role_binding_t*
-RbacAuthorizationV1beta1API_readNamespacedRoleBinding(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty)
+RbacAuthorizationV1beta1API_readNamespacedRoleBinding(apiClient_t *apiClient, char * name, char * namespace, char * pretty)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5744,7 +5745,7 @@ end:
 // replace the specified ClusterRole
 //
 v1beta1_cluster_role_t*
-RbacAuthorizationV1beta1API_replaceClusterRole(apiClient_t *apiClient ,char * name ,v1beta1_cluster_role_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_replaceClusterRole(apiClient_t *apiClient, char * name, v1beta1_cluster_role_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -5903,7 +5904,7 @@ end:
 // replace the specified ClusterRoleBinding
 //
 v1beta1_cluster_role_binding_t*
-RbacAuthorizationV1beta1API_replaceClusterRoleBinding(apiClient_t *apiClient ,char * name ,v1beta1_cluster_role_binding_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_replaceClusterRoleBinding(apiClient_t *apiClient, char * name, v1beta1_cluster_role_binding_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -6062,7 +6063,7 @@ end:
 // replace the specified Role
 //
 v1beta1_role_t*
-RbacAuthorizationV1beta1API_replaceNamespacedRole(apiClient_t *apiClient ,char * name ,char * namespace ,v1beta1_role_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_replaceNamespacedRole(apiClient_t *apiClient, char * name, char * namespace, v1beta1_role_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -6232,7 +6233,7 @@ end:
 // replace the specified RoleBinding
 //
 v1beta1_role_binding_t*
-RbacAuthorizationV1beta1API_replaceNamespacedRoleBinding(apiClient_t *apiClient ,char * name ,char * namespace ,v1beta1_role_binding_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+RbacAuthorizationV1beta1API_replaceNamespacedRoleBinding(apiClient_t *apiClient, char * name, char * namespace, v1beta1_role_binding_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;

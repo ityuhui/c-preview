@@ -29,6 +29,9 @@ extensions_v1beta1_deployment_condition_t *extensions_v1beta1_deployment_conditi
 
 
 void extensions_v1beta1_deployment_condition_free(extensions_v1beta1_deployment_condition_t *extensions_v1beta1_deployment_condition) {
+    if(NULL == extensions_v1beta1_deployment_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_deployment_condition->last_transition_time);
     free(extensions_v1beta1_deployment_condition->last_update_time);

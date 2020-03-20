@@ -25,6 +25,9 @@ v1_controller_revision_list_t *v1_controller_revision_list_create(
 
 
 void v1_controller_revision_list_free(v1_controller_revision_list_t *v1_controller_revision_list) {
+    if(NULL == v1_controller_revision_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_controller_revision_list->api_version);
     list_ForEach(listEntry, v1_controller_revision_list->items) {

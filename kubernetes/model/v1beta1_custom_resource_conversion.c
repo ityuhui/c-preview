@@ -23,6 +23,9 @@ v1beta1_custom_resource_conversion_t *v1beta1_custom_resource_conversion_create(
 
 
 void v1beta1_custom_resource_conversion_free(v1beta1_custom_resource_conversion_t *v1beta1_custom_resource_conversion) {
+    if(NULL == v1beta1_custom_resource_conversion){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_custom_resource_conversion->conversion_review_versions) {
         free(listEntry->data);

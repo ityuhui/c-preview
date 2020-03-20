@@ -19,6 +19,9 @@ v1beta1_custom_resource_validation_t *v1beta1_custom_resource_validation_create(
 
 
 void v1beta1_custom_resource_validation_free(v1beta1_custom_resource_validation_t *v1beta1_custom_resource_validation) {
+    if(NULL == v1beta1_custom_resource_validation){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta1_json_schema_props_free(v1beta1_custom_resource_validation->open_apiv3_schema);
     free(v1beta1_custom_resource_validation);

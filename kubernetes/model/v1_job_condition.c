@@ -29,6 +29,9 @@ v1_job_condition_t *v1_job_condition_create(
 
 
 void v1_job_condition_free(v1_job_condition_t *v1_job_condition) {
+    if(NULL == v1_job_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_job_condition->last_probe_time);
     free(v1_job_condition->last_transition_time);

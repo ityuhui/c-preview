@@ -29,6 +29,9 @@ v1_persistent_volume_claim_condition_t *v1_persistent_volume_claim_condition_cre
 
 
 void v1_persistent_volume_claim_condition_free(v1_persistent_volume_claim_condition_t *v1_persistent_volume_claim_condition) {
+    if(NULL == v1_persistent_volume_claim_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_persistent_volume_claim_condition->last_probe_time);
     free(v1_persistent_volume_claim_condition->last_transition_time);

@@ -11,10 +11,11 @@
     snprintf(dst, 256, "%ld", (long int)(src));\
 }while(0)
 
+
 // create an APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_createAPIService(apiClient_t *apiClient ,v1beta1_api_service_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+ApiregistrationV1beta1API_createAPIService(apiClient_t *apiClient, v1beta1_api_service_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -165,7 +166,7 @@ end:
 // delete an APIService
 //
 v1_status_t*
-ApiregistrationV1beta1API_deleteAPIService(apiClient_t *apiClient ,char * name ,char * pretty ,char * dryRun ,int gracePeriodSeconds ,int orphanDependents ,char * propagationPolicy ,v1_delete_options_t * body)
+ApiregistrationV1beta1API_deleteAPIService(apiClient_t *apiClient, char * name, char * pretty, char * dryRun, int gracePeriodSeconds, int orphanDependents, char * propagationPolicy, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -364,7 +365,7 @@ end:
 // delete collection of APIService
 //
 v1_status_t*
-ApiregistrationV1beta1API_deleteCollectionAPIService(apiClient_t *apiClient ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * dryRun ,char * fieldSelector ,int gracePeriodSeconds ,char * labelSelector ,int limit ,int orphanDependents ,char * propagationPolicy ,char * resourceVersion ,int timeoutSeconds ,int watch ,v1_delete_options_t * body)
+ApiregistrationV1beta1API_deleteCollectionAPIService(apiClient_t *apiClient, char * pretty, int allowWatchBookmarks, char * _continue, char * dryRun, char * fieldSelector, int gracePeriodSeconds, char * labelSelector, int limit, int orphanDependents, char * propagationPolicy, char * resourceVersion, int timeoutSeconds, int watch, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -787,7 +788,7 @@ end:
 // list or watch objects of kind APIService
 //
 v1beta1_api_service_list_t*
-ApiregistrationV1beta1API_listAPIService(apiClient_t *apiClient ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * resourceVersion ,int timeoutSeconds ,int watch)
+ApiregistrationV1beta1API_listAPIService(apiClient_t *apiClient, char * pretty, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1051,7 +1052,7 @@ end:
 // partially update the specified APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_patchAPIService(apiClient_t *apiClient ,char * name ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+ApiregistrationV1beta1API_patchAPIService(apiClient_t *apiClient, char * name, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1231,7 +1232,7 @@ end:
 // partially update status of the specified APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_patchAPIServiceStatus(apiClient_t *apiClient ,char * name ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+ApiregistrationV1beta1API_patchAPIServiceStatus(apiClient_t *apiClient, char * name, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1411,7 +1412,7 @@ end:
 // read the specified APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_readAPIService(apiClient_t *apiClient ,char * name ,char * pretty ,int exact ,int export)
+ApiregistrationV1beta1API_readAPIService(apiClient_t *apiClient, char * name, char * pretty, int exact, int export)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1548,7 +1549,7 @@ end:
 // read status of the specified APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_readAPIServiceStatus(apiClient_t *apiClient ,char * name ,char * pretty)
+ApiregistrationV1beta1API_readAPIServiceStatus(apiClient_t *apiClient, char * name, char * pretty)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1645,7 +1646,7 @@ end:
 // replace the specified APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_replaceAPIService(apiClient_t *apiClient ,char * name ,v1beta1_api_service_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+ApiregistrationV1beta1API_replaceAPIService(apiClient_t *apiClient, char * name, v1beta1_api_service_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1804,7 +1805,7 @@ end:
 // replace status of the specified APIService
 //
 v1beta1_api_service_t*
-ApiregistrationV1beta1API_replaceAPIServiceStatus(apiClient_t *apiClient ,char * name ,v1beta1_api_service_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+ApiregistrationV1beta1API_replaceAPIServiceStatus(apiClient_t *apiClient, char * name, v1beta1_api_service_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;

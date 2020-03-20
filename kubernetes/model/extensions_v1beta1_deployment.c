@@ -27,6 +27,9 @@ extensions_v1beta1_deployment_t *extensions_v1beta1_deployment_create(
 
 
 void extensions_v1beta1_deployment_free(extensions_v1beta1_deployment_t *extensions_v1beta1_deployment) {
+    if(NULL == extensions_v1beta1_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_deployment->api_version);
     free(extensions_v1beta1_deployment->kind);

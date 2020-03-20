@@ -23,6 +23,9 @@ apps_v1beta1_scale_status_t *apps_v1beta1_scale_status_create(
 
 
 void apps_v1beta1_scale_status_free(apps_v1beta1_scale_status_t *apps_v1beta1_scale_status) {
+    if(NULL == apps_v1beta1_scale_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, apps_v1beta1_scale_status->selector) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

@@ -29,6 +29,9 @@ v1beta1_custom_resource_definition_version_t *v1beta1_custom_resource_definition
 
 
 void v1beta1_custom_resource_definition_version_free(v1beta1_custom_resource_definition_version_t *v1beta1_custom_resource_definition_version) {
+    if(NULL == v1beta1_custom_resource_definition_version){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_custom_resource_definition_version->additional_printer_columns) {
         v1beta1_custom_resource_column_definition_free(listEntry->data);

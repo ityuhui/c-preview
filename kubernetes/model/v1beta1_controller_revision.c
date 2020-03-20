@@ -27,6 +27,9 @@ v1beta1_controller_revision_t *v1beta1_controller_revision_create(
 
 
 void v1beta1_controller_revision_free(v1beta1_controller_revision_t *v1beta1_controller_revision) {
+    if(NULL == v1beta1_controller_revision){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_controller_revision->api_version);
     object_free(v1beta1_controller_revision->data);

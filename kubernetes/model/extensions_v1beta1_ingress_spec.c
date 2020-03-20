@@ -23,6 +23,9 @@ extensions_v1beta1_ingress_spec_t *extensions_v1beta1_ingress_spec_create(
 
 
 void extensions_v1beta1_ingress_spec_free(extensions_v1beta1_ingress_spec_t *extensions_v1beta1_ingress_spec) {
+    if(NULL == extensions_v1beta1_ingress_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     extensions_v1beta1_ingress_backend_free(extensions_v1beta1_ingress_spec->backend);
     list_ForEach(listEntry, extensions_v1beta1_ingress_spec->rules) {

@@ -19,6 +19,9 @@ v1alpha1_flow_distinguisher_method_t *v1alpha1_flow_distinguisher_method_create(
 
 
 void v1alpha1_flow_distinguisher_method_free(v1alpha1_flow_distinguisher_method_t *v1alpha1_flow_distinguisher_method) {
+    if(NULL == v1alpha1_flow_distinguisher_method){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_flow_distinguisher_method->type);
     free(v1alpha1_flow_distinguisher_method);

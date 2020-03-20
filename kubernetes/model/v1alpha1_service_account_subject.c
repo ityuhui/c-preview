@@ -21,6 +21,9 @@ v1alpha1_service_account_subject_t *v1alpha1_service_account_subject_create(
 
 
 void v1alpha1_service_account_subject_free(v1alpha1_service_account_subject_t *v1alpha1_service_account_subject) {
+    if(NULL == v1alpha1_service_account_subject){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_service_account_subject->name);
     free(v1alpha1_service_account_subject->namespace);

@@ -21,6 +21,9 @@ v1_photon_persistent_disk_volume_source_t *v1_photon_persistent_disk_volume_sour
 
 
 void v1_photon_persistent_disk_volume_source_free(v1_photon_persistent_disk_volume_source_t *v1_photon_persistent_disk_volume_source) {
+    if(NULL == v1_photon_persistent_disk_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_photon_persistent_disk_volume_source->fs_type);
     free(v1_photon_persistent_disk_volume_source->pd_id);

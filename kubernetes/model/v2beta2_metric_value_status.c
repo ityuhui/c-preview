@@ -23,6 +23,9 @@ v2beta2_metric_value_status_t *v2beta2_metric_value_status_create(
 
 
 void v2beta2_metric_value_status_free(v2beta2_metric_value_status_t *v2beta2_metric_value_status) {
+    if(NULL == v2beta2_metric_value_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta2_metric_value_status->average_value);
     free(v2beta2_metric_value_status->value);

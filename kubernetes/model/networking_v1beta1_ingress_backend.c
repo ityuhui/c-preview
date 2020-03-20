@@ -21,6 +21,9 @@ networking_v1beta1_ingress_backend_t *networking_v1beta1_ingress_backend_create(
 
 
 void networking_v1beta1_ingress_backend_free(networking_v1beta1_ingress_backend_t *networking_v1beta1_ingress_backend) {
+    if(NULL == networking_v1beta1_ingress_backend){
+        return ;
+    }
     listEntry_t *listEntry;
     free(networking_v1beta1_ingress_backend->service_name);
     object_free(networking_v1beta1_ingress_backend->service_port);

@@ -21,6 +21,9 @@ v1alpha1_priority_level_configuration_spec_t *v1alpha1_priority_level_configurat
 
 
 void v1alpha1_priority_level_configuration_spec_free(v1alpha1_priority_level_configuration_spec_t *v1alpha1_priority_level_configuration_spec) {
+    if(NULL == v1alpha1_priority_level_configuration_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_limited_priority_level_configuration_free(v1alpha1_priority_level_configuration_spec->limited);
     free(v1alpha1_priority_level_configuration_spec->type);

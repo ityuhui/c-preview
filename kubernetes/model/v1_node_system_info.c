@@ -37,6 +37,9 @@ v1_node_system_info_t *v1_node_system_info_create(
 
 
 void v1_node_system_info_free(v1_node_system_info_t *v1_node_system_info) {
+    if(NULL == v1_node_system_info){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_node_system_info->architecture);
     free(v1_node_system_info->boot_id);

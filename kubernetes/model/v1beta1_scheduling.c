@@ -21,6 +21,9 @@ v1beta1_scheduling_t *v1beta1_scheduling_create(
 
 
 void v1beta1_scheduling_free(v1beta1_scheduling_t *v1beta1_scheduling) {
+    if(NULL == v1beta1_scheduling){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_scheduling->node_selector) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

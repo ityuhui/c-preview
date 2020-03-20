@@ -21,6 +21,9 @@ v1beta1_network_policy_port_t *v1beta1_network_policy_port_create(
 
 
 void v1beta1_network_policy_port_free(v1beta1_network_policy_port_t *v1beta1_network_policy_port) {
+    if(NULL == v1beta1_network_policy_port){
+        return ;
+    }
     listEntry_t *listEntry;
     object_free(v1beta1_network_policy_port->port);
     free(v1beta1_network_policy_port->protocol);

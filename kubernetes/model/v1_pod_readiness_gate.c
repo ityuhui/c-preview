@@ -19,6 +19,9 @@ v1_pod_readiness_gate_t *v1_pod_readiness_gate_create(
 
 
 void v1_pod_readiness_gate_free(v1_pod_readiness_gate_t *v1_pod_readiness_gate) {
+    if(NULL == v1_pod_readiness_gate){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod_readiness_gate->condition_type);
     free(v1_pod_readiness_gate);

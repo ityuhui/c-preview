@@ -21,6 +21,9 @@ v1beta1_external_documentation_t *v1beta1_external_documentation_create(
 
 
 void v1beta1_external_documentation_free(v1beta1_external_documentation_t *v1beta1_external_documentation) {
+    if(NULL == v1beta1_external_documentation){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_external_documentation->description);
     free(v1beta1_external_documentation->url);

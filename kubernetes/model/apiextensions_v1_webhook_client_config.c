@@ -23,6 +23,9 @@ apiextensions_v1_webhook_client_config_t *apiextensions_v1_webhook_client_config
 
 
 void apiextensions_v1_webhook_client_config_free(apiextensions_v1_webhook_client_config_t *apiextensions_v1_webhook_client_config) {
+    if(NULL == apiextensions_v1_webhook_client_config){
+        return ;
+    }
     listEntry_t *listEntry;
     apiextensions_v1_service_reference_free(apiextensions_v1_webhook_client_config->service);
     free(apiextensions_v1_webhook_client_config->url);

@@ -27,6 +27,9 @@ v1_self_subject_access_review_t *v1_self_subject_access_review_create(
 
 
 void v1_self_subject_access_review_free(v1_self_subject_access_review_t *v1_self_subject_access_review) {
+    if(NULL == v1_self_subject_access_review){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_self_subject_access_review->api_version);
     free(v1_self_subject_access_review->kind);

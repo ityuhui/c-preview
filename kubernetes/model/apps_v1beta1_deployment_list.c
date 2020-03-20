@@ -25,6 +25,9 @@ apps_v1beta1_deployment_list_t *apps_v1beta1_deployment_list_create(
 
 
 void apps_v1beta1_deployment_list_free(apps_v1beta1_deployment_list_t *apps_v1beta1_deployment_list) {
+    if(NULL == apps_v1beta1_deployment_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_deployment_list->api_version);
     list_ForEach(listEntry, apps_v1beta1_deployment_list->items) {

@@ -21,6 +21,9 @@ v1_node_address_t *v1_node_address_create(
 
 
 void v1_node_address_free(v1_node_address_t *v1_node_address) {
+    if(NULL == v1_node_address){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_node_address->address);
     free(v1_node_address->type);

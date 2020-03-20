@@ -23,6 +23,9 @@ apiregistration_v1beta1_service_reference_t *apiregistration_v1beta1_service_ref
 
 
 void apiregistration_v1beta1_service_reference_free(apiregistration_v1beta1_service_reference_t *apiregistration_v1beta1_service_reference) {
+    if(NULL == apiregistration_v1beta1_service_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apiregistration_v1beta1_service_reference->name);
     free(apiregistration_v1beta1_service_reference->namespace);

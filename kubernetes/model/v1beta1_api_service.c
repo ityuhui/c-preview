@@ -27,6 +27,9 @@ v1beta1_api_service_t *v1beta1_api_service_create(
 
 
 void v1beta1_api_service_free(v1beta1_api_service_t *v1beta1_api_service) {
+    if(NULL == v1beta1_api_service){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_api_service->api_version);
     free(v1beta1_api_service->kind);

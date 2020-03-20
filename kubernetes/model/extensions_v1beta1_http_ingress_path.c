@@ -21,6 +21,9 @@ extensions_v1beta1_http_ingress_path_t *extensions_v1beta1_http_ingress_path_cre
 
 
 void extensions_v1beta1_http_ingress_path_free(extensions_v1beta1_http_ingress_path_t *extensions_v1beta1_http_ingress_path) {
+    if(NULL == extensions_v1beta1_http_ingress_path){
+        return ;
+    }
     listEntry_t *listEntry;
     extensions_v1beta1_ingress_backend_free(extensions_v1beta1_http_ingress_path->backend);
     free(extensions_v1beta1_http_ingress_path->path);

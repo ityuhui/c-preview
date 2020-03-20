@@ -25,6 +25,9 @@ v1_node_config_status_t *v1_node_config_status_create(
 
 
 void v1_node_config_status_free(v1_node_config_status_t *v1_node_config_status) {
+    if(NULL == v1_node_config_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_node_config_source_free(v1_node_config_status->active);
     v1_node_config_source_free(v1_node_config_status->assigned);

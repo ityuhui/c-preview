@@ -27,6 +27,9 @@ v1_http_get_action_t *v1_http_get_action_create(
 
 
 void v1_http_get_action_free(v1_http_get_action_t *v1_http_get_action) {
+    if(NULL == v1_http_get_action){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_http_get_action->host);
     list_ForEach(listEntry, v1_http_get_action->http_headers) {

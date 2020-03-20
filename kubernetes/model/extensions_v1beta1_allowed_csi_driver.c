@@ -19,6 +19,9 @@ extensions_v1beta1_allowed_csi_driver_t *extensions_v1beta1_allowed_csi_driver_c
 
 
 void extensions_v1beta1_allowed_csi_driver_free(extensions_v1beta1_allowed_csi_driver_t *extensions_v1beta1_allowed_csi_driver) {
+    if(NULL == extensions_v1beta1_allowed_csi_driver){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_allowed_csi_driver->name);
     free(extensions_v1beta1_allowed_csi_driver);

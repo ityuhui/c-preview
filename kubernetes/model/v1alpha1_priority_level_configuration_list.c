@@ -25,6 +25,9 @@ v1alpha1_priority_level_configuration_list_t *v1alpha1_priority_level_configurat
 
 
 void v1alpha1_priority_level_configuration_list_free(v1alpha1_priority_level_configuration_list_t *v1alpha1_priority_level_configuration_list) {
+    if(NULL == v1alpha1_priority_level_configuration_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_priority_level_configuration_list->api_version);
     list_ForEach(listEntry, v1alpha1_priority_level_configuration_list->items) {

@@ -21,6 +21,9 @@ v2alpha1_cron_job_status_t *v2alpha1_cron_job_status_create(
 
 
 void v2alpha1_cron_job_status_free(v2alpha1_cron_job_status_t *v2alpha1_cron_job_status) {
+    if(NULL == v2alpha1_cron_job_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v2alpha1_cron_job_status->active) {
         v1_object_reference_free(listEntry->data);

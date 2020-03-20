@@ -27,6 +27,9 @@ v1beta1_certificate_signing_request_t *v1beta1_certificate_signing_request_creat
 
 
 void v1beta1_certificate_signing_request_free(v1beta1_certificate_signing_request_t *v1beta1_certificate_signing_request) {
+    if(NULL == v1beta1_certificate_signing_request){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_certificate_signing_request->api_version);
     free(v1beta1_certificate_signing_request->kind);

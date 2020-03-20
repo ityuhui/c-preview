@@ -27,6 +27,9 @@ v1_custom_resource_definition_t *v1_custom_resource_definition_create(
 
 
 void v1_custom_resource_definition_free(v1_custom_resource_definition_t *v1_custom_resource_definition) {
+    if(NULL == v1_custom_resource_definition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_custom_resource_definition->api_version);
     free(v1_custom_resource_definition->kind);

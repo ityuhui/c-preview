@@ -25,6 +25,9 @@ policy_v1beta1_pod_security_policy_t *policy_v1beta1_pod_security_policy_create(
 
 
 void policy_v1beta1_pod_security_policy_free(policy_v1beta1_pod_security_policy_t *policy_v1beta1_pod_security_policy) {
+    if(NULL == policy_v1beta1_pod_security_policy){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_pod_security_policy->api_version);
     free(policy_v1beta1_pod_security_policy->kind);

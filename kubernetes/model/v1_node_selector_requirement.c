@@ -23,6 +23,9 @@ v1_node_selector_requirement_t *v1_node_selector_requirement_create(
 
 
 void v1_node_selector_requirement_free(v1_node_selector_requirement_t *v1_node_selector_requirement) {
+    if(NULL == v1_node_selector_requirement){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_node_selector_requirement->key);
     free(v1_node_selector_requirement->operator);

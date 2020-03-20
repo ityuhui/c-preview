@@ -27,6 +27,9 @@ networking_v1beta1_ingress_t *networking_v1beta1_ingress_create(
 
 
 void networking_v1beta1_ingress_free(networking_v1beta1_ingress_t *networking_v1beta1_ingress) {
+    if(NULL == networking_v1beta1_ingress){
+        return ;
+    }
     listEntry_t *listEntry;
     free(networking_v1beta1_ingress->api_version);
     free(networking_v1beta1_ingress->kind);

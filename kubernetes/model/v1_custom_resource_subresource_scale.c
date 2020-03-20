@@ -23,6 +23,9 @@ v1_custom_resource_subresource_scale_t *v1_custom_resource_subresource_scale_cre
 
 
 void v1_custom_resource_subresource_scale_free(v1_custom_resource_subresource_scale_t *v1_custom_resource_subresource_scale) {
+    if(NULL == v1_custom_resource_subresource_scale){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_custom_resource_subresource_scale->label_selector_path);
     free(v1_custom_resource_subresource_scale->spec_replicas_path);

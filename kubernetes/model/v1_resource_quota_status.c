@@ -21,6 +21,9 @@ v1_resource_quota_status_t *v1_resource_quota_status_create(
 
 
 void v1_resource_quota_status_free(v1_resource_quota_status_t *v1_resource_quota_status) {
+    if(NULL == v1_resource_quota_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_resource_quota_status->hard) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

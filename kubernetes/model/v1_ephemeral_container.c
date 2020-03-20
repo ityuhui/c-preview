@@ -63,6 +63,9 @@ v1_ephemeral_container_t *v1_ephemeral_container_create(
 
 
 void v1_ephemeral_container_free(v1_ephemeral_container_t *v1_ephemeral_container) {
+    if(NULL == v1_ephemeral_container){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_ephemeral_container->args) {
         free(listEntry->data);

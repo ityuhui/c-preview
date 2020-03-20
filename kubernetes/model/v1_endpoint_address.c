@@ -25,6 +25,9 @@ v1_endpoint_address_t *v1_endpoint_address_create(
 
 
 void v1_endpoint_address_free(v1_endpoint_address_t *v1_endpoint_address) {
+    if(NULL == v1_endpoint_address){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_endpoint_address->hostname);
     free(v1_endpoint_address->ip);

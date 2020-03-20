@@ -27,6 +27,9 @@ v1_service_port_t *v1_service_port_create(
 
 
 void v1_service_port_free(v1_service_port_t *v1_service_port) {
+    if(NULL == v1_service_port){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_service_port->name);
     free(v1_service_port->protocol);

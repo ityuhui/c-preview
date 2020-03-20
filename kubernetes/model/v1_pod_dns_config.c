@@ -23,6 +23,9 @@ v1_pod_dns_config_t *v1_pod_dns_config_create(
 
 
 void v1_pod_dns_config_free(v1_pod_dns_config_t *v1_pod_dns_config) {
+    if(NULL == v1_pod_dns_config){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_pod_dns_config->nameservers) {
         free(listEntry->data);

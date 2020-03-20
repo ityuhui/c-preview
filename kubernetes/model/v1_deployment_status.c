@@ -33,6 +33,9 @@ v1_deployment_status_t *v1_deployment_status_create(
 
 
 void v1_deployment_status_free(v1_deployment_status_t *v1_deployment_status) {
+    if(NULL == v1_deployment_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_deployment_status->conditions) {
         v1_deployment_condition_free(listEntry->data);

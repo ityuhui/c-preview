@@ -21,6 +21,9 @@ apps_v1beta1_rolling_update_deployment_t *apps_v1beta1_rolling_update_deployment
 
 
 void apps_v1beta1_rolling_update_deployment_free(apps_v1beta1_rolling_update_deployment_t *apps_v1beta1_rolling_update_deployment) {
+    if(NULL == apps_v1beta1_rolling_update_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     object_free(apps_v1beta1_rolling_update_deployment->max_surge);
     object_free(apps_v1beta1_rolling_update_deployment->max_unavailable);

@@ -25,6 +25,9 @@ v1beta1_validating_webhook_configuration_list_t *v1beta1_validating_webhook_conf
 
 
 void v1beta1_validating_webhook_configuration_list_free(v1beta1_validating_webhook_configuration_list_t *v1beta1_validating_webhook_configuration_list) {
+    if(NULL == v1beta1_validating_webhook_configuration_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_validating_webhook_configuration_list->api_version);
     list_ForEach(listEntry, v1beta1_validating_webhook_configuration_list->items) {

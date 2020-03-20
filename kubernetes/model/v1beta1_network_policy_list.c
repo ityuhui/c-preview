@@ -25,6 +25,9 @@ v1beta1_network_policy_list_t *v1beta1_network_policy_list_create(
 
 
 void v1beta1_network_policy_list_free(v1beta1_network_policy_list_t *v1beta1_network_policy_list) {
+    if(NULL == v1beta1_network_policy_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_network_policy_list->api_version);
     list_ForEach(listEntry, v1beta1_network_policy_list->items) {

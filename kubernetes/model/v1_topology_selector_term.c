@@ -19,6 +19,9 @@ v1_topology_selector_term_t *v1_topology_selector_term_create(
 
 
 void v1_topology_selector_term_free(v1_topology_selector_term_t *v1_topology_selector_term) {
+    if(NULL == v1_topology_selector_term){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_topology_selector_term->match_label_expressions) {
         v1_topology_selector_label_requirement_free(listEntry->data);

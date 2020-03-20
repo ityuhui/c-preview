@@ -21,6 +21,9 @@ policy_v1beta1_run_as_user_strategy_options_t *policy_v1beta1_run_as_user_strate
 
 
 void policy_v1beta1_run_as_user_strategy_options_free(policy_v1beta1_run_as_user_strategy_options_t *policy_v1beta1_run_as_user_strategy_options) {
+    if(NULL == policy_v1beta1_run_as_user_strategy_options){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, policy_v1beta1_run_as_user_strategy_options->ranges) {
         policy_v1beta1_id_range_free(listEntry->data);

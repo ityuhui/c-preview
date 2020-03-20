@@ -23,6 +23,9 @@ v1_service_account_token_projection_t *v1_service_account_token_projection_creat
 
 
 void v1_service_account_token_projection_free(v1_service_account_token_projection_t *v1_service_account_token_projection) {
+    if(NULL == v1_service_account_token_projection){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_service_account_token_projection->audience);
     free(v1_service_account_token_projection->path);

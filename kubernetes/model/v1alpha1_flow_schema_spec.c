@@ -25,6 +25,9 @@ v1alpha1_flow_schema_spec_t *v1alpha1_flow_schema_spec_create(
 
 
 void v1alpha1_flow_schema_spec_free(v1alpha1_flow_schema_spec_t *v1alpha1_flow_schema_spec) {
+    if(NULL == v1alpha1_flow_schema_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_flow_distinguisher_method_free(v1alpha1_flow_schema_spec->distinguisher_method);
     v1alpha1_priority_level_configuration_reference_free(v1alpha1_flow_schema_spec->priority_level_configuration);

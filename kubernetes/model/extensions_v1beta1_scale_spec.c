@@ -19,6 +19,9 @@ extensions_v1beta1_scale_spec_t *extensions_v1beta1_scale_spec_create(
 
 
 void extensions_v1beta1_scale_spec_free(extensions_v1beta1_scale_spec_t *extensions_v1beta1_scale_spec) {
+    if(NULL == extensions_v1beta1_scale_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_scale_spec);
 }

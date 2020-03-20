@@ -21,6 +21,9 @@ v1_non_resource_rule_t *v1_non_resource_rule_create(
 
 
 void v1_non_resource_rule_free(v1_non_resource_rule_t *v1_non_resource_rule) {
+    if(NULL == v1_non_resource_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_non_resource_rule->non_resource_ur_ls) {
         free(listEntry->data);

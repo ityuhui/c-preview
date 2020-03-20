@@ -19,6 +19,9 @@ v1alpha1_flow_schema_status_t *v1alpha1_flow_schema_status_create(
 
 
 void v1alpha1_flow_schema_status_free(v1alpha1_flow_schema_status_t *v1alpha1_flow_schema_status) {
+    if(NULL == v1alpha1_flow_schema_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1alpha1_flow_schema_status->conditions) {
         v1alpha1_flow_schema_condition_free(listEntry->data);

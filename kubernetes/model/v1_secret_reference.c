@@ -21,6 +21,9 @@ v1_secret_reference_t *v1_secret_reference_create(
 
 
 void v1_secret_reference_free(v1_secret_reference_t *v1_secret_reference) {
+    if(NULL == v1_secret_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_secret_reference->name);
     free(v1_secret_reference->namespace);

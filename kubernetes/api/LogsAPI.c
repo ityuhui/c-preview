@@ -11,8 +11,9 @@
     snprintf(dst, 256, "%ld", (long int)(src));\
 }while(0)
 
+
 void
-LogsAPI_logFileHandler(apiClient_t *apiClient ,char * logpath)
+LogsAPI_logFileHandler(apiClient_t *apiClient, char * logpath)
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;

@@ -21,6 +21,9 @@ v1alpha1_limit_response_t *v1alpha1_limit_response_create(
 
 
 void v1alpha1_limit_response_free(v1alpha1_limit_response_t *v1alpha1_limit_response) {
+    if(NULL == v1alpha1_limit_response){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_queuing_configuration_free(v1alpha1_limit_response->queuing);
     free(v1alpha1_limit_response->type);

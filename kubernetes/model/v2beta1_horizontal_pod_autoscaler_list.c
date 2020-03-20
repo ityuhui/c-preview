@@ -25,6 +25,9 @@ v2beta1_horizontal_pod_autoscaler_list_t *v2beta1_horizontal_pod_autoscaler_list
 
 
 void v2beta1_horizontal_pod_autoscaler_list_free(v2beta1_horizontal_pod_autoscaler_list_t *v2beta1_horizontal_pod_autoscaler_list) {
+    if(NULL == v2beta1_horizontal_pod_autoscaler_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta1_horizontal_pod_autoscaler_list->api_version);
     list_ForEach(listEntry, v2beta1_horizontal_pod_autoscaler_list->items) {

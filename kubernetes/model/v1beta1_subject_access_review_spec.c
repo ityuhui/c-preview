@@ -29,6 +29,9 @@ v1beta1_subject_access_review_spec_t *v1beta1_subject_access_review_spec_create(
 
 
 void v1beta1_subject_access_review_spec_free(v1beta1_subject_access_review_spec_t *v1beta1_subject_access_review_spec) {
+    if(NULL == v1beta1_subject_access_review_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_subject_access_review_spec->extra) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

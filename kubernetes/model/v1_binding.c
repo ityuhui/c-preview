@@ -25,6 +25,9 @@ v1_binding_t *v1_binding_create(
 
 
 void v1_binding_free(v1_binding_t *v1_binding) {
+    if(NULL == v1_binding){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_binding->api_version);
     free(v1_binding->kind);

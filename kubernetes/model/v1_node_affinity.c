@@ -21,6 +21,9 @@ v1_node_affinity_t *v1_node_affinity_create(
 
 
 void v1_node_affinity_free(v1_node_affinity_t *v1_node_affinity) {
+    if(NULL == v1_node_affinity){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_node_affinity->preferred_during_scheduling_ignored_during_execution) {
         v1_preferred_scheduling_term_free(listEntry->data);

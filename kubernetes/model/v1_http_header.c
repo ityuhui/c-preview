@@ -21,6 +21,9 @@ v1_http_header_t *v1_http_header_create(
 
 
 void v1_http_header_free(v1_http_header_t *v1_http_header) {
+    if(NULL == v1_http_header){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_http_header->name);
     free(v1_http_header->value);

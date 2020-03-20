@@ -19,6 +19,9 @@ v1_api_service_status_t *v1_api_service_status_create(
 
 
 void v1_api_service_status_free(v1_api_service_status_t *v1_api_service_status) {
+    if(NULL == v1_api_service_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_api_service_status->conditions) {
         v1_api_service_condition_free(listEntry->data);

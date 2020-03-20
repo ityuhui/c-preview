@@ -21,6 +21,9 @@ extensions_v1beta1_ingress_backend_t *extensions_v1beta1_ingress_backend_create(
 
 
 void extensions_v1beta1_ingress_backend_free(extensions_v1beta1_ingress_backend_t *extensions_v1beta1_ingress_backend) {
+    if(NULL == extensions_v1beta1_ingress_backend){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_ingress_backend->service_name);
     object_free(extensions_v1beta1_ingress_backend->service_port);

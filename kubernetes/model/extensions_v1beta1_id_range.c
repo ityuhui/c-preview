@@ -21,6 +21,9 @@ extensions_v1beta1_id_range_t *extensions_v1beta1_id_range_create(
 
 
 void extensions_v1beta1_id_range_free(extensions_v1beta1_id_range_t *extensions_v1beta1_id_range) {
+    if(NULL == extensions_v1beta1_id_range){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_id_range);
 }

@@ -29,6 +29,9 @@ v2beta2_horizontal_pod_autoscaler_status_t *v2beta2_horizontal_pod_autoscaler_st
 
 
 void v2beta2_horizontal_pod_autoscaler_status_free(v2beta2_horizontal_pod_autoscaler_status_t *v2beta2_horizontal_pod_autoscaler_status) {
+    if(NULL == v2beta2_horizontal_pod_autoscaler_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v2beta2_horizontal_pod_autoscaler_status->conditions) {
         v2beta2_horizontal_pod_autoscaler_condition_free(listEntry->data);

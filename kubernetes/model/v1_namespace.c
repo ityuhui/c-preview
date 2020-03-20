@@ -27,6 +27,9 @@ v1_namespace_t *v1_namespace_create(
 
 
 void v1_namespace_free(v1_namespace_t *v1_namespace) {
+    if(NULL == v1_namespace){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_namespace->api_version);
     free(v1_namespace->kind);

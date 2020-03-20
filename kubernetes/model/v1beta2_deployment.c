@@ -27,6 +27,9 @@ v1beta2_deployment_t *v1beta2_deployment_create(
 
 
 void v1beta2_deployment_free(v1beta2_deployment_t *v1beta2_deployment) {
+    if(NULL == v1beta2_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta2_deployment->api_version);
     free(v1beta2_deployment->kind);

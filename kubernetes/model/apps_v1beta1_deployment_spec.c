@@ -35,6 +35,9 @@ apps_v1beta1_deployment_spec_t *apps_v1beta1_deployment_spec_create(
 
 
 void apps_v1beta1_deployment_spec_free(apps_v1beta1_deployment_spec_t *apps_v1beta1_deployment_spec) {
+    if(NULL == apps_v1beta1_deployment_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     apps_v1beta1_rollback_config_free(apps_v1beta1_deployment_spec->rollback_to);
     v1_label_selector_free(apps_v1beta1_deployment_spec->selector);

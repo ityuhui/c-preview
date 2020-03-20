@@ -23,6 +23,9 @@ networking_v1beta1_ingress_spec_t *networking_v1beta1_ingress_spec_create(
 
 
 void networking_v1beta1_ingress_spec_free(networking_v1beta1_ingress_spec_t *networking_v1beta1_ingress_spec) {
+    if(NULL == networking_v1beta1_ingress_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     networking_v1beta1_ingress_backend_free(networking_v1beta1_ingress_spec->backend);
     list_ForEach(listEntry, networking_v1beta1_ingress_spec->rules) {

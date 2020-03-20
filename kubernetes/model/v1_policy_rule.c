@@ -27,6 +27,9 @@ v1_policy_rule_t *v1_policy_rule_create(
 
 
 void v1_policy_rule_free(v1_policy_rule_t *v1_policy_rule) {
+    if(NULL == v1_policy_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_policy_rule->api_groups) {
         free(listEntry->data);

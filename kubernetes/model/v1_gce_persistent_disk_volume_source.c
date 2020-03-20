@@ -25,6 +25,9 @@ v1_gce_persistent_disk_volume_source_t *v1_gce_persistent_disk_volume_source_cre
 
 
 void v1_gce_persistent_disk_volume_source_free(v1_gce_persistent_disk_volume_source_t *v1_gce_persistent_disk_volume_source) {
+    if(NULL == v1_gce_persistent_disk_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_gce_persistent_disk_volume_source->fs_type);
     free(v1_gce_persistent_disk_volume_source->pd_name);

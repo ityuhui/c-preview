@@ -25,6 +25,9 @@ v1_api_resource_list_t *v1_api_resource_list_create(
 
 
 void v1_api_resource_list_free(v1_api_resource_list_t *v1_api_resource_list) {
+    if(NULL == v1_api_resource_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_api_resource_list->api_version);
     free(v1_api_resource_list->group_version);

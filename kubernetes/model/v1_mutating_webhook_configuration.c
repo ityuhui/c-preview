@@ -25,6 +25,9 @@ v1_mutating_webhook_configuration_t *v1_mutating_webhook_configuration_create(
 
 
 void v1_mutating_webhook_configuration_free(v1_mutating_webhook_configuration_t *v1_mutating_webhook_configuration) {
+    if(NULL == v1_mutating_webhook_configuration){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_mutating_webhook_configuration->api_version);
     free(v1_mutating_webhook_configuration->kind);

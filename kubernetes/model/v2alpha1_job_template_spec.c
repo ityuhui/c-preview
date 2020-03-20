@@ -21,6 +21,9 @@ v2alpha1_job_template_spec_t *v2alpha1_job_template_spec_create(
 
 
 void v2alpha1_job_template_spec_free(v2alpha1_job_template_spec_t *v2alpha1_job_template_spec) {
+    if(NULL == v2alpha1_job_template_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_object_meta_free(v2alpha1_job_template_spec->metadata);
     v1_job_spec_free(v2alpha1_job_template_spec->spec);

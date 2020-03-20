@@ -19,6 +19,9 @@ v1_node_selector_t *v1_node_selector_create(
 
 
 void v1_node_selector_free(v1_node_selector_t *v1_node_selector) {
+    if(NULL == v1_node_selector){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_node_selector->node_selector_terms) {
         v1_node_selector_term_free(listEntry->data);

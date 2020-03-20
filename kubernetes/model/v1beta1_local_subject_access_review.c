@@ -27,6 +27,9 @@ v1beta1_local_subject_access_review_t *v1beta1_local_subject_access_review_creat
 
 
 void v1beta1_local_subject_access_review_free(v1beta1_local_subject_access_review_t *v1beta1_local_subject_access_review) {
+    if(NULL == v1beta1_local_subject_access_review){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_local_subject_access_review->api_version);
     free(v1beta1_local_subject_access_review->kind);

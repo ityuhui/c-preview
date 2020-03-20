@@ -21,6 +21,9 @@ policy_v1beta1_allowed_host_path_t *policy_v1beta1_allowed_host_path_create(
 
 
 void policy_v1beta1_allowed_host_path_free(policy_v1beta1_allowed_host_path_t *policy_v1beta1_allowed_host_path) {
+    if(NULL == policy_v1beta1_allowed_host_path){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_allowed_host_path->path_prefix);
     free(policy_v1beta1_allowed_host_path);

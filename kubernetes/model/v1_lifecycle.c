@@ -21,6 +21,9 @@ v1_lifecycle_t *v1_lifecycle_create(
 
 
 void v1_lifecycle_free(v1_lifecycle_t *v1_lifecycle) {
+    if(NULL == v1_lifecycle){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_handler_free(v1_lifecycle->post_start);
     v1_handler_free(v1_lifecycle->pre_stop);

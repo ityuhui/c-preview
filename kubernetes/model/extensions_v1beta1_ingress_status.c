@@ -19,6 +19,9 @@ extensions_v1beta1_ingress_status_t *extensions_v1beta1_ingress_status_create(
 
 
 void extensions_v1beta1_ingress_status_free(extensions_v1beta1_ingress_status_t *extensions_v1beta1_ingress_status) {
+    if(NULL == extensions_v1beta1_ingress_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_load_balancer_status_free(extensions_v1beta1_ingress_status->load_balancer);
     free(extensions_v1beta1_ingress_status);

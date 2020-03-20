@@ -11,6 +11,7 @@
     snprintf(dst, 256, "%ld", (long int)(src));\
 }while(0)
 
+
 // get information of a group
 //
 v1_api_group_t*

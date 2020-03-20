@@ -21,6 +21,9 @@ apps_v1beta1_deployment_strategy_t *apps_v1beta1_deployment_strategy_create(
 
 
 void apps_v1beta1_deployment_strategy_free(apps_v1beta1_deployment_strategy_t *apps_v1beta1_deployment_strategy) {
+    if(NULL == apps_v1beta1_deployment_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     apps_v1beta1_rolling_update_deployment_free(apps_v1beta1_deployment_strategy->rolling_update);
     free(apps_v1beta1_deployment_strategy->type);

@@ -27,6 +27,9 @@ v1_stateful_set_condition_t *v1_stateful_set_condition_create(
 
 
 void v1_stateful_set_condition_free(v1_stateful_set_condition_t *v1_stateful_set_condition) {
+    if(NULL == v1_stateful_set_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_stateful_set_condition->last_transition_time);
     free(v1_stateful_set_condition->message);

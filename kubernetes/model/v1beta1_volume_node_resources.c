@@ -19,6 +19,9 @@ v1beta1_volume_node_resources_t *v1beta1_volume_node_resources_create(
 
 
 void v1beta1_volume_node_resources_free(v1beta1_volume_node_resources_t *v1beta1_volume_node_resources) {
+    if(NULL == v1beta1_volume_node_resources){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_volume_node_resources);
 }

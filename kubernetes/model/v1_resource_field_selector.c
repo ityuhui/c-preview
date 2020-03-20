@@ -23,6 +23,9 @@ v1_resource_field_selector_t *v1_resource_field_selector_create(
 
 
 void v1_resource_field_selector_free(v1_resource_field_selector_t *v1_resource_field_selector) {
+    if(NULL == v1_resource_field_selector){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_resource_field_selector->container_name);
     free(v1_resource_field_selector->divisor);

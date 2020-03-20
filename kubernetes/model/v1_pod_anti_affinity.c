@@ -21,6 +21,9 @@ v1_pod_anti_affinity_t *v1_pod_anti_affinity_create(
 
 
 void v1_pod_anti_affinity_free(v1_pod_anti_affinity_t *v1_pod_anti_affinity) {
+    if(NULL == v1_pod_anti_affinity){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_pod_anti_affinity->preferred_during_scheduling_ignored_during_execution) {
         v1_weighted_pod_affinity_term_free(listEntry->data);

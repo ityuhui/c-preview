@@ -25,6 +25,9 @@ v1_namespace_list_t *v1_namespace_list_create(
 
 
 void v1_namespace_list_free(v1_namespace_list_t *v1_namespace_list) {
+    if(NULL == v1_namespace_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_namespace_list->api_version);
     list_ForEach(listEntry, v1_namespace_list->items) {

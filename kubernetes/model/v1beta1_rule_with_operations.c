@@ -27,6 +27,9 @@ v1beta1_rule_with_operations_t *v1beta1_rule_with_operations_create(
 
 
 void v1beta1_rule_with_operations_free(v1beta1_rule_with_operations_t *v1beta1_rule_with_operations) {
+    if(NULL == v1beta1_rule_with_operations){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_rule_with_operations->api_groups) {
         free(listEntry->data);

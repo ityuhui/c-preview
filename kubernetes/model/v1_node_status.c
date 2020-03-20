@@ -39,6 +39,9 @@ v1_node_status_t *v1_node_status_create(
 
 
 void v1_node_status_free(v1_node_status_t *v1_node_status) {
+    if(NULL == v1_node_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_node_status->addresses) {
         v1_node_address_free(listEntry->data);

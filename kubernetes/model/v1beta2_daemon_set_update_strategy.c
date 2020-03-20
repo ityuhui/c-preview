@@ -21,6 +21,9 @@ v1beta2_daemon_set_update_strategy_t *v1beta2_daemon_set_update_strategy_create(
 
 
 void v1beta2_daemon_set_update_strategy_free(v1beta2_daemon_set_update_strategy_t *v1beta2_daemon_set_update_strategy) {
+    if(NULL == v1beta2_daemon_set_update_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta2_rolling_update_daemon_set_free(v1beta2_daemon_set_update_strategy->rolling_update);
     free(v1beta2_daemon_set_update_strategy->type);

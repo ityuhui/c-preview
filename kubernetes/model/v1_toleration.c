@@ -27,6 +27,9 @@ v1_toleration_t *v1_toleration_create(
 
 
 void v1_toleration_free(v1_toleration_t *v1_toleration) {
+    if(NULL == v1_toleration){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_toleration->effect);
     free(v1_toleration->key);

@@ -19,6 +19,9 @@ extensions_v1beta1_allowed_flex_volume_t *extensions_v1beta1_allowed_flex_volume
 
 
 void extensions_v1beta1_allowed_flex_volume_free(extensions_v1beta1_allowed_flex_volume_t *extensions_v1beta1_allowed_flex_volume) {
+    if(NULL == extensions_v1beta1_allowed_flex_volume){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_allowed_flex_volume->driver);
     free(extensions_v1beta1_allowed_flex_volume);

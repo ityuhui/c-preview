@@ -19,6 +19,9 @@ networking_v1beta1_http_ingress_rule_value_t *networking_v1beta1_http_ingress_ru
 
 
 void networking_v1beta1_http_ingress_rule_value_free(networking_v1beta1_http_ingress_rule_value_t *networking_v1beta1_http_ingress_rule_value) {
+    if(NULL == networking_v1beta1_http_ingress_rule_value){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, networking_v1beta1_http_ingress_rule_value->paths) {
         networking_v1beta1_http_ingress_path_free(listEntry->data);

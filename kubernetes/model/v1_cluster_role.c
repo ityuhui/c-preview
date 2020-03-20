@@ -27,6 +27,9 @@ v1_cluster_role_t *v1_cluster_role_create(
 
 
 void v1_cluster_role_free(v1_cluster_role_t *v1_cluster_role) {
+    if(NULL == v1_cluster_role){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_aggregation_rule_free(v1_cluster_role->aggregation_rule);
     free(v1_cluster_role->api_version);

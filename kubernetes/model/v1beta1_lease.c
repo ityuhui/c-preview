@@ -25,6 +25,9 @@ v1beta1_lease_t *v1beta1_lease_create(
 
 
 void v1beta1_lease_free(v1beta1_lease_t *v1beta1_lease) {
+    if(NULL == v1beta1_lease){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_lease->api_version);
     free(v1beta1_lease->kind);

@@ -21,6 +21,9 @@ extensions_v1beta1_ingress_rule_t *extensions_v1beta1_ingress_rule_create(
 
 
 void extensions_v1beta1_ingress_rule_free(extensions_v1beta1_ingress_rule_t *extensions_v1beta1_ingress_rule) {
+    if(NULL == extensions_v1beta1_ingress_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_ingress_rule->host);
     extensions_v1beta1_http_ingress_rule_value_free(extensions_v1beta1_ingress_rule->http);

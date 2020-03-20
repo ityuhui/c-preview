@@ -21,6 +21,9 @@ policy_v1beta1_se_linux_strategy_options_t *policy_v1beta1_se_linux_strategy_opt
 
 
 void policy_v1beta1_se_linux_strategy_options_free(policy_v1beta1_se_linux_strategy_options_t *policy_v1beta1_se_linux_strategy_options) {
+    if(NULL == policy_v1beta1_se_linux_strategy_options){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_se_linux_strategy_options->rule);
     v1_se_linux_options_free(policy_v1beta1_se_linux_strategy_options->se_linux_options);

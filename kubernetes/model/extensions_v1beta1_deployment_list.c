@@ -25,6 +25,9 @@ extensions_v1beta1_deployment_list_t *extensions_v1beta1_deployment_list_create(
 
 
 void extensions_v1beta1_deployment_list_free(extensions_v1beta1_deployment_list_t *extensions_v1beta1_deployment_list) {
+    if(NULL == extensions_v1beta1_deployment_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_deployment_list->api_version);
     list_ForEach(listEntry, extensions_v1beta1_deployment_list->items) {

@@ -25,6 +25,9 @@ v1_list_meta_t *v1_list_meta_create(
 
 
 void v1_list_meta_free(v1_list_meta_t *v1_list_meta) {
+    if(NULL == v1_list_meta){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_list_meta->_continue);
     free(v1_list_meta->resource_version);

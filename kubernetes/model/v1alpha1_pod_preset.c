@@ -25,6 +25,9 @@ v1alpha1_pod_preset_t *v1alpha1_pod_preset_create(
 
 
 void v1alpha1_pod_preset_free(v1alpha1_pod_preset_t *v1alpha1_pod_preset) {
+    if(NULL == v1alpha1_pod_preset){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_pod_preset->api_version);
     free(v1alpha1_pod_preset->kind);

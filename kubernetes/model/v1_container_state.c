@@ -23,6 +23,9 @@ v1_container_state_t *v1_container_state_create(
 
 
 void v1_container_state_free(v1_container_state_t *v1_container_state) {
+    if(NULL == v1_container_state){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_container_state_running_free(v1_container_state->running);
     v1_container_state_terminated_free(v1_container_state->terminated);

@@ -25,6 +25,9 @@ v2beta2_metric_target_t *v2beta2_metric_target_create(
 
 
 void v2beta2_metric_target_free(v2beta2_metric_target_t *v2beta2_metric_target) {
+    if(NULL == v2beta2_metric_target){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta2_metric_target->average_value);
     free(v2beta2_metric_target->type);

@@ -19,6 +19,9 @@ apps_v1beta1_scale_spec_t *apps_v1beta1_scale_spec_create(
 
 
 void apps_v1beta1_scale_spec_free(apps_v1beta1_scale_spec_t *apps_v1beta1_scale_spec) {
+    if(NULL == apps_v1beta1_scale_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_scale_spec);
 }

@@ -27,6 +27,9 @@ v1alpha1_role_binding_t *v1alpha1_role_binding_create(
 
 
 void v1alpha1_role_binding_free(v1alpha1_role_binding_t *v1alpha1_role_binding) {
+    if(NULL == v1alpha1_role_binding){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_role_binding->api_version);
     free(v1alpha1_role_binding->kind);

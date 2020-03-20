@@ -23,6 +23,9 @@ v1_secret_key_selector_t *v1_secret_key_selector_create(
 
 
 void v1_secret_key_selector_free(v1_secret_key_selector_t *v1_secret_key_selector) {
+    if(NULL == v1_secret_key_selector){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_secret_key_selector->key);
     free(v1_secret_key_selector->name);

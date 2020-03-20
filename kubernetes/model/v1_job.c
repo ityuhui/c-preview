@@ -27,6 +27,9 @@ v1_job_t *v1_job_create(
 
 
 void v1_job_free(v1_job_t *v1_job) {
+    if(NULL == v1_job){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_job->api_version);
     free(v1_job->kind);

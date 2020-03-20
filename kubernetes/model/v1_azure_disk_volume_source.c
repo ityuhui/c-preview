@@ -29,6 +29,9 @@ v1_azure_disk_volume_source_t *v1_azure_disk_volume_source_create(
 
 
 void v1_azure_disk_volume_source_free(v1_azure_disk_volume_source_t *v1_azure_disk_volume_source) {
+    if(NULL == v1_azure_disk_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_azure_disk_volume_source->caching_mode);
     free(v1_azure_disk_volume_source->disk_name);

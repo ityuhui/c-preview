@@ -25,6 +25,9 @@ v1_endpoints_t *v1_endpoints_create(
 
 
 void v1_endpoints_free(v1_endpoints_t *v1_endpoints) {
+    if(NULL == v1_endpoints){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_endpoints->api_version);
     free(v1_endpoints->kind);

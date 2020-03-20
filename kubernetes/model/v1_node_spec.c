@@ -31,6 +31,9 @@ v1_node_spec_t *v1_node_spec_create(
 
 
 void v1_node_spec_free(v1_node_spec_t *v1_node_spec) {
+    if(NULL == v1_node_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_node_config_source_free(v1_node_spec->config_source);
     free(v1_node_spec->external_id);

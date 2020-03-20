@@ -21,6 +21,9 @@ v1_self_subject_access_review_spec_t *v1_self_subject_access_review_spec_create(
 
 
 void v1_self_subject_access_review_spec_free(v1_self_subject_access_review_spec_t *v1_self_subject_access_review_spec) {
+    if(NULL == v1_self_subject_access_review_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_non_resource_attributes_free(v1_self_subject_access_review_spec->non_resource_attributes);
     v1_resource_attributes_free(v1_self_subject_access_review_spec->resource_attributes);

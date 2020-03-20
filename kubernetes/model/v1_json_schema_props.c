@@ -103,6 +103,9 @@ v1_json_schema_props_t *v1_json_schema_props_create(
 
 
 void v1_json_schema_props_free(v1_json_schema_props_t *v1_json_schema_props) {
+    if(NULL == v1_json_schema_props){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_json_schema_props->ref);
     free(v1_json_schema_props->schema);

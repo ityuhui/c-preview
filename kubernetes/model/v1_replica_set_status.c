@@ -29,6 +29,9 @@ v1_replica_set_status_t *v1_replica_set_status_create(
 
 
 void v1_replica_set_status_free(v1_replica_set_status_t *v1_replica_set_status) {
+    if(NULL == v1_replica_set_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_replica_set_status->conditions) {
         v1_replica_set_condition_free(listEntry->data);

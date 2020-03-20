@@ -31,6 +31,9 @@ v1_persistent_volume_claim_spec_t *v1_persistent_volume_claim_spec_create(
 
 
 void v1_persistent_volume_claim_spec_free(v1_persistent_volume_claim_spec_t *v1_persistent_volume_claim_spec) {
+    if(NULL == v1_persistent_volume_claim_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_persistent_volume_claim_spec->access_modes) {
         free(listEntry->data);

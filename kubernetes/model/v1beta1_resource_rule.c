@@ -25,6 +25,9 @@ v1beta1_resource_rule_t *v1beta1_resource_rule_create(
 
 
 void v1beta1_resource_rule_free(v1beta1_resource_rule_t *v1beta1_resource_rule) {
+    if(NULL == v1beta1_resource_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_resource_rule->api_groups) {
         free(listEntry->data);

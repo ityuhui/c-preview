@@ -27,6 +27,9 @@ v2beta2_metric_spec_t *v2beta2_metric_spec_create(
 
 
 void v2beta2_metric_spec_free(v2beta2_metric_spec_t *v2beta2_metric_spec) {
+    if(NULL == v2beta2_metric_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v2beta2_external_metric_source_free(v2beta2_metric_spec->external);
     v2beta2_object_metric_source_free(v2beta2_metric_spec->object);

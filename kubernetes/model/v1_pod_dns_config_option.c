@@ -21,6 +21,9 @@ v1_pod_dns_config_option_t *v1_pod_dns_config_option_create(
 
 
 void v1_pod_dns_config_option_free(v1_pod_dns_config_option_t *v1_pod_dns_config_option) {
+    if(NULL == v1_pod_dns_config_option){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod_dns_config_option->name);
     free(v1_pod_dns_config_option->value);

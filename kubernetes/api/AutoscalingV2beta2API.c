@@ -11,10 +11,11 @@
     snprintf(dst, 256, "%ld", (long int)(src));\
 }while(0)
 
+
 // create a HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_createNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * namespace ,v2beta2_horizontal_pod_autoscaler_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+AutoscalingV2beta2API_createNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * namespace, v2beta2_horizontal_pod_autoscaler_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -176,7 +177,7 @@ end:
 // delete collection of HorizontalPodAutoscaler
 //
 v1_status_t*
-AutoscalingV2beta2API_deleteCollectionNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * namespace ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * dryRun ,char * fieldSelector ,int gracePeriodSeconds ,char * labelSelector ,int limit ,int orphanDependents ,char * propagationPolicy ,char * resourceVersion ,int timeoutSeconds ,int watch ,v1_delete_options_t * body)
+AutoscalingV2beta2API_deleteCollectionNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * namespace, char * pretty, int allowWatchBookmarks, char * _continue, char * dryRun, char * fieldSelector, int gracePeriodSeconds, char * labelSelector, int limit, int orphanDependents, char * propagationPolicy, char * resourceVersion, int timeoutSeconds, int watch, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -548,7 +549,7 @@ end:
 // delete a HorizontalPodAutoscaler
 //
 v1_status_t*
-AutoscalingV2beta2API_deleteNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty ,char * dryRun ,int gracePeriodSeconds ,int orphanDependents ,char * propagationPolicy ,v1_delete_options_t * body)
+AutoscalingV2beta2API_deleteNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * name, char * namespace, char * pretty, char * dryRun, int gracePeriodSeconds, int orphanDependents, char * propagationPolicy, v1_delete_options_t * body)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -820,7 +821,7 @@ end:
 // list or watch objects of kind HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_list_t*
-AutoscalingV2beta2API_listHorizontalPodAutoscalerForAllNamespaces(apiClient_t *apiClient ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * pretty ,char * resourceVersion ,int timeoutSeconds ,int watch)
+AutoscalingV2beta2API_listHorizontalPodAutoscalerForAllNamespaces(apiClient_t *apiClient, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * pretty, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1084,7 +1085,7 @@ end:
 // list or watch objects of kind HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_list_t*
-AutoscalingV2beta2API_listNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * namespace ,char * pretty ,int allowWatchBookmarks ,char * _continue ,char * fieldSelector ,char * labelSelector ,int limit ,char * resourceVersion ,int timeoutSeconds ,int watch)
+AutoscalingV2beta2API_listNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * namespace, char * pretty, int allowWatchBookmarks, char * _continue, char * fieldSelector, char * labelSelector, int limit, char * resourceVersion, int timeoutSeconds, int watch)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1359,7 +1360,7 @@ end:
 // partially update the specified HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_patchNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * name ,char * namespace ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+AutoscalingV2beta2API_patchNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * name, char * namespace, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1550,7 +1551,7 @@ end:
 // partially update status of the specified HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_patchNamespacedHorizontalPodAutoscalerStatus(apiClient_t *apiClient ,char * name ,char * namespace ,object_t * body ,char * pretty ,char * dryRun ,char * fieldManager ,int force)
+AutoscalingV2beta2API_patchNamespacedHorizontalPodAutoscalerStatus(apiClient_t *apiClient, char * name, char * namespace, object_t * body, char * pretty, char * dryRun, char * fieldManager, int force)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1741,7 +1742,7 @@ end:
 // read the specified HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_readNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty ,int exact ,int export)
+AutoscalingV2beta2API_readNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * name, char * namespace, char * pretty, int exact, int export)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1889,7 +1890,7 @@ end:
 // read status of the specified HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_readNamespacedHorizontalPodAutoscalerStatus(apiClient_t *apiClient ,char * name ,char * namespace ,char * pretty)
+AutoscalingV2beta2API_readNamespacedHorizontalPodAutoscalerStatus(apiClient_t *apiClient, char * name, char * namespace, char * pretty)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -1997,7 +1998,7 @@ end:
 // replace the specified HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_replaceNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient ,char * name ,char * namespace ,v2beta2_horizontal_pod_autoscaler_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+AutoscalingV2beta2API_replaceNamespacedHorizontalPodAutoscaler(apiClient_t *apiClient, char * name, char * namespace, v2beta2_horizontal_pod_autoscaler_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;
@@ -2167,7 +2168,7 @@ end:
 // replace status of the specified HorizontalPodAutoscaler
 //
 v2beta2_horizontal_pod_autoscaler_t*
-AutoscalingV2beta2API_replaceNamespacedHorizontalPodAutoscalerStatus(apiClient_t *apiClient ,char * name ,char * namespace ,v2beta2_horizontal_pod_autoscaler_t * body ,char * pretty ,char * dryRun ,char * fieldManager)
+AutoscalingV2beta2API_replaceNamespacedHorizontalPodAutoscalerStatus(apiClient_t *apiClient, char * name, char * namespace, v2beta2_horizontal_pod_autoscaler_t * body, char * pretty, char * dryRun, char * fieldManager)
 {
     list_t    *localVarQueryParameters = list_create();
     list_t    *localVarHeaderParameters = NULL;

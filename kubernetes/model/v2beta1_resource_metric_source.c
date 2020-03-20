@@ -23,6 +23,9 @@ v2beta1_resource_metric_source_t *v2beta1_resource_metric_source_create(
 
 
 void v2beta1_resource_metric_source_free(v2beta1_resource_metric_source_t *v2beta1_resource_metric_source) {
+    if(NULL == v2beta1_resource_metric_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta1_resource_metric_source->name);
     free(v2beta1_resource_metric_source->target_average_value);

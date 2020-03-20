@@ -27,6 +27,9 @@ v1_replication_controller_condition_t *v1_replication_controller_condition_creat
 
 
 void v1_replication_controller_condition_free(v1_replication_controller_condition_t *v1_replication_controller_condition) {
+    if(NULL == v1_replication_controller_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_replication_controller_condition->last_transition_time);
     free(v1_replication_controller_condition->message);

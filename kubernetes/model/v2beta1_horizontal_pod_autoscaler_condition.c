@@ -27,6 +27,9 @@ v2beta1_horizontal_pod_autoscaler_condition_t *v2beta1_horizontal_pod_autoscaler
 
 
 void v2beta1_horizontal_pod_autoscaler_condition_free(v2beta1_horizontal_pod_autoscaler_condition_t *v2beta1_horizontal_pod_autoscaler_condition) {
+    if(NULL == v2beta1_horizontal_pod_autoscaler_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta1_horizontal_pod_autoscaler_condition->last_transition_time);
     free(v2beta1_horizontal_pod_autoscaler_condition->message);

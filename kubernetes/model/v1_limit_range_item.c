@@ -29,6 +29,9 @@ v1_limit_range_item_t *v1_limit_range_item_create(
 
 
 void v1_limit_range_item_free(v1_limit_range_item_t *v1_limit_range_item) {
+    if(NULL == v1_limit_range_item){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_limit_range_item->_default) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

@@ -29,6 +29,9 @@ v1_deployment_condition_t *v1_deployment_condition_create(
 
 
 void v1_deployment_condition_free(v1_deployment_condition_t *v1_deployment_condition) {
+    if(NULL == v1_deployment_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_deployment_condition->last_transition_time);
     free(v1_deployment_condition->last_update_time);

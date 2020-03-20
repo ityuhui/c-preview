@@ -19,6 +19,9 @@ v1beta2_rolling_update_daemon_set_t *v1beta2_rolling_update_daemon_set_create(
 
 
 void v1beta2_rolling_update_daemon_set_free(v1beta2_rolling_update_daemon_set_t *v1beta2_rolling_update_daemon_set) {
+    if(NULL == v1beta2_rolling_update_daemon_set){
+        return ;
+    }
     listEntry_t *listEntry;
     object_free(v1beta2_rolling_update_daemon_set->max_unavailable);
     free(v1beta2_rolling_update_daemon_set);

@@ -37,6 +37,9 @@ v1_scale_io_persistent_volume_source_t *v1_scale_io_persistent_volume_source_cre
 
 
 void v1_scale_io_persistent_volume_source_free(v1_scale_io_persistent_volume_source_t *v1_scale_io_persistent_volume_source) {
+    if(NULL == v1_scale_io_persistent_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_scale_io_persistent_volume_source->fs_type);
     free(v1_scale_io_persistent_volume_source->gateway);

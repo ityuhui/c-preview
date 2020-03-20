@@ -35,6 +35,9 @@ extensions_v1beta1_deployment_spec_t *extensions_v1beta1_deployment_spec_create(
 
 
 void extensions_v1beta1_deployment_spec_free(extensions_v1beta1_deployment_spec_t *extensions_v1beta1_deployment_spec) {
+    if(NULL == extensions_v1beta1_deployment_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     extensions_v1beta1_rollback_config_free(extensions_v1beta1_deployment_spec->rollback_to);
     v1_label_selector_free(extensions_v1beta1_deployment_spec->selector);

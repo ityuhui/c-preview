@@ -19,6 +19,9 @@ v1_session_affinity_config_t *v1_session_affinity_config_create(
 
 
 void v1_session_affinity_config_free(v1_session_affinity_config_t *v1_session_affinity_config) {
+    if(NULL == v1_session_affinity_config){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_client_ip_config_free(v1_session_affinity_config->client_ip);
     free(v1_session_affinity_config);

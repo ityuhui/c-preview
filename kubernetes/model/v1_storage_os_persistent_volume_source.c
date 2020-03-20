@@ -27,6 +27,9 @@ v1_storage_os_persistent_volume_source_t *v1_storage_os_persistent_volume_source
 
 
 void v1_storage_os_persistent_volume_source_free(v1_storage_os_persistent_volume_source_t *v1_storage_os_persistent_volume_source) {
+    if(NULL == v1_storage_os_persistent_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_storage_os_persistent_volume_source->fs_type);
     v1_object_reference_free(v1_storage_os_persistent_volume_source->secret_ref);

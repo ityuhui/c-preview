@@ -23,6 +23,9 @@ v1alpha1_queuing_configuration_t *v1alpha1_queuing_configuration_create(
 
 
 void v1alpha1_queuing_configuration_free(v1alpha1_queuing_configuration_t *v1alpha1_queuing_configuration) {
+    if(NULL == v1alpha1_queuing_configuration){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_queuing_configuration);
 }

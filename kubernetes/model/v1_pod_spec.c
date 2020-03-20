@@ -85,6 +85,9 @@ v1_pod_spec_t *v1_pod_spec_create(
 
 
 void v1_pod_spec_free(v1_pod_spec_t *v1_pod_spec) {
+    if(NULL == v1_pod_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_affinity_free(v1_pod_spec->affinity);
     list_ForEach(listEntry, v1_pod_spec->containers) {

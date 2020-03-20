@@ -19,6 +19,9 @@ v1_scale_spec_t *v1_scale_spec_create(
 
 
 void v1_scale_spec_free(v1_scale_spec_t *v1_scale_spec) {
+    if(NULL == v1_scale_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_scale_spec);
 }

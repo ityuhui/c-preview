@@ -21,6 +21,9 @@ v1_weighted_pod_affinity_term_t *v1_weighted_pod_affinity_term_create(
 
 
 void v1_weighted_pod_affinity_term_free(v1_weighted_pod_affinity_term_t *v1_weighted_pod_affinity_term) {
+    if(NULL == v1_weighted_pod_affinity_term){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_pod_affinity_term_free(v1_weighted_pod_affinity_term->pod_affinity_term);
     free(v1_weighted_pod_affinity_term);

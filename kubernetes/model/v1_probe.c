@@ -33,6 +33,9 @@ v1_probe_t *v1_probe_create(
 
 
 void v1_probe_free(v1_probe_t *v1_probe) {
+    if(NULL == v1_probe){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_exec_action_free(v1_probe->exec);
     v1_http_get_action_free(v1_probe->http_get);

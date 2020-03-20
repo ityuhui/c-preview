@@ -27,6 +27,9 @@ v1alpha1_priority_level_configuration_condition_t *v1alpha1_priority_level_confi
 
 
 void v1alpha1_priority_level_configuration_condition_free(v1alpha1_priority_level_configuration_condition_t *v1alpha1_priority_level_configuration_condition) {
+    if(NULL == v1alpha1_priority_level_configuration_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_priority_level_configuration_condition->last_transition_time);
     free(v1alpha1_priority_level_configuration_condition->message);

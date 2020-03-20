@@ -21,6 +21,9 @@ v1_group_version_for_discovery_t *v1_group_version_for_discovery_create(
 
 
 void v1_group_version_for_discovery_free(v1_group_version_for_discovery_t *v1_group_version_for_discovery) {
+    if(NULL == v1_group_version_for_discovery){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_group_version_for_discovery->group_version);
     free(v1_group_version_for_discovery->version);

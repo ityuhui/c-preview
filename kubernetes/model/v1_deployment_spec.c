@@ -33,6 +33,9 @@ v1_deployment_spec_t *v1_deployment_spec_create(
 
 
 void v1_deployment_spec_free(v1_deployment_spec_t *v1_deployment_spec) {
+    if(NULL == v1_deployment_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_label_selector_free(v1_deployment_spec->selector);
     v1_deployment_strategy_free(v1_deployment_spec->strategy);

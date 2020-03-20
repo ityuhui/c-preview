@@ -19,6 +19,9 @@ v1_service_status_t *v1_service_status_create(
 
 
 void v1_service_status_free(v1_service_status_t *v1_service_status) {
+    if(NULL == v1_service_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_load_balancer_status_free(v1_service_status->load_balancer);
     free(v1_service_status);

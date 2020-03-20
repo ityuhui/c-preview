@@ -33,6 +33,9 @@ v1_pod_security_context_t *v1_pod_security_context_create(
 
 
 void v1_pod_security_context_free(v1_pod_security_context_t *v1_pod_security_context) {
+    if(NULL == v1_pod_security_context){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_se_linux_options_free(v1_pod_security_context->se_linux_options);
     list_ForEach(listEntry, v1_pod_security_context->supplemental_groups) {

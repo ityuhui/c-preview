@@ -25,6 +25,9 @@ v1_deployment_list_t *v1_deployment_list_create(
 
 
 void v1_deployment_list_free(v1_deployment_list_t *v1_deployment_list) {
+    if(NULL == v1_deployment_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_deployment_list->api_version);
     list_ForEach(listEntry, v1_deployment_list->items) {

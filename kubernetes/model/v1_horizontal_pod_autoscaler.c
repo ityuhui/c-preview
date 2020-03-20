@@ -27,6 +27,9 @@ v1_horizontal_pod_autoscaler_t *v1_horizontal_pod_autoscaler_create(
 
 
 void v1_horizontal_pod_autoscaler_free(v1_horizontal_pod_autoscaler_t *v1_horizontal_pod_autoscaler) {
+    if(NULL == v1_horizontal_pod_autoscaler){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_horizontal_pod_autoscaler->api_version);
     free(v1_horizontal_pod_autoscaler->kind);

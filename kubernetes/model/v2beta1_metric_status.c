@@ -27,6 +27,9 @@ v2beta1_metric_status_t *v2beta1_metric_status_create(
 
 
 void v2beta1_metric_status_free(v2beta1_metric_status_t *v2beta1_metric_status) {
+    if(NULL == v2beta1_metric_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v2beta1_external_metric_status_free(v2beta1_metric_status->external);
     v2beta1_object_metric_status_free(v2beta1_metric_status->object);

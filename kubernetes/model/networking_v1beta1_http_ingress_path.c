@@ -21,6 +21,9 @@ networking_v1beta1_http_ingress_path_t *networking_v1beta1_http_ingress_path_cre
 
 
 void networking_v1beta1_http_ingress_path_free(networking_v1beta1_http_ingress_path_t *networking_v1beta1_http_ingress_path) {
+    if(NULL == networking_v1beta1_http_ingress_path){
+        return ;
+    }
     listEntry_t *listEntry;
     networking_v1beta1_ingress_backend_free(networking_v1beta1_http_ingress_path->backend);
     free(networking_v1beta1_http_ingress_path->path);

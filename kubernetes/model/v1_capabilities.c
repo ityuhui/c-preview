@@ -21,6 +21,9 @@ v1_capabilities_t *v1_capabilities_create(
 
 
 void v1_capabilities_free(v1_capabilities_t *v1_capabilities) {
+    if(NULL == v1_capabilities){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_capabilities->add) {
         free(listEntry->data);

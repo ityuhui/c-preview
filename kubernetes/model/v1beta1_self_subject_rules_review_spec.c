@@ -19,6 +19,9 @@ v1beta1_self_subject_rules_review_spec_t *v1beta1_self_subject_rules_review_spec
 
 
 void v1beta1_self_subject_rules_review_spec_free(v1beta1_self_subject_rules_review_spec_t *v1beta1_self_subject_rules_review_spec) {
+    if(NULL == v1beta1_self_subject_rules_review_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_self_subject_rules_review_spec->namespace);
     free(v1beta1_self_subject_rules_review_spec);

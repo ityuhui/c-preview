@@ -27,6 +27,9 @@ apps_v1beta1_deployment_t *apps_v1beta1_deployment_create(
 
 
 void apps_v1beta1_deployment_free(apps_v1beta1_deployment_t *apps_v1beta1_deployment) {
+    if(NULL == apps_v1beta1_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_deployment->api_version);
     free(apps_v1beta1_deployment->kind);

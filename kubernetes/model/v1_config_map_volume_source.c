@@ -25,6 +25,9 @@ v1_config_map_volume_source_t *v1_config_map_volume_source_create(
 
 
 void v1_config_map_volume_source_free(v1_config_map_volume_source_t *v1_config_map_volume_source) {
+    if(NULL == v1_config_map_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_config_map_volume_source->items) {
         v1_key_to_path_free(listEntry->data);

@@ -21,6 +21,9 @@ v1beta1_custom_resource_subresources_t *v1beta1_custom_resource_subresources_cre
 
 
 void v1beta1_custom_resource_subresources_free(v1beta1_custom_resource_subresources_t *v1beta1_custom_resource_subresources) {
+    if(NULL == v1beta1_custom_resource_subresources){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta1_custom_resource_subresource_scale_free(v1beta1_custom_resource_subresources->scale);
     object_free(v1beta1_custom_resource_subresources->status);

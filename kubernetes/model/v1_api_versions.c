@@ -25,6 +25,9 @@ v1_api_versions_t *v1_api_versions_create(
 
 
 void v1_api_versions_free(v1_api_versions_t *v1_api_versions) {
+    if(NULL == v1_api_versions){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_api_versions->api_version);
     free(v1_api_versions->kind);

@@ -27,6 +27,9 @@ v1_config_map_node_config_source_t *v1_config_map_node_config_source_create(
 
 
 void v1_config_map_node_config_source_free(v1_config_map_node_config_source_t *v1_config_map_node_config_source) {
+    if(NULL == v1_config_map_node_config_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_config_map_node_config_source->kubelet_config_key);
     free(v1_config_map_node_config_source->name);

@@ -23,6 +23,9 @@ v1_role_ref_t *v1_role_ref_create(
 
 
 void v1_role_ref_free(v1_role_ref_t *v1_role_ref) {
+    if(NULL == v1_role_ref){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_role_ref->api_group);
     free(v1_role_ref->kind);

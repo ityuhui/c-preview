@@ -23,6 +23,9 @@ v2beta1_cross_version_object_reference_t *v2beta1_cross_version_object_reference
 
 
 void v2beta1_cross_version_object_reference_free(v2beta1_cross_version_object_reference_t *v2beta1_cross_version_object_reference) {
+    if(NULL == v2beta1_cross_version_object_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta1_cross_version_object_reference->api_version);
     free(v2beta1_cross_version_object_reference->kind);

@@ -25,6 +25,9 @@ v1_limit_range_t *v1_limit_range_create(
 
 
 void v1_limit_range_free(v1_limit_range_t *v1_limit_range) {
+    if(NULL == v1_limit_range){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_limit_range->api_version);
     free(v1_limit_range->kind);

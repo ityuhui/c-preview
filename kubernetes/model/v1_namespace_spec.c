@@ -19,6 +19,9 @@ v1_namespace_spec_t *v1_namespace_spec_create(
 
 
 void v1_namespace_spec_free(v1_namespace_spec_t *v1_namespace_spec) {
+    if(NULL == v1_namespace_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_namespace_spec->finalizers) {
         free(listEntry->data);

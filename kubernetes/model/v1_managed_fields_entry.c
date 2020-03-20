@@ -29,6 +29,9 @@ v1_managed_fields_entry_t *v1_managed_fields_entry_create(
 
 
 void v1_managed_fields_entry_free(v1_managed_fields_entry_t *v1_managed_fields_entry) {
+    if(NULL == v1_managed_fields_entry){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_managed_fields_entry->api_version);
     free(v1_managed_fields_entry->fields_type);

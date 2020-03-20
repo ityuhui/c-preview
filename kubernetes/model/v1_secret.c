@@ -29,6 +29,9 @@ v1_secret_t *v1_secret_create(
 
 
 void v1_secret_free(v1_secret_t *v1_secret) {
+    if(NULL == v1_secret){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_secret->api_version);
     list_ForEach(listEntry, v1_secret->data) {

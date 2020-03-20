@@ -21,6 +21,9 @@ v1_token_review_spec_t *v1_token_review_spec_create(
 
 
 void v1_token_review_spec_free(v1_token_review_spec_t *v1_token_review_spec) {
+    if(NULL == v1_token_review_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_token_review_spec->audiences) {
         free(listEntry->data);

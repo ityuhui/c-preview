@@ -21,6 +21,9 @@ v1_rolling_update_deployment_t *v1_rolling_update_deployment_create(
 
 
 void v1_rolling_update_deployment_free(v1_rolling_update_deployment_t *v1_rolling_update_deployment) {
+    if(NULL == v1_rolling_update_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     object_free(v1_rolling_update_deployment->max_surge);
     object_free(v1_rolling_update_deployment->max_unavailable);

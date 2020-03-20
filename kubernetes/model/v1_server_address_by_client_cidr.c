@@ -21,6 +21,9 @@ v1_server_address_by_client_cidr_t *v1_server_address_by_client_cidr_create(
 
 
 void v1_server_address_by_client_cidr_free(v1_server_address_by_client_cidr_t *v1_server_address_by_client_cidr) {
+    if(NULL == v1_server_address_by_client_cidr){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_server_address_by_client_cidr->client_cidr);
     free(v1_server_address_by_client_cidr->server_address);

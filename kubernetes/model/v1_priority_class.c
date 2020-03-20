@@ -31,6 +31,9 @@ v1_priority_class_t *v1_priority_class_create(
 
 
 void v1_priority_class_free(v1_priority_class_t *v1_priority_class) {
+    if(NULL == v1_priority_class){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_priority_class->api_version);
     free(v1_priority_class->description);

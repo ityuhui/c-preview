@@ -29,6 +29,9 @@ v1_ceph_fs_volume_source_t *v1_ceph_fs_volume_source_create(
 
 
 void v1_ceph_fs_volume_source_free(v1_ceph_fs_volume_source_t *v1_ceph_fs_volume_source) {
+    if(NULL == v1_ceph_fs_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_ceph_fs_volume_source->monitors) {
         free(listEntry->data);

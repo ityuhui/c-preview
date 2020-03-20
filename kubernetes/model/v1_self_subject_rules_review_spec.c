@@ -19,6 +19,9 @@ v1_self_subject_rules_review_spec_t *v1_self_subject_rules_review_spec_create(
 
 
 void v1_self_subject_rules_review_spec_free(v1_self_subject_rules_review_spec_t *v1_self_subject_rules_review_spec) {
+    if(NULL == v1_self_subject_rules_review_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_self_subject_rules_review_spec->namespace);
     free(v1_self_subject_rules_review_spec);

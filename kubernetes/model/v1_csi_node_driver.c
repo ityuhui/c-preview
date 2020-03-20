@@ -25,6 +25,9 @@ v1_csi_node_driver_t *v1_csi_node_driver_create(
 
 
 void v1_csi_node_driver_free(v1_csi_node_driver_t *v1_csi_node_driver) {
+    if(NULL == v1_csi_node_driver){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_volume_node_resources_free(v1_csi_node_driver->allocatable);
     free(v1_csi_node_driver->name);

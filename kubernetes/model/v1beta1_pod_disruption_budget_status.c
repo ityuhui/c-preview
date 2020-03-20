@@ -29,6 +29,9 @@ v1beta1_pod_disruption_budget_status_t *v1beta1_pod_disruption_budget_status_cre
 
 
 void v1beta1_pod_disruption_budget_status_free(v1beta1_pod_disruption_budget_status_t *v1beta1_pod_disruption_budget_status) {
+    if(NULL == v1beta1_pod_disruption_budget_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_pod_disruption_budget_status->disrupted_pods) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

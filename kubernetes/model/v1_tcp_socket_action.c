@@ -21,6 +21,9 @@ v1_tcp_socket_action_t *v1_tcp_socket_action_create(
 
 
 void v1_tcp_socket_action_free(v1_tcp_socket_action_t *v1_tcp_socket_action) {
+    if(NULL == v1_tcp_socket_action){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_tcp_socket_action->host);
     object_free(v1_tcp_socket_action->port);

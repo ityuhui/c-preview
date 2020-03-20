@@ -33,6 +33,9 @@ v1_status_t *v1_status_create(
 
 
 void v1_status_free(v1_status_t *v1_status) {
+    if(NULL == v1_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_status->api_version);
     v1_status_details_free(v1_status->details);

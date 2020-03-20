@@ -51,6 +51,9 @@ v1beta1_event_t *v1beta1_event_create(
 
 
 void v1beta1_event_free(v1beta1_event_t *v1beta1_event) {
+    if(NULL == v1beta1_event){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_event->action);
     free(v1beta1_event->api_version);

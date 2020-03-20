@@ -27,6 +27,9 @@ v1beta1_daemon_set_t *v1beta1_daemon_set_create(
 
 
 void v1beta1_daemon_set_free(v1beta1_daemon_set_t *v1beta1_daemon_set) {
+    if(NULL == v1beta1_daemon_set){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_daemon_set->api_version);
     free(v1beta1_daemon_set->kind);

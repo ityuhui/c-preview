@@ -29,6 +29,9 @@ v1_custom_resource_column_definition_t *v1_custom_resource_column_definition_cre
 
 
 void v1_custom_resource_column_definition_free(v1_custom_resource_column_definition_t *v1_custom_resource_column_definition) {
+    if(NULL == v1_custom_resource_column_definition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_custom_resource_column_definition->description);
     free(v1_custom_resource_column_definition->format);

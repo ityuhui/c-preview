@@ -35,6 +35,9 @@ v1_container_status_t *v1_container_status_create(
 
 
 void v1_container_status_free(v1_container_status_t *v1_container_status) {
+    if(NULL == v1_container_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_container_status->container_id);
     free(v1_container_status->image);

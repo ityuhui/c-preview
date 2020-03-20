@@ -27,6 +27,9 @@ apps_v1beta1_scale_t *apps_v1beta1_scale_create(
 
 
 void apps_v1beta1_scale_free(apps_v1beta1_scale_t *apps_v1beta1_scale) {
+    if(NULL == apps_v1beta1_scale){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_scale->api_version);
     free(apps_v1beta1_scale->kind);

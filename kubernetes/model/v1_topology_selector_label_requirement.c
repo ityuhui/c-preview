@@ -21,6 +21,9 @@ v1_topology_selector_label_requirement_t *v1_topology_selector_label_requirement
 
 
 void v1_topology_selector_label_requirement_free(v1_topology_selector_label_requirement_t *v1_topology_selector_label_requirement) {
+    if(NULL == v1_topology_selector_label_requirement){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_topology_selector_label_requirement->key);
     list_ForEach(listEntry, v1_topology_selector_label_requirement->values) {

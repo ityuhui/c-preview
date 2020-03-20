@@ -21,6 +21,9 @@ v1_preferred_scheduling_term_t *v1_preferred_scheduling_term_create(
 
 
 void v1_preferred_scheduling_term_free(v1_preferred_scheduling_term_t *v1_preferred_scheduling_term) {
+    if(NULL == v1_preferred_scheduling_term){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_node_selector_term_free(v1_preferred_scheduling_term->preference);
     free(v1_preferred_scheduling_term);

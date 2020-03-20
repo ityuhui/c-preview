@@ -23,6 +23,9 @@ v1_env_var_t *v1_env_var_create(
 
 
 void v1_env_var_free(v1_env_var_t *v1_env_var) {
+    if(NULL == v1_env_var){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_env_var->name);
     free(v1_env_var->value);

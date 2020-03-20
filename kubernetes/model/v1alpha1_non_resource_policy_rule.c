@@ -21,6 +21,9 @@ v1alpha1_non_resource_policy_rule_t *v1alpha1_non_resource_policy_rule_create(
 
 
 void v1alpha1_non_resource_policy_rule_free(v1alpha1_non_resource_policy_rule_t *v1alpha1_non_resource_policy_rule) {
+    if(NULL == v1alpha1_non_resource_policy_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1alpha1_non_resource_policy_rule->non_resource_ur_ls) {
         free(listEntry->data);

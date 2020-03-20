@@ -21,6 +21,9 @@ v2beta2_pods_metric_source_t *v2beta2_pods_metric_source_create(
 
 
 void v2beta2_pods_metric_source_free(v2beta2_pods_metric_source_t *v2beta2_pods_metric_source) {
+    if(NULL == v2beta2_pods_metric_source){
+        return ;
+    }
     listEntry_t *listEntry;
     v2beta2_metric_identifier_free(v2beta2_pods_metric_source->metric);
     v2beta2_metric_target_free(v2beta2_pods_metric_source->target);

@@ -21,6 +21,9 @@ v1alpha1_policy_t *v1alpha1_policy_create(
 
 
 void v1alpha1_policy_free(v1alpha1_policy_t *v1alpha1_policy) {
+    if(NULL == v1alpha1_policy){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_policy->level);
     list_ForEach(listEntry, v1alpha1_policy->stages) {

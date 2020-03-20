@@ -23,6 +23,9 @@ v1_api_group_list_t *v1_api_group_list_create(
 
 
 void v1_api_group_list_free(v1_api_group_list_t *v1_api_group_list) {
+    if(NULL == v1_api_group_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_api_group_list->api_version);
     list_ForEach(listEntry, v1_api_group_list->groups) {

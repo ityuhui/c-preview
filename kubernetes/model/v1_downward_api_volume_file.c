@@ -25,6 +25,9 @@ v1_downward_api_volume_file_t *v1_downward_api_volume_file_create(
 
 
 void v1_downward_api_volume_file_free(v1_downward_api_volume_file_t *v1_downward_api_volume_file) {
+    if(NULL == v1_downward_api_volume_file){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_object_field_selector_free(v1_downward_api_volume_file->field_ref);
     free(v1_downward_api_volume_file->path);

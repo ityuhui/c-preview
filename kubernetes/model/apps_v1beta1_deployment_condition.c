@@ -29,6 +29,9 @@ apps_v1beta1_deployment_condition_t *apps_v1beta1_deployment_condition_create(
 
 
 void apps_v1beta1_deployment_condition_free(apps_v1beta1_deployment_condition_t *apps_v1beta1_deployment_condition) {
+    if(NULL == apps_v1beta1_deployment_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_deployment_condition->last_transition_time);
     free(apps_v1beta1_deployment_condition->last_update_time);

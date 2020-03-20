@@ -25,6 +25,9 @@ v1beta1_eviction_t *v1beta1_eviction_create(
 
 
 void v1beta1_eviction_free(v1beta1_eviction_t *v1beta1_eviction) {
+    if(NULL == v1beta1_eviction){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_eviction->api_version);
     v1_delete_options_free(v1beta1_eviction->delete_options);

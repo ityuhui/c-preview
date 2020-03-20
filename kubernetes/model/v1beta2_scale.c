@@ -27,6 +27,9 @@ v1beta2_scale_t *v1beta2_scale_create(
 
 
 void v1beta2_scale_free(v1beta2_scale_t *v1beta2_scale) {
+    if(NULL == v1beta2_scale){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta2_scale->api_version);
     free(v1beta2_scale->kind);

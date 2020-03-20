@@ -25,6 +25,9 @@ policy_v1beta1_pod_security_policy_list_t *policy_v1beta1_pod_security_policy_li
 
 
 void policy_v1beta1_pod_security_policy_list_free(policy_v1beta1_pod_security_policy_list_t *policy_v1beta1_pod_security_policy_list) {
+    if(NULL == policy_v1beta1_pod_security_policy_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_pod_security_policy_list->api_version);
     list_ForEach(listEntry, policy_v1beta1_pod_security_policy_list->items) {

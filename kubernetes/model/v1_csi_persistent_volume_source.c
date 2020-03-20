@@ -35,6 +35,9 @@ v1_csi_persistent_volume_source_t *v1_csi_persistent_volume_source_create(
 
 
 void v1_csi_persistent_volume_source_free(v1_csi_persistent_volume_source_t *v1_csi_persistent_volume_source) {
+    if(NULL == v1_csi_persistent_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_secret_reference_free(v1_csi_persistent_volume_source->controller_expand_secret_ref);
     v1_secret_reference_free(v1_csi_persistent_volume_source->controller_publish_secret_ref);

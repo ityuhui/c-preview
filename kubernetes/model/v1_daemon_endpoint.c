@@ -19,6 +19,9 @@ v1_daemon_endpoint_t *v1_daemon_endpoint_create(
 
 
 void v1_daemon_endpoint_free(v1_daemon_endpoint_t *v1_daemon_endpoint) {
+    if(NULL == v1_daemon_endpoint){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_daemon_endpoint);
 }

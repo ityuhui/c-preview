@@ -31,6 +31,9 @@ v1_api_service_spec_t *v1_api_service_spec_create(
 
 
 void v1_api_service_spec_free(v1_api_service_spec_t *v1_api_service_spec) {
+    if(NULL == v1_api_service_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_api_service_spec->group);
     apiregistration_v1_service_reference_free(v1_api_service_spec->service);

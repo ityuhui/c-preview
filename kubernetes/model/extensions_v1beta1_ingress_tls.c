@@ -21,6 +21,9 @@ extensions_v1beta1_ingress_tls_t *extensions_v1beta1_ingress_tls_create(
 
 
 void extensions_v1beta1_ingress_tls_free(extensions_v1beta1_ingress_tls_t *extensions_v1beta1_ingress_tls) {
+    if(NULL == extensions_v1beta1_ingress_tls){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_ingress_tls->hosts) {
         free(listEntry->data);

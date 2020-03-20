@@ -29,6 +29,9 @@ v1_volume_mount_t *v1_volume_mount_create(
 
 
 void v1_volume_mount_free(v1_volume_mount_t *v1_volume_mount) {
+    if(NULL == v1_volume_mount){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_volume_mount->mount_path);
     free(v1_volume_mount->mount_propagation);

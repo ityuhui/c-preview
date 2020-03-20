@@ -19,6 +19,9 @@ v1_client_ip_config_t *v1_client_ip_config_create(
 
 
 void v1_client_ip_config_free(v1_client_ip_config_t *v1_client_ip_config) {
+    if(NULL == v1_client_ip_config){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_client_ip_config);
 }

@@ -27,6 +27,9 @@ v1_deployment_t *v1_deployment_create(
 
 
 void v1_deployment_free(v1_deployment_t *v1_deployment) {
+    if(NULL == v1_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_deployment->api_version);
     free(v1_deployment->kind);

@@ -23,6 +23,9 @@ v1_status_cause_t *v1_status_cause_create(
 
 
 void v1_status_cause_free(v1_status_cause_t *v1_status_cause) {
+    if(NULL == v1_status_cause){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_status_cause->field);
     free(v1_status_cause->message);

@@ -25,6 +25,9 @@ v1beta1_subject_access_review_status_t *v1beta1_subject_access_review_status_cre
 
 
 void v1beta1_subject_access_review_status_free(v1beta1_subject_access_review_status_t *v1beta1_subject_access_review_status) {
+    if(NULL == v1beta1_subject_access_review_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_subject_access_review_status->evaluation_error);
     free(v1beta1_subject_access_review_status->reason);

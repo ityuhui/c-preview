@@ -75,6 +75,9 @@ v1_volume_t *v1_volume_create(
 
 
 void v1_volume_free(v1_volume_t *v1_volume) {
+    if(NULL == v1_volume){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_aws_elastic_block_store_volume_source_free(v1_volume->aws_elastic_block_store);
     v1_azure_disk_volume_source_free(v1_volume->azure_disk);

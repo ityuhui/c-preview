@@ -25,6 +25,9 @@ flowcontrol_v1alpha1_subject_t *flowcontrol_v1alpha1_subject_create(
 
 
 void flowcontrol_v1alpha1_subject_free(flowcontrol_v1alpha1_subject_t *flowcontrol_v1alpha1_subject) {
+    if(NULL == flowcontrol_v1alpha1_subject){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_group_subject_free(flowcontrol_v1alpha1_subject->group);
     free(flowcontrol_v1alpha1_subject->kind);

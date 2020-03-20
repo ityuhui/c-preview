@@ -27,6 +27,9 @@ v1_resource_quota_t *v1_resource_quota_create(
 
 
 void v1_resource_quota_free(v1_resource_quota_t *v1_resource_quota) {
+    if(NULL == v1_resource_quota){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_resource_quota->api_version);
     free(v1_resource_quota->kind);

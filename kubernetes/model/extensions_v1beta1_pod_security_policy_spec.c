@@ -65,6 +65,9 @@ extensions_v1beta1_pod_security_policy_spec_t *extensions_v1beta1_pod_security_p
 
 
 void extensions_v1beta1_pod_security_policy_spec_free(extensions_v1beta1_pod_security_policy_spec_t *extensions_v1beta1_pod_security_policy_spec) {
+    if(NULL == extensions_v1beta1_pod_security_policy_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_pod_security_policy_spec->allowed_csi_drivers) {
         extensions_v1beta1_allowed_csi_driver_free(listEntry->data);

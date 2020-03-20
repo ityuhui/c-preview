@@ -21,6 +21,9 @@ extensions_v1beta1_allowed_host_path_t *extensions_v1beta1_allowed_host_path_cre
 
 
 void extensions_v1beta1_allowed_host_path_free(extensions_v1beta1_allowed_host_path_t *extensions_v1beta1_allowed_host_path) {
+    if(NULL == extensions_v1beta1_allowed_host_path){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_allowed_host_path->path_prefix);
     free(extensions_v1beta1_allowed_host_path);

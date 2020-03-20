@@ -25,6 +25,9 @@ v1_network_policy_spec_t *v1_network_policy_spec_create(
 
 
 void v1_network_policy_spec_free(v1_network_policy_spec_t *v1_network_policy_spec) {
+    if(NULL == v1_network_policy_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_network_policy_spec->egress) {
         v1_network_policy_egress_rule_free(listEntry->data);

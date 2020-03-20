@@ -21,6 +21,9 @@ extensions_v1beta1_runtime_class_strategy_options_t *extensions_v1beta1_runtime_
 
 
 void extensions_v1beta1_runtime_class_strategy_options_free(extensions_v1beta1_runtime_class_strategy_options_t *extensions_v1beta1_runtime_class_strategy_options) {
+    if(NULL == extensions_v1beta1_runtime_class_strategy_options){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_runtime_class_strategy_options->allowed_runtime_class_names) {
         free(listEntry->data);

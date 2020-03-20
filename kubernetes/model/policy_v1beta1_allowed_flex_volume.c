@@ -19,6 +19,9 @@ policy_v1beta1_allowed_flex_volume_t *policy_v1beta1_allowed_flex_volume_create(
 
 
 void policy_v1beta1_allowed_flex_volume_free(policy_v1beta1_allowed_flex_volume_t *policy_v1beta1_allowed_flex_volume) {
+    if(NULL == policy_v1beta1_allowed_flex_volume){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_allowed_flex_volume->driver);
     free(policy_v1beta1_allowed_flex_volume);

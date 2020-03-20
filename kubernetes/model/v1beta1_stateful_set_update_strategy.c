@@ -21,6 +21,9 @@ v1beta1_stateful_set_update_strategy_t *v1beta1_stateful_set_update_strategy_cre
 
 
 void v1beta1_stateful_set_update_strategy_free(v1beta1_stateful_set_update_strategy_t *v1beta1_stateful_set_update_strategy) {
+    if(NULL == v1beta1_stateful_set_update_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta1_rolling_update_stateful_set_strategy_free(v1beta1_stateful_set_update_strategy->rolling_update);
     free(v1beta1_stateful_set_update_strategy->type);

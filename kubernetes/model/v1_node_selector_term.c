@@ -21,6 +21,9 @@ v1_node_selector_term_t *v1_node_selector_term_create(
 
 
 void v1_node_selector_term_free(v1_node_selector_term_t *v1_node_selector_term) {
+    if(NULL == v1_node_selector_term){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_node_selector_term->match_expressions) {
         v1_node_selector_requirement_free(listEntry->data);

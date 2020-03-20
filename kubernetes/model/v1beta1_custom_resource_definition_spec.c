@@ -37,6 +37,9 @@ v1beta1_custom_resource_definition_spec_t *v1beta1_custom_resource_definition_sp
 
 
 void v1beta1_custom_resource_definition_spec_free(v1beta1_custom_resource_definition_spec_t *v1beta1_custom_resource_definition_spec) {
+    if(NULL == v1beta1_custom_resource_definition_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_custom_resource_definition_spec->additional_printer_columns) {
         v1beta1_custom_resource_column_definition_free(listEntry->data);

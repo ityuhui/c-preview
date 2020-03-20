@@ -25,6 +25,9 @@ v1beta1_user_info_t *v1beta1_user_info_create(
 
 
 void v1beta1_user_info_free(v1beta1_user_info_t *v1beta1_user_info) {
+    if(NULL == v1beta1_user_info){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_user_info->extra) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

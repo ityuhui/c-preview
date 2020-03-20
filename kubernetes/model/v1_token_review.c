@@ -27,6 +27,9 @@ v1_token_review_t *v1_token_review_create(
 
 
 void v1_token_review_free(v1_token_review_t *v1_token_review) {
+    if(NULL == v1_token_review){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_token_review->api_version);
     free(v1_token_review->kind);

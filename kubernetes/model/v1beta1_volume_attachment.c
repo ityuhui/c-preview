@@ -27,6 +27,9 @@ v1beta1_volume_attachment_t *v1beta1_volume_attachment_create(
 
 
 void v1beta1_volume_attachment_free(v1beta1_volume_attachment_t *v1beta1_volume_attachment) {
+    if(NULL == v1beta1_volume_attachment){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_volume_attachment->api_version);
     free(v1beta1_volume_attachment->kind);

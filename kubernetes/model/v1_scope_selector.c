@@ -19,6 +19,9 @@ v1_scope_selector_t *v1_scope_selector_create(
 
 
 void v1_scope_selector_free(v1_scope_selector_t *v1_scope_selector) {
+    if(NULL == v1_scope_selector){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_scope_selector->match_expressions) {
         v1_scoped_resource_selector_requirement_free(listEntry->data);

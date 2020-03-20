@@ -29,6 +29,9 @@ v1_owner_reference_t *v1_owner_reference_create(
 
 
 void v1_owner_reference_free(v1_owner_reference_t *v1_owner_reference) {
+    if(NULL == v1_owner_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_owner_reference->api_version);
     free(v1_owner_reference->kind);

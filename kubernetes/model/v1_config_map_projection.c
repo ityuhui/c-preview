@@ -23,6 +23,9 @@ v1_config_map_projection_t *v1_config_map_projection_create(
 
 
 void v1_config_map_projection_free(v1_config_map_projection_t *v1_config_map_projection) {
+    if(NULL == v1_config_map_projection){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_config_map_projection->items) {
         v1_key_to_path_free(listEntry->data);

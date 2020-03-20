@@ -39,6 +39,9 @@ v1beta1_mutating_webhook_t *v1beta1_mutating_webhook_create(
 
 
 void v1beta1_mutating_webhook_free(v1beta1_mutating_webhook_t *v1beta1_mutating_webhook) {
+    if(NULL == v1beta1_mutating_webhook){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_mutating_webhook->admission_review_versions) {
         free(listEntry->data);

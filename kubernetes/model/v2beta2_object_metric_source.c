@@ -23,6 +23,9 @@ v2beta2_object_metric_source_t *v2beta2_object_metric_source_create(
 
 
 void v2beta2_object_metric_source_free(v2beta2_object_metric_source_t *v2beta2_object_metric_source) {
+    if(NULL == v2beta2_object_metric_source){
+        return ;
+    }
     listEntry_t *listEntry;
     v2beta2_cross_version_object_reference_free(v2beta2_object_metric_source->described_object);
     v2beta2_metric_identifier_free(v2beta2_object_metric_source->metric);

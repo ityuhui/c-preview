@@ -21,6 +21,9 @@ extensions_v1beta1_se_linux_strategy_options_t *extensions_v1beta1_se_linux_stra
 
 
 void extensions_v1beta1_se_linux_strategy_options_free(extensions_v1beta1_se_linux_strategy_options_t *extensions_v1beta1_se_linux_strategy_options) {
+    if(NULL == extensions_v1beta1_se_linux_strategy_options){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_se_linux_strategy_options->rule);
     v1_se_linux_options_free(extensions_v1beta1_se_linux_strategy_options->se_linux_options);

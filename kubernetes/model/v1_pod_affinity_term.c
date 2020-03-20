@@ -23,6 +23,9 @@ v1_pod_affinity_term_t *v1_pod_affinity_term_create(
 
 
 void v1_pod_affinity_term_free(v1_pod_affinity_term_t *v1_pod_affinity_term) {
+    if(NULL == v1_pod_affinity_term){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_label_selector_free(v1_pod_affinity_term->label_selector);
     list_ForEach(listEntry, v1_pod_affinity_term->namespaces) {

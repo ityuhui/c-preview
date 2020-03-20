@@ -23,6 +23,9 @@ v1alpha1_runtime_class_spec_t *v1alpha1_runtime_class_spec_create(
 
 
 void v1alpha1_runtime_class_spec_free(v1alpha1_runtime_class_spec_t *v1alpha1_runtime_class_spec) {
+    if(NULL == v1alpha1_runtime_class_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_overhead_free(v1alpha1_runtime_class_spec->overhead);
     free(v1alpha1_runtime_class_spec->runtime_handler);

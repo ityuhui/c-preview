@@ -25,6 +25,9 @@ v1_taint_t *v1_taint_create(
 
 
 void v1_taint_free(v1_taint_t *v1_taint) {
+    if(NULL == v1_taint){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_taint->effect);
     free(v1_taint->key);

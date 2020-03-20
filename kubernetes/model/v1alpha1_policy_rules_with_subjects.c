@@ -23,6 +23,9 @@ v1alpha1_policy_rules_with_subjects_t *v1alpha1_policy_rules_with_subjects_creat
 
 
 void v1alpha1_policy_rules_with_subjects_free(v1alpha1_policy_rules_with_subjects_t *v1alpha1_policy_rules_with_subjects) {
+    if(NULL == v1alpha1_policy_rules_with_subjects){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1alpha1_policy_rules_with_subjects->non_resource_rules) {
         v1alpha1_non_resource_policy_rule_free(listEntry->data);

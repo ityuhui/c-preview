@@ -23,6 +23,9 @@ v1_endpoint_subset_t *v1_endpoint_subset_create(
 
 
 void v1_endpoint_subset_free(v1_endpoint_subset_t *v1_endpoint_subset) {
+    if(NULL == v1_endpoint_subset){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_endpoint_subset->addresses) {
         v1_endpoint_address_free(listEntry->data);

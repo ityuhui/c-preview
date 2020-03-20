@@ -19,6 +19,9 @@ v1_container_state_running_t *v1_container_state_running_create(
 
 
 void v1_container_state_running_free(v1_container_state_running_t *v1_container_state_running) {
+    if(NULL == v1_container_state_running){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_container_state_running->started_at);
     free(v1_container_state_running);

@@ -21,6 +21,9 @@ v1_pod_template_spec_t *v1_pod_template_spec_create(
 
 
 void v1_pod_template_spec_free(v1_pod_template_spec_t *v1_pod_template_spec) {
+    if(NULL == v1_pod_template_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_object_meta_free(v1_pod_template_spec->metadata);
     v1_pod_spec_free(v1_pod_template_spec->spec);

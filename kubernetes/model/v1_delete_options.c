@@ -31,6 +31,9 @@ v1_delete_options_t *v1_delete_options_create(
 
 
 void v1_delete_options_free(v1_delete_options_t *v1_delete_options) {
+    if(NULL == v1_delete_options){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_delete_options->api_version);
     list_ForEach(listEntry, v1_delete_options->dry_run) {

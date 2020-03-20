@@ -21,6 +21,9 @@ extensions_v1beta1_deployment_strategy_t *extensions_v1beta1_deployment_strategy
 
 
 void extensions_v1beta1_deployment_strategy_free(extensions_v1beta1_deployment_strategy_t *extensions_v1beta1_deployment_strategy) {
+    if(NULL == extensions_v1beta1_deployment_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     extensions_v1beta1_rolling_update_deployment_free(extensions_v1beta1_deployment_strategy->rolling_update);
     free(extensions_v1beta1_deployment_strategy->type);

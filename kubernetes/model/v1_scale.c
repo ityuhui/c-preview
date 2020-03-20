@@ -27,6 +27,9 @@ v1_scale_t *v1_scale_create(
 
 
 void v1_scale_free(v1_scale_t *v1_scale) {
+    if(NULL == v1_scale){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_scale->api_version);
     free(v1_scale->kind);

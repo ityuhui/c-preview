@@ -23,6 +23,9 @@ v1_volume_attachment_spec_t *v1_volume_attachment_spec_create(
 
 
 void v1_volume_attachment_spec_free(v1_volume_attachment_spec_t *v1_volume_attachment_spec) {
+    if(NULL == v1_volume_attachment_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_volume_attachment_spec->attacher);
     free(v1_volume_attachment_spec->node_name);

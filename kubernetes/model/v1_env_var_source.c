@@ -25,6 +25,9 @@ v1_env_var_source_t *v1_env_var_source_create(
 
 
 void v1_env_var_source_free(v1_env_var_source_t *v1_env_var_source) {
+    if(NULL == v1_env_var_source){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_config_map_key_selector_free(v1_env_var_source->config_map_key_ref);
     v1_object_field_selector_free(v1_env_var_source->field_ref);

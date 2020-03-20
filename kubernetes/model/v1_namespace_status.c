@@ -21,6 +21,9 @@ v1_namespace_status_t *v1_namespace_status_create(
 
 
 void v1_namespace_status_free(v1_namespace_status_t *v1_namespace_status) {
+    if(NULL == v1_namespace_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_namespace_status->conditions) {
         v1_namespace_condition_free(listEntry->data);

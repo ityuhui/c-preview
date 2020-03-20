@@ -27,6 +27,9 @@ v1beta1_custom_resource_definition_condition_t *v1beta1_custom_resource_definiti
 
 
 void v1beta1_custom_resource_definition_condition_free(v1beta1_custom_resource_definition_condition_t *v1beta1_custom_resource_definition_condition) {
+    if(NULL == v1beta1_custom_resource_definition_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_custom_resource_definition_condition->last_transition_time);
     free(v1beta1_custom_resource_definition_condition->message);

@@ -21,6 +21,9 @@ v1beta1_ip_block_t *v1beta1_ip_block_create(
 
 
 void v1beta1_ip_block_free(v1beta1_ip_block_t *v1beta1_ip_block) {
+    if(NULL == v1beta1_ip_block){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_ip_block->cidr);
     list_ForEach(listEntry, v1beta1_ip_block->except) {

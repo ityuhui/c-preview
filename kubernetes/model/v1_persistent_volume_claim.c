@@ -27,6 +27,9 @@ v1_persistent_volume_claim_t *v1_persistent_volume_claim_create(
 
 
 void v1_persistent_volume_claim_free(v1_persistent_volume_claim_t *v1_persistent_volume_claim) {
+    if(NULL == v1_persistent_volume_claim){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_persistent_volume_claim->api_version);
     free(v1_persistent_volume_claim->kind);

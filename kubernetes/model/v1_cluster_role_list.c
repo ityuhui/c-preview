@@ -25,6 +25,9 @@ v1_cluster_role_list_t *v1_cluster_role_list_create(
 
 
 void v1_cluster_role_list_free(v1_cluster_role_list_t *v1_cluster_role_list) {
+    if(NULL == v1_cluster_role_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_cluster_role_list->api_version);
     list_ForEach(listEntry, v1_cluster_role_list->items) {

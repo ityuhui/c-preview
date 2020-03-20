@@ -27,6 +27,9 @@ v1beta1_endpoint_t *v1beta1_endpoint_create(
 
 
 void v1beta1_endpoint_free(v1beta1_endpoint_t *v1beta1_endpoint) {
+    if(NULL == v1beta1_endpoint){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_endpoint->addresses) {
         free(listEntry->data);

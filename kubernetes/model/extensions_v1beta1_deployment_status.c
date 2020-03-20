@@ -33,6 +33,9 @@ extensions_v1beta1_deployment_status_t *extensions_v1beta1_deployment_status_cre
 
 
 void extensions_v1beta1_deployment_status_free(extensions_v1beta1_deployment_status_t *extensions_v1beta1_deployment_status) {
+    if(NULL == extensions_v1beta1_deployment_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_deployment_status->conditions) {
         extensions_v1beta1_deployment_condition_free(listEntry->data);

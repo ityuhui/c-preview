@@ -23,6 +23,9 @@ v1beta1_network_policy_peer_t *v1beta1_network_policy_peer_create(
 
 
 void v1beta1_network_policy_peer_free(v1beta1_network_policy_peer_t *v1beta1_network_policy_peer) {
+    if(NULL == v1beta1_network_policy_peer){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta1_ip_block_free(v1beta1_network_policy_peer->ip_block);
     v1_label_selector_free(v1beta1_network_policy_peer->namespace_selector);

@@ -25,6 +25,9 @@ v1_horizontal_pod_autoscaler_spec_t *v1_horizontal_pod_autoscaler_spec_create(
 
 
 void v1_horizontal_pod_autoscaler_spec_free(v1_horizontal_pod_autoscaler_spec_t *v1_horizontal_pod_autoscaler_spec) {
+    if(NULL == v1_horizontal_pod_autoscaler_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_cross_version_object_reference_free(v1_horizontal_pod_autoscaler_spec->scale_target_ref);
     free(v1_horizontal_pod_autoscaler_spec);

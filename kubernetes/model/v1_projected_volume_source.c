@@ -21,6 +21,9 @@ v1_projected_volume_source_t *v1_projected_volume_source_create(
 
 
 void v1_projected_volume_source_free(v1_projected_volume_source_t *v1_projected_volume_source) {
+    if(NULL == v1_projected_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_projected_volume_source->sources) {
         v1_volume_projection_free(listEntry->data);

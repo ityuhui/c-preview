@@ -19,6 +19,9 @@ v1_node_daemon_endpoints_t *v1_node_daemon_endpoints_create(
 
 
 void v1_node_daemon_endpoints_free(v1_node_daemon_endpoints_t *v1_node_daemon_endpoints) {
+    if(NULL == v1_node_daemon_endpoints){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_daemon_endpoint_free(v1_node_daemon_endpoints->kubelet_endpoint);
     free(v1_node_daemon_endpoints);

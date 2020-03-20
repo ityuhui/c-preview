@@ -25,6 +25,9 @@ v1_volume_attachment_status_t *v1_volume_attachment_status_create(
 
 
 void v1_volume_attachment_status_free(v1_volume_attachment_status_t *v1_volume_attachment_status) {
+    if(NULL == v1_volume_attachment_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_volume_error_free(v1_volume_attachment_status->attach_error);
     list_ForEach(listEntry, v1_volume_attachment_status->attachment_metadata) {

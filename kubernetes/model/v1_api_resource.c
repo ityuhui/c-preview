@@ -37,6 +37,9 @@ v1_api_resource_t *v1_api_resource_create(
 
 
 void v1_api_resource_free(v1_api_resource_t *v1_api_resource) {
+    if(NULL == v1_api_resource){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_api_resource->categories) {
         free(listEntry->data);

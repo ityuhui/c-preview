@@ -27,6 +27,9 @@ v1beta1_self_subject_rules_review_t *v1beta1_self_subject_rules_review_create(
 
 
 void v1beta1_self_subject_rules_review_free(v1beta1_self_subject_rules_review_t *v1beta1_self_subject_rules_review) {
+    if(NULL == v1beta1_self_subject_rules_review){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_self_subject_rules_review->api_version);
     free(v1beta1_self_subject_rules_review->kind);

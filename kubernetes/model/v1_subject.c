@@ -25,6 +25,9 @@ v1_subject_t *v1_subject_create(
 
 
 void v1_subject_free(v1_subject_t *v1_subject) {
+    if(NULL == v1_subject){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_subject->api_group);
     free(v1_subject->kind);

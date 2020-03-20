@@ -25,6 +25,9 @@ rbac_v1alpha1_subject_t *rbac_v1alpha1_subject_create(
 
 
 void rbac_v1alpha1_subject_free(rbac_v1alpha1_subject_t *rbac_v1alpha1_subject) {
+    if(NULL == rbac_v1alpha1_subject){
+        return ;
+    }
     listEntry_t *listEntry;
     free(rbac_v1alpha1_subject->api_version);
     free(rbac_v1alpha1_subject->kind);

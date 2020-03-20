@@ -21,6 +21,9 @@ v1beta1_volume_error_t *v1beta1_volume_error_create(
 
 
 void v1beta1_volume_error_free(v1beta1_volume_error_t *v1beta1_volume_error) {
+    if(NULL == v1beta1_volume_error){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_volume_error->message);
     free(v1beta1_volume_error->time);

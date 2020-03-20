@@ -19,6 +19,9 @@ v1_limit_range_spec_t *v1_limit_range_spec_create(
 
 
 void v1_limit_range_spec_free(v1_limit_range_spec_t *v1_limit_range_spec) {
+    if(NULL == v1_limit_range_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_limit_range_spec->limits) {
         v1_limit_range_item_free(listEntry->data);

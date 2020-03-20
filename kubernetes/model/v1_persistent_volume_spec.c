@@ -77,6 +77,9 @@ v1_persistent_volume_spec_t *v1_persistent_volume_spec_create(
 
 
 void v1_persistent_volume_spec_free(v1_persistent_volume_spec_t *v1_persistent_volume_spec) {
+    if(NULL == v1_persistent_volume_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_persistent_volume_spec->access_modes) {
         free(listEntry->data);

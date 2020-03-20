@@ -21,6 +21,9 @@ networking_v1beta1_ingress_tls_t *networking_v1beta1_ingress_tls_create(
 
 
 void networking_v1beta1_ingress_tls_free(networking_v1beta1_ingress_tls_t *networking_v1beta1_ingress_tls) {
+    if(NULL == networking_v1beta1_ingress_tls){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, networking_v1beta1_ingress_tls->hosts) {
         free(listEntry->data);

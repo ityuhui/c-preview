@@ -27,6 +27,9 @@ v1_token_request_t *v1_token_request_create(
 
 
 void v1_token_request_free(v1_token_request_t *v1_token_request) {
+    if(NULL == v1_token_request){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_token_request->api_version);
     free(v1_token_request->kind);

@@ -25,6 +25,9 @@ v1alpha1_audit_sink_t *v1alpha1_audit_sink_create(
 
 
 void v1alpha1_audit_sink_free(v1alpha1_audit_sink_t *v1alpha1_audit_sink) {
+    if(NULL == v1alpha1_audit_sink){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_audit_sink->api_version);
     free(v1alpha1_audit_sink->kind);

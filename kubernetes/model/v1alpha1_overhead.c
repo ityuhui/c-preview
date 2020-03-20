@@ -19,6 +19,9 @@ v1alpha1_overhead_t *v1alpha1_overhead_create(
 
 
 void v1alpha1_overhead_free(v1alpha1_overhead_t *v1alpha1_overhead) {
+    if(NULL == v1alpha1_overhead){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1alpha1_overhead->pod_fixed) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

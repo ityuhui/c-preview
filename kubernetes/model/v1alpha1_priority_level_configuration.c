@@ -27,6 +27,9 @@ v1alpha1_priority_level_configuration_t *v1alpha1_priority_level_configuration_c
 
 
 void v1alpha1_priority_level_configuration_free(v1alpha1_priority_level_configuration_t *v1alpha1_priority_level_configuration) {
+    if(NULL == v1alpha1_priority_level_configuration){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_priority_level_configuration->api_version);
     free(v1alpha1_priority_level_configuration->kind);

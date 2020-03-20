@@ -25,6 +25,9 @@ v1_replica_set_spec_t *v1_replica_set_spec_create(
 
 
 void v1_replica_set_spec_free(v1_replica_set_spec_t *v1_replica_set_spec) {
+    if(NULL == v1_replica_set_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_label_selector_free(v1_replica_set_spec->selector);
     v1_pod_template_spec_free(v1_replica_set_spec->template);

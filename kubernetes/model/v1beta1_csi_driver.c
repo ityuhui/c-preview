@@ -25,6 +25,9 @@ v1beta1_csi_driver_t *v1beta1_csi_driver_create(
 
 
 void v1beta1_csi_driver_free(v1beta1_csi_driver_t *v1beta1_csi_driver) {
+    if(NULL == v1beta1_csi_driver){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_csi_driver->api_version);
     free(v1beta1_csi_driver->kind);

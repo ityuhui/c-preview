@@ -23,6 +23,9 @@ v1_handler_t *v1_handler_create(
 
 
 void v1_handler_free(v1_handler_t *v1_handler) {
+    if(NULL == v1_handler){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_exec_action_free(v1_handler->exec);
     v1_http_get_action_free(v1_handler->http_get);

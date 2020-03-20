@@ -25,6 +25,9 @@ networking_v1beta1_ingress_list_t *networking_v1beta1_ingress_list_create(
 
 
 void networking_v1beta1_ingress_list_free(networking_v1beta1_ingress_list_t *networking_v1beta1_ingress_list) {
+    if(NULL == networking_v1beta1_ingress_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(networking_v1beta1_ingress_list->api_version);
     list_ForEach(listEntry, networking_v1beta1_ingress_list->items) {

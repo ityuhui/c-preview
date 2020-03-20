@@ -21,6 +21,9 @@ v1_webhook_conversion_t *v1_webhook_conversion_create(
 
 
 void v1_webhook_conversion_free(v1_webhook_conversion_t *v1_webhook_conversion) {
+    if(NULL == v1_webhook_conversion){
+        return ;
+    }
     listEntry_t *listEntry;
     apiextensions_v1_webhook_client_config_free(v1_webhook_conversion->client_config);
     list_ForEach(listEntry, v1_webhook_conversion->conversion_review_versions) {

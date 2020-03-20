@@ -25,6 +25,9 @@ extensions_v1beta1_ingress_list_t *extensions_v1beta1_ingress_list_create(
 
 
 void extensions_v1beta1_ingress_list_free(extensions_v1beta1_ingress_list_t *extensions_v1beta1_ingress_list) {
+    if(NULL == extensions_v1beta1_ingress_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_ingress_list->api_version);
     list_ForEach(listEntry, extensions_v1beta1_ingress_list->items) {

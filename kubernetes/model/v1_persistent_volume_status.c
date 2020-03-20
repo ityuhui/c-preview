@@ -23,6 +23,9 @@ v1_persistent_volume_status_t *v1_persistent_volume_status_create(
 
 
 void v1_persistent_volume_status_free(v1_persistent_volume_status_t *v1_persistent_volume_status) {
+    if(NULL == v1_persistent_volume_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_persistent_volume_status->message);
     free(v1_persistent_volume_status->phase);

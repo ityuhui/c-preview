@@ -27,6 +27,9 @@ apps_v1beta1_deployment_rollback_t *apps_v1beta1_deployment_rollback_create(
 
 
 void apps_v1beta1_deployment_rollback_free(apps_v1beta1_deployment_rollback_t *apps_v1beta1_deployment_rollback) {
+    if(NULL == apps_v1beta1_deployment_rollback){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_deployment_rollback->api_version);
     free(apps_v1beta1_deployment_rollback->kind);

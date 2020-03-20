@@ -21,6 +21,9 @@ v1_token_request_status_t *v1_token_request_status_create(
 
 
 void v1_token_request_status_free(v1_token_request_status_t *v1_token_request_status) {
+    if(NULL == v1_token_request_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_token_request_status->expiration_timestamp);
     free(v1_token_request_status->token);

@@ -19,6 +19,9 @@ v1alpha1_user_subject_t *v1alpha1_user_subject_create(
 
 
 void v1alpha1_user_subject_free(v1alpha1_user_subject_t *v1alpha1_user_subject) {
+    if(NULL == v1alpha1_user_subject){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_user_subject->name);
     free(v1alpha1_user_subject);

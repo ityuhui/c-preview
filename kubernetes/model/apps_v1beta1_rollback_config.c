@@ -19,6 +19,9 @@ apps_v1beta1_rollback_config_t *apps_v1beta1_rollback_config_create(
 
 
 void apps_v1beta1_rollback_config_free(apps_v1beta1_rollback_config_t *apps_v1beta1_rollback_config) {
+    if(NULL == apps_v1beta1_rollback_config){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apps_v1beta1_rollback_config);
 }

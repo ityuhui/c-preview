@@ -21,6 +21,9 @@ v1alpha1_webhook_throttle_config_t *v1alpha1_webhook_throttle_config_create(
 
 
 void v1alpha1_webhook_throttle_config_free(v1alpha1_webhook_throttle_config_t *v1alpha1_webhook_throttle_config) {
+    if(NULL == v1alpha1_webhook_throttle_config){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_webhook_throttle_config);
 }

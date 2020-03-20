@@ -25,6 +25,9 @@ v1_component_status_list_t *v1_component_status_list_create(
 
 
 void v1_component_status_list_free(v1_component_status_list_t *v1_component_status_list) {
+    if(NULL == v1_component_status_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_component_status_list->api_version);
     list_ForEach(listEntry, v1_component_status_list->items) {

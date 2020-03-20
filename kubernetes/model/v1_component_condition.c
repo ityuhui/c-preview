@@ -25,6 +25,9 @@ v1_component_condition_t *v1_component_condition_create(
 
 
 void v1_component_condition_free(v1_component_condition_t *v1_component_condition) {
+    if(NULL == v1_component_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_component_condition->error);
     free(v1_component_condition->message);

@@ -29,6 +29,9 @@ v1_pod_condition_t *v1_pod_condition_create(
 
 
 void v1_pod_condition_free(v1_pod_condition_t *v1_pod_condition) {
+    if(NULL == v1_pod_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod_condition->last_probe_time);
     free(v1_pod_condition->last_transition_time);

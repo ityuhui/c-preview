@@ -21,6 +21,9 @@ v1_event_source_t *v1_event_source_create(
 
 
 void v1_event_source_free(v1_event_source_t *v1_event_source) {
+    if(NULL == v1_event_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_event_source->component);
     free(v1_event_source->host);

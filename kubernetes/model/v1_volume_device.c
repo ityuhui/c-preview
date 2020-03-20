@@ -21,6 +21,9 @@ v1_volume_device_t *v1_volume_device_create(
 
 
 void v1_volume_device_free(v1_volume_device_t *v1_volume_device) {
+    if(NULL == v1_volume_device){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_volume_device->device_path);
     free(v1_volume_device->name);

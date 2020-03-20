@@ -27,6 +27,9 @@ v1_config_map_t *v1_config_map_create(
 
 
 void v1_config_map_free(v1_config_map_t *v1_config_map) {
+    if(NULL == v1_config_map){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_config_map->api_version);
     list_ForEach(listEntry, v1_config_map->binary_data) {

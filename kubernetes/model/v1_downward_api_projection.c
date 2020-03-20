@@ -19,6 +19,9 @@ v1_downward_api_projection_t *v1_downward_api_projection_create(
 
 
 void v1_downward_api_projection_free(v1_downward_api_projection_t *v1_downward_api_projection) {
+    if(NULL == v1_downward_api_projection){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_downward_api_projection->items) {
         v1_downward_api_volume_file_free(listEntry->data);

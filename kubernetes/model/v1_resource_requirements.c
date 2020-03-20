@@ -21,6 +21,9 @@ v1_resource_requirements_t *v1_resource_requirements_create(
 
 
 void v1_resource_requirements_free(v1_resource_requirements_t *v1_resource_requirements) {
+    if(NULL == v1_resource_requirements){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_resource_requirements->limits) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

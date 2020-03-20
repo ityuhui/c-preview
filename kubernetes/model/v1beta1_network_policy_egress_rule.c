@@ -21,6 +21,9 @@ v1beta1_network_policy_egress_rule_t *v1beta1_network_policy_egress_rule_create(
 
 
 void v1beta1_network_policy_egress_rule_free(v1beta1_network_policy_egress_rule_t *v1beta1_network_policy_egress_rule) {
+    if(NULL == v1beta1_network_policy_egress_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_network_policy_egress_rule->ports) {
         v1beta1_network_policy_port_free(listEntry->data);

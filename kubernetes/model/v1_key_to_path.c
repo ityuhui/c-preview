@@ -23,6 +23,9 @@ v1_key_to_path_t *v1_key_to_path_create(
 
 
 void v1_key_to_path_free(v1_key_to_path_t *v1_key_to_path) {
+    if(NULL == v1_key_to_path){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_key_to_path->key);
     free(v1_key_to_path->path);

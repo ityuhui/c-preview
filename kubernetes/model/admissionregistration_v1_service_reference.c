@@ -25,6 +25,9 @@ admissionregistration_v1_service_reference_t *admissionregistration_v1_service_r
 
 
 void admissionregistration_v1_service_reference_free(admissionregistration_v1_service_reference_t *admissionregistration_v1_service_reference) {
+    if(NULL == admissionregistration_v1_service_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(admissionregistration_v1_service_reference->name);
     free(admissionregistration_v1_service_reference->namespace);

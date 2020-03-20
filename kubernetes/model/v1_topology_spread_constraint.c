@@ -25,6 +25,9 @@ v1_topology_spread_constraint_t *v1_topology_spread_constraint_create(
 
 
 void v1_topology_spread_constraint_free(v1_topology_spread_constraint_t *v1_topology_spread_constraint) {
+    if(NULL == v1_topology_spread_constraint){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_label_selector_free(v1_topology_spread_constraint->label_selector);
     free(v1_topology_spread_constraint->topology_key);

@@ -31,6 +31,9 @@ v1beta1_resource_attributes_t *v1beta1_resource_attributes_create(
 
 
 void v1beta1_resource_attributes_free(v1beta1_resource_attributes_t *v1beta1_resource_attributes) {
+    if(NULL == v1beta1_resource_attributes){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_resource_attributes->group);
     free(v1beta1_resource_attributes->name);

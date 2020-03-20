@@ -27,6 +27,9 @@ v1beta2_daemon_set_condition_t *v1beta2_daemon_set_condition_create(
 
 
 void v1beta2_daemon_set_condition_free(v1beta2_daemon_set_condition_t *v1beta2_daemon_set_condition) {
+    if(NULL == v1beta2_daemon_set_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta2_daemon_set_condition->last_transition_time);
     free(v1beta2_daemon_set_condition->message);

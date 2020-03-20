@@ -21,6 +21,9 @@ v2beta2_resource_metric_source_t *v2beta2_resource_metric_source_create(
 
 
 void v2beta2_resource_metric_source_free(v2beta2_resource_metric_source_t *v2beta2_resource_metric_source) {
+    if(NULL == v2beta2_resource_metric_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta2_resource_metric_source->name);
     v2beta2_metric_target_free(v2beta2_resource_metric_source->target);

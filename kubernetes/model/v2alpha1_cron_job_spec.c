@@ -31,6 +31,9 @@ v2alpha1_cron_job_spec_t *v2alpha1_cron_job_spec_create(
 
 
 void v2alpha1_cron_job_spec_free(v2alpha1_cron_job_spec_t *v2alpha1_cron_job_spec) {
+    if(NULL == v2alpha1_cron_job_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2alpha1_cron_job_spec->concurrency_policy);
     v2alpha1_job_template_spec_free(v2alpha1_cron_job_spec->job_template);

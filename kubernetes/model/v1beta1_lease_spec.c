@@ -27,6 +27,9 @@ v1beta1_lease_spec_t *v1beta1_lease_spec_create(
 
 
 void v1beta1_lease_spec_free(v1beta1_lease_spec_t *v1beta1_lease_spec) {
+    if(NULL == v1beta1_lease_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_lease_spec->acquire_time);
     free(v1beta1_lease_spec->holder_identity);

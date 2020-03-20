@@ -25,6 +25,9 @@ v1beta1_role_binding_list_t *v1beta1_role_binding_list_create(
 
 
 void v1beta1_role_binding_list_free(v1beta1_role_binding_list_t *v1beta1_role_binding_list) {
+    if(NULL == v1beta1_role_binding_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_role_binding_list->api_version);
     list_ForEach(listEntry, v1beta1_role_binding_list->items) {

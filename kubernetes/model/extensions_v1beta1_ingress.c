@@ -27,6 +27,9 @@ extensions_v1beta1_ingress_t *extensions_v1beta1_ingress_create(
 
 
 void extensions_v1beta1_ingress_free(extensions_v1beta1_ingress_t *extensions_v1beta1_ingress) {
+    if(NULL == extensions_v1beta1_ingress){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_ingress->api_version);
     free(extensions_v1beta1_ingress->kind);

@@ -19,6 +19,9 @@ v1alpha1_priority_level_configuration_status_t *v1alpha1_priority_level_configur
 
 
 void v1alpha1_priority_level_configuration_status_free(v1alpha1_priority_level_configuration_status_t *v1alpha1_priority_level_configuration_status) {
+    if(NULL == v1alpha1_priority_level_configuration_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1alpha1_priority_level_configuration_status->conditions) {
         v1alpha1_priority_level_configuration_condition_free(listEntry->data);

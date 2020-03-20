@@ -21,6 +21,9 @@ v1_non_resource_attributes_t *v1_non_resource_attributes_create(
 
 
 void v1_non_resource_attributes_free(v1_non_resource_attributes_t *v1_non_resource_attributes) {
+    if(NULL == v1_non_resource_attributes){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_non_resource_attributes->path);
     free(v1_non_resource_attributes->verb);

@@ -21,6 +21,9 @@ v1_custom_resource_subresources_t *v1_custom_resource_subresources_create(
 
 
 void v1_custom_resource_subresources_free(v1_custom_resource_subresources_t *v1_custom_resource_subresources) {
+    if(NULL == v1_custom_resource_subresources){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_custom_resource_subresource_scale_free(v1_custom_resource_subresources->scale);
     object_free(v1_custom_resource_subresources->status);

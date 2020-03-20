@@ -25,6 +25,9 @@ v1_volume_projection_t *v1_volume_projection_create(
 
 
 void v1_volume_projection_free(v1_volume_projection_t *v1_volume_projection) {
+    if(NULL == v1_volume_projection){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_config_map_projection_free(v1_volume_projection->config_map);
     v1_downward_api_projection_free(v1_volume_projection->downward_api);

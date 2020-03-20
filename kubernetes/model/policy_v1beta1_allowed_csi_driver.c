@@ -19,6 +19,9 @@ policy_v1beta1_allowed_csi_driver_t *policy_v1beta1_allowed_csi_driver_create(
 
 
 void policy_v1beta1_allowed_csi_driver_free(policy_v1beta1_allowed_csi_driver_t *policy_v1beta1_allowed_csi_driver) {
+    if(NULL == policy_v1beta1_allowed_csi_driver){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_allowed_csi_driver->name);
     free(policy_v1beta1_allowed_csi_driver);

@@ -21,6 +21,9 @@ v1_container_image_t *v1_container_image_create(
 
 
 void v1_container_image_free(v1_container_image_t *v1_container_image) {
+    if(NULL == v1_container_image){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_container_image->names) {
         free(listEntry->data);

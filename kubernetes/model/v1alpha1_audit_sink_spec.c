@@ -21,6 +21,9 @@ v1alpha1_audit_sink_spec_t *v1alpha1_audit_sink_spec_create(
 
 
 void v1alpha1_audit_sink_spec_free(v1alpha1_audit_sink_spec_t *v1alpha1_audit_sink_spec) {
+    if(NULL == v1alpha1_audit_sink_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_policy_free(v1alpha1_audit_sink_spec->policy);
     v1alpha1_webhook_free(v1alpha1_audit_sink_spec->webhook);

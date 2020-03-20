@@ -21,6 +21,9 @@ v1_flocker_volume_source_t *v1_flocker_volume_source_create(
 
 
 void v1_flocker_volume_source_free(v1_flocker_volume_source_t *v1_flocker_volume_source) {
+    if(NULL == v1_flocker_volume_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_flocker_volume_source->dataset_name);
     free(v1_flocker_volume_source->dataset_uuid);

@@ -21,6 +21,9 @@ v1_stateful_set_update_strategy_t *v1_stateful_set_update_strategy_create(
 
 
 void v1_stateful_set_update_strategy_free(v1_stateful_set_update_strategy_t *v1_stateful_set_update_strategy) {
+    if(NULL == v1_stateful_set_update_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_rolling_update_stateful_set_strategy_free(v1_stateful_set_update_strategy->rolling_update);
     free(v1_stateful_set_update_strategy->type);

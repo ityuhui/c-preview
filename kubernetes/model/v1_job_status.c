@@ -29,6 +29,9 @@ v1_job_status_t *v1_job_status_create(
 
 
 void v1_job_status_free(v1_job_status_t *v1_job_status) {
+    if(NULL == v1_job_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_job_status->completion_time);
     list_ForEach(listEntry, v1_job_status->conditions) {

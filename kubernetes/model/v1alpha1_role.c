@@ -25,6 +25,9 @@ v1alpha1_role_t *v1alpha1_role_create(
 
 
 void v1alpha1_role_free(v1alpha1_role_t *v1alpha1_role) {
+    if(NULL == v1alpha1_role){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_role->api_version);
     free(v1alpha1_role->kind);

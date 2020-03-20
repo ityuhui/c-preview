@@ -25,6 +25,9 @@ v1_replication_controller_spec_t *v1_replication_controller_spec_create(
 
 
 void v1_replication_controller_spec_free(v1_replication_controller_spec_t *v1_replication_controller_spec) {
+    if(NULL == v1_replication_controller_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_replication_controller_spec->selector) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

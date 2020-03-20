@@ -21,6 +21,9 @@ policy_v1beta1_host_port_range_t *policy_v1beta1_host_port_range_create(
 
 
 void policy_v1beta1_host_port_range_free(policy_v1beta1_host_port_range_t *policy_v1beta1_host_port_range) {
+    if(NULL == policy_v1beta1_host_port_range){
+        return ;
+    }
     listEntry_t *listEntry;
     free(policy_v1beta1_host_port_range);
 }

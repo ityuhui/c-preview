@@ -23,6 +23,9 @@ v1_scoped_resource_selector_requirement_t *v1_scoped_resource_selector_requireme
 
 
 void v1_scoped_resource_selector_requirement_free(v1_scoped_resource_selector_requirement_t *v1_scoped_resource_selector_requirement) {
+    if(NULL == v1_scoped_resource_selector_requirement){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_scoped_resource_selector_requirement->operator);
     free(v1_scoped_resource_selector_requirement->scope_name);

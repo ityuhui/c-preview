@@ -23,6 +23,9 @@ v1_typed_local_object_reference_t *v1_typed_local_object_reference_create(
 
 
 void v1_typed_local_object_reference_free(v1_typed_local_object_reference_t *v1_typed_local_object_reference) {
+    if(NULL == v1_typed_local_object_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_typed_local_object_reference->api_group);
     free(v1_typed_local_object_reference->kind);

@@ -19,6 +19,9 @@ v1_exec_action_t *v1_exec_action_create(
 
 
 void v1_exec_action_free(v1_exec_action_t *v1_exec_action) {
+    if(NULL == v1_exec_action){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_exec_action->command) {
         free(listEntry->data);

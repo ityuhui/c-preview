@@ -21,6 +21,9 @@ v1_scale_status_t *v1_scale_status_create(
 
 
 void v1_scale_status_free(v1_scale_status_t *v1_scale_status) {
+    if(NULL == v1_scale_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_scale_status->selector);
     free(v1_scale_status);

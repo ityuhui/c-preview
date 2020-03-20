@@ -27,6 +27,9 @@ v1_namespace_condition_t *v1_namespace_condition_create(
 
 
 void v1_namespace_condition_free(v1_namespace_condition_t *v1_namespace_condition) {
+    if(NULL == v1_namespace_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_namespace_condition->last_transition_time);
     free(v1_namespace_condition->message);

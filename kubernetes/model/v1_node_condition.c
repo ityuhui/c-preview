@@ -29,6 +29,9 @@ v1_node_condition_t *v1_node_condition_create(
 
 
 void v1_node_condition_free(v1_node_condition_t *v1_node_condition) {
+    if(NULL == v1_node_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_node_condition->last_heartbeat_time);
     free(v1_node_condition->last_transition_time);

@@ -27,6 +27,9 @@ v1_pod_t *v1_pod_create(
 
 
 void v1_pod_free(v1_pod_t *v1_pod) {
+    if(NULL == v1_pod){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod->api_version);
     free(v1_pod->kind);

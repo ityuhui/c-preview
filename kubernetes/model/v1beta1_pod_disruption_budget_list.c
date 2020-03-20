@@ -25,6 +25,9 @@ v1beta1_pod_disruption_budget_list_t *v1beta1_pod_disruption_budget_list_create(
 
 
 void v1beta1_pod_disruption_budget_list_free(v1beta1_pod_disruption_budget_list_t *v1beta1_pod_disruption_budget_list) {
+    if(NULL == v1beta1_pod_disruption_budget_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_pod_disruption_budget_list->api_version);
     list_ForEach(listEntry, v1beta1_pod_disruption_budget_list->items) {

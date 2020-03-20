@@ -23,6 +23,9 @@ admissionregistration_v1beta1_webhook_client_config_t *admissionregistration_v1b
 
 
 void admissionregistration_v1beta1_webhook_client_config_free(admissionregistration_v1beta1_webhook_client_config_t *admissionregistration_v1beta1_webhook_client_config) {
+    if(NULL == admissionregistration_v1beta1_webhook_client_config){
+        return ;
+    }
     listEntry_t *listEntry;
     admissionregistration_v1beta1_service_reference_free(admissionregistration_v1beta1_webhook_client_config->service);
     free(admissionregistration_v1beta1_webhook_client_config->url);

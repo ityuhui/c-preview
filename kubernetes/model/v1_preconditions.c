@@ -21,6 +21,9 @@ v1_preconditions_t *v1_preconditions_create(
 
 
 void v1_preconditions_free(v1_preconditions_t *v1_preconditions) {
+    if(NULL == v1_preconditions){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_preconditions->resource_version);
     free(v1_preconditions->uid);

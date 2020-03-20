@@ -27,6 +27,9 @@ v1_persistent_volume_t *v1_persistent_volume_create(
 
 
 void v1_persistent_volume_free(v1_persistent_volume_t *v1_persistent_volume) {
+    if(NULL == v1_persistent_volume){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_persistent_volume->api_version);
     free(v1_persistent_volume->kind);

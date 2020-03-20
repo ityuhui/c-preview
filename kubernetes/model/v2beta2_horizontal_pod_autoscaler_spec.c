@@ -25,6 +25,9 @@ v2beta2_horizontal_pod_autoscaler_spec_t *v2beta2_horizontal_pod_autoscaler_spec
 
 
 void v2beta2_horizontal_pod_autoscaler_spec_free(v2beta2_horizontal_pod_autoscaler_spec_t *v2beta2_horizontal_pod_autoscaler_spec) {
+    if(NULL == v2beta2_horizontal_pod_autoscaler_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v2beta2_horizontal_pod_autoscaler_spec->metrics) {
         v2beta2_metric_spec_free(listEntry->data);

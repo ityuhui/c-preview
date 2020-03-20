@@ -21,6 +21,9 @@ v1_host_alias_t *v1_host_alias_create(
 
 
 void v1_host_alias_free(v1_host_alias_t *v1_host_alias) {
+    if(NULL == v1_host_alias){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_host_alias->hostnames) {
         free(listEntry->data);

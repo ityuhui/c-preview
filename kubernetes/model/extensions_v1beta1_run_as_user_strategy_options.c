@@ -21,6 +21,9 @@ extensions_v1beta1_run_as_user_strategy_options_t *extensions_v1beta1_run_as_use
 
 
 void extensions_v1beta1_run_as_user_strategy_options_free(extensions_v1beta1_run_as_user_strategy_options_t *extensions_v1beta1_run_as_user_strategy_options) {
+    if(NULL == extensions_v1beta1_run_as_user_strategy_options){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_run_as_user_strategy_options->ranges) {
         extensions_v1beta1_id_range_free(listEntry->data);

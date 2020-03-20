@@ -27,6 +27,9 @@ v1beta2_replica_set_t *v1beta2_replica_set_create(
 
 
 void v1beta2_replica_set_free(v1beta2_replica_set_t *v1beta2_replica_set) {
+    if(NULL == v1beta2_replica_set){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta2_replica_set->api_version);
     free(v1beta2_replica_set->kind);

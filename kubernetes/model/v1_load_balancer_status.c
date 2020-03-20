@@ -19,6 +19,9 @@ v1_load_balancer_status_t *v1_load_balancer_status_create(
 
 
 void v1_load_balancer_status_free(v1_load_balancer_status_t *v1_load_balancer_status) {
+    if(NULL == v1_load_balancer_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_load_balancer_status->ingress) {
         v1_load_balancer_ingress_free(listEntry->data);

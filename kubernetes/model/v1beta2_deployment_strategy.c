@@ -21,6 +21,9 @@ v1beta2_deployment_strategy_t *v1beta2_deployment_strategy_create(
 
 
 void v1beta2_deployment_strategy_free(v1beta2_deployment_strategy_t *v1beta2_deployment_strategy) {
+    if(NULL == v1beta2_deployment_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta2_rolling_update_deployment_free(v1beta2_deployment_strategy->rolling_update);
     free(v1beta2_deployment_strategy->type);

@@ -21,6 +21,9 @@ v2beta2_external_metric_status_t *v2beta2_external_metric_status_create(
 
 
 void v2beta2_external_metric_status_free(v2beta2_external_metric_status_t *v2beta2_external_metric_status) {
+    if(NULL == v2beta2_external_metric_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v2beta2_metric_value_status_free(v2beta2_external_metric_status->current);
     v2beta2_metric_identifier_free(v2beta2_external_metric_status->metric);

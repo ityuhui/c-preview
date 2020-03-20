@@ -19,6 +19,9 @@ networking_v1beta1_ingress_status_t *networking_v1beta1_ingress_status_create(
 
 
 void networking_v1beta1_ingress_status_free(networking_v1beta1_ingress_status_t *networking_v1beta1_ingress_status) {
+    if(NULL == networking_v1beta1_ingress_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_load_balancer_status_free(networking_v1beta1_ingress_status->load_balancer);
     free(networking_v1beta1_ingress_status);

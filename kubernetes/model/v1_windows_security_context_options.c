@@ -23,6 +23,9 @@ v1_windows_security_context_options_t *v1_windows_security_context_options_creat
 
 
 void v1_windows_security_context_options_free(v1_windows_security_context_options_t *v1_windows_security_context_options) {
+    if(NULL == v1_windows_security_context_options){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_windows_security_context_options->gmsa_credential_spec);
     free(v1_windows_security_context_options->gmsa_credential_spec_name);

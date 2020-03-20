@@ -25,6 +25,9 @@ v1beta1_certificate_signing_request_condition_t *v1beta1_certificate_signing_req
 
 
 void v1beta1_certificate_signing_request_condition_free(v1beta1_certificate_signing_request_condition_t *v1beta1_certificate_signing_request_condition) {
+    if(NULL == v1beta1_certificate_signing_request_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_certificate_signing_request_condition->last_update_time);
     free(v1beta1_certificate_signing_request_condition->message);

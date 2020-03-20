@@ -19,6 +19,9 @@ extensions_v1beta1_http_ingress_rule_value_t *extensions_v1beta1_http_ingress_ru
 
 
 void extensions_v1beta1_http_ingress_rule_value_free(extensions_v1beta1_http_ingress_rule_value_t *extensions_v1beta1_http_ingress_rule_value) {
+    if(NULL == extensions_v1beta1_http_ingress_rule_value){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_http_ingress_rule_value->paths) {
         extensions_v1beta1_http_ingress_path_free(listEntry->data);

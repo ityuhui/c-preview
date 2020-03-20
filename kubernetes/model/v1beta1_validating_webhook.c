@@ -37,6 +37,9 @@ v1beta1_validating_webhook_t *v1beta1_validating_webhook_create(
 
 
 void v1beta1_validating_webhook_free(v1beta1_validating_webhook_t *v1beta1_validating_webhook) {
+    if(NULL == v1beta1_validating_webhook){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_validating_webhook->admission_review_versions) {
         free(listEntry->data);

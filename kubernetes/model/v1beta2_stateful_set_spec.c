@@ -33,6 +33,9 @@ v1beta2_stateful_set_spec_t *v1beta2_stateful_set_spec_create(
 
 
 void v1beta2_stateful_set_spec_free(v1beta2_stateful_set_spec_t *v1beta2_stateful_set_spec) {
+    if(NULL == v1beta2_stateful_set_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta2_stateful_set_spec->pod_management_policy);
     v1_label_selector_free(v1beta2_stateful_set_spec->selector);

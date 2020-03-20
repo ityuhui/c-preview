@@ -21,6 +21,9 @@ v1_label_selector_t *v1_label_selector_create(
 
 
 void v1_label_selector_free(v1_label_selector_t *v1_label_selector) {
+    if(NULL == v1_label_selector){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_label_selector->match_expressions) {
         v1_label_selector_requirement_free(listEntry->data);

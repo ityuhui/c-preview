@@ -19,6 +19,9 @@ v1beta1_csi_node_spec_t *v1beta1_csi_node_spec_create(
 
 
 void v1beta1_csi_node_spec_free(v1beta1_csi_node_spec_t *v1beta1_csi_node_spec) {
+    if(NULL == v1beta1_csi_node_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_csi_node_spec->drivers) {
         v1beta1_csi_node_driver_free(listEntry->data);

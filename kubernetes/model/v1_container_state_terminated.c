@@ -31,6 +31,9 @@ v1_container_state_terminated_t *v1_container_state_terminated_create(
 
 
 void v1_container_state_terminated_free(v1_container_state_terminated_t *v1_container_state_terminated) {
+    if(NULL == v1_container_state_terminated){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_container_state_terminated->container_id);
     free(v1_container_state_terminated->finished_at);

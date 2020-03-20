@@ -27,6 +27,9 @@ v1_api_service_condition_t *v1_api_service_condition_create(
 
 
 void v1_api_service_condition_free(v1_api_service_condition_t *v1_api_service_condition) {
+    if(NULL == v1_api_service_condition){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_api_service_condition->last_transition_time);
     free(v1_api_service_condition->message);

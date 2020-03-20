@@ -21,6 +21,9 @@ networking_v1beta1_ingress_rule_t *networking_v1beta1_ingress_rule_create(
 
 
 void networking_v1beta1_ingress_rule_free(networking_v1beta1_ingress_rule_t *networking_v1beta1_ingress_rule) {
+    if(NULL == networking_v1beta1_ingress_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     free(networking_v1beta1_ingress_rule->host);
     networking_v1beta1_http_ingress_rule_value_free(networking_v1beta1_ingress_rule->http);

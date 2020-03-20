@@ -37,6 +37,9 @@ v1_security_context_t *v1_security_context_create(
 
 
 void v1_security_context_free(v1_security_context_t *v1_security_context) {
+    if(NULL == v1_security_context){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_capabilities_free(v1_security_context->capabilities);
     free(v1_security_context->proc_mount);

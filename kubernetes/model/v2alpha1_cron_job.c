@@ -27,6 +27,9 @@ v2alpha1_cron_job_t *v2alpha1_cron_job_create(
 
 
 void v2alpha1_cron_job_free(v2alpha1_cron_job_t *v2alpha1_cron_job) {
+    if(NULL == v2alpha1_cron_job){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2alpha1_cron_job->api_version);
     free(v2alpha1_cron_job->kind);

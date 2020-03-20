@@ -49,6 +49,9 @@ v1_object_meta_t *v1_object_meta_create(
 
 
 void v1_object_meta_free(v1_object_meta_t *v1_object_meta) {
+    if(NULL == v1_object_meta){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_object_meta->annotations) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

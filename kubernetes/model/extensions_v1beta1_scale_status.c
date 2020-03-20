@@ -23,6 +23,9 @@ extensions_v1beta1_scale_status_t *extensions_v1beta1_scale_status_create(
 
 
 void extensions_v1beta1_scale_status_free(extensions_v1beta1_scale_status_t *extensions_v1beta1_scale_status) {
+    if(NULL == extensions_v1beta1_scale_status){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, extensions_v1beta1_scale_status->selector) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

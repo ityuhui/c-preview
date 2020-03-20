@@ -25,6 +25,9 @@ apiextensions_v1beta1_service_reference_t *apiextensions_v1beta1_service_referen
 
 
 void apiextensions_v1beta1_service_reference_free(apiextensions_v1beta1_service_reference_t *apiextensions_v1beta1_service_reference) {
+    if(NULL == apiextensions_v1beta1_service_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(apiextensions_v1beta1_service_reference->name);
     free(apiextensions_v1beta1_service_reference->namespace);

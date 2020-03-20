@@ -23,6 +23,9 @@ v1alpha1_webhook_client_config_t *v1alpha1_webhook_client_config_create(
 
 
 void v1alpha1_webhook_client_config_free(v1alpha1_webhook_client_config_t *v1alpha1_webhook_client_config) {
+    if(NULL == v1alpha1_webhook_client_config){
+        return ;
+    }
     listEntry_t *listEntry;
     v1alpha1_service_reference_free(v1alpha1_webhook_client_config->service);
     free(v1alpha1_webhook_client_config->url);

@@ -35,6 +35,9 @@ version_info_t *version_info_create(
 
 
 void version_info_free(version_info_t *version_info) {
+    if(NULL == version_info){
+        return ;
+    }
     listEntry_t *listEntry;
     free(version_info->build_date);
     free(version_info->compiler);

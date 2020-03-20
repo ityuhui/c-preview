@@ -25,6 +25,9 @@ v1_job_list_t *v1_job_list_create(
 
 
 void v1_job_list_free(v1_job_list_t *v1_job_list) {
+    if(NULL == v1_job_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_job_list->api_version);
     list_ForEach(listEntry, v1_job_list->items) {

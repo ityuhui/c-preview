@@ -21,6 +21,9 @@ v2beta2_metric_identifier_t *v2beta2_metric_identifier_create(
 
 
 void v2beta2_metric_identifier_free(v2beta2_metric_identifier_t *v2beta2_metric_identifier) {
+    if(NULL == v2beta2_metric_identifier){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta2_metric_identifier->name);
     v1_label_selector_free(v2beta2_metric_identifier->selector);

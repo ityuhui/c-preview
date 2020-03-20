@@ -27,6 +27,9 @@ v1beta1_cluster_role_binding_t *v1beta1_cluster_role_binding_create(
 
 
 void v1beta1_cluster_role_binding_free(v1beta1_cluster_role_binding_t *v1beta1_cluster_role_binding) {
+    if(NULL == v1beta1_cluster_role_binding){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_cluster_role_binding->api_version);
     free(v1beta1_cluster_role_binding->kind);

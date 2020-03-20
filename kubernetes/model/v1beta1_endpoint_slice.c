@@ -29,6 +29,9 @@ v1beta1_endpoint_slice_t *v1beta1_endpoint_slice_create(
 
 
 void v1beta1_endpoint_slice_free(v1beta1_endpoint_slice_t *v1beta1_endpoint_slice) {
+    if(NULL == v1beta1_endpoint_slice){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_endpoint_slice->address_type);
     free(v1beta1_endpoint_slice->api_version);

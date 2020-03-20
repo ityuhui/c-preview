@@ -29,6 +29,9 @@ v1beta1_certificate_signing_request_spec_t *v1beta1_certificate_signing_request_
 
 
 void v1beta1_certificate_signing_request_spec_free(v1beta1_certificate_signing_request_spec_t *v1beta1_certificate_signing_request_spec) {
+    if(NULL == v1beta1_certificate_signing_request_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_certificate_signing_request_spec->extra) {
         keyValuePair_t *localKeyValue = (keyValuePair_t*) listEntry->data;

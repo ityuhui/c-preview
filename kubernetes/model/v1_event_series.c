@@ -23,6 +23,9 @@ v1_event_series_t *v1_event_series_create(
 
 
 void v1_event_series_free(v1_event_series_t *v1_event_series) {
+    if(NULL == v1_event_series){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_event_series->last_observed_time);
     free(v1_event_series->state);

@@ -31,6 +31,9 @@ v1_resource_attributes_t *v1_resource_attributes_create(
 
 
 void v1_resource_attributes_free(v1_resource_attributes_t *v1_resource_attributes) {
+    if(NULL == v1_resource_attributes){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_resource_attributes->group);
     free(v1_resource_attributes->name);

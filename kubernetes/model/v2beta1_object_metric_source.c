@@ -27,6 +27,9 @@ v2beta1_object_metric_source_t *v2beta1_object_metric_source_create(
 
 
 void v2beta1_object_metric_source_free(v2beta1_object_metric_source_t *v2beta1_object_metric_source) {
+    if(NULL == v2beta1_object_metric_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta1_object_metric_source->average_value);
     free(v2beta1_object_metric_source->metric_name);

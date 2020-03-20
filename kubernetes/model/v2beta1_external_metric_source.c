@@ -25,6 +25,9 @@ v2beta1_external_metric_source_t *v2beta1_external_metric_source_create(
 
 
 void v2beta1_external_metric_source_free(v2beta1_external_metric_source_t *v2beta1_external_metric_source) {
+    if(NULL == v2beta1_external_metric_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v2beta1_external_metric_source->metric_name);
     v1_label_selector_free(v2beta1_external_metric_source->metric_selector);

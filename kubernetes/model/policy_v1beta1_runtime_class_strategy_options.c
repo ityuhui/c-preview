@@ -21,6 +21,9 @@ policy_v1beta1_runtime_class_strategy_options_t *policy_v1beta1_runtime_class_st
 
 
 void policy_v1beta1_runtime_class_strategy_options_free(policy_v1beta1_runtime_class_strategy_options_t *policy_v1beta1_runtime_class_strategy_options) {
+    if(NULL == policy_v1beta1_runtime_class_strategy_options){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, policy_v1beta1_runtime_class_strategy_options->allowed_runtime_class_names) {
         free(listEntry->data);

@@ -29,6 +29,9 @@ v1_status_details_t *v1_status_details_create(
 
 
 void v1_status_details_free(v1_status_details_t *v1_status_details) {
+    if(NULL == v1_status_details){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_status_details->causes) {
         v1_status_cause_free(listEntry->data);

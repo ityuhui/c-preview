@@ -25,6 +25,9 @@ v1_bound_object_reference_t *v1_bound_object_reference_create(
 
 
 void v1_bound_object_reference_free(v1_bound_object_reference_t *v1_bound_object_reference) {
+    if(NULL == v1_bound_object_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_bound_object_reference->api_version);
     free(v1_bound_object_reference->kind);

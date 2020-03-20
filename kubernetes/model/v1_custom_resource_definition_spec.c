@@ -29,6 +29,9 @@ v1_custom_resource_definition_spec_t *v1_custom_resource_definition_spec_create(
 
 
 void v1_custom_resource_definition_spec_free(v1_custom_resource_definition_spec_t *v1_custom_resource_definition_spec) {
+    if(NULL == v1_custom_resource_definition_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_custom_resource_conversion_free(v1_custom_resource_definition_spec->conversion);
     free(v1_custom_resource_definition_spec->group);

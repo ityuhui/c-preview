@@ -19,6 +19,9 @@ v1beta1_endpoint_conditions_t *v1beta1_endpoint_conditions_create(
 
 
 void v1beta1_endpoint_conditions_free(v1beta1_endpoint_conditions_t *v1beta1_endpoint_conditions) {
+    if(NULL == v1beta1_endpoint_conditions){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_endpoint_conditions);
 }

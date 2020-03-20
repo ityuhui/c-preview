@@ -27,6 +27,9 @@ extensions_v1beta1_deployment_rollback_t *extensions_v1beta1_deployment_rollback
 
 
 void extensions_v1beta1_deployment_rollback_free(extensions_v1beta1_deployment_rollback_t *extensions_v1beta1_deployment_rollback) {
+    if(NULL == extensions_v1beta1_deployment_rollback){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_deployment_rollback->api_version);
     free(extensions_v1beta1_deployment_rollback->kind);

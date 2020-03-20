@@ -19,6 +19,9 @@ v1_pod_ip_t *v1_pod_ip_create(
 
 
 void v1_pod_ip_free(v1_pod_ip_t *v1_pod_ip) {
+    if(NULL == v1_pod_ip){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod_ip->ip);
     free(v1_pod_ip);

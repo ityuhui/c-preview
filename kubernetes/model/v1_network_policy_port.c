@@ -21,6 +21,9 @@ v1_network_policy_port_t *v1_network_policy_port_create(
 
 
 void v1_network_policy_port_free(v1_network_policy_port_t *v1_network_policy_port) {
+    if(NULL == v1_network_policy_port){
+        return ;
+    }
     listEntry_t *listEntry;
     object_free(v1_network_policy_port->port);
     free(v1_network_policy_port->protocol);

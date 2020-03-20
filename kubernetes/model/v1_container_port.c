@@ -27,6 +27,9 @@ v1_container_port_t *v1_container_port_create(
 
 
 void v1_container_port_free(v1_container_port_t *v1_container_port) {
+    if(NULL == v1_container_port){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_container_port->host_ip);
     free(v1_container_port->name);

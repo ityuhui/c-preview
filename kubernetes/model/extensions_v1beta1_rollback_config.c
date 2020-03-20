@@ -19,6 +19,9 @@ extensions_v1beta1_rollback_config_t *extensions_v1beta1_rollback_config_create(
 
 
 void extensions_v1beta1_rollback_config_free(extensions_v1beta1_rollback_config_t *extensions_v1beta1_rollback_config) {
+    if(NULL == extensions_v1beta1_rollback_config){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_rollback_config);
 }

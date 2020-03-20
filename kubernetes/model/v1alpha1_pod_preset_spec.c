@@ -27,6 +27,9 @@ v1alpha1_pod_preset_spec_t *v1alpha1_pod_preset_spec_create(
 
 
 void v1alpha1_pod_preset_spec_free(v1alpha1_pod_preset_spec_t *v1alpha1_pod_preset_spec) {
+    if(NULL == v1alpha1_pod_preset_spec){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1alpha1_pod_preset_spec->env) {
         v1_env_var_free(listEntry->data);

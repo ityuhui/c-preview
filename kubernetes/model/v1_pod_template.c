@@ -25,6 +25,9 @@ v1_pod_template_t *v1_pod_template_create(
 
 
 void v1_pod_template_free(v1_pod_template_t *v1_pod_template) {
+    if(NULL == v1_pod_template){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_pod_template->api_version);
     free(v1_pod_template->kind);

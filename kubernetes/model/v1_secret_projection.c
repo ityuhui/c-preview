@@ -23,6 +23,9 @@ v1_secret_projection_t *v1_secret_projection_create(
 
 
 void v1_secret_projection_free(v1_secret_projection_t *v1_secret_projection) {
+    if(NULL == v1_secret_projection){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_secret_projection->items) {
         v1_key_to_path_free(listEntry->data);

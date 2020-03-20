@@ -19,6 +19,9 @@ v1alpha1_priority_level_configuration_reference_t *v1alpha1_priority_level_confi
 
 
 void v1alpha1_priority_level_configuration_reference_free(v1alpha1_priority_level_configuration_reference_t *v1alpha1_priority_level_configuration_reference) {
+    if(NULL == v1alpha1_priority_level_configuration_reference){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1alpha1_priority_level_configuration_reference->name);
     free(v1alpha1_priority_level_configuration_reference);

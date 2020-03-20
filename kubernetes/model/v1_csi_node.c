@@ -25,6 +25,9 @@ v1_csi_node_t *v1_csi_node_create(
 
 
 void v1_csi_node_free(v1_csi_node_t *v1_csi_node) {
+    if(NULL == v1_csi_node){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_csi_node->api_version);
     free(v1_csi_node->kind);

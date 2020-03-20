@@ -27,6 +27,9 @@ v1_service_t *v1_service_create(
 
 
 void v1_service_free(v1_service_t *v1_service) {
+    if(NULL == v1_service){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_service->api_version);
     free(v1_service->kind);

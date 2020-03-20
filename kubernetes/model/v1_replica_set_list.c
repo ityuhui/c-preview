@@ -25,6 +25,9 @@ v1_replica_set_list_t *v1_replica_set_list_create(
 
 
 void v1_replica_set_list_free(v1_replica_set_list_t *v1_replica_set_list) {
+    if(NULL == v1_replica_set_list){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_replica_set_list->api_version);
     list_ForEach(listEntry, v1_replica_set_list->items) {

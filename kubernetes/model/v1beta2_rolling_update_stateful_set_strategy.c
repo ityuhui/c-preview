@@ -19,6 +19,9 @@ v1beta2_rolling_update_stateful_set_strategy_t *v1beta2_rolling_update_stateful_
 
 
 void v1beta2_rolling_update_stateful_set_strategy_free(v1beta2_rolling_update_stateful_set_strategy_t *v1beta2_rolling_update_stateful_set_strategy) {
+    if(NULL == v1beta2_rolling_update_stateful_set_strategy){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta2_rolling_update_stateful_set_strategy);
 }

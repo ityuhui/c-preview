@@ -29,6 +29,9 @@ v1_service_account_t *v1_service_account_create(
 
 
 void v1_service_account_free(v1_service_account_t *v1_service_account) {
+    if(NULL == v1_service_account){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_service_account->api_version);
     list_ForEach(listEntry, v1_service_account->image_pull_secrets) {

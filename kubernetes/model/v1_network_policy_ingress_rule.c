@@ -21,6 +21,9 @@ v1_network_policy_ingress_rule_t *v1_network_policy_ingress_rule_create(
 
 
 void v1_network_policy_ingress_rule_free(v1_network_policy_ingress_rule_t *v1_network_policy_ingress_rule) {
+    if(NULL == v1_network_policy_ingress_rule){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1_network_policy_ingress_rule->from) {
         v1_network_policy_peer_free(listEntry->data);

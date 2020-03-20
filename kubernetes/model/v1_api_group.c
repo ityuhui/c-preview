@@ -29,6 +29,9 @@ v1_api_group_t *v1_api_group_create(
 
 
 void v1_api_group_free(v1_api_group_t *v1_api_group) {
+    if(NULL == v1_api_group){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_api_group->api_version);
     free(v1_api_group->kind);

@@ -25,6 +25,9 @@ v1beta1_endpoint_port_t *v1beta1_endpoint_port_create(
 
 
 void v1beta1_endpoint_port_free(v1beta1_endpoint_port_t *v1beta1_endpoint_port) {
+    if(NULL == v1beta1_endpoint_port){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_endpoint_port->app_protocol);
     free(v1beta1_endpoint_port->name);

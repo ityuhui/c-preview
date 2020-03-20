@@ -37,6 +37,9 @@ v1beta1_storage_class_t *v1beta1_storage_class_create(
 
 
 void v1beta1_storage_class_free(v1beta1_storage_class_t *v1beta1_storage_class) {
+    if(NULL == v1beta1_storage_class){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_storage_class->allowed_topologies) {
         v1_topology_selector_term_free(listEntry->data);

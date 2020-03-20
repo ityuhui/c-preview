@@ -27,6 +27,9 @@ extensions_v1beta1_scale_t *extensions_v1beta1_scale_create(
 
 
 void extensions_v1beta1_scale_free(extensions_v1beta1_scale_t *extensions_v1beta1_scale) {
+    if(NULL == extensions_v1beta1_scale){
+        return ;
+    }
     listEntry_t *listEntry;
     free(extensions_v1beta1_scale->api_version);
     free(extensions_v1beta1_scale->kind);

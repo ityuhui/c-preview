@@ -21,6 +21,9 @@ extensions_v1beta1_rolling_update_deployment_t *extensions_v1beta1_rolling_updat
 
 
 void extensions_v1beta1_rolling_update_deployment_free(extensions_v1beta1_rolling_update_deployment_t *extensions_v1beta1_rolling_update_deployment) {
+    if(NULL == extensions_v1beta1_rolling_update_deployment){
+        return ;
+    }
     listEntry_t *listEntry;
     object_free(extensions_v1beta1_rolling_update_deployment->max_surge);
     object_free(extensions_v1beta1_rolling_update_deployment->max_unavailable);

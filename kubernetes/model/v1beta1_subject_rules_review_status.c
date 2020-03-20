@@ -25,6 +25,9 @@ v1beta1_subject_rules_review_status_t *v1beta1_subject_rules_review_status_creat
 
 
 void v1beta1_subject_rules_review_status_free(v1beta1_subject_rules_review_status_t *v1beta1_subject_rules_review_status) {
+    if(NULL == v1beta1_subject_rules_review_status){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1beta1_subject_rules_review_status->evaluation_error);
     list_ForEach(listEntry, v1beta1_subject_rules_review_status->non_resource_rules) {

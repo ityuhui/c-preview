@@ -29,6 +29,9 @@ v1beta1_custom_resource_definition_names_t *v1beta1_custom_resource_definition_n
 
 
 void v1beta1_custom_resource_definition_names_free(v1beta1_custom_resource_definition_names_t *v1beta1_custom_resource_definition_names) {
+    if(NULL == v1beta1_custom_resource_definition_names){
+        return ;
+    }
     listEntry_t *listEntry;
     list_ForEach(listEntry, v1beta1_custom_resource_definition_names->categories) {
         free(listEntry->data);

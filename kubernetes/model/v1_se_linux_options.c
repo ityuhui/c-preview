@@ -25,6 +25,9 @@ v1_se_linux_options_t *v1_se_linux_options_create(
 
 
 void v1_se_linux_options_free(v1_se_linux_options_t *v1_se_linux_options) {
+    if(NULL == v1_se_linux_options){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_se_linux_options->level);
     free(v1_se_linux_options->role);

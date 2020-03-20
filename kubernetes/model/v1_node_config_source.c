@@ -19,6 +19,9 @@ v1_node_config_source_t *v1_node_config_source_create(
 
 
 void v1_node_config_source_free(v1_node_config_source_t *v1_node_config_source) {
+    if(NULL == v1_node_config_source){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_config_map_node_config_source_free(v1_node_config_source->config_map);
     free(v1_node_config_source);

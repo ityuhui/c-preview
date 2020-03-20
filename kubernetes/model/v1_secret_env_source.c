@@ -21,6 +21,9 @@ v1_secret_env_source_t *v1_secret_env_source_create(
 
 
 void v1_secret_env_source_free(v1_secret_env_source_t *v1_secret_env_source) {
+    if(NULL == v1_secret_env_source){
+        return ;
+    }
     listEntry_t *listEntry;
     free(v1_secret_env_source->name);
     free(v1_secret_env_source);

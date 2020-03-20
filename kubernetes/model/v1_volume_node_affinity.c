@@ -19,6 +19,9 @@ v1_volume_node_affinity_t *v1_volume_node_affinity_create(
 
 
 void v1_volume_node_affinity_free(v1_volume_node_affinity_t *v1_volume_node_affinity) {
+    if(NULL == v1_volume_node_affinity){
+        return ;
+    }
     listEntry_t *listEntry;
     v1_node_selector_free(v1_volume_node_affinity->required);
     free(v1_volume_node_affinity);

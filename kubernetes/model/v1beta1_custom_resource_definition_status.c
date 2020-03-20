@@ -23,6 +23,9 @@ v1beta1_custom_resource_definition_status_t *v1beta1_custom_resource_definition_
 
 
 void v1beta1_custom_resource_definition_status_free(v1beta1_custom_resource_definition_status_t *v1beta1_custom_resource_definition_status) {
+    if(NULL == v1beta1_custom_resource_definition_status){
+        return ;
+    }
     listEntry_t *listEntry;
     v1beta1_custom_resource_definition_names_free(v1beta1_custom_resource_definition_status->accepted_names);
     list_ForEach(listEntry, v1beta1_custom_resource_definition_status->conditions) {
