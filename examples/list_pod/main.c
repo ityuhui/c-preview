@@ -5,7 +5,7 @@
 #include <errno.h>
 
 // kubectl proxy server
-#define K8S_APISERVER_BASEPATH "http://localhost:8001"
+#define K8S_APISERVER_BASEPATH "https://9.111.254.254:6443"
 
 // Alternately from within a Kubernetes cluster:
 // #define K8S_APISERVER_BASEPATH https://your.server.here
@@ -16,6 +16,7 @@
 #define K8S_AUTH_VALUE_TEMPLATE "Bearer %s"
 
 apiClient_t *g_k8sAPIConnector;
+sslConfig_t *g_sslConfig;
 
 void list_pod(apiClient_t * apiClient)
 {
@@ -75,6 +76,11 @@ int loadK8sConfigInCluster(char *token, int token_buf_size)
 
 int init_k8s_connector(const char *token_out_of_cluster)
 {
+    g_sslConfig = sslConfig_create("/root/sslconfigk8s/client.cert",
+                                   "/root/sslconfigk8s/client.pem",
+                                   NULL,//"sslconfig/ca.cert", 
+                                   1);
+
     list_t *apiKeys;
     apiKeys = list_create();
 
@@ -88,7 +94,10 @@ int init_k8s_connector(const char *token_out_of_cluster)
     keyValuePair_t *keyPairToken = keyValuePair_create(keyToken, valueToken);
     list_addElement(apiKeys, keyPairToken);
 
-    g_k8sAPIConnector = apiClient_create_with_base_path(K8S_APISERVER_BASEPATH, NULL, apiKeys);
+
+
+
+    g_k8sAPIConnector = apiClient_create_with_base_path(K8S_APISERVER_BASEPATH, g_sslConfig, /*apiKeys*/NULL);
 }
 
 int main(int argc, char *argv[])
@@ -97,5 +106,6 @@ int main(int argc, char *argv[])
 
     list_pod(g_k8sAPIConnector);
 
+    sslConfig_free(g_sslConfig);
     apiClient_free(g_k8sAPIConnector);
 }

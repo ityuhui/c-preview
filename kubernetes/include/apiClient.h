@@ -9,9 +9,21 @@
 #include "../include/list.h"
 #include "../include/keyValuePair.h"
 
+typedef struct sslConfig_t {
+    char *clientCertFile;         /* client certificate */
+    char *clientKeyFile;          /* client private key */
+    char *CACertFile;             /* CA certificate */
+    int  insecureSkipTlsVerify ;  /* 0 -- verify server certificate */
+                                  /* 1 -- skip ssl verify for server certificate */
+} sslConfig_t;
+
+sslConfig_t *sslConfig_create(const char *clientCertFile,const char *clientKeyFile, const char *CACertFile, int insecureSkipTlsVerify);
+
+void sslConfig_free(sslConfig_t *sslConfig);
+
 typedef struct apiClient_t {
     char *basePath;
-    char *caPath;
+    sslConfig_t *sslConfig;
     void *dataReceived;
     long response_code;
     list_t *apiKeys;
@@ -23,10 +35,12 @@ typedef struct binary_t
     unsigned int len;
 } binary_t;
 
+
+
 apiClient_t* apiClient_create();
 
 apiClient_t* apiClient_create_with_base_path(const char *basePath
-, const char *caPath
+, sslConfig_t *sslConfig
 , list_t *apiKeys
 );
 
