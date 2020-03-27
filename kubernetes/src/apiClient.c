@@ -9,33 +9,6 @@
 
 size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp);
 
-sslConfig_t *sslConfig_create(const char *clientCertFile, const char *clientKeyFile, const char *CACertFile, int insecureSkipTlsVerify) {
-    sslConfig_t *sslConfig = malloc(sizeof(sslConfig_t));
-    if ( clientCertFile ) {
-        sslConfig->clientCertFile = strdup(clientCertFile);
-    }
-    if ( clientKeyFile ) {
-        sslConfig->clientKeyFile = strdup(clientKeyFile);
-    }
-    if ( CACertFile ) {
-        sslConfig->CACertFile = strdup(CACertFile);
-    }
-    sslConfig->insecureSkipTlsVerify = insecureSkipTlsVerify;
-}
-
-void sslConfig_free(sslConfig_t *sslConfig) {
-    if ( sslConfig->clientCertFile ) {
-        free(sslConfig->clientCertFile);
-    }
-    if ( sslConfig->clientKeyFile ) {
-        free(sslConfig->clientKeyFile);
-    }
-    if ( sslConfig->CACertFile ){
-        free(sslConfig->CACertFile);
-    }
-    free(sslConfig);
-}
-
 apiClient_t *apiClient_create() {
     curl_global_init(CURL_GLOBAL_ALL);
     apiClient_t *apiClient = malloc(sizeof(apiClient_t));
@@ -103,6 +76,33 @@ void apiClient_free(apiClient_t *apiClient) {
     }
     free(apiClient);
     curl_global_cleanup();
+}
+
+sslConfig_t *sslConfig_create(const char *clientCertFile, const char *clientKeyFile, const char *CACertFile, int insecureSkipTlsVerify) {
+    sslConfig_t *sslConfig = calloc(1, sizeof(sslConfig_t));
+    if ( clientCertFile ) {
+        sslConfig->clientCertFile = strdup(clientCertFile);
+    }
+    if ( clientKeyFile ) {
+        sslConfig->clientKeyFile = strdup(clientKeyFile);
+    }
+    if ( CACertFile ) {
+        sslConfig->CACertFile = strdup(CACertFile);
+    }
+    sslConfig->insecureSkipTlsVerify = insecureSkipTlsVerify;
+}
+
+void sslConfig_free(sslConfig_t *sslConfig) {
+    if ( sslConfig->clientCertFile ) {
+        free(sslConfig->clientCertFile);
+    }
+    if ( sslConfig->clientKeyFile ) {
+        free(sslConfig->clientKeyFile);
+    }
+    if ( sslConfig->CACertFile ){
+        free(sslConfig->CACertFile);
+    }
+    free(sslConfig);
 }
 
 void replaceSpaceWithPlus(char *stringToProcess) {
@@ -452,16 +452,13 @@ void apiClient_invoke(apiClient_t    *apiClient,
     }
 }
 
+
 size_t g_userdata_original_size = 0;
 size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp) {
     size_t size_this_time = nmemb * size;
-
     *(char **)userp = (char *) realloc (*(char **)userp, g_userdata_original_size + size_this_time + 1);
-
     memcpy(*(char **)userp + g_userdata_original_size, buffer, size_this_time);
-
     g_userdata_original_size += size_this_time ;
-
     return size_this_time;
 }
 
