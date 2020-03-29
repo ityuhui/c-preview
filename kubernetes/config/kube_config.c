@@ -1,29 +1,11 @@
-#include <kube_config.h>
+#include "kube_config.h"
+#include "kube_config_model.h"
 
 #define KUBE_CONFIG_DEFAULT_LOCATION "~/.kube/config"
 #define K8S_TOKEN_BUF_SIZE 1024
 #define K8S_AUTH_KEY "Authorization"
 #define K8S_AUTH_VALUE_TEMPLATE "Bearer %s"
 
-/*
- *
- * Load Kubernetes cluster configuration from the file defined by configFileName
- * or default location: ~/.kube/config
- *
- * Parameter:
- *
- * IN
- *
- * configFileName
- * 
- *
- * OUT
- *
- * basePath
- * sslConfig
- * apiKeys
- *
- */
 
 static int setBasePath()
 {
@@ -81,13 +63,24 @@ static char *getConfigFileTakeEffect(const char *configFileName)
     return _configFileName;
 }
 
+static int loadKubeConfigFile(kubeconfig_t* kubeConfig, const char * configFileTakeEffect)
+{
+    int rc = 0;
+
+    kubeyaml_loadkubeconfig(kubeConfig, configFileTakeEffect);
+
+    return 0;
+}
+
 int load_kube_config(char **pBasePath, sslConfig_t **pSslConfig, list_t **pApiKeys, const char *configFileName)
 {
     int rc = 0;
 
     char *configFileTakeEffect = getConfigFileTakeEffect(configFileName);
 
-    loadKubeConfigFile(kubeConfig, configFileTakeEffect);
+    kubeconfig_t* kubeconfig = calloc(1, sizeof(kubeconfig_t));
+    kubeconfig->fileName = strdup(configFileTakeEffect);
+    kubeyaml_loadkubeconfig(kubeconfig);
 
     if(){
         setBasePath();
@@ -104,19 +97,6 @@ int load_kube_config(char **pBasePath, sslConfig_t **pSslConfig, list_t **pApiKe
     return rc;
 }
 
-/*
- *
- * Free Kubernetes cluster configuration 
- *
- * Parameter:
- *
- * IN
- *
- * basePath
- * sslConfig
- * apiKeys
- *
- */
 
 int free_kube_config(char *basePath, sslConfig_t *sslConfig, list_t *apiKeys)
 {

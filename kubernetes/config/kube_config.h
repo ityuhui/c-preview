@@ -5,65 +5,59 @@
 extern "C" {
 #endif
 
-typedef struct kube_cluster_t {
-    char *name;
-    char *server;
-    char *certificate_authority_data;
-} kube_cluster_t ;
-
-typedef struct kube_auth_provider_config_t {
-    char *id_token;
-    char *cmd_path;
-    char *access_token;
-    char *expires_on;
-    char *expiry;
-    char *idp_certificate_authority_data;
-} kube_auth_provider_config_t ;
-
-typedef struct kube_auth_provider_t {
-    char *name;
-    kube_auth_provider_config_t *config;
-} kube_auth_provider_t ;
-
-typedef struct kube_config_exec_t {
-
-} kube_config_exec_t;
-
-typedef struct kube_user_t {
-    char *name;
-    char *client_certificate_data;
-    char *client_key_data;
-    kube_auth_provider_t *auth_provider;
-    kube_config_exec_t *exec;
-    int insecure_skip_tls_verify;
-    char *username;
-    char *password;
-} kube_user_t ;
-
-typedef struct kube_context_t {
-    char *name;
-    char *cluster;
-    char *user;
-} kube_context_t ;
-
-typedef struct kubeconfig_t {
-    char *fileName;
-    char *apiVersion;
-    char *preferences;
-    char *kind;
-    kube_context_t *current_context;
-    kube_context_t **contexts;
-    int  num_contexts;
-    kube_cluster_t **clusters;
-    int  num_clusters;
-    kube_user_t **users;
-    int  num_users;
-    char **extensions;
-    int  num_extensions;
-} kubeconfig_t;
+/*
+ * load_kube_config
+ *
+ * Description:
+ *
+ * Load kubernetes cluster configuration from the file defined by configFileName
+ * or default location: ~/.kube/config
+ *
+ * Return:
+ *
+ *   0     Success
+ *  -1     Failed
+ *
+ * Parameter:
+ *
+ * IN
+ *
+ * configFileName : kubernetes cluster configuration file name
+ *
+ * OUT
+ *
+ * pBasePath: the pointer to API server address
+ * pSslConfig: the pointer to SSL configuration for client
+ * pApiKeys: the pointer to API tokens for client
+ * The memory will be allocated in the function load_kube_config
+ * 
+ */
+int load_kube_config(char** pBasePath, sslConfig_t** pSslConfig, list_t** pApiKeys, const char* configFileName);
 
 
-extern int free_kube_config(char *basePath, sslConfig_t *sslConfig, list_t *apiKeys);
+/*
+ * free_kube_config
+ *
+ * Description:
+ *
+ * Help function to free the memory for kubernetes cluster configuration
+ *
+ * Return:
+ *
+ *  0     Success
+ * -1     Failed
+ * 
+ * Parameter:
+ *
+ * IN
+ *
+ * basePath: API server address
+ * sslConfig: SSL configuration for client
+ * apiKeys: API tokens for client
+ *
+ */
+int free_kube_config(char* basePath, sslConfig_t* sslConfig, list_t* apiKeys);
+
 
 #ifdef  __cplusplus
 }
