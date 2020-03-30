@@ -19,6 +19,8 @@ else(CURL_FOUND)
 endif()
 
 set(SRCS
+    config/kube_config_yaml.c
+#config/kube_config.c
     src/list.c
     src/apiKey.c
     src/apiClient.c
@@ -770,6 +772,8 @@ set(SRCS
 )
 
 set(HDRS
+    config/kube_config_model.h
+    config/kube_config_yaml.h
     include/apiClient.h
     include/list.h
     include/keyValuePair.h

@@ -336,7 +336,7 @@ static int parse_kubeconfig_yaml_document(kubeconfig_t * kubeconfig, yaml_docume
     return 0;
 }
 
-int kubeyaml_loadkubeconfig(kubeconfig_t * kubeconfig)
+int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
 {
     yaml_parser_t parser;
     yaml_document_t document;
@@ -373,6 +373,8 @@ int kubeyaml_loadkubeconfig(kubeconfig_t * kubeconfig)
 
     }
 
+    set_kubeconfig_current_context(kubeconfig);
+
     /* Cleanup */
     yaml_parser_delete(&parser);
     fclose(input);
@@ -382,4 +384,98 @@ int kubeyaml_loadkubeconfig(kubeconfig_t * kubeconfig)
     yaml_parser_delete(&parser);
     fclose(input);
     return -1;
+}
+
+void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t ** clusters, int cluster_count)
+{
+    if ( !clusters ) {
+        return;
+    }
+
+    int i = 0;
+    for (i = 0; i < cluster_count; i++) {
+        if (clusters[i]) {
+            free(clusters[i]);
+        }
+    }
+    free(clusters);
+}
+
+void kubeyaml_free_kubeconfig_users(kubeconfig_user_t ** users, int users_count)
+{
+    if (!users) {
+        return;
+    }
+
+    int i = 0;
+    for (i = 0; i < users_count; i++) {
+        if (users[i]) {
+            free(users[i]);
+        }
+    }
+    free(users);
+}
+
+void kubeyaml_free_kubeconfig_contexts(kubeconfig_user_t** contexts, int context_count)
+{
+    if (!contexts) {
+        return;
+    }
+
+    int i = 0;
+    for (i = 0; i < context_count; i++) {
+        if (contexts[i]) {
+            free(contexts[i]);
+        }
+    }
+    free(contexts);
+}
+
+void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t** clusters, int cluster_count)
+{
+    if (!clusters) {
+        return;
+    }
+
+    int i = 0;
+    for (i = 0; i < cluster_count; i++) {
+        if (clusters[i]) {
+            free(clusters[i]);
+        }
+    }
+    free(clusters);
+}
+
+void kubeyaml_free_kubeconfig(kubeconfig_t * kubeconfig)
+{
+    if ( ! kubeconfig) {
+        return;
+    }
+
+    if (kubeconfig->fileName) {
+        free(kubeconfig->fileName);
+    }
+    if (kubeconfig->apiVersion) {
+        free(kubeconfig->apiVersion);
+    }
+    if (kubeconfig->kind) {
+        free(kubeconfig->kind);
+    }
+    if (kubeconfig->preferences) {
+        free(kubeconfig->preferences);
+    }
+    if (kubeconfig->current_context) {
+        free(kubeconfig->current_context);
+    }
+    if (kubeconfig->clusters) {
+        kubeyaml_free_kubeconfig_clusters(kubeconfig->clusters, kubeconfig->clusters_count);
+    }
+    if (kubeconfig->users) {
+        kubeyaml_free_kubeconfig_users(kubeconfig->users, kubeconfig->users_count);
+    }
+    if (kubeconfig->contexts) {
+        kubeyaml_free_kubeconfig_contexts(kubeconfig->contexts, kubeconfig->contexts_count);
+    }
+
+
 }

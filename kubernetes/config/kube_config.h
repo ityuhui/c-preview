@@ -1,6 +1,8 @@
 #ifndef _KUBE_CONFIG_H
 #define _KUBE_CONFIG_H
 
+#include "../include/apiClient.h"
+
 #ifdef  __cplusplus
 extern "C" {
 #endif
