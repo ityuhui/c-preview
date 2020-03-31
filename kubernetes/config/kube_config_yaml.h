@@ -2,12 +2,12 @@
 #define _KUBE_CONFIG_YAML_H
 
 #include "kube_config_model.h"
-    
+
 #ifdef  __cplusplus
 extern "C" {
-    
-#endif  /* __cplusplus */
-    
+
+#endif                          /* __cplusplus */
+
 /*
  * kubeyaml_loadkubeconfig
  *
@@ -23,13 +23,12 @@ extern "C" {
  *
  * OUT:
  * kubeconfig: kubernetes cluster configuration
- */ 
+ */
 extern int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig);
 
 extern void kubeyaml_free_kubeconfig(kubeconfig_t * kubeconfig);
 
 #ifdef  __cplusplus
-} 
-#endif  /* __cplusplus  */
- 
+}
+#endif                          /* __cplusplus  */
 #endif                          /* _KUBE_CONFIG_YAML_H */

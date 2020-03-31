@@ -1,4 +1,5 @@
 #include <yaml.h>
+#include <errno.h>
 #include "kube_config_yaml.h"
 
 /*
@@ -27,6 +28,8 @@ mapping :: = MAPPING - START(node node) * MAPPING - END
 
 static int parse_kubeconfig_yaml_userinfo_mapping(kubeconfig_user_t * user, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_userinfo_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -36,7 +39,7 @@ static int parse_kubeconfig_yaml_userinfo_mapping(kubeconfig_user_t * user, yaml
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -54,6 +57,8 @@ static int parse_kubeconfig_yaml_userinfo_mapping(kubeconfig_user_t * user, yaml
 
 static int parse_kubeconfig_yaml_user_mapping(kubeconfig_user_t * user, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_user_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -63,7 +68,7 @@ static int parse_kubeconfig_yaml_user_mapping(kubeconfig_user_t * user, yaml_doc
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -108,6 +113,8 @@ static int parse_kubeconfig_yaml_users_sequence(kubeconfig_t * kubeconfig, yaml_
 
 static int parse_kubeconfig_yaml_contextinfo_mapping(kubeconfig_context_t * context, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_contextinfo_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -117,7 +124,7 @@ static int parse_kubeconfig_yaml_contextinfo_mapping(kubeconfig_context_t * cont
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -135,6 +142,8 @@ static int parse_kubeconfig_yaml_contextinfo_mapping(kubeconfig_context_t * cont
 
 static int parse_kubeconfig_yaml_context_mapping(kubeconfig_context_t * context, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_context_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -144,7 +153,7 @@ static int parse_kubeconfig_yaml_context_mapping(kubeconfig_context_t * context,
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -189,6 +198,8 @@ static int parse_kubeconfig_yaml_contexts_sequence(kubeconfig_t * kubeconfig, ya
 
 static int parse_kubeconfig_yaml_clusterinfo_mapping(kubeconfig_cluster_t * cluster, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_clusterinfo_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -198,7 +209,7 @@ static int parse_kubeconfig_yaml_clusterinfo_mapping(kubeconfig_cluster_t * clus
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -216,6 +227,8 @@ static int parse_kubeconfig_yaml_clusterinfo_mapping(kubeconfig_cluster_t * clus
 
 static int parse_kubeconfig_yaml_cluster_mapping(kubeconfig_cluster_t * cluster, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_cluster_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -225,7 +238,7 @@ static int parse_kubeconfig_yaml_cluster_mapping(kubeconfig_cluster_t * cluster,
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -270,6 +283,8 @@ static int parse_kubeconfig_yaml_clusters_sequence(kubeconfig_t * kubeconfig, ya
 
 static int parse_kubeconfig_yaml_top_mapping(kubeconfig_t * kubeconfig, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_top_mapping()";
+
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
     yaml_node_t *value = NULL;
@@ -279,7 +294,7 @@ static int parse_kubeconfig_yaml_top_mapping(kubeconfig_t * kubeconfig, yaml_doc
         value = yaml_document_get_node(document, pair->value);
 
         if (key->type != YAML_SCALAR_NODE) {
-            printf("the key node is not YAML_SCALAR_NODE\n");
+            fprintf(stderr, "%s: The key node is not YAML_SCALAR_NODE.\n", fname);
             return -1;
         }
 
@@ -308,12 +323,13 @@ static int parse_kubeconfig_yaml_top_mapping(kubeconfig_t * kubeconfig, yaml_doc
 
 static int parse_kubeconfig_yaml_node(kubeconfig_t * kubeconfig, yaml_document_t * document, yaml_node_t * node)
 {
+    static char fname[] = "parse_kubeconfig_yaml_node()";
     int rc = 0;
 
     if (YAML_MAPPING_NODE == node->type) {
         rc = parse_kubeconfig_yaml_top_mapping(kubeconfig, document, node);
     } else {
-        printf("%s is not a valid kubeconfig file.\n", kubeconfig->fileName);
+        fprintf(stderr, "%s is not a valid kubeconfig file.\n", kubeconfig->fileName);
         rc = -1;
     }
 
@@ -322,12 +338,14 @@ static int parse_kubeconfig_yaml_node(kubeconfig_t * kubeconfig, yaml_document_t
 
 static int parse_kubeconfig_yaml_document(kubeconfig_t * kubeconfig, yaml_document_t * document)
 {
+    static char fname[] = "parse_kubeconfig_yaml_document()";
+
     int rc = 0;
 
     yaml_node_t *root;
     root = yaml_document_get_root_node(document);
     if (NULL == root) {
-        printf("The document is null\n");
+        fprintf(stderr, "%s: The document is null\n", fname);
         return -1;
     }
 
@@ -338,6 +356,8 @@ static int parse_kubeconfig_yaml_document(kubeconfig_t * kubeconfig, yaml_docume
 
 int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
 {
+    static char fname[] = "kubeyaml_load_kubeconfig()";
+
     yaml_parser_t parser;
     yaml_document_t document;
 
@@ -349,9 +369,13 @@ int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
     /* Set a file input. */
     FILE *input = NULL;
     if (kubeconfig->fileName) {
-        input = fopen(kubeconfig->fileName, "r");
+        input = fopen(kubeconfig->fileName, "rb");
+        if (!input) {
+            fprintf(stderr, "%s: Cannot open the file %s.[%s]\n", fname, kubeconfig->fileName, strerror(errno));
+            return -1;
+        }
     } else {
-        printf("The kubeconf file name needs be set by kubeconfig->fileName .\n");
+        fprintf(stderr, "%s: The kubeconf file name needs be set by kubeconfig->fileName .\n", fname);
         return -1;
     }
 
@@ -373,8 +397,6 @@ int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
 
     }
 
-    set_kubeconfig_current_context(kubeconfig);
-
     /* Cleanup */
     yaml_parser_delete(&parser);
     fclose(input);
@@ -384,21 +406,6 @@ int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
     yaml_parser_delete(&parser);
     fclose(input);
     return -1;
-}
-
-void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t ** clusters, int cluster_count)
-{
-    if ( !clusters ) {
-        return;
-    }
-
-    int i = 0;
-    for (i = 0; i < cluster_count; i++) {
-        if (clusters[i]) {
-            free(clusters[i]);
-        }
-    }
-    free(clusters);
 }
 
 void kubeyaml_free_kubeconfig_users(kubeconfig_user_t ** users, int users_count)
@@ -416,7 +423,7 @@ void kubeyaml_free_kubeconfig_users(kubeconfig_user_t ** users, int users_count)
     free(users);
 }
 
-void kubeyaml_free_kubeconfig_contexts(kubeconfig_user_t** contexts, int context_count)
+void kubeyaml_free_kubeconfig_contexts(kubeconfig_context_t ** contexts, int context_count)
 {
     if (!contexts) {
         return;
@@ -431,7 +438,7 @@ void kubeyaml_free_kubeconfig_contexts(kubeconfig_user_t** contexts, int context
     free(contexts);
 }
 
-void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t** clusters, int cluster_count)
+void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t ** clusters, int cluster_count)
 {
     if (!clusters) {
         return;
@@ -448,7 +455,7 @@ void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t** clusters, int clus
 
 void kubeyaml_free_kubeconfig(kubeconfig_t * kubeconfig)
 {
-    if ( ! kubeconfig) {
+    if (!kubeconfig) {
         return;
     }
 
@@ -476,6 +483,5 @@ void kubeyaml_free_kubeconfig(kubeconfig_t * kubeconfig)
     if (kubeconfig->contexts) {
         kubeyaml_free_kubeconfig_contexts(kubeconfig->contexts, kubeconfig->contexts_count);
     }
-
 
 }

@@ -34,8 +34,7 @@ extern "C" {
  * The memory will be allocated in the function load_kube_config
  * 
  */
-int load_kube_config(char** pBasePath, sslConfig_t** pSslConfig, list_t** pApiKeys, const char* configFileName);
-
+int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApiKeys, const char *configFileName);
 
 /*
  * free_kube_config
@@ -58,12 +57,9 @@ int load_kube_config(char** pBasePath, sslConfig_t** pSslConfig, list_t** pApiKe
  * apiKeys: API tokens for client
  *
  */
-int free_kube_config(char* basePath, sslConfig_t* sslConfig, list_t* apiKeys);
-
+int free_kube_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys);
 
 #ifdef  __cplusplus
 }
 #endif
-
-
-#endif /* _KUBE_CONFIG_H */
+#endif                          /* _KUBE_CONFIG_H */

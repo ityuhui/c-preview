@@ -1,3 +1,4 @@
+#include <kube_config.h>
 #include <apiClient.h>
 #include <CoreV1API.h>
 #include <malloc.h>
@@ -42,13 +43,14 @@ int main(int argc, char *argv[])
     apiClient_t *k8sApiClient = NULL;
 
     rc = load_kube_config(&baseName, &sslConfig, &apiKeys, NULL);
-    if ( 0 == rc) {
+    if (0 == rc) {
         k8sApiClient = apiClient_create_with_base_path(baseName, sslConfig, apiKeys);
     } else {
         printf("Cannot load kubernetes configuration.\n");
+        return -1;
     }
 
-    if ( k8sApiClient ) {
+    if (k8sApiClient) {
         list_pod(k8sApiClient);
     }
 
@@ -56,11 +58,9 @@ int main(int argc, char *argv[])
     baseName = NULL;
     sslConfig = NULL;
     apiKeys = NULL;
-    
+
     apiClient_free(k8sApiClient);
     k8sApiClient = NULL;
-    
-    return rc ;
+
+    return rc;
 }
-
-
