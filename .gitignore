@@ -1,4 +1,6 @@
 kubernetes/build/
+tags
+cscope.files
 
 # Prerequisites
 *.d
