@@ -31,6 +31,10 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *b64data)
 
     int decoded_bytes = 0;
     char *b64decode = base64decode(b64data, strlen(b64data), &decoded_bytes);
+    if (!b64decode || 0 == decoded_bytes) {
+        fprintf(stderr, "%s: Base64 decodes failed.\n", fname);
+        return NULL;
+    }
 
     char tempfile_name_template[] = KUBE_CONFIG_TEMPFILE_NAME_TEMPLATE;
     int fd = mkstemp(tempfile_name_template);
@@ -41,7 +45,10 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *b64data)
 
     if (-1 == write(fd, b64decode, decoded_bytes)) {
         fprintf(stderr, "%s: Writing temp file failed with error [%s]\n", fname, strerror(errno));
+        close(fd);
+        return NULL;
     }
+
     close(fd);
 
     return strdup(tempfile_name_template);
@@ -78,7 +85,7 @@ static int setSslConfig(sslConfig_t ** pSslConfig, kubeconfig_cluster_t * cluste
     char *client_cert_file = NULL;
     char *client_key_file = NULL;
     char *ca_file = NULL;
-    int insecure_skip_tls_verify = 1;
+    int insecure_skip_tls_verify = 0;
 
     if (user) {
         if (user->client_certificate_data) {
@@ -102,6 +109,17 @@ static int setSslConfig(sslConfig_t ** pSslConfig, kubeconfig_cluster_t * cluste
     } else {
         rc = -1;
     }
+
+    if (client_cert_file) {
+        free(client_cert_file);
+    }
+    if (client_key_file) {
+        free(client_key_file);
+    }
+    if (ca_file) {
+        free(ca_file);
+    }
+
     return rc;
 }
 
@@ -129,7 +147,7 @@ static int setApiKeys(list_t ** pApiKeys, kubeconfig_user_t * user)
     return rc;
 }
 
-static char *getConfigFileTakeEffect(const char *configFileNamePassedIn)
+static char *getWorkingConfigFile(const char *configFileNamePassedIn)
 {
     char *configFileName = NULL;
     const char *kubeconfig_env = NULL;
@@ -221,7 +239,7 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
     kubeconfig_user_t *current_user = NULL;
 
     kubeconfig_t *kubeconfig = calloc(1, sizeof(kubeconfig_t));
-    kubeconfig->fileName = getConfigFileTakeEffect(configFileName);
+    kubeconfig->fileName = getWorkingConfigFile(configFileName);
     rc = kubeyaml_load_kubeconfig(kubeconfig);
     if (0 == rc) {
         current_context = kubeconfig_get_current_context(kubeconfig->contexts, kubeconfig->contexts_count, kubeconfig->current_context);
@@ -229,36 +247,48 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
             current_cluster = kubeconfig_get_current_cluster(kubeconfig->clusters, kubeconfig->clusters_count, current_context->cluster);
             current_user = kubeconfig_get_current_user(kubeconfig->users, kubeconfig->users_count, current_context->user);
         } else {
-            fprintf(stderr, "%s: Cannot get the current user and cluster information for kubeconfig.\n", fname);
-            return -1;
+            fprintf(stderr, "%s: Cannot get the current user and cluster information by the kubeconfig.\n", fname);
+            rc = -1;
+            goto end;
         }
     } else {
         fprintf(stderr, "%s: Cannot load the kubeconfig %s\n", fname, kubeconfig->fileName);
-        return -1;
+        rc = -1;
+        goto end;
     }
 
     if (current_cluster && current_cluster->server) {
-        setBasePath(pBasePath, current_cluster->server);
+        rc = setBasePath(pBasePath, current_cluster->server);
+        if (-1 == rc) {
+            fprintf(stderr, "%s: Cannot set the base path for API server.\n", fname);
+            goto end;
+        }
     }
 
     if (current_cluster || current_user) {
-        setSslConfig(pSslConfig, current_cluster, current_user);
+        rc = setSslConfig(pSslConfig, current_cluster, current_user);
+        if (-1 == rc) {
+            fprintf(stderr, "%s: Cannot set the SSL Configuration for the client.\n", fname);
+            goto end;
+        }
     }
 
     if (current_user) {
-        setApiKeys(pApiKeys, current_user);
+        rc = setApiKeys(pApiKeys, current_user);
+        if (-1 == rc) {
+            fprintf(stderr, "%s: Cannot set the tokens for the client.\n", fname);
+            goto end;
+        }
     }
 
+  end:
     kubeyaml_free_kubeconfig(kubeconfig);
     kubeconfig = NULL;
-
     return rc;
 }
 
-int free_kube_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys)
+void free_kube_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys)
 {
-    int rc = 0;
-
     if (basePath) {
         free(basePath);
     }
@@ -271,6 +301,4 @@ int free_kube_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys)
     if (apiKeys) {
         list_free(apiKeys);
     }
-
-    return 0;
 }

@@ -408,7 +408,7 @@ int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
     return -1;
 }
 
-void kubeyaml_free_kubeconfig_users(kubeconfig_user_t ** users, int users_count)
+static void kubeyaml_free_kubeconfig_users(kubeconfig_user_t ** users, int users_count)
 {
     if (!users) {
         return;
@@ -423,7 +423,7 @@ void kubeyaml_free_kubeconfig_users(kubeconfig_user_t ** users, int users_count)
     free(users);
 }
 
-void kubeyaml_free_kubeconfig_contexts(kubeconfig_context_t ** contexts, int context_count)
+static void kubeyaml_free_kubeconfig_contexts(kubeconfig_context_t ** contexts, int context_count)
 {
     if (!contexts) {
         return;
@@ -438,7 +438,7 @@ void kubeyaml_free_kubeconfig_contexts(kubeconfig_context_t ** contexts, int con
     free(contexts);
 }
 
-void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t ** clusters, int cluster_count)
+static void kubeyaml_free_kubeconfig_clusters(kubeconfig_cluster_t ** clusters, int cluster_count)
 {
     if (!clusters) {
         return;
