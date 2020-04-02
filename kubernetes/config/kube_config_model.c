@@ -116,7 +116,7 @@ kubeconfig_context_t *kubeconfig_context_create()
     return context;
 }
 
-void kub_config_context_free(kubeconfig_context_t * context)
+void kubeconfig_context_free(kubeconfig_context_t * context)
 {
     if (!context) {
         return;
@@ -148,7 +148,8 @@ static void kubeconfig_clusters_free(kubeconfig_cluster_t ** clusters, int clust
     int i = 0;
     for (i = 0; i < cluster_count; i++) {
         if (clusters[i]) {
-            free(clusters[i]);
+            kubeconfig_cluster_free(clusters[i]);
+            clusters[i] = NULL;
         }
     }
     free(clusters);
@@ -163,7 +164,8 @@ static void kubeconfig_users_free(kubeconfig_user_t ** users, int users_count)
     int i = 0;
     for (i = 0; i < users_count; i++) {
         if (users[i]) {
-            free(users[i]);
+            kubeconfig_user_free(users[i]);
+            users[i] = NULL;
         }
     }
     free(users);
@@ -178,7 +180,8 @@ static void kubeconfig_contexts_free(kubeconfig_context_t ** contexts, int conte
     int i = 0;
     for (i = 0; i < context_count; i++) {
         if (contexts[i]) {
-            free(contexts[i]);
+            kubeconfig_context_free(contexts[i]);
+            contexts[i] = NULL;
         }
     }
     free(contexts);
