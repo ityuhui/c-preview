@@ -37,7 +37,7 @@ extern "C" {
 int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApiKeys, const char *configFileName);
 
 /*
- * free_kube_config
+ * free_client_config
  *
  *
  * Description:
@@ -61,7 +61,7 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
  * None
  *
  */
-void free_kube_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys);
+void free_client_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys);
 
 #ifdef  __cplusplus
 }

@@ -238,28 +238,44 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
     kubeconfig_cluster_t *current_cluster = NULL;
     kubeconfig_user_t *current_user = NULL;
 
-    kubeconfig_t *kubeconfig = calloc(1, sizeof(kubeconfig_t));
+    kubeconfig_t *kubeconfig = kubeconfig_create();
+    if (!kubeconfig) {
+        fprintf(stderr, "%s: Cannot create kubeconfig.[%s]\n", fname, strerror(errno));
+        return -1;
+    }
+
     kubeconfig->fileName = getWorkingConfigFile(configFileName);
     rc = kubeyaml_load_kubeconfig(kubeconfig);
-    if (0 == rc) {
-        current_context = kubeconfig_get_current_context(kubeconfig->contexts, kubeconfig->contexts_count, kubeconfig->current_context);
-        if (current_context) {
-            current_cluster = kubeconfig_get_current_cluster(kubeconfig->clusters, kubeconfig->clusters_count, current_context->cluster);
-            current_user = kubeconfig_get_current_user(kubeconfig->users, kubeconfig->users_count, current_context->user);
-        } else {
-            fprintf(stderr, "%s: Cannot get the current user and cluster information by the kubeconfig.\n", fname);
-            rc = -1;
-            goto end;
-        }
-    } else {
+    if (0 != rc) {
         fprintf(stderr, "%s: Cannot load the kubeconfig %s\n", fname, kubeconfig->fileName);
+        rc = -1;
+        goto end;
+    }
+
+    current_context = kubeconfig_get_current_context(kubeconfig->contexts, kubeconfig->contexts_count, kubeconfig->current_context);
+    if (!current_context) {
+        fprintf(stderr, "%s: Cannot get the current context by the kubeconfig.\n", fname);
+        rc = -1;
+        goto end;
+    }
+
+    current_cluster = kubeconfig_get_current_cluster(kubeconfig->clusters, kubeconfig->clusters_count, current_context->cluster);
+    if (!current_cluster) {
+        fprintf(stderr, "%s: Cannot get the current cluster information by the kubeconfig.\n", fname);
+        rc = -1;
+        goto end;
+    }
+
+    current_user = kubeconfig_get_current_user(kubeconfig->users, kubeconfig->users_count, current_context->user);
+    if (!current_user) {
+        fprintf(stderr, "%s: Cannot get the current user information by the kubeconfig.\n", fname);
         rc = -1;
         goto end;
     }
 
     if (current_cluster && current_cluster->server) {
         rc = setBasePath(pBasePath, current_cluster->server);
-        if (-1 == rc) {
+        if (0 != rc) {
             fprintf(stderr, "%s: Cannot set the base path for API server.\n", fname);
             goto end;
         }
@@ -267,7 +283,7 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
 
     if (current_cluster || current_user) {
         rc = setSslConfig(pSslConfig, current_cluster, current_user);
-        if (-1 == rc) {
+        if (0 != rc) {
             fprintf(stderr, "%s: Cannot set the SSL Configuration for the client.\n", fname);
             goto end;
         }
@@ -275,19 +291,19 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
 
     if (current_user) {
         rc = setApiKeys(pApiKeys, current_user);
-        if (-1 == rc) {
+        if (0 != rc) {
             fprintf(stderr, "%s: Cannot set the tokens for the client.\n", fname);
             goto end;
         }
     }
 
   end:
-    kubeyaml_free_kubeconfig(kubeconfig);
+    kubeconfig_free(kubeconfig);
     kubeconfig = NULL;
     return rc;
 }
 
-void free_kube_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys)
+void free_client_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKeys)
 {
     if (basePath) {
         free(basePath);

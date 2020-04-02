@@ -11,18 +11,14 @@ typedef struct kubeconfig_cluster_t {
     char *certificate_authority_data;
 } kubeconfig_cluster_t ;
 
-typedef struct kubeconfig_auth_provider_config_t {
+typedef struct kubeconfig_auth_provider_t {
+    char *name;
     char *id_token;
     char *cmd_path;
     char *access_token;
     char *expires_on;
     char *expiry;
     char *idp_certificate_authority_data;
-} kubeconfig_auth_provider_config_t ;
-
-typedef struct kubeconfig_auth_provider_t {
-    char *name;
-    kubeconfig_auth_provider_config_t *config;
 } kubeconfig_auth_provider_t ;
 
 typedef struct kubeconfig_exec_t {
@@ -59,6 +55,25 @@ typedef struct kubeconfig_t {
     kubeconfig_user_t **users;
     int  users_count;
 } kubeconfig_t;
+
+
+kubeconfig_auth_provider_t * kubeconfig_auth_provider_create();
+void kubeconfig_auth_provider_free(kubeconfig_auth_provider_t *provider);
+
+kubeconfig_exec_t * kubeconfig_exec_create();
+void kubeconfig_exec_free(kubeconfig_exec_t *exec);
+
+kubeconfig_cluster_t * kubeconfig_cluster_create();
+void kubeconfig_cluster_free(kubeconfig_cluster_t *cluster);
+
+kubeconfig_user_t * kubeconfig_user_create();
+void kubeconfig_user_free(kubeconfig_user_t *user);
+
+kubeconfig_context_t * kubeconfig_context_create();
+void kub_config_context_free(kubeconfig_context_t *context);
+
+kubeconfig_t * kubeconfig_create();
+void kubeconfig_free(kubeconfig_t *kubeconfig);
 
 #ifdef  __cplusplus
 }
