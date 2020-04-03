@@ -97,10 +97,7 @@ static int parse_kubeconfig_yaml_users_sequence(kubeconfig_t * kubeconfig, yaml_
     }
 
     kubeconfig->users_count = item_count;
-    kubeconfig->users = (kubeconfig_user_t **) calloc(kubeconfig->clusters_count, sizeof(kubeconfig_user_t *));
-    for (i = 0; i < kubeconfig->users_count; i++) {
-        kubeconfig->users[i] = (kubeconfig_user_t *) calloc(1, sizeof(kubeconfig_user_t));
-    }
+    kubeconfig->users = kubeconfig_users_create(kubeconfig->users_count);
 
     for (item = node->data.sequence.items.start, i = 0; item < node->data.sequence.items.top; item++, i++) {
         value = yaml_document_get_node(document, *item);
@@ -182,10 +179,7 @@ static int parse_kubeconfig_yaml_contexts_sequence(kubeconfig_t * kubeconfig, ya
     }
 
     kubeconfig->contexts_count = item_count;
-    kubeconfig->contexts = (kubeconfig_context_t **) calloc(kubeconfig->contexts_count, sizeof(kubeconfig_context_t *));
-    for (i = 0; i < kubeconfig->contexts_count; i++) {
-        kubeconfig->contexts[i] = (kubeconfig_context_t *) calloc(1, sizeof(kubeconfig_context_t));
-    }
+    kubeconfig->contexts = kubeconfig_contexts_create(kubeconfig->contexts_count);
 
     for (item = node->data.sequence.items.start, i = 0; item < node->data.sequence.items.top; item++, i++) {
         value = yaml_document_get_node(document, *item);
@@ -267,10 +261,7 @@ static int parse_kubeconfig_yaml_clusters_sequence(kubeconfig_t * kubeconfig, ya
     }
 
     kubeconfig->clusters_count = item_count;
-    kubeconfig->clusters = (kubeconfig_cluster_t **) calloc(kubeconfig->clusters_count, sizeof(kubeconfig_cluster_t *));
-    for (i = 0; i < kubeconfig->clusters_count; i++) {
-        kubeconfig->clusters[i] = (kubeconfig_cluster_t *) calloc(1, sizeof(kubeconfig_cluster_t));
-    }
+    kubeconfig->clusters = kubeconfig_clusters_create(kubeconfig->clusters_count);
 
     for (item = node->data.sequence.items.start, i = 0; item < node->data.sequence.items.top; item++, i++) {
         value = yaml_document_get_node(document, *item);

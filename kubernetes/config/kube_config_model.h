@@ -65,12 +65,18 @@ void kubeconfig_exec_free(kubeconfig_exec_t *exec);
 
 kubeconfig_cluster_t * kubeconfig_cluster_create();
 void kubeconfig_cluster_free(kubeconfig_cluster_t *cluster);
+kubeconfig_cluster_t ** kubeconfig_clusters_create(int clusters_count);
+void kubeconfig_clusters_free(kubeconfig_cluster_t **clusters, int clusters_count);
 
 kubeconfig_user_t * kubeconfig_user_create();
 void kubeconfig_user_free(kubeconfig_user_t *user);
+kubeconfig_user_t ** kubeconfig_users_create(int users_count);
+void kubeconfig_users_free(kubeconfig_user_t **users, int users_count);
 
 kubeconfig_context_t * kubeconfig_context_create();
-void kub_config_context_free(kubeconfig_context_t *context);
+void kubeconfig_context_free(kubeconfig_context_t *context);
+kubeconfig_context_t ** kubeconfig_contexts_create(int contexts_count);
+void kubeconfig_contexts_free(kubeconfig_context_t **contexts, int contexts_count);
 
 kubeconfig_t * kubeconfig_create();
 void kubeconfig_free(kubeconfig_t *kubeconfig);

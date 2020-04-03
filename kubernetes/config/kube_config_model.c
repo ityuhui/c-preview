@@ -82,6 +82,32 @@ void kubeconfig_cluster_free(kubeconfig_cluster_t * cluster)
     free(cluster);
 }
 
+kubeconfig_cluster_t **kubeconfig_clusters_create(int clusters_count)
+{
+    kubeconfig_cluster_t **clusters = (kubeconfig_cluster_t **) calloc(clusters_count, sizeof(kubeconfig_cluster_t *));
+    int i = 0;
+    for (i = 0; i < clusters_count; i++) {
+        clusters[i] = kubeconfig_cluster_create();
+    }
+    return clusters;
+}
+
+void kubeconfig_clusters_free(kubeconfig_cluster_t ** clusters, int cluster_count)
+{
+    if (!clusters) {
+        return;
+    }
+
+    int i = 0;
+    for (i = 0; i < cluster_count; i++) {
+        if (clusters[i]) {
+            kubeconfig_cluster_free(clusters[i]);
+            clusters[i] = NULL;
+        }
+    }
+    free(clusters);
+}
+
 kubeconfig_user_t *kubeconfig_user_create()
 {
     kubeconfig_user_t *user = calloc(1, sizeof(kubeconfig_user_t));
@@ -119,6 +145,32 @@ void kubeconfig_user_free(kubeconfig_user_t * user)
     free(user);
 }
 
+kubeconfig_user_t **kubeconfig_users_create(int users_count)
+{
+    kubeconfig_user_t **users = (kubeconfig_user_t **) calloc(users_count, sizeof(kubeconfig_user_t *));
+    int i = 0;
+    for (i = 0; i < users_count; i++) {
+        users[i] = kubeconfig_user_create();
+    }
+    return users;
+}
+
+void kubeconfig_users_free(kubeconfig_user_t ** users, int users_count)
+{
+    if (!users) {
+        return;
+    }
+
+    int i = 0;
+    for (i = 0; i < users_count; i++) {
+        if (users[i]) {
+            kubeconfig_user_free(users[i]);
+            users[i] = NULL;
+        }
+    }
+    free(users);
+}
+
 kubeconfig_context_t *kubeconfig_context_create()
 {
     kubeconfig_context_t *context = calloc(1, sizeof(kubeconfig_context_t));
@@ -144,45 +196,17 @@ void kubeconfig_context_free(kubeconfig_context_t * context)
     free(context);
 }
 
-kubeconfig_t *kubeconfig_create()
+kubeconfig_context_t **kubeconfig_contexts_create(int contexts_count)
 {
-    kubeconfig_t *config = calloc(1, sizeof(kubeconfig_t));
-    return config;
-}
-
-static void kubeconfig_clusters_free(kubeconfig_cluster_t ** clusters, int cluster_count)
-{
-    if (!clusters) {
-        return;
-    }
-
+    kubeconfig_context_t **contexts = (kubeconfig_context_t **) calloc(contexts_count, sizeof(kubeconfig_context_t *));
     int i = 0;
-    for (i = 0; i < cluster_count; i++) {
-        if (clusters[i]) {
-            kubeconfig_cluster_free(clusters[i]);
-            clusters[i] = NULL;
-        }
+    for (i = 0; i < contexts_count; i++) {
+        contexts[i] = kubeconfig_context_create();
     }
-    free(clusters);
+    return contexts;
 }
 
-static void kubeconfig_users_free(kubeconfig_user_t ** users, int users_count)
-{
-    if (!users) {
-        return;
-    }
-
-    int i = 0;
-    for (i = 0; i < users_count; i++) {
-        if (users[i]) {
-            kubeconfig_user_free(users[i]);
-            users[i] = NULL;
-        }
-    }
-    free(users);
-}
-
-static void kubeconfig_contexts_free(kubeconfig_context_t ** contexts, int context_count)
+void kubeconfig_contexts_free(kubeconfig_context_t ** contexts, int context_count)
 {
     if (!contexts) {
         return;
@@ -196,6 +220,12 @@ static void kubeconfig_contexts_free(kubeconfig_context_t ** contexts, int conte
         }
     }
     free(contexts);
+}
+
+kubeconfig_t *kubeconfig_create()
+{
+    kubeconfig_t *config = calloc(1, sizeof(kubeconfig_t));
+    return config;
 }
 
 void kubeconfig_free(kubeconfig_t * kubeconfig)
@@ -232,4 +262,3 @@ void kubeconfig_free(kubeconfig_t * kubeconfig)
     free(kubeconfig);
 
 }
-

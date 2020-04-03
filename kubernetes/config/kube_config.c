@@ -8,10 +8,6 @@
 #define KUBE_CONFIG_DEFAULT_LOCATION "%s/.kube/config"
 #define KUBE_CONFIG_TEMPFILE_NAME_TEMPLATE "/tmp/kubeconfig-XXXXXX"
 
-#define K8S_TOKEN_BUF_SIZE 1024
-#define K8S_AUTH_KEY "Authorization"
-#define K8S_AUTH_VALUE_TEMPLATE "Bearer %s"
-
 static int setBasePath(char **pBasePath, char *basePath)
 {
     int rc = 0;
@@ -39,7 +35,7 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *b64data)
     char tempfile_name_template[] = KUBE_CONFIG_TEMPFILE_NAME_TEMPLATE;
     int fd = mkstemp(tempfile_name_template);
     if (-1 == fd) {
-        fprintf(stderr, "%s: Creating temp file for kubeconfig failed. [%s]\n", fname, strerror(errno));
+        fprintf(stderr, "%s: Creating temp file for kubeconfig failed with error [%s]\n", fname, strerror(errno));
         return NULL;
     }
 
@@ -131,15 +127,6 @@ static int setApiKeys(list_t ** pApiKeys, kubeconfig_user_t * user)
 
         /* under development for the token based authentication */
 
-        /*
-           char *keyToken = strdup(K8S_AUTH_KEY);
-           char valueToken[K8S_TOKEN_BUF_SIZE];
-           memset(valueToken, 0, sizeof(valueToken));
-           sprintf(valueToken, K8S_AUTH_VALUE_TEMPLATE, token_out_of_cluster);
-           keyValuePair_t *keyPairToken = keyValuePair_create(keyToken, valueToken);
-           list_addElement(apiKeys, keyPairToken);
-         */
-
         *pApiKeys = apiKeys;
     } else {
         rc = -1;
@@ -152,11 +139,14 @@ static char *getWorkingConfigFile(const char *configFileNamePassedIn)
     char *configFileName = NULL;
     const char *kubeconfig_env = NULL;
     const char *homedir_env = NULL;
-    if (configFileNamePassedIn && configFileNamePassedIn[0] != '\0') {
+
+    if (configFileNamePassedIn) {
         configFileName = strdup(configFileNamePassedIn);
     } else {
         kubeconfig_env = getenv(ENV_KUBECONFIGE);
-        if (NULL == kubeconfig_env) {
+        if (kubeconfig_env) {
+            configFileName = strdup(kubeconfig_env);
+        } else {
             homedir_env = getenv(ENV_HOME);
             if (homedir_env) {
                 configFileName = calloc(strlen(homedir_env) + strlen(KUBE_CONFIG_DEFAULT_LOCATION) + 1, sizeof(char));
@@ -164,10 +154,9 @@ static char *getWorkingConfigFile(const char *configFileNamePassedIn)
                     sprintf(configFileName, KUBE_CONFIG_DEFAULT_LOCATION, homedir_env);
                 }
             }
-        } else {
-            configFileName = strdup(kubeconfig_env);
         }
     }
+
     return configFileName;
 }
 
