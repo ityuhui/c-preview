@@ -1,4 +1,5 @@
 #include "kube_config_model.h"
+#include <stdlib.h>
 
 kubeconfig_auth_provider_t *kubeconfig_auth_provider_create()
 {
@@ -33,6 +34,8 @@ void kubeconfig_auth_provider_free(kubeconfig_auth_provider_t * provider)
     if (provider->idp_certificate_authority_data) {
         free(provider->idp_certificate_authority_data);
     }
+
+    free(provider);
 }
 
 kubeconfig_exec_t *kubeconfig_exec_create()
@@ -50,6 +53,8 @@ void kubeconfig_exec_free(kubeconfig_exec_t * exec)
     if (exec->command) {
         free(exec->command);
     }
+
+    free(exec);
 }
 
 kubeconfig_cluster_t *kubeconfig_cluster_create()
@@ -73,6 +78,8 @@ void kubeconfig_cluster_free(kubeconfig_cluster_t * cluster)
     if (cluster->certificate_authority_data) {
         free(cluster->certificate_authority_data);
     }
+
+    free(cluster);
 }
 
 kubeconfig_user_t *kubeconfig_user_create()
@@ -108,6 +115,8 @@ void kubeconfig_user_free(kubeconfig_user_t * user)
     if (user->exec) {
         kubeconfig_exec_free(user->exec);
     }
+
+    free(user);
 }
 
 kubeconfig_context_t *kubeconfig_context_create()
@@ -131,6 +140,8 @@ void kubeconfig_context_free(kubeconfig_context_t * context)
     if (context->user) {
         free(context->user);
     }
+
+    free(context);
 }
 
 kubeconfig_t *kubeconfig_create()
@@ -218,4 +229,7 @@ void kubeconfig_free(kubeconfig_t * kubeconfig)
         kubeconfig_contexts_free(kubeconfig->contexts, kubeconfig->contexts_count);
     }
 
+    free(kubeconfig);
+
 }
+

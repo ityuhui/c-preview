@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
         create_a_pod(k8sApiClient);
     }
 
-    free_kube_config(baseName, sslConfig, apiKeys);
+    free_client_config(baseName, sslConfig, apiKeys);
     baseName = NULL;
     sslConfig = NULL;
     apiKeys = NULL;

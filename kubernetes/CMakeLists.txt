@@ -21,6 +21,7 @@ endif()
 
 
 set(SRCS
+    config/kube_config_model.c
     config/kube_config_yaml.c
     config/kube_config.c
     src/list.c
