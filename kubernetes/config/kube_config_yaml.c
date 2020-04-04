@@ -58,6 +58,7 @@ static int parse_kubeconfig_yaml_userinfo_mapping(kubeconfig_user_t * user, yaml
 static int parse_kubeconfig_yaml_user_mapping(kubeconfig_user_t * user, yaml_document_t * document, yaml_node_t * node)
 {
     static char fname[] = "parse_kubeconfig_yaml_user_mapping()";
+    int rc = 0;
 
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
@@ -77,15 +78,17 @@ static int parse_kubeconfig_yaml_user_mapping(kubeconfig_user_t * user, yaml_doc
                 user->name = strdup(value->data.scalar.value);
             }
         } else if (value->type == YAML_MAPPING_NODE) {
-            parse_kubeconfig_yaml_userinfo_mapping(user, document, value);
+            rc = parse_kubeconfig_yaml_userinfo_mapping(user, document, value);
         }
     }
 
-    return 0;
+    return rc;
 }
 
 static int parse_kubeconfig_yaml_users_sequence(kubeconfig_t * kubeconfig, yaml_document_t * document, yaml_node_t * node)
 {
+    int rc = 0;
+
     yaml_node_item_t *item = NULL;
     yaml_node_t *value = NULL;
     int item_count = 0;
@@ -101,10 +104,10 @@ static int parse_kubeconfig_yaml_users_sequence(kubeconfig_t * kubeconfig, yaml_
 
     for (item = node->data.sequence.items.start, i = 0; item < node->data.sequence.items.top; item++, i++) {
         value = yaml_document_get_node(document, *item);
-        parse_kubeconfig_yaml_user_mapping(kubeconfig->users[i], document, value);
+        rc = parse_kubeconfig_yaml_user_mapping(kubeconfig->users[i], document, value);
     }
 
-    return 0;
+    return rc;
 
 }
 
@@ -140,6 +143,7 @@ static int parse_kubeconfig_yaml_contextinfo_mapping(kubeconfig_context_t * cont
 static int parse_kubeconfig_yaml_context_mapping(kubeconfig_context_t * context, yaml_document_t * document, yaml_node_t * node)
 {
     static char fname[] = "parse_kubeconfig_yaml_context_mapping()";
+    int rc = 0;
 
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
@@ -159,15 +163,16 @@ static int parse_kubeconfig_yaml_context_mapping(kubeconfig_context_t * context,
                 context->name = strdup(value->data.scalar.value);
             }
         } else if (value->type == YAML_MAPPING_NODE) {
-            parse_kubeconfig_yaml_contextinfo_mapping(context, document, value);
+            rc = parse_kubeconfig_yaml_contextinfo_mapping(context, document, value);
         }
     }
 
-    return 0;
+    return rc;
 }
 
 static int parse_kubeconfig_yaml_contexts_sequence(kubeconfig_t * kubeconfig, yaml_document_t * document, yaml_node_t * node)
 {
+    int rc = 0;
     yaml_node_item_t *item = NULL;
     yaml_node_t *value = NULL;
     int item_count = 0;
@@ -183,10 +188,10 @@ static int parse_kubeconfig_yaml_contexts_sequence(kubeconfig_t * kubeconfig, ya
 
     for (item = node->data.sequence.items.start, i = 0; item < node->data.sequence.items.top; item++, i++) {
         value = yaml_document_get_node(document, *item);
-        parse_kubeconfig_yaml_context_mapping(kubeconfig->contexts[i], document, value);
+        rc = parse_kubeconfig_yaml_context_mapping(kubeconfig->contexts[i], document, value);
     }
 
-    return 0;
+    return rc;
 
 }
 
@@ -222,6 +227,7 @@ static int parse_kubeconfig_yaml_clusterinfo_mapping(kubeconfig_cluster_t * clus
 static int parse_kubeconfig_yaml_cluster_mapping(kubeconfig_cluster_t * cluster, yaml_document_t * document, yaml_node_t * node)
 {
     static char fname[] = "parse_kubeconfig_yaml_cluster_mapping()";
+    int rc = 0;
 
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
@@ -241,15 +247,16 @@ static int parse_kubeconfig_yaml_cluster_mapping(kubeconfig_cluster_t * cluster,
                 cluster->name = strdup(value->data.scalar.value);
             }
         } else if (value->type == YAML_MAPPING_NODE) {
-            parse_kubeconfig_yaml_clusterinfo_mapping(cluster, document, value);
+            rc = parse_kubeconfig_yaml_clusterinfo_mapping(cluster, document, value);
         }
     }
 
-    return 0;
+    return rc;
 }
 
 static int parse_kubeconfig_yaml_clusters_sequence(kubeconfig_t * kubeconfig, yaml_document_t * document, yaml_node_t * node)
 {
+    int rc = 0;
     yaml_node_item_t *item = NULL;
     yaml_node_t *value = NULL;
     int item_count = 0;
@@ -265,16 +272,17 @@ static int parse_kubeconfig_yaml_clusters_sequence(kubeconfig_t * kubeconfig, ya
 
     for (item = node->data.sequence.items.start, i = 0; item < node->data.sequence.items.top; item++, i++) {
         value = yaml_document_get_node(document, *item);
-        parse_kubeconfig_yaml_cluster_mapping(kubeconfig->clusters[i], document, value);
+        rc = parse_kubeconfig_yaml_cluster_mapping(kubeconfig->clusters[i], document, value);
     }
 
-    return 0;
+    return rc;
 
 }
 
 static int parse_kubeconfig_yaml_top_mapping(kubeconfig_t * kubeconfig, yaml_document_t * document, yaml_node_t * node)
 {
     static char fname[] = "parse_kubeconfig_yaml_top_mapping()";
+    int rc = 0;
 
     yaml_node_pair_t *pair = NULL;
     yaml_node_t *key = NULL;
@@ -299,16 +307,16 @@ static int parse_kubeconfig_yaml_top_mapping(kubeconfig_t * kubeconfig, yaml_doc
             }
         } else {
             if (0 == strcmp(key->data.scalar.value, KEY_CLUSTERS)) {
-                parse_kubeconfig_yaml_clusters_sequence(kubeconfig, document, value);
+                rc = parse_kubeconfig_yaml_clusters_sequence(kubeconfig, document, value);
             } else if (0 == strcmp(key->data.scalar.value, KEY_CONTEXTS)) {
-                parse_kubeconfig_yaml_contexts_sequence(kubeconfig, document, value);
+                rc = parse_kubeconfig_yaml_contexts_sequence(kubeconfig, document, value);
             } else if (0 == strcmp(key->data.scalar.value, KEY_USERS)) {
-                parse_kubeconfig_yaml_users_sequence(kubeconfig, document, value);
+                rc = parse_kubeconfig_yaml_users_sequence(kubeconfig, document, value);
             }
         }
     }
 
-    return 0;
+    return rc;
 
 }
 
@@ -330,7 +338,6 @@ static int parse_kubeconfig_yaml_node(kubeconfig_t * kubeconfig, yaml_document_t
 static int parse_kubeconfig_yaml_document(kubeconfig_t * kubeconfig, yaml_document_t * document)
 {
     static char fname[] = "parse_kubeconfig_yaml_document()";
-
     int rc = 0;
 
     yaml_node_t *root;
