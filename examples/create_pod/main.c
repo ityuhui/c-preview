@@ -15,7 +15,7 @@ void create_a_pod(apiClient_t * apiClient)
     podinfo->spec = calloc(1, sizeof(v1_pod_spec_t));
 
     podinfo->metadata = calloc(1, sizeof(v1_object_meta_t));
-    podinfo->metadata->name = strdup("test-pod-7");
+    podinfo->metadata->name = strdup("test-pod-9");
 
     list_t *containerlist = list_create();
     v1_container_t *con = calloc(1, sizeof(v1_container_t));

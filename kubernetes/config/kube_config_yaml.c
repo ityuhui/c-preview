@@ -320,7 +320,7 @@ static int parse_kubeconfig_yaml_node(kubeconfig_t * kubeconfig, yaml_document_t
     if (YAML_MAPPING_NODE == node->type) {
         rc = parse_kubeconfig_yaml_top_mapping(kubeconfig, document, node);
     } else {
-        fprintf(stderr, "%s is not a valid kubeconfig file.\n", kubeconfig->fileName);
+        fprintf(stderr, "%s: %s is not a valid kubeconfig file.\n", fname, kubeconfig->fileName);
         rc = -1;
     }
 
@@ -342,7 +342,7 @@ static int parse_kubeconfig_yaml_document(kubeconfig_t * kubeconfig, yaml_docume
 
     rc = parse_kubeconfig_yaml_node(kubeconfig, document, root);
 
-    return 0;
+    return rc;
 }
 
 int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig)
