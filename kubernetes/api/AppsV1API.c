@@ -122,7 +122,9 @@ AppsV1API_createNamespacedControllerRevision(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -284,7 +286,9 @@ AppsV1API_createNamespacedDaemonSet(apiClient_t *apiClient, char * namespace , v
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -446,7 +450,9 @@ AppsV1API_createNamespacedDeployment(apiClient_t *apiClient, char * namespace , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -608,7 +614,9 @@ AppsV1API_createNamespacedReplicaSet(apiClient_t *apiClient, char * namespace , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -770,7 +778,9 @@ AppsV1API_createNamespacedStatefulSet(apiClient_t *apiClient, char * namespace ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1046,7 +1056,9 @@ AppsV1API_deleteCollectionNamespacedControllerRevision(apiClient_t *apiClient, c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1418,7 +1430,9 @@ AppsV1API_deleteCollectionNamespacedDaemonSet(apiClient_t *apiClient, char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1790,7 +1804,9 @@ AppsV1API_deleteCollectionNamespacedDeployment(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2162,7 +2178,9 @@ AppsV1API_deleteCollectionNamespacedReplicaSet(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2534,7 +2552,9 @@ AppsV1API_deleteCollectionNamespacedStatefulSet(apiClient_t *apiClient, char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2823,7 +2843,9 @@ AppsV1API_deleteNamespacedControllerRevision(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3033,7 +3055,9 @@ AppsV1API_deleteNamespacedDaemonSet(apiClient_t *apiClient, char * name , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3243,7 +3267,9 @@ AppsV1API_deleteNamespacedDeployment(apiClient_t *apiClient, char * name , char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3453,7 +3479,9 @@ AppsV1API_deleteNamespacedReplicaSet(apiClient_t *apiClient, char * name , char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3663,7 +3691,9 @@ AppsV1API_deleteNamespacedStatefulSet(apiClient_t *apiClient, char * name , char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3781,7 +3811,9 @@ AppsV1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3953,7 +3985,9 @@ AppsV1API_listControllerRevisionForAllNamespaces(apiClient_t *apiClient, int all
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4217,7 +4251,9 @@ AppsV1API_listDaemonSetForAllNamespaces(apiClient_t *apiClient, int allowWatchBo
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4481,7 +4517,9 @@ AppsV1API_listDeploymentForAllNamespaces(apiClient_t *apiClient, int allowWatchB
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4755,7 +4793,9 @@ AppsV1API_listNamespacedControllerRevision(apiClient_t *apiClient, char * namesp
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5030,7 +5070,9 @@ AppsV1API_listNamespacedDaemonSet(apiClient_t *apiClient, char * namespace , cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5305,7 +5347,9 @@ AppsV1API_listNamespacedDeployment(apiClient_t *apiClient, char * namespace , ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5580,7 +5624,9 @@ AppsV1API_listNamespacedReplicaSet(apiClient_t *apiClient, char * namespace , ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5855,7 +5901,9 @@ AppsV1API_listNamespacedStatefulSet(apiClient_t *apiClient, char * namespace , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6120,7 +6168,9 @@ AppsV1API_listReplicaSetForAllNamespaces(apiClient_t *apiClient, int allowWatchB
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6384,7 +6434,9 @@ AppsV1API_listStatefulSetForAllNamespaces(apiClient_t *apiClient, int allowWatch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6619,7 +6671,9 @@ AppsV1API_patchNamespacedControllerRevision(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6810,7 +6864,9 @@ AppsV1API_patchNamespacedDaemonSet(apiClient_t *apiClient, char * name , char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -7001,7 +7057,9 @@ AppsV1API_patchNamespacedDaemonSetStatus(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -7192,7 +7250,9 @@ AppsV1API_patchNamespacedDeployment(apiClient_t *apiClient, char * name , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -7383,7 +7443,9 @@ AppsV1API_patchNamespacedDeploymentScale(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -7574,7 +7636,9 @@ AppsV1API_patchNamespacedDeploymentStatus(apiClient_t *apiClient, char * name , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -7765,7 +7829,9 @@ AppsV1API_patchNamespacedReplicaSet(apiClient_t *apiClient, char * name , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -7956,7 +8022,9 @@ AppsV1API_patchNamespacedReplicaSetScale(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -8147,7 +8215,9 @@ AppsV1API_patchNamespacedReplicaSetStatus(apiClient_t *apiClient, char * name , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -8338,7 +8408,9 @@ AppsV1API_patchNamespacedStatefulSet(apiClient_t *apiClient, char * name , char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -8529,7 +8601,9 @@ AppsV1API_patchNamespacedStatefulSetScale(apiClient_t *apiClient, char * name , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -8720,7 +8794,9 @@ AppsV1API_patchNamespacedStatefulSetStatus(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -8886,7 +8962,9 @@ AppsV1API_readNamespacedControllerRevision(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9034,7 +9112,9 @@ AppsV1API_readNamespacedDaemonSet(apiClient_t *apiClient, char * name , char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9158,7 +9238,9 @@ AppsV1API_readNamespacedDaemonSetStatus(apiClient_t *apiClient, char * name , ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9290,7 +9372,9 @@ AppsV1API_readNamespacedDeployment(apiClient_t *apiClient, char * name , char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9414,7 +9498,9 @@ AppsV1API_readNamespacedDeploymentScale(apiClient_t *apiClient, char * name , ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9522,7 +9608,9 @@ AppsV1API_readNamespacedDeploymentStatus(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9654,7 +9742,9 @@ AppsV1API_readNamespacedReplicaSet(apiClient_t *apiClient, char * name , char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9778,7 +9868,9 @@ AppsV1API_readNamespacedReplicaSetScale(apiClient_t *apiClient, char * name , ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -9886,7 +9978,9 @@ AppsV1API_readNamespacedReplicaSetStatus(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10018,7 +10112,9 @@ AppsV1API_readNamespacedStatefulSet(apiClient_t *apiClient, char * name , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10142,7 +10238,9 @@ AppsV1API_readNamespacedStatefulSetScale(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10250,7 +10348,9 @@ AppsV1API_readNamespacedStatefulSetStatus(apiClient_t *apiClient, char * name , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10394,7 +10494,9 @@ AppsV1API_replaceNamespacedControllerRevision(apiClient_t *apiClient, char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10564,7 +10666,9 @@ AppsV1API_replaceNamespacedDaemonSet(apiClient_t *apiClient, char * name , char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10734,7 +10838,9 @@ AppsV1API_replaceNamespacedDaemonSetStatus(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -10904,7 +11010,9 @@ AppsV1API_replaceNamespacedDeployment(apiClient_t *apiClient, char * name , char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -11074,7 +11182,9 @@ AppsV1API_replaceNamespacedDeploymentScale(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -11244,7 +11354,9 @@ AppsV1API_replaceNamespacedDeploymentStatus(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -11414,7 +11526,9 @@ AppsV1API_replaceNamespacedReplicaSet(apiClient_t *apiClient, char * name , char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -11584,7 +11698,9 @@ AppsV1API_replaceNamespacedReplicaSetScale(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -11754,7 +11870,9 @@ AppsV1API_replaceNamespacedReplicaSetStatus(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -11924,7 +12042,9 @@ AppsV1API_replaceNamespacedStatefulSet(apiClient_t *apiClient, char * name , cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -12094,7 +12214,9 @@ AppsV1API_replaceNamespacedStatefulSetScale(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -12264,7 +12386,9 @@ AppsV1API_replaceNamespacedStatefulSetStatus(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

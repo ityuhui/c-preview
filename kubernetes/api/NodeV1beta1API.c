@@ -112,7 +112,9 @@ NodeV1beta1API_createRuntimeClass(apiClient_t *apiClient, v1beta1_runtime_class_
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -377,7 +379,9 @@ NodeV1beta1API_deleteCollectionRuntimeClass(apiClient_t *apiClient, char * prett
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -655,7 +659,9 @@ NodeV1beta1API_deleteRuntimeClass(apiClient_t *apiClient, char * name , char * p
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -772,7 +778,9 @@ NodeV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -944,7 +952,9 @@ NodeV1beta1API_listRuntimeClass(apiClient_t *apiClient, char * pretty , int allo
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1169,7 +1179,9 @@ NodeV1beta1API_patchRuntimeClass(apiClient_t *apiClient, char * name , object_t 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1324,7 +1336,9 @@ NodeV1beta1API_readRuntimeClass(apiClient_t *apiClient, char * name , char * pre
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1473,7 +1487,9 @@ NodeV1beta1API_replaceRuntimeClass(apiClient_t *apiClient, char * name , v1beta1
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

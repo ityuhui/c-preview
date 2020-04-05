@@ -61,7 +61,9 @@ AppsAPI_getAPIGroup(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     

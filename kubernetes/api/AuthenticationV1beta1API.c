@@ -112,7 +112,9 @@ AuthenticationV1beta1API_createTokenReview(apiClient_t *apiClient, v1beta1_token
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -212,7 +214,9 @@ AuthenticationV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     

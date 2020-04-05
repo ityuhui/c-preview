@@ -122,7 +122,9 @@ DiscoveryV1beta1API_createNamespacedEndpointSlice(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -398,7 +400,9 @@ DiscoveryV1beta1API_deleteCollectionNamespacedEndpointSlice(apiClient_t *apiClie
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -687,7 +691,9 @@ DiscoveryV1beta1API_deleteNamespacedEndpointSlice(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -805,7 +811,9 @@ DiscoveryV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -977,7 +985,9 @@ DiscoveryV1beta1API_listEndpointSliceForAllNamespaces(apiClient_t *apiClient, in
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1251,7 +1261,9 @@ DiscoveryV1beta1API_listNamespacedEndpointSlice(apiClient_t *apiClient, char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1487,7 +1499,9 @@ DiscoveryV1beta1API_patchNamespacedEndpointSlice(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1653,7 +1667,9 @@ DiscoveryV1beta1API_readNamespacedEndpointSlice(apiClient_t *apiClient, char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1813,7 +1829,9 @@ DiscoveryV1beta1API_replaceNamespacedEndpointSlice(apiClient_t *apiClient, char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

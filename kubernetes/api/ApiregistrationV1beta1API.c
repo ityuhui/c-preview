@@ -112,7 +112,9 @@ ApiregistrationV1beta1API_createAPIService(apiClient_t *apiClient, v1beta1_api_s
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -294,7 +296,9 @@ ApiregistrationV1beta1API_deleteAPIService(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -576,7 +580,9 @@ ApiregistrationV1beta1API_deleteCollectionAPIService(apiClient_t *apiClient, cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -772,7 +778,9 @@ ApiregistrationV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -944,7 +952,9 @@ ApiregistrationV1beta1API_listAPIService(apiClient_t *apiClient, char * pretty ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1169,7 +1179,9 @@ ApiregistrationV1beta1API_patchAPIService(apiClient_t *apiClient, char * name , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1349,7 +1361,9 @@ ApiregistrationV1beta1API_patchAPIServiceStatus(apiClient_t *apiClient, char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1504,7 +1518,9 @@ ApiregistrationV1beta1API_readAPIService(apiClient_t *apiClient, char * name , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1617,7 +1633,9 @@ ApiregistrationV1beta1API_readAPIServiceStatus(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1750,7 +1768,9 @@ ApiregistrationV1beta1API_replaceAPIService(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1909,7 +1929,9 @@ ApiregistrationV1beta1API_replaceAPIServiceStatus(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

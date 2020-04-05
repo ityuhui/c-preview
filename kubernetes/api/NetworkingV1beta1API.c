@@ -122,7 +122,9 @@ NetworkingV1beta1API_createNamespacedIngress(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -398,7 +400,9 @@ NetworkingV1beta1API_deleteCollectionNamespacedIngress(apiClient_t *apiClient, c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -687,7 +691,9 @@ NetworkingV1beta1API_deleteNamespacedIngress(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -805,7 +811,9 @@ NetworkingV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -977,7 +985,9 @@ NetworkingV1beta1API_listIngressForAllNamespaces(apiClient_t *apiClient, int all
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1251,7 +1261,9 @@ NetworkingV1beta1API_listNamespacedIngress(apiClient_t *apiClient, char * namesp
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1487,7 +1499,9 @@ NetworkingV1beta1API_patchNamespacedIngress(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1678,7 +1692,9 @@ NetworkingV1beta1API_patchNamespacedIngressStatus(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1844,7 +1860,9 @@ NetworkingV1beta1API_readNamespacedIngress(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1968,7 +1986,9 @@ NetworkingV1beta1API_readNamespacedIngressStatus(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2112,7 +2132,9 @@ NetworkingV1beta1API_replaceNamespacedIngress(apiClient_t *apiClient, char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2282,7 +2304,9 @@ NetworkingV1beta1API_replaceNamespacedIngressStatus(apiClient_t *apiClient, char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

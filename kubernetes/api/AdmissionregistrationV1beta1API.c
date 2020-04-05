@@ -112,7 +112,9 @@ AdmissionregistrationV1beta1API_createMutatingWebhookConfiguration(apiClient_t *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -263,7 +265,9 @@ AdmissionregistrationV1beta1API_createValidatingWebhookConfiguration(apiClient_t
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -528,7 +532,9 @@ AdmissionregistrationV1beta1API_deleteCollectionMutatingWebhookConfiguration(api
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -889,7 +895,9 @@ AdmissionregistrationV1beta1API_deleteCollectionValidatingWebhookConfiguration(a
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1167,7 +1175,9 @@ AdmissionregistrationV1beta1API_deleteMutatingWebhookConfiguration(apiClient_t *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1366,7 +1376,9 @@ AdmissionregistrationV1beta1API_deleteValidatingWebhookConfiguration(apiClient_t
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1483,7 +1495,9 @@ AdmissionregistrationV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1655,7 +1669,9 @@ AdmissionregistrationV1beta1API_listMutatingWebhookConfiguration(apiClient_t *ap
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1919,7 +1935,9 @@ AdmissionregistrationV1beta1API_listValidatingWebhookConfiguration(apiClient_t *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2144,7 +2162,9 @@ AdmissionregistrationV1beta1API_patchMutatingWebhookConfiguration(apiClient_t *a
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2324,7 +2344,9 @@ AdmissionregistrationV1beta1API_patchValidatingWebhookConfiguration(apiClient_t 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2479,7 +2501,9 @@ AdmissionregistrationV1beta1API_readMutatingWebhookConfiguration(apiClient_t *ap
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2616,7 +2640,9 @@ AdmissionregistrationV1beta1API_readValidatingWebhookConfiguration(apiClient_t *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2765,7 +2791,9 @@ AdmissionregistrationV1beta1API_replaceMutatingWebhookConfiguration(apiClient_t 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2924,7 +2952,9 @@ AdmissionregistrationV1beta1API_replaceValidatingWebhookConfiguration(apiClient_
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

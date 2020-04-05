@@ -112,7 +112,9 @@ CertificatesV1beta1API_createCertificateSigningRequest(apiClient_t *apiClient, v
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -294,7 +296,9 @@ CertificatesV1beta1API_deleteCertificateSigningRequest(apiClient_t *apiClient, c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -576,7 +580,9 @@ CertificatesV1beta1API_deleteCollectionCertificateSigningRequest(apiClient_t *ap
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -772,7 +778,9 @@ CertificatesV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -944,7 +952,9 @@ CertificatesV1beta1API_listCertificateSigningRequest(apiClient_t *apiClient, cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1169,7 +1179,9 @@ CertificatesV1beta1API_patchCertificateSigningRequest(apiClient_t *apiClient, ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1349,7 +1361,9 @@ CertificatesV1beta1API_patchCertificateSigningRequestStatus(apiClient_t *apiClie
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1504,7 +1518,9 @@ CertificatesV1beta1API_readCertificateSigningRequest(apiClient_t *apiClient, cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1617,7 +1633,9 @@ CertificatesV1beta1API_readCertificateSigningRequestStatus(apiClient_t *apiClien
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1750,7 +1768,9 @@ CertificatesV1beta1API_replaceCertificateSigningRequest(apiClient_t *apiClient, 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1909,7 +1929,9 @@ CertificatesV1beta1API_replaceCertificateSigningRequestApproval(apiClient_t *api
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2068,7 +2090,9 @@ CertificatesV1beta1API_replaceCertificateSigningRequestStatus(apiClient_t *apiCl
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

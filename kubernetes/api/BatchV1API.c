@@ -122,7 +122,9 @@ BatchV1API_createNamespacedJob(apiClient_t *apiClient, char * namespace , v1_job
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -398,7 +400,9 @@ BatchV1API_deleteCollectionNamespacedJob(apiClient_t *apiClient, char * namespac
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -687,7 +691,9 @@ BatchV1API_deleteNamespacedJob(apiClient_t *apiClient, char * name , char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -805,7 +811,9 @@ BatchV1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -977,7 +985,9 @@ BatchV1API_listJobForAllNamespaces(apiClient_t *apiClient, int allowWatchBookmar
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1251,7 +1261,9 @@ BatchV1API_listNamespacedJob(apiClient_t *apiClient, char * namespace , char * p
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1487,7 +1499,9 @@ BatchV1API_patchNamespacedJob(apiClient_t *apiClient, char * name , char * names
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1678,7 +1692,9 @@ BatchV1API_patchNamespacedJobStatus(apiClient_t *apiClient, char * name , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1844,7 +1860,9 @@ BatchV1API_readNamespacedJob(apiClient_t *apiClient, char * name , char * namesp
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1968,7 +1986,9 @@ BatchV1API_readNamespacedJobStatus(apiClient_t *apiClient, char * name , char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2112,7 +2132,9 @@ BatchV1API_replaceNamespacedJob(apiClient_t *apiClient, char * name , char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2282,7 +2304,9 @@ BatchV1API_replaceNamespacedJobStatus(apiClient_t *apiClient, char * name , char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

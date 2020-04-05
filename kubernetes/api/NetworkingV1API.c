@@ -122,7 +122,9 @@ NetworkingV1API_createNamespacedNetworkPolicy(apiClient_t *apiClient, char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -398,7 +400,9 @@ NetworkingV1API_deleteCollectionNamespacedNetworkPolicy(apiClient_t *apiClient, 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -687,7 +691,9 @@ NetworkingV1API_deleteNamespacedNetworkPolicy(apiClient_t *apiClient, char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -805,7 +811,9 @@ NetworkingV1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -987,7 +995,9 @@ NetworkingV1API_listNamespacedNetworkPolicy(apiClient_t *apiClient, char * names
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1252,7 +1262,9 @@ NetworkingV1API_listNetworkPolicyForAllNamespaces(apiClient_t *apiClient, int al
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1487,7 +1499,9 @@ NetworkingV1API_patchNamespacedNetworkPolicy(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1653,7 +1667,9 @@ NetworkingV1API_readNamespacedNetworkPolicy(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1813,7 +1829,9 @@ NetworkingV1API_replaceNamespacedNetworkPolicy(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

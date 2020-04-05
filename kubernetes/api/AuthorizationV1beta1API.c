@@ -122,7 +122,9 @@ AuthorizationV1beta1API_createNamespacedLocalSubjectAccessReview(apiClient_t *ap
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -274,7 +276,9 @@ AuthorizationV1beta1API_createSelfSubjectAccessReview(apiClient_t *apiClient, v1
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -425,7 +429,9 @@ AuthorizationV1beta1API_createSelfSubjectRulesReview(apiClient_t *apiClient, v1b
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -576,7 +582,9 @@ AuthorizationV1beta1API_createSubjectAccessReview(apiClient_t *apiClient, v1beta
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -676,7 +684,9 @@ AuthorizationV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     

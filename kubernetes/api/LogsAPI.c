@@ -56,7 +56,9 @@ LogsAPI_logFileHandler(apiClient_t *apiClient, char * logpath )
 end:
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -101,7 +103,9 @@ LogsAPI_logFileListHandler(apiClient_t *apiClient)
 end:
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     

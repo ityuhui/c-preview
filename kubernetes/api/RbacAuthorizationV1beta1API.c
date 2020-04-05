@@ -112,7 +112,9 @@ RbacAuthorizationV1beta1API_createClusterRole(apiClient_t *apiClient, v1beta1_cl
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -263,7 +265,9 @@ RbacAuthorizationV1beta1API_createClusterRoleBinding(apiClient_t *apiClient, v1b
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -424,7 +428,9 @@ RbacAuthorizationV1beta1API_createNamespacedRole(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -586,7 +592,9 @@ RbacAuthorizationV1beta1API_createNamespacedRoleBinding(apiClient_t *apiClient, 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -769,7 +777,9 @@ RbacAuthorizationV1beta1API_deleteClusterRole(apiClient_t *apiClient, char * nam
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -968,7 +978,9 @@ RbacAuthorizationV1beta1API_deleteClusterRoleBinding(apiClient_t *apiClient, cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1250,7 +1262,9 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1611,7 +1625,9 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiC
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1982,7 +1998,9 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClien
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2354,7 +2372,9 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *a
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2643,7 +2663,9 @@ RbacAuthorizationV1beta1API_deleteNamespacedRole(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2853,7 +2875,9 @@ RbacAuthorizationV1beta1API_deleteNamespacedRoleBinding(apiClient_t *apiClient, 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2971,7 +2995,9 @@ RbacAuthorizationV1beta1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3143,7 +3169,9 @@ RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient, char * prett
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3407,7 +3435,9 @@ RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient, char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3681,7 +3711,9 @@ RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3956,7 +3988,9 @@ RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient, ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4221,7 +4255,9 @@ RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClie
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4485,7 +4521,9 @@ RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient, int
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4710,7 +4748,9 @@ RbacAuthorizationV1beta1API_patchClusterRole(apiClient_t *apiClient, char * name
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4890,7 +4930,9 @@ RbacAuthorizationV1beta1API_patchClusterRoleBinding(apiClient_t *apiClient, char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5080,7 +5122,9 @@ RbacAuthorizationV1beta1API_patchNamespacedRole(apiClient_t *apiClient, char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5271,7 +5315,9 @@ RbacAuthorizationV1beta1API_patchNamespacedRoleBinding(apiClient_t *apiClient, c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5403,7 +5449,9 @@ RbacAuthorizationV1beta1API_readClusterRole(apiClient_t *apiClient, char * name 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5500,7 +5548,9 @@ RbacAuthorizationV1beta1API_readClusterRoleBinding(apiClient_t *apiClient, char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5607,7 +5657,9 @@ RbacAuthorizationV1beta1API_readNamespacedRole(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5715,7 +5767,9 @@ RbacAuthorizationV1beta1API_readNamespacedRoleBinding(apiClient_t *apiClient, ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5849,7 +5903,9 @@ RbacAuthorizationV1beta1API_replaceClusterRole(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6008,7 +6064,9 @@ RbacAuthorizationV1beta1API_replaceClusterRoleBinding(apiClient_t *apiClient, ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6177,7 +6235,9 @@ RbacAuthorizationV1beta1API_replaceNamespacedRole(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6347,7 +6407,9 @@ RbacAuthorizationV1beta1API_replaceNamespacedRoleBinding(apiClient_t *apiClient,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

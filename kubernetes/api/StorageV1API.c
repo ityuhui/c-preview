@@ -112,7 +112,9 @@ StorageV1API_createCSINode(apiClient_t *apiClient, v1_csi_node_t * body , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -263,7 +265,9 @@ StorageV1API_createStorageClass(apiClient_t *apiClient, v1_storage_class_t * bod
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -414,7 +418,9 @@ StorageV1API_createVolumeAttachment(apiClient_t *apiClient, v1_volume_attachment
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -596,7 +602,9 @@ StorageV1API_deleteCSINode(apiClient_t *apiClient, char * name , char * pretty ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -878,7 +886,9 @@ StorageV1API_deleteCollectionCSINode(apiClient_t *apiClient, char * pretty , int
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1239,7 +1249,9 @@ StorageV1API_deleteCollectionStorageClass(apiClient_t *apiClient, char * pretty 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1600,7 +1612,9 @@ StorageV1API_deleteCollectionVolumeAttachment(apiClient_t *apiClient, char * pre
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1878,7 +1892,9 @@ StorageV1API_deleteStorageClass(apiClient_t *apiClient, char * name , char * pre
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2077,7 +2093,9 @@ StorageV1API_deleteVolumeAttachment(apiClient_t *apiClient, char * name , char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2194,7 +2212,9 @@ StorageV1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2366,7 +2386,9 @@ StorageV1API_listCSINode(apiClient_t *apiClient, char * pretty , int allowWatchB
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2630,7 +2652,9 @@ StorageV1API_listStorageClass(apiClient_t *apiClient, char * pretty , int allowW
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2894,7 +2918,9 @@ StorageV1API_listVolumeAttachment(apiClient_t *apiClient, char * pretty , int al
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3119,7 +3145,9 @@ StorageV1API_patchCSINode(apiClient_t *apiClient, char * name , object_t * body 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3299,7 +3327,9 @@ StorageV1API_patchStorageClass(apiClient_t *apiClient, char * name , object_t * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3479,7 +3509,9 @@ StorageV1API_patchVolumeAttachment(apiClient_t *apiClient, char * name , object_
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3659,7 +3691,9 @@ StorageV1API_patchVolumeAttachmentStatus(apiClient_t *apiClient, char * name , o
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3814,7 +3848,9 @@ StorageV1API_readCSINode(apiClient_t *apiClient, char * name , char * pretty , i
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3951,7 +3987,9 @@ StorageV1API_readStorageClass(apiClient_t *apiClient, char * name , char * prett
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4088,7 +4126,9 @@ StorageV1API_readVolumeAttachment(apiClient_t *apiClient, char * name , char * p
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4201,7 +4241,9 @@ StorageV1API_readVolumeAttachmentStatus(apiClient_t *apiClient, char * name , ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4334,7 +4376,9 @@ StorageV1API_replaceCSINode(apiClient_t *apiClient, char * name , v1_csi_node_t 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4493,7 +4537,9 @@ StorageV1API_replaceStorageClass(apiClient_t *apiClient, char * name , v1_storag
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4652,7 +4698,9 @@ StorageV1API_replaceVolumeAttachment(apiClient_t *apiClient, char * name , v1_vo
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4811,7 +4859,9 @@ StorageV1API_replaceVolumeAttachmentStatus(apiClient_t *apiClient, char * name ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

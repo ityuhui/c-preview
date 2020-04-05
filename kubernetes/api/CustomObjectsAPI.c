@@ -110,7 +110,9 @@ CustomObjectsAPI_createClusterCustomObject(apiClient_t *apiClient, char * group 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -248,7 +250,9 @@ CustomObjectsAPI_createNamespacedCustomObject(apiClient_t *apiClient, char * gro
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -411,7 +415,9 @@ CustomObjectsAPI_deleteClusterCustomObject(apiClient_t *apiClient, char * group 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -600,7 +606,9 @@ CustomObjectsAPI_deleteNamespacedCustomObject(apiClient_t *apiClient, char * gro
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -735,7 +743,9 @@ CustomObjectsAPI_getClusterCustomObject(apiClient_t *apiClient, char * group , c
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -841,7 +851,9 @@ CustomObjectsAPI_getClusterCustomObjectScale(apiClient_t *apiClient, char * grou
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -947,7 +959,9 @@ CustomObjectsAPI_getClusterCustomObjectStatus(apiClient_t *apiClient, char * gro
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1061,7 +1075,9 @@ CustomObjectsAPI_getNamespacedCustomObject(apiClient_t *apiClient, char * group 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1178,7 +1194,9 @@ CustomObjectsAPI_getNamespacedCustomObjectScale(apiClient_t *apiClient, char * g
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1295,7 +1313,9 @@ CustomObjectsAPI_getNamespacedCustomObjectStatus(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1487,7 +1507,9 @@ CustomObjectsAPI_listClusterCustomObject(apiClient_t *apiClient, char * group , 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1771,7 +1793,9 @@ CustomObjectsAPI_listNamespacedCustomObject(apiClient_t *apiClient, char * group
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1970,7 +1994,9 @@ CustomObjectsAPI_patchClusterCustomObject(apiClient_t *apiClient, char * group ,
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2089,7 +2115,9 @@ CustomObjectsAPI_patchClusterCustomObjectScale(apiClient_t *apiClient, char * gr
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2208,7 +2236,9 @@ CustomObjectsAPI_patchClusterCustomObjectStatus(apiClient_t *apiClient, char * g
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2335,7 +2365,9 @@ CustomObjectsAPI_patchNamespacedCustomObject(apiClient_t *apiClient, char * grou
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2465,7 +2497,9 @@ CustomObjectsAPI_patchNamespacedCustomObjectScale(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2595,7 +2629,9 @@ CustomObjectsAPI_patchNamespacedCustomObjectStatus(apiClient_t *apiClient, char 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2711,7 +2747,9 @@ CustomObjectsAPI_replaceClusterCustomObject(apiClient_t *apiClient, char * group
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2831,7 +2869,9 @@ CustomObjectsAPI_replaceClusterCustomObjectScale(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2951,7 +2991,9 @@ CustomObjectsAPI_replaceClusterCustomObjectStatus(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3076,7 +3118,9 @@ CustomObjectsAPI_replaceNamespacedCustomObject(apiClient_t *apiClient, char * gr
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3207,7 +3251,9 @@ CustomObjectsAPI_replaceNamespacedCustomObjectScale(apiClient_t *apiClient, char
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3338,7 +3384,9 @@ CustomObjectsAPI_replaceNamespacedCustomObjectStatus(apiClient_t *apiClient, cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     

@@ -112,7 +112,9 @@ FlowcontrolApiserverV1alpha1API_createFlowSchema(apiClient_t *apiClient, v1alpha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -263,7 +265,9 @@ FlowcontrolApiserverV1alpha1API_createPriorityLevelConfiguration(apiClient_t *ap
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -528,7 +532,9 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionFlowSchema(apiClient_t *apiClien
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -889,7 +895,9 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionPriorityLevelConfiguration(apiCl
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1167,7 +1175,9 @@ FlowcontrolApiserverV1alpha1API_deleteFlowSchema(apiClient_t *apiClient, char * 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1366,7 +1376,9 @@ FlowcontrolApiserverV1alpha1API_deletePriorityLevelConfiguration(apiClient_t *ap
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1483,7 +1495,9 @@ FlowcontrolApiserverV1alpha1API_getAPIResources(apiClient_t *apiClient)
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1655,7 +1669,9 @@ FlowcontrolApiserverV1alpha1API_listFlowSchema(apiClient_t *apiClient, char * pr
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1919,7 +1935,9 @@ FlowcontrolApiserverV1alpha1API_listPriorityLevelConfiguration(apiClient_t *apiC
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2144,7 +2162,9 @@ FlowcontrolApiserverV1alpha1API_patchFlowSchema(apiClient_t *apiClient, char * n
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2324,7 +2344,9 @@ FlowcontrolApiserverV1alpha1API_patchFlowSchemaStatus(apiClient_t *apiClient, ch
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2504,7 +2526,9 @@ FlowcontrolApiserverV1alpha1API_patchPriorityLevelConfiguration(apiClient_t *api
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2684,7 +2708,9 @@ FlowcontrolApiserverV1alpha1API_patchPriorityLevelConfigurationStatus(apiClient_
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2839,7 +2865,9 @@ FlowcontrolApiserverV1alpha1API_readFlowSchema(apiClient_t *apiClient, char * na
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2952,7 +2980,9 @@ FlowcontrolApiserverV1alpha1API_readFlowSchemaStatus(apiClient_t *apiClient, cha
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3073,7 +3103,9 @@ FlowcontrolApiserverV1alpha1API_readPriorityLevelConfiguration(apiClient_t *apiC
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3186,7 +3218,9 @@ FlowcontrolApiserverV1alpha1API_readPriorityLevelConfigurationStatus(apiClient_t
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3319,7 +3353,9 @@ FlowcontrolApiserverV1alpha1API_replaceFlowSchema(apiClient_t *apiClient, char *
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3478,7 +3514,9 @@ FlowcontrolApiserverV1alpha1API_replaceFlowSchemaStatus(apiClient_t *apiClient, 
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3637,7 +3675,9 @@ FlowcontrolApiserverV1alpha1API_replacePriorityLevelConfiguration(apiClient_t *a
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3796,7 +3836,9 @@ FlowcontrolApiserverV1alpha1API_replacePriorityLevelConfigurationStatus(apiClien
     //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
     }
+    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
