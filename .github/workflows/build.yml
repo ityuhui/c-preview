@@ -23,14 +23,9 @@ jobs:
         make
     - name: Build examples
       run: |
-        cd examples/list_pod/
+        cd examples/
         make
-  test:
-    needs: [build]
-    runs-on: [ubuntu-latest]
-    steps:
-    - uses: actions/checkout@v2
-    - name: test
+    - name: Test examples
       run: |
         cd examples/list_pod/
         ./list_pod_bin
