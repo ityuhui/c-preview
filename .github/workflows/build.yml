@@ -13,13 +13,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: cmake
+    - name: Prepare
+      run: sudo apt-get install -y libcurl4-openssl-dev uncrustify libyaml-dev
+    - name: Cmake
       run: |
-        sudo apt-get install libcurl4-openssl-dev uncrustify libyaml-dev -y
         cd kubernetes
         mkdir build
         cd build
         cmake ..
         make
-    - name: check
+    - name: Check
       run: ls -l kubernetes/build/libkubernetes.so
