@@ -1,4 +1,4 @@
-name: Code Static Check
+name: Code Check
 
 on:
   push:
@@ -7,10 +7,8 @@ on:
     branches: [ master ]
     types: [assigned, opened, synchronize, reopened]
 jobs:
-  check:
-
+  code-staick-check:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Parepare
@@ -19,3 +17,13 @@ jobs:
       run: sh ./code-check/code-static-check.sh ./kubernetes/config/
     - name: Code static check for examples
       run: sh ./code-check/code-static-check.sh ./examples/
+  code-style-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Parepare
+      run: sudo apt-get install -y cppcheck
+    - name: Code style check for config
+      run: sh ./code-check/code-style-check.sh ./kubernetes/config/
+    - name: Code style check for examples
+      run: sh ./code-check/code-style-check.sh ./examples/
