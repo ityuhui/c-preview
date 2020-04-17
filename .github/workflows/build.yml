@@ -8,7 +8,7 @@ on:
     types: [assigned, opened, synchronize, reopened]
 
 jobs:
-  build-library:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -21,13 +21,6 @@ jobs:
         cd build
         cmake ..
         make
-    - name: Check
-      run: ls -l kubernetes/build/libkubernetes.so
-  build-examples:
-    runs-on: ubuntu-latest
-    needs: build-library
-    steps:
-    - uses: actions/checkout@v2
     - name: Build examples
       run: |
         cd examples/list_pod/
