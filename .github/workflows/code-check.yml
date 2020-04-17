@@ -7,7 +7,7 @@ on:
     branches: [ master ]
     types: [assigned, opened, synchronize, reopened]
 jobs:
-  code-staick-check:
+  code-stack-check:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -22,8 +22,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Parepare
-      run: sudo apt-get install -y cppcheck
+      run: sudo apt-get install -y indent
     - name: Code style check for config
-      run: sh ./code-check/code-style-check.sh ./kubernetes/config/
+      run: find ./kubernetes/config/ -name "*.c" -exec sh ./code-check/code-style-check.sh {} \;
     - name: Code style check for examples
-      run: sh ./code-check/code-style-check.sh ./examples/
+      run: find ./examples/ -name "*.c" -exec sh ./code-check/code-style-check.sh {} \;
