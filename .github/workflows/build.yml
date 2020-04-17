@@ -27,5 +27,8 @@ jobs:
         make
     - name: Test examples
       run: |
+        echo $LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH=./kubernetes/build/
         ldd ./examples/list_pod/list_pod_bin
-        LD_LIBRARY_PATH=./kubernetes/build/ & ./examples/list_pod/list_pod_bin
+        echo $LD_LIBRARY_PATH
+        ./examples/list_pod/list_pod_bin
