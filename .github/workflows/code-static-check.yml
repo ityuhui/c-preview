@@ -13,9 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: parepare
+    - name: Parepare
       run: sudo apt-get install -y cppcheck
-    - name: code static check for config
+    - name: Code static check for config
       run: sh ./code-check/code-static-check.sh ./kubernetes/config/
-    - name: code static check for examples
+    - name: Code static check for examples
       run: sh ./code-check/code-static-check.sh ./examples/
