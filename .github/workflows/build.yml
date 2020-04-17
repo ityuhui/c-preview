@@ -8,15 +8,13 @@ on:
     types: [assigned, opened, synchronize, reopened]
 
 jobs:
-  build:
-
+  build-library:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
       run: sudo apt-get install -y libcurl4-openssl-dev uncrustify libyaml-dev
-    - name: Cmake
+    - name: Build library
       run: |
         cd kubernetes
         mkdir build
@@ -25,3 +23,13 @@ jobs:
         make
     - name: Check
       run: ls -l kubernetes/build/libkubernetes.so
+  build-examples:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Prepare
+      run: sudo apt-get install -y libcurl4-openssl-dev uncrustify libyaml-dev
+    - name: Build examples
+      run: |
+        cd examples
+        make
