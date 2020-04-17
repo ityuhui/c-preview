@@ -29,8 +29,8 @@ jobs:
     needs: [build]
     runs-on: [ubuntu-latest]
     steps:
-      - name: test
-      - run: |
-          cd examples/list_pod/
-          ./list_pod_bin
+    - name: test
+      run: |
+        cd examples/list_pod/
+        ./list_pod_bin
     
