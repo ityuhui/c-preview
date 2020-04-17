@@ -25,3 +25,12 @@ jobs:
       run: |
         cd examples/list_pod/
         make
+  test:
+    needs: [build]
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: test
+      - run: |
+          cd examples/list_pod/
+          ./list_pod_bin
+    
