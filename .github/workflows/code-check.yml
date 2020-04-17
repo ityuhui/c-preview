@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Parepare
+    - name: Prepare
       run: sudo apt-get install -y cppcheck
     - name: Code static check for config
       run: sh ./code-check/code-static-check.sh ./kubernetes/config/
@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Parepare
+    - name: Prepare
       run: sudo apt-get install -y indent
     - name: Code style check for config
       run: |
