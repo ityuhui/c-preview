@@ -25,9 +25,9 @@ jobs:
       run: sudo apt-get install -y indent
     - name: Code style check for config
       run: |
-        find ./kubernetes/config/ -name "*.c" -exec sh ./code-check/code-style-check.sh {} \;
-        find ./kubernetes/config/ -name "*.c" -exec diff {} {}~ \;
+        find ./kubernetes/config/ -type f -regextype posix-extended -regex ".*\.(c|h)" -exec sh ./code-check/code-style-check.sh {} \;
+        find ./kubernetes/config/ -type f -regextype posix-extended -regex ".*\.(c|h)" -exec diff {} {}~ \;
     - name: Code style check for examples
       run: |
-        find ./examples/ -name "*.c" -exec sh ./code-check/code-style-check.sh {} \;
-        find ./examples/ -name "*.c" -exec diff {} {}~ \;
+        find ./examples/ -type f -regextype posix-extended -regex ".*\.(c|h)" -exec sh ./code-check/code-style-check.sh {} \;
+        find ./examples/ -type f -regextype posix-extended -regex ".*\.(c|h)" -exec diff {} {}~ \;
