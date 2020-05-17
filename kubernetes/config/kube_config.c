@@ -212,6 +212,7 @@ static int kubeconfig_exec(kubeconfig_property_t * current_user)
     if (!exec_output) {
         return -1;
     }
+
     rc = kube_exec_and_get_result(exec_output, current_user->exec);
     if (0 != rc) {
         fprintf(stderr, "%s: The kubeconfig exec failed.\n", fname);
@@ -233,6 +234,31 @@ static int kubeconfig_exec(kubeconfig_property_t * current_user)
     exec_credential_free(exec_output);
     exec_output = NULL;
     return rc;
+}
+
+static int kubeconfig_update_exec_command_path(kubeconfig_property_t* exec, const char *kube_config_file)
+{
+    static char fname[] = "kubeconfig_update_exec_command_path()";
+
+    if (!exec->command ||
+        0 == strlen(exec->command) ) {
+        return 0;
+    }
+
+    if ( '/' != exec->command[1]) { // not absolute path e.g. "./bin/" or "bin/"
+        char *kube_config_dirname = dirname(kube_config_file);
+        char *original_command = exec->command;
+        int new_command_length = strlen(kube_config_dirname) + strlen("/") + strlen(original_command) + 1 /* 1 for the terminal of string */;
+        exec->command = calloc(1, new_command_length);
+        if (!exec->command) {
+            fprintf(stderr, "%s: Cannot allocate memory for exec command.[%s]\n", fname, strerror(errno));
+            return -1;
+        }
+        snprintf(exec->command, new_command_length,"%s/%s", kube_config_dirname, original_command);
+        free(original_command);
+    }
+
+    return 0;
 }
 
 int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApiKeys, const char *configFileName)
@@ -279,6 +305,11 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
     }
 
     if (current_user && current_user->exec) {
+        rc = kubeconfig_update_exec_command_path(current_user->exec,kubeconfig->fileName);
+        if ( 0 != rc) {
+            fprintf(stderr, "%s: Cannot update exec command path.\n", fname);
+            goto end;
+        }
         rc = kubeconfig_exec(current_user);
         if (0 != rc) {
             fprintf(stderr, "%s: Cannot exec command in kubeconfig.\n", fname);

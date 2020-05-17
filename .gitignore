@@ -2,6 +2,10 @@ kubernetes/build/
 tags
 cscope.files
 *.swp
+.vs
+*.sln
+*.vcxproj
+*.vcxproj.*
 
 # Prerequisites
 *.d
