@@ -1,225 +1,187 @@
 #include "kube_config_model.h"
 #include <stdlib.h>
 
-kubeconfig_auth_provider_t *kubeconfig_auth_provider_create()
+void kubeconfig_free_string_list(char** string_list, int count)
 {
-    kubeconfig_auth_provider_t *provider = calloc(1, sizeof(kubeconfig_auth_provider_t));
-    return provider;
+    if (string_list &&
+        count > 0) {
+        for (int i = 0; i < count; i++) {
+            if (string_list[i]) {
+                free(string_list[i]);
+                string_list[i] = NULL;
+            }
+        }
+        free(string_list);
+    }
 }
 
-void kubeconfig_auth_provider_free(kubeconfig_auth_provider_t * provider)
+void kubeconfig_free_string_map_list(keyValuePair_t** map_list, int count)
 {
-    if (!provider) {
+    if (map_list &&
+        count > 0) {
+        keyValuePair_t* pair = NULL;
+        for (int i = 0; i < count; i++) {
+            pair = map_list[i];
+            if (pair) {
+                if (pair->key) {
+                    free(pair->key);
+                    pair->key = NULL;
+                }
+                if (pair->value) {
+                    free(pair->value);
+                    pair->value = NULL;
+                }
+                free(pair);
+                pair = NULL;
+            }
+        }
+        free(map_list);
+    }
+}
+
+kubeconfig_property_t *kubeconfig_property_create(kubeconfig_property_type_t type)
+{
+    kubeconfig_property_t *property = calloc(1, sizeof(kubeconfig_property_t));
+    property->type = type;
+    return property;
+}
+
+void kubeconfig_property_free(kubeconfig_property_t * property)
+{
+    if (!property) {
         return;
     }
 
-    if (provider->name) {
-        free(provider->name);
-    }
-    if (provider->id_token) {
-        free(provider->id_token);
-    }
-    if (provider->cmd_path) {
-        free(provider->cmd_path);
-    }
-    if (provider->access_token) {
-        free(provider->access_token);
-    }
-    if (provider->expires_on) {
-        free(provider->expires_on);
-    }
-    if (provider->expiry) {
-        free(provider->expiry);
-    }
-    if (provider->idp_certificate_authority_data) {
-        free(provider->idp_certificate_authority_data);
+    if (property->name) {
+        free(property->name);
+        property->name = NULL;
     }
 
-    free(provider);
-}
-
-kubeconfig_exec_t *kubeconfig_exec_create()
-{
-    kubeconfig_exec_t *exec = calloc(1, sizeof(kubeconfig_exec_t));
-    return exec;
-}
-
-void kubeconfig_exec_free(kubeconfig_exec_t * exec)
-{
-    if (!exec) {
-        return;
-    }
-
-    if (exec->command) {
-        free(exec->command);
-    }
-
-    free(exec);
-}
-
-kubeconfig_cluster_t *kubeconfig_cluster_create()
-{
-    kubeconfig_cluster_t *cluster = calloc(1, sizeof(kubeconfig_cluster_t));
-    return cluster;
-}
-
-void kubeconfig_cluster_free(kubeconfig_cluster_t * cluster)
-{
-    if (!cluster) {
-        return;
-    }
-
-    if (cluster->name) {
-        free(cluster->name);
-    }
-    if (cluster->server) {
-        free(cluster->server);
-    }
-    if (cluster->certificate_authority_data) {
-        free(cluster->certificate_authority_data);
-    }
-
-    free(cluster);
-}
-
-kubeconfig_cluster_t **kubeconfig_clusters_create(int clusters_count)
-{
-    kubeconfig_cluster_t **clusters = (kubeconfig_cluster_t **) calloc(clusters_count, sizeof(kubeconfig_cluster_t *));
-    int i = 0;
-    for (i = 0; i < clusters_count; i++) {
-        clusters[i] = kubeconfig_cluster_create();
-    }
-    return clusters;
-}
-
-void kubeconfig_clusters_free(kubeconfig_cluster_t ** clusters, int cluster_count)
-{
-    if (!clusters) {
-        return;
-    }
-
-    int i = 0;
-    for (i = 0; i < cluster_count; i++) {
-        if (clusters[i]) {
-            kubeconfig_cluster_free(clusters[i]);
-            clusters[i] = NULL;
+    if (KUBECONFIG_PROPERTY_TYPE_CLUSTER == property->type) {
+        if (property->server) {
+            free(property->server);
+            property->server = NULL;
+        }
+        if (property->certificate_authority_data) {
+            free(property->certificate_authority_data);
+            property->certificate_authority_data = NULL;
         }
     }
-    free(clusters);
-}
 
-kubeconfig_user_t *kubeconfig_user_create()
-{
-    kubeconfig_user_t *user = calloc(1, sizeof(kubeconfig_user_t));
-    return user;
-}
-
-void kubeconfig_user_free(kubeconfig_user_t * user)
-{
-    if (!user) {
-        return;
-    }
-
-    if (user->name) {
-        free(user->name);
-    }
-    if (user->client_certificate_data) {
-        free(user->client_certificate_data);
-    }
-    if (user->client_key_data) {
-        free(user->client_key_data);
-    }
-    if (user->username) {
-        free(user->username);
-    }
-    if (user->password) {
-        free(user->password);
-    }
-    if (user->auth_provider) {
-        kubeconfig_auth_provider_free(user->auth_provider);
-    }
-    if (user->exec) {
-        kubeconfig_exec_free(user->exec);
-    }
-
-    free(user);
-}
-
-kubeconfig_user_t **kubeconfig_users_create(int users_count)
-{
-    kubeconfig_user_t **users = (kubeconfig_user_t **) calloc(users_count, sizeof(kubeconfig_user_t *));
-    int i = 0;
-    for (i = 0; i < users_count; i++) {
-        users[i] = kubeconfig_user_create();
-    }
-    return users;
-}
-
-void kubeconfig_users_free(kubeconfig_user_t ** users, int users_count)
-{
-    if (!users) {
-        return;
-    }
-
-    int i = 0;
-    for (i = 0; i < users_count; i++) {
-        if (users[i]) {
-            kubeconfig_user_free(users[i]);
-            users[i] = NULL;
+    if (KUBECONFIG_PROPERTY_TYPE_USER == property->type) {
+        if (property->client_certificate_data) {
+            free(property->client_certificate_data);
+            property->client_certificate_data = NULL;
+        }
+        if (property->client_key_data) {
+            free(property->client_key_data);
+            property->client_key_data = NULL;
+        }
+        if (property->username) {
+            free(property->username);
+            property->username = NULL;
+        }
+        if (property->password) {
+            free(property->password);
+            property->password = NULL;
+        }
+        if (property->auth_provider) {
+            kubeconfig_property_free(property->auth_provider);
+            property->auth_provider = NULL;
+        }
+        if (property->exec) {
+            kubeconfig_property_free(property->exec);
+            property->exec = NULL;
         }
     }
-    free(users);
+
+    if (KUBECONFIG_PROPERTY_TYPE_CONTEXT == property->type) {
+        if (property->cluster) {
+            free(property->cluster);
+            property->cluster = NULL;
+        }
+        if (property->user) {
+            free(property->user);
+            property->user = NULL;
+        }
+    }
+
+    if (KUBECONFIG_PROPERTY_TYPE_USER_EXEC == property->type) {
+        if (property->command) {
+            free(property->command);
+            property->command = NULL;
+        }
+        if (property->apiVersion) {
+            free(property->apiVersion);
+            property->apiVersion = NULL;
+        }
+        if (property->envs &&
+            property->envs_count > 0) {
+            kubeconfig_free_string_map_list(property->envs, property->envs_count);
+            property->envs = NULL;
+            property->envs_count = 0;
+        }
+        if (property->args &&
+            property->args_count > 0) {
+            kubeconfig_free_string_list(property->args, property->args_count);
+            property->args = NULL;
+            property->args_count = 0;
+        }
+    }
+
+    if (KUBECONFIG_PROPERTY_TYPE_USER_AUTH_PROVIDER == property->type) {
+        if (property->id_token) {
+            free(property->id_token);
+            property->id_token = NULL;
+        }
+        if (property->cmd_path) {
+            free(property->cmd_path);
+            property->cmd_path = NULL;
+        }
+        if (property->access_token) {
+            free(property->access_token);
+            property->access_token = NULL;
+        }
+        if (property->expires_on) {
+            free(property->expires_on);
+            property->expires_on = NULL;
+        }
+        if (property->expiry) {
+            free(property->expiry);
+            property->expiry = NULL;
+        }
+        if (property->idp_certificate_authority_data) {
+            free(property->idp_certificate_authority_data);
+            property->idp_certificate_authority_data = NULL;
+        }
+    }
+
+    free(property);
 }
 
-kubeconfig_context_t *kubeconfig_context_create()
+kubeconfig_property_t **kubeconfig_properties_create(int contexts_count, kubeconfig_property_type_t type)
 {
-    kubeconfig_context_t *context = calloc(1, sizeof(kubeconfig_context_t));
-    return context;
-}
-
-void kubeconfig_context_free(kubeconfig_context_t * context)
-{
-    if (!context) {
-        return;
-    }
-
-    if (context->name) {
-        free(context->name);
-    }
-    if (context->cluster) {
-        free(context->cluster);
-    }
-    if (context->user) {
-        free(context->user);
-    }
-
-    free(context);
-}
-
-kubeconfig_context_t **kubeconfig_contexts_create(int contexts_count)
-{
-    kubeconfig_context_t **contexts = (kubeconfig_context_t **) calloc(contexts_count, sizeof(kubeconfig_context_t *));
+    kubeconfig_property_t **properties = (kubeconfig_property_t **) calloc(contexts_count, sizeof(kubeconfig_property_t *));
     int i = 0;
     for (i = 0; i < contexts_count; i++) {
-        contexts[i] = kubeconfig_context_create();
+        properties[i] = kubeconfig_property_create(type);
     }
-    return contexts;
+    return properties;
 }
 
-void kubeconfig_contexts_free(kubeconfig_context_t ** contexts, int context_count)
+void kubeconfig_properties_free(kubeconfig_property_t ** properties, int properties_count)
 {
-    if (!contexts) {
+    if (!properties) {
         return;
     }
 
-    int i = 0;
-    for (i = 0; i < context_count; i++) {
-        if (contexts[i]) {
-            kubeconfig_context_free(contexts[i]);
-            contexts[i] = NULL;
+    for (int i = 0; i < properties_count; i++) {
+        if (properties[i]) {
+            kubeconfig_property_free(properties[i]);
+            properties[i] = NULL;
         }
     }
-    free(contexts);
+    free(properties);
 }
 
 kubeconfig_t *kubeconfig_create()
@@ -236,29 +198,92 @@ void kubeconfig_free(kubeconfig_t * kubeconfig)
 
     if (kubeconfig->fileName) {
         free(kubeconfig->fileName);
+        kubeconfig->fileName = NULL;
     }
     if (kubeconfig->apiVersion) {
         free(kubeconfig->apiVersion);
+        kubeconfig->apiVersion = NULL;
     }
     if (kubeconfig->kind) {
         free(kubeconfig->kind);
+        kubeconfig->kind = NULL;
     }
     if (kubeconfig->preferences) {
         free(kubeconfig->preferences);
+        kubeconfig->preferences = NULL;
     }
     if (kubeconfig->current_context) {
         free(kubeconfig->current_context);
+        kubeconfig->current_context = NULL;
     }
     if (kubeconfig->clusters) {
-        kubeconfig_clusters_free(kubeconfig->clusters, kubeconfig->clusters_count);
+        kubeconfig_properties_free(kubeconfig->clusters, kubeconfig->clusters_count);
+        kubeconfig->clusters = NULL;
     }
     if (kubeconfig->users) {
-        kubeconfig_users_free(kubeconfig->users, kubeconfig->users_count);
+        kubeconfig_properties_free(kubeconfig->users, kubeconfig->users_count);
+        kubeconfig->users = NULL;
     }
     if (kubeconfig->contexts) {
-        kubeconfig_contexts_free(kubeconfig->contexts, kubeconfig->contexts_count);
+        kubeconfig_properties_free(kubeconfig->contexts, kubeconfig->contexts_count);
+        kubeconfig->contexts = NULL;
     }
 
     free(kubeconfig);
+}
 
+ExecCredential_status_t* exec_credential_status_create()
+{
+    ExecCredential_status_t* exec_credential_status = calloc(1, sizeof(ExecCredential_status_t));
+    return exec_credential_status;
+}
+
+void exec_credential_status_free(ExecCredential_status_t* exec_credential_status)
+{
+    if (!exec_credential_status) {
+        return;
+    }
+
+    if (exec_credential_status->token) {
+        free(exec_credential_status->token);
+        exec_credential_status->token = NULL;
+    }
+    if (exec_credential_status->clientCertificateData) {
+        free(exec_credential_status->clientCertificateData);
+        exec_credential_status->clientCertificateData = NULL;
+    }
+    if (exec_credential_status->clientKeyData) {
+        free(exec_credential_status->clientKeyData);
+        exec_credential_status->clientKeyData = NULL;
+    }
+
+    free(exec_credential_status);
+}
+
+ExecCredential_t* exec_credential_create()
+{
+    ExecCredential_t* exec_credential = calloc(1, sizeof(ExecCredential_t));
+    return exec_credential;
+}
+
+void exec_credential_free(ExecCredential_t* exec_credential)
+{
+    if (!exec_credential) {
+        return;
+    }
+
+    if (exec_credential->apiVersion) {
+        free(exec_credential->apiVersion);
+        exec_credential->apiVersion = NULL;
+    }
+    if (exec_credential->kind) {
+        free(exec_credential->kind);
+        exec_credential->kind = NULL;
+    }
+    if (exec_credential->status) {
+        exec_credential_status_free(exec_credential->status);
+        exec_credential->status = NULL;
+    }
+
+    free(exec_credential);
 }
