@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <string.h>
+#include <libgen.h>
 #include "kube_config.h"
 #include "kube_config_yaml.h"
 #include "kube_config_common.h"
@@ -245,8 +246,8 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t* exec, cons
         return 0;
     }
 
-    if ( '/' != exec->command[1]) { // not absolute path e.g. "./bin/" or "bin/"
-        char *kube_config_dirname = dirname(kube_config_file);
+    if ( '/' != exec->command[0]) { // not absolute path e.g. "./bin/" or "bin/"
+        const char *kube_config_dirname = dirname(kube_config_file);
         char *original_command = exec->command;
         int new_command_length = strlen(kube_config_dirname) + strlen("/") + strlen(original_command) + 1 /* 1 for the terminal of string */;
         exec->command = calloc(1, new_command_length);

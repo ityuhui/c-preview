@@ -56,7 +56,7 @@ int kube_exec_and_get_result(ExecCredential_t * exec_credential, const kubeconfi
                 return -1;
             }
             strncat(args_string, ARGS_DELIM, strlen(ARGS_DELIM));
-            strncat(args_string, exec->args[i], args_string_remaining_size);
+            strncat(args_string, exec->args[i], strlen(exec->args[i]));
         }
     }
 
@@ -83,7 +83,7 @@ int kube_exec_and_get_result(ExecCredential_t * exec_credential, const kubeconfi
                 rc = -1;
                 goto end;
             }
-            strncat(result_string, string_buf, result_string_remaining_size);
+            strncat(result_string, string_buf, strlen(string_buf));
             memset(string_buf, 0, sizeof(string_buf));
         }
         pclose(fp);
