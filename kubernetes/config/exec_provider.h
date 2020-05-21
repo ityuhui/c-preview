@@ -8,14 +8,14 @@ extern "C" {
 #endif
 
     /*
-     * kubeconfig_exec_run
+     * kube_exec_and_get_result
      *
      *
      * Description:
      *
      *
-     * Load kubernetes cluster configuration from service account
-     * files inside a pod
+     * run exec command and get result of authentication 
+     *
      *
      *
      * Return:
@@ -28,19 +28,13 @@ extern "C" {
      *
      *
      * IN:
-
-     * None
-     *
+     * 
+     * exec: kubeconfig exec configuration
      *
      * OUT:
      *
-     * pBasePath: The pointer to API server address
-     * pSslConfig: The pointer to SSL configuration for client
-     * pApiKeys: The pointer to API tokens for client
+     * exec_credential: result of exec
      *
-     * The memory will be allocated inside this function. User
-     * should call free_client_config to free the memory after
-     * these parameters are not used.
      *
      */
 

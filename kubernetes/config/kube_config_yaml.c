@@ -491,7 +491,7 @@ static int parse_exec_credential_yaml_document(ExecCredential_t * exec_credentia
     return rc;
 }
 
-int kubeyaml_parse_exec_crendentail(ExecCredential_t * exec_credential, const char *exec_credential_string)
+int kubeyaml_parse_exec_crendential(ExecCredential_t * exec_credential, const char *exec_credential_string)
 {
     static char fname[] = "kubeyaml_parse_ExecCrendentail()";
 

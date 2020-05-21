@@ -24,11 +24,11 @@ static int setBasePath(char **pBasePath, char *basePath)
     return -1;
 }
 
-static int is_certdata_or_privatekey_base64_encoded(const char *data)
+static int is_cert_or_key_base64_encoded(const char *data)
 {
-    if ( NULL == strstr(data, "BEGIN") ) {
+    if ( NULL == strstr(data, "BEGIN") ) { 
         return 0; // base64 encoded
-    } else {
+    } else { // e.g. "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
         return -1;
     }
 }
@@ -40,7 +40,7 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
     const char *cert_key_data = NULL;
     int cert_key_data_bytes = 0;
 
-    if ( 0 == is_certdata_or_privatekey_base64_encoded(data)) {
+    if ( 0 == is_cert_or_key_base64_encoded(data)) {
         int decoded_bytes = 0;
         char *b64decode = base64decode(data, strlen(data), &decoded_bytes);
         if (!b64decode || 0 == decoded_bytes) {
@@ -49,7 +49,7 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
         }
         cert_key_data = b64decode;
         cert_key_data_bytes = decoded_bytes;
-    } else { // plain data, no need base64 decode
+    } else { // plain text, no need base64 decode
         cert_key_data = data;
         cert_key_data_bytes = strlen(cert_key_data);
     }
@@ -145,7 +145,7 @@ static int setApiKeys(list_t ** pApiKeys, const char *token)
 
     list_t *apiKeys = list_create();
     if (!apiKeys) {
-        fprintf(stderr, "%s: Cannot allocate the memory for api kyes for kubernetes service.\n", fname);
+        fprintf(stderr, "%s: Cannot allocate the memory for api key list for kubernetes service.\n", fname);
         return -1;
     }
 
@@ -211,6 +211,7 @@ static int kubeconfig_exec(kubeconfig_property_t * current_user)
 
     ExecCredential_t *exec_output = exec_credential_create();
     if (!exec_output) {
+        fprintf(stderr, "%s: Cannot allocate memory for exec credential.[%s]\n", fname, strerror(errno));
         return -1;
     }
 
@@ -229,6 +230,10 @@ static int kubeconfig_exec(kubeconfig_property_t * current_user)
     } else if (exec_output->status->clientCertificateData && exec_output->status->clientKeyData) {
         current_user->client_certificate_data = strdup(exec_output->status->clientCertificateData);
         current_user->client_key_data = strdup(exec_output->status->clientKeyData);
+    } else {
+        rc = -1;
+        fprintf(stderr, "%s: Cannot get the authentication infomation from the kubeconfig exec result.\n", fname);
+        goto end;
     }
 
   end:
@@ -246,7 +251,7 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t* exec, cons
         return 0;
     }
 
-    if ( '/' != exec->command[0]) { // not absolute path e.g. "./bin/" or "bin/"
+    if ( '/' != exec->command[0]) { // relative path e.g. "./bin/" or "bin/"
         const char *kube_config_dirname = dirname(kube_config_file);
         char *original_command = exec->command;
         int new_command_length = strlen(kube_config_dirname) + strlen("/") + strlen(original_command) + 1 /* 1 for the terminal of string */;

@@ -5,7 +5,6 @@
 
 #ifdef  __cplusplus
 extern "C" {
-
 #endif                          /* __cplusplus */
 
 /*
@@ -28,15 +27,16 @@ extern "C" {
  *
  * OUT:
  * kubeconfig: kubernetes cluster configuration
+ *
  */
     int kubeyaml_load_kubeconfig(kubeconfig_t * kubeconfig);
 
 /*
- * kubeyaml_parse_exec_crendentail
+ * kubeyaml_parse_exec_crendential
  *
  * Description:
  *
- * parse the string to get the data fields of kubeconfig exec result.
+ * Parse the exec result string to get the kubeconfig exec credential.
  *
  * Return:
  *
@@ -46,15 +46,16 @@ extern "C" {
  * Parameter:
  *
  * IN:
- * exec_credential_string: raw string of kubeconfig exec result
- * exec_credential_string_length: the length of exec_credential_string
+ * exec_credential_string: text string of kubeconfig exec result
  *
  * OUT:
- * exec_credential: data structure of kubeconfig exec result
+ * exec_credential: data structure of kubeconfig exec credential
+ *
  */
-    int kubeyaml_parse_exec_crendentail(ExecCredential_t * exec_credential, const char *exec_credential_string);
+    int kubeyaml_parse_exec_crendential(ExecCredential_t * exec_credential, const char *exec_credential_string);
 
 #ifdef  __cplusplus
 }
 #endif                          /* __cplusplus  */
+
 #endif                          /* _KUBE_CONFIG_YAML_H */

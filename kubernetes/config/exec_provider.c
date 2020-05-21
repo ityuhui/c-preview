@@ -21,7 +21,7 @@ int kube_exec_and_get_result(ExecCredential_t * exec_credential, const kubeconfi
         return -1;
     }
     if (!exec->command) {
-        fprintf(stderr, "%s: The command is not specified.\n", fname);
+        fprintf(stderr, "%s: The kubeconfig exec command is not specified.\n", fname);
         return -1;
     }
 
@@ -92,7 +92,7 @@ int kube_exec_and_get_result(ExecCredential_t * exec_credential, const kubeconfi
         return -1;
     }
     
-    rc = kubeyaml_parse_exec_crendentail(exec_credential, result_string);
+    rc = kubeyaml_parse_exec_crendential(exec_credential, result_string);
 
 end:
     if (result_string) {
