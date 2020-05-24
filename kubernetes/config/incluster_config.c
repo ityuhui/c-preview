@@ -12,7 +12,6 @@
 #define SERVICE_TOKEN_FILENAME "/var/run/secrets/kubernetes.io/serviceaccount/token"
 #define SERVICE_CERT_FILENAME "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
 
-
 static int checkServiceAccountFile(const char *fileName)
 {
     static char fname[] = "checkServiceAccountFile()";

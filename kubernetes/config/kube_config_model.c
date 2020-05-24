@@ -1,10 +1,9 @@
 #include "kube_config_model.h"
 #include <stdlib.h>
 
-void kubeconfig_free_string_list(char** string_list, int count)
+void kubeconfig_free_string_list(char **string_list, int count)
 {
-    if (string_list &&
-        count > 0) {
+    if (string_list && count > 0) {
         for (int i = 0; i < count; i++) {
             if (string_list[i]) {
                 free(string_list[i]);
@@ -15,11 +14,10 @@ void kubeconfig_free_string_list(char** string_list, int count)
     }
 }
 
-void kubeconfig_free_string_map_list(keyValuePair_t** map_list, int count)
+void kubeconfig_free_string_map_list(keyValuePair_t ** map_list, int count)
 {
-    if (map_list &&
-        count > 0) {
-        keyValuePair_t* pair = NULL;
+    if (map_list && count > 0) {
+        keyValuePair_t *pair = NULL;
         for (int i = 0; i < count; i++) {
             pair = map_list[i];
             if (pair) {
@@ -115,14 +113,12 @@ void kubeconfig_property_free(kubeconfig_property_t * property)
             free(property->apiVersion);
             property->apiVersion = NULL;
         }
-        if (property->envs &&
-            property->envs_count > 0) {
+        if (property->envs && property->envs_count > 0) {
             kubeconfig_free_string_map_list(property->envs, property->envs_count);
             property->envs = NULL;
             property->envs_count = 0;
         }
-        if (property->args &&
-            property->args_count > 0) {
+        if (property->args && property->args_count > 0) {
             kubeconfig_free_string_list(property->args, property->args_count);
             property->args = NULL;
             property->args_count = 0;
@@ -232,13 +228,13 @@ void kubeconfig_free(kubeconfig_t * kubeconfig)
     free(kubeconfig);
 }
 
-ExecCredential_status_t* exec_credential_status_create()
+ExecCredential_status_t *exec_credential_status_create()
 {
-    ExecCredential_status_t* exec_credential_status = calloc(1, sizeof(ExecCredential_status_t));
+    ExecCredential_status_t *exec_credential_status = calloc(1, sizeof(ExecCredential_status_t));
     return exec_credential_status;
 }
 
-void exec_credential_status_free(ExecCredential_status_t* exec_credential_status)
+void exec_credential_status_free(ExecCredential_status_t * exec_credential_status)
 {
     if (!exec_credential_status) {
         return;
@@ -260,13 +256,13 @@ void exec_credential_status_free(ExecCredential_status_t* exec_credential_status
     free(exec_credential_status);
 }
 
-ExecCredential_t* exec_credential_create()
+ExecCredential_t *exec_credential_create()
 {
-    ExecCredential_t* exec_credential = calloc(1, sizeof(ExecCredential_t));
+    ExecCredential_t *exec_credential = calloc(1, sizeof(ExecCredential_t));
     return exec_credential;
 }
 
-void exec_credential_free(ExecCredential_t* exec_credential)
+void exec_credential_free(ExecCredential_t * exec_credential)
 {
     if (!exec_credential) {
         return;

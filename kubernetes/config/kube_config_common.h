@@ -4,13 +4,12 @@
 #ifdef  __cplusplus
 extern "C" {
 #endif
-    
+
 #define AUTH_TOKEN_KEY "Authorization"
 #define BEARER_TOKEN_TEMPLATE "Bearer %s"
 #define BEARER_TOKEN_BUFFER_SIZE 1024
-    
-#ifdef  __cplusplus
-} 
-#endif
 
+#ifdef  __cplusplus
+}
+#endif
 #endif                          /* _KUBE_CONFIG_COMMON_H */

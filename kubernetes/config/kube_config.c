@@ -26,9 +26,9 @@ static int setBasePath(char **pBasePath, char *basePath)
 
 static int is_cert_or_key_base64_encoded(const char *data)
 {
-    if ( NULL == strstr(data, "BEGIN") ) { 
-        return 0; // base64 encoded
-    } else { // e.g. "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+    if (NULL == strstr(data, "BEGIN")) {
+        return 0;               // base64 encoded
+    } else {                    // e.g. "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
         return -1;
     }
 }
@@ -40,7 +40,7 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
     const char *cert_key_data = NULL;
     int cert_key_data_bytes = 0;
 
-    if ( 0 == is_cert_or_key_base64_encoded(data)) {
+    if (0 == is_cert_or_key_base64_encoded(data)) {
         int decoded_bytes = 0;
         char *b64decode = base64decode(data, strlen(data), &decoded_bytes);
         if (!b64decode || 0 == decoded_bytes) {
@@ -49,7 +49,7 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
         }
         cert_key_data = b64decode;
         cert_key_data_bytes = decoded_bytes;
-    } else { // plain text, no need base64 decode
+    } else {                    // plain text, no need base64 decode
         cert_key_data = data;
         cert_key_data_bytes = strlen(cert_key_data);
     }
@@ -186,9 +186,9 @@ static char *getWorkingConfigFile(const char *configFileNamePassedIn)
     return configFileName;
 }
 
-static const kubeconfig_property_t *kubeconfig_get_current_property(kubeconfig_property_t ** properties, int properties_count, const char *property_name)
+static kubeconfig_property_t *kubeconfig_get_current_property(kubeconfig_property_t ** properties, int properties_count, const char *property_name)
 {
-    const kubeconfig_property_t *current_property = NULL;
+    kubeconfig_property_t *current_property = NULL;
 
     if (NULL == properties || NULL == property_name) {
         return NULL;
@@ -242,25 +242,24 @@ static int kubeconfig_exec(kubeconfig_property_t * current_user)
     return rc;
 }
 
-static int kubeconfig_update_exec_command_path(kubeconfig_property_t* exec, const char *kube_config_file)
+static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, const char *kube_config_file)
 {
     static char fname[] = "kubeconfig_update_exec_command_path()";
 
-    if (!exec->command ||
-        0 == strlen(exec->command) ) {
+    if (!exec->command || 0 == strlen(exec->command)) {
         return 0;
     }
 
-    if ( '/' != exec->command[0]) { // relative path e.g. "./bin/" or "bin/"
-        const char *kube_config_dirname = dirname(kube_config_file);
+    if ('/' != exec->command[0]) {  // relative path e.g. "./bin/" or "bin/"
+        const char *kube_config_dirname = dirname((char *) kube_config_file);
         char *original_command = exec->command;
-        int new_command_length = strlen(kube_config_dirname) + strlen("/") + strlen(original_command) + 1 /* 1 for the terminal of string */;
+        int new_command_length = strlen(kube_config_dirname) + strlen("/") + strlen(original_command) + 1 /* 1 for the terminal of string */ ;
         exec->command = calloc(1, new_command_length);
         if (!exec->command) {
             fprintf(stderr, "%s: Cannot allocate memory for exec command.[%s]\n", fname, strerror(errno));
             return -1;
         }
-        snprintf(exec->command, new_command_length,"%s/%s", kube_config_dirname, original_command);
+        snprintf(exec->command, new_command_length, "%s/%s", kube_config_dirname, original_command);
         free(original_command);
     }
 
@@ -311,8 +310,8 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
     }
 
     if (current_user && current_user->exec) {
-        rc = kubeconfig_update_exec_command_path(current_user->exec,kubeconfig->fileName);
-        if ( 0 != rc) {
+        rc = kubeconfig_update_exec_command_path(current_user->exec, kubeconfig->fileName);
+        if (0 != rc) {
             fprintf(stderr, "%s: Cannot update exec command path.\n", fname);
             goto end;
         }
