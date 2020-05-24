@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <libgen.h>
+#include <stdbool.h>
 #include "kube_config.h"
 #include "kube_config_yaml.h"
 #include "kube_config_common.h"
@@ -24,12 +25,12 @@ static int setBasePath(char **pBasePath, char *basePath)
     return -1;
 }
 
-static int is_cert_or_key_base64_encoded(const char *data)
+static bool is_cert_or_key_base64_encoded(const char *data)
 {
     if (NULL == strstr(data, "BEGIN")) {
-        return 0;               // base64 encoded
-    } else {                    // e.g. "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
-        return -1;
+        return true;
+    } else {
+        return false;           // e.g. "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
     }
 }
 
@@ -40,7 +41,8 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
     const char *cert_key_data = NULL;
     int cert_key_data_bytes = 0;
 
-    if (0 == is_cert_or_key_base64_encoded(data)) {
+    bool is_data_base64_encoded = is_cert_or_key_base64_encoded(data);
+    if (true == is_data_base64_encoded) {
         int decoded_bytes = 0;
         char *b64decode = base64decode(data, strlen(data), &decoded_bytes);
         if (!b64decode || 0 == decoded_bytes) {
@@ -63,6 +65,10 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
 
     int rc = write(fd, cert_key_data, cert_key_data_bytes);
     close(fd);
+    if (true == is_data_base64_encoded && cert_key_data) {
+        free((char *)cert_key_data); // cast "const char *" to "char *" 
+        cert_key_data = NULL;
+    }
     if (-1 == rc) {
         fprintf(stderr, "%s: Writing temp file failed with error [%s]\n", fname, strerror(errno));
         return NULL;
@@ -245,25 +251,43 @@ static int kubeconfig_exec(kubeconfig_property_t * current_user)
 static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, const char *kube_config_file)
 {
     static char fname[] = "kubeconfig_update_exec_command_path()";
+    int rc = 0;
 
     if (!exec->command || 0 == strlen(exec->command)) {
         return 0;
     }
 
+    char *kube_config_file_copy = NULL;
+    char *original_command = NULL;
     if ('/' != exec->command[0]) {  // relative path e.g. "./bin/" or "bin/"
-        const char *kube_config_dirname = dirname((char *) kube_config_file);
-        char *original_command = exec->command;
+        kube_config_file_copy = strdup(kube_config_file);
+        if (NULL == kube_config_file_copy) {
+            fprintf(stderr, "%s: Cannot allocate memory for temp kube config file name.[%s]\n", fname, strerror(errno));
+            return -1;
+        }
+        const char *kube_config_dirname = dirname(kube_config_file_copy);
+        original_command = exec->command;
         int new_command_length = strlen(kube_config_dirname) + strlen("/") + strlen(original_command) + 1 /* 1 for the terminal of string */ ;
         exec->command = calloc(1, new_command_length);
         if (!exec->command) {
-            fprintf(stderr, "%s: Cannot allocate memory for exec command.[%s]\n", fname, strerror(errno));
-            return -1;
+            fprintf(stderr, "%s: Cannot allocate memory for exec new command.[%s]\n", fname, strerror(errno));
+            exec->command = original_command; //restore original exec->command, its memory will be freed outside
+            rc = -1;
+            goto end;
         }
         snprintf(exec->command, new_command_length, "%s/%s", kube_config_dirname, original_command);
-        free(original_command);
+        if (original_command) {
+            free(original_command);
+        }
     }
 
-    return 0;
+end:
+    if (kube_config_file_copy) {
+        free(kube_config_file_copy);
+        kube_config_file_copy = NULL;
+    }
+
+    return rc;
 }
 
 int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApiKeys, const char *configFileName)
