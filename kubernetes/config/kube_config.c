@@ -66,7 +66,7 @@ static char *kubeconfig_mk_cert_key_tempfile(const char *data)
     int rc = write(fd, cert_key_data, cert_key_data_bytes);
     close(fd);
     if (true == is_data_base64_encoded && cert_key_data) {
-        free((char *)cert_key_data); // cast "const char *" to "char *" 
+        free((char *) cert_key_data);   // cast "const char *" to "char *" 
         cert_key_data = NULL;
     }
     if (-1 == rc) {
@@ -271,7 +271,7 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, con
         exec->command = calloc(1, new_command_length);
         if (!exec->command) {
             fprintf(stderr, "%s: Cannot allocate memory for exec new command.[%s]\n", fname, strerror(errno));
-            exec->command = original_command; //restore original exec->command, its memory will be freed outside
+            exec->command = original_command;   //restore original exec->command, its memory will be freed outside
             rc = -1;
             goto end;
         }
@@ -281,7 +281,7 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, con
         }
     }
 
-end:
+  end:
     if (kube_config_file_copy) {
         free(kube_config_file_copy);
         kube_config_file_copy = NULL;
