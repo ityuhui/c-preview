@@ -19621,13 +19621,14 @@ CoreV1API_listNamespacedPod(apiClient_t *apiClient, char * namespace , char * pr
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char* valueQuery_watch = NULL;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1, 16);
+        snprintf(valueQuery_watch, 16, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
