@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "AuthorizationV1API.h"
 
-
+#define MAX_NUMBER_LENGTH 16
 #define MAX_BUFFER_LENGTH 4096
 #define intToStr(dst, src) \
     do {\
@@ -123,8 +123,8 @@ AuthorizationV1API_createNamespacedLocalSubjectAccessReview(apiClient_t *apiClie
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -277,8 +277,8 @@ AuthorizationV1API_createSelfSubjectAccessReview(apiClient_t *apiClient, v1_self
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -430,8 +430,8 @@ AuthorizationV1API_createSelfSubjectRulesReview(apiClient_t *apiClient, v1_self_
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -583,8 +583,8 @@ AuthorizationV1API_createSubjectAccessReview(apiClient_t *apiClient, v1_subject_
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -685,8 +685,8 @@ AuthorizationV1API_getAPIResources(apiClient_t *apiClient)
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     

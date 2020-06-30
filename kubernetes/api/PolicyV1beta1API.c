@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "PolicyV1beta1API.h"
 
-
+#define MAX_NUMBER_LENGTH 16
 #define MAX_BUFFER_LENGTH 4096
 #define intToStr(dst, src) \
     do {\
@@ -123,8 +123,8 @@ PolicyV1beta1API_createNamespacedPodDisruptionBudget(apiClient_t *apiClient, cha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -277,8 +277,8 @@ PolicyV1beta1API_createPodSecurityPolicy(apiClient_t *apiClient, policy_v1beta1_
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -373,13 +373,14 @@ PolicyV1beta1API_deleteCollectionNamespacedPodDisruptionBudget(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -421,13 +422,14 @@ PolicyV1beta1API_deleteCollectionNamespacedPodDisruptionBudget(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -445,25 +447,27 @@ PolicyV1beta1API_deleteCollectionNamespacedPodDisruptionBudget(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -493,25 +497,27 @@ PolicyV1beta1API_deleteCollectionNamespacedPodDisruptionBudget(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -554,8 +560,8 @@ PolicyV1beta1API_deleteCollectionNamespacedPodDisruptionBudget(apiClient_t *apiC
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -737,13 +743,14 @@ PolicyV1beta1API_deleteCollectionPodSecurityPolicy(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -785,13 +792,14 @@ PolicyV1beta1API_deleteCollectionPodSecurityPolicy(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -809,25 +817,27 @@ PolicyV1beta1API_deleteCollectionPodSecurityPolicy(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -857,25 +867,27 @@ PolicyV1beta1API_deleteCollectionPodSecurityPolicy(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -918,8 +930,8 @@ PolicyV1beta1API_deleteCollectionPodSecurityPolicy(apiClient_t *apiClient, char 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1132,25 +1144,27 @@ PolicyV1beta1API_deleteNamespacedPodDisruptionBudget(apiClient_t *apiClient, cha
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1208,8 +1222,8 @@ PolicyV1beta1API_deleteNamespacedPodDisruptionBudget(apiClient_t *apiClient, cha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1334,25 +1348,27 @@ PolicyV1beta1API_deletePodSecurityPolicy(apiClient_t *apiClient, char * name , c
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1410,8 +1426,8 @@ PolicyV1beta1API_deletePodSecurityPolicy(apiClient_t *apiClient, char * name , c
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1529,8 +1545,8 @@ PolicyV1beta1API_getAPIResources(apiClient_t *apiClient)
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1587,13 +1603,14 @@ PolicyV1beta1API_listNamespacedPodDisruptionBudget(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1635,13 +1652,14 @@ PolicyV1beta1API_listNamespacedPodDisruptionBudget(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -1659,25 +1677,27 @@ PolicyV1beta1API_listNamespacedPodDisruptionBudget(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -1713,8 +1733,8 @@ PolicyV1beta1API_listNamespacedPodDisruptionBudget(apiClient_t *apiClient, char 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1842,13 +1862,14 @@ PolicyV1beta1API_listPodDisruptionBudgetForAllNamespaces(apiClient_t *apiClient,
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1890,13 +1911,14 @@ PolicyV1beta1API_listPodDisruptionBudgetForAllNamespaces(apiClient_t *apiClient,
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -1926,25 +1948,27 @@ PolicyV1beta1API_listPodDisruptionBudgetForAllNamespaces(apiClient_t *apiClient,
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -1980,8 +2004,8 @@ PolicyV1beta1API_listPodDisruptionBudgetForAllNamespaces(apiClient_t *apiClient,
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2120,13 +2144,14 @@ PolicyV1beta1API_listPodSecurityPolicy(apiClient_t *apiClient, char * pretty , i
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -2168,13 +2193,14 @@ PolicyV1beta1API_listPodSecurityPolicy(apiClient_t *apiClient, char * pretty , i
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -2192,25 +2218,27 @@ PolicyV1beta1API_listPodSecurityPolicy(apiClient_t *apiClient, char * pretty , i
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -2246,8 +2274,8 @@ PolicyV1beta1API_listPodSecurityPolicy(apiClient_t *apiClient, char * pretty , i
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2430,13 +2458,14 @@ PolicyV1beta1API_patchNamespacedPodDisruptionBudget(apiClient_t *apiClient, char
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2483,8 +2512,8 @@ PolicyV1beta1API_patchNamespacedPodDisruptionBudget(apiClient_t *apiClient, char
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2623,13 +2652,14 @@ PolicyV1beta1API_patchNamespacedPodDisruptionBudgetStatus(apiClient_t *apiClient
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2676,8 +2706,8 @@ PolicyV1beta1API_patchNamespacedPodDisruptionBudgetStatus(apiClient_t *apiClient
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2806,13 +2836,14 @@ PolicyV1beta1API_patchPodSecurityPolicy(apiClient_t *apiClient, char * name , ob
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2859,8 +2890,8 @@ PolicyV1beta1API_patchPodSecurityPolicy(apiClient_t *apiClient, char * name , ob
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2974,25 +3005,27 @@ PolicyV1beta1API_readNamespacedPodDisruptionBudget(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_exact = NULL;
-    int valueQuery_exact ;
+    char * valueQuery_exact ;
     keyValuePair_t *keyPairQuery_exact = 0;
     if (exact)
     {
         keyQuery_exact = strdup("exact");
-        valueQuery_exact = (exact);
-        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, &valueQuery_exact);
+        valueQuery_exact = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_exact, MAX_NUMBER_LENGTH, "%d", exact);
+        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, valueQuery_exact);
         list_addElement(localVarQueryParameters,keyPairQuery_exact);
     }
 
     // query parameters
     char *keyQuery_export = NULL;
-    int valueQuery_export ;
+    char * valueQuery_export ;
     keyValuePair_t *keyPairQuery_export = 0;
     if (export)
     {
         keyQuery_export = strdup("export");
-        valueQuery_export = (export);
-        keyPairQuery_export = keyValuePair_create(keyQuery_export, &valueQuery_export);
+        valueQuery_export = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_export, MAX_NUMBER_LENGTH, "%d", export);
+        keyPairQuery_export = keyValuePair_create(keyQuery_export, valueQuery_export);
         list_addElement(localVarQueryParameters,keyPairQuery_export);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3026,8 +3059,8 @@ PolicyV1beta1API_readNamespacedPodDisruptionBudget(apiClient_t *apiClient, char 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3152,8 +3185,8 @@ PolicyV1beta1API_readNamespacedPodDisruptionBudgetStatus(apiClient_t *apiClient,
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3224,25 +3257,27 @@ PolicyV1beta1API_readPodSecurityPolicy(apiClient_t *apiClient, char * name , cha
 
     // query parameters
     char *keyQuery_exact = NULL;
-    int valueQuery_exact ;
+    char * valueQuery_exact ;
     keyValuePair_t *keyPairQuery_exact = 0;
     if (exact)
     {
         keyQuery_exact = strdup("exact");
-        valueQuery_exact = (exact);
-        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, &valueQuery_exact);
+        valueQuery_exact = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_exact, MAX_NUMBER_LENGTH, "%d", exact);
+        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, valueQuery_exact);
         list_addElement(localVarQueryParameters,keyPairQuery_exact);
     }
 
     // query parameters
     char *keyQuery_export = NULL;
-    int valueQuery_export ;
+    char * valueQuery_export ;
     keyValuePair_t *keyPairQuery_export = 0;
     if (export)
     {
         keyQuery_export = strdup("export");
-        valueQuery_export = (export);
-        keyPairQuery_export = keyValuePair_create(keyQuery_export, &valueQuery_export);
+        valueQuery_export = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_export, MAX_NUMBER_LENGTH, "%d", export);
+        keyPairQuery_export = keyValuePair_create(keyQuery_export, valueQuery_export);
         list_addElement(localVarQueryParameters,keyPairQuery_export);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3276,8 +3311,8 @@ PolicyV1beta1API_readPodSecurityPolicy(apiClient_t *apiClient, char * name , cha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3437,8 +3472,8 @@ PolicyV1beta1API_replaceNamespacedPodDisruptionBudget(apiClient_t *apiClient, ch
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3609,8 +3644,8 @@ PolicyV1beta1API_replaceNamespacedPodDisruptionBudgetStatus(apiClient_t *apiClie
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3771,8 +3806,8 @@ PolicyV1beta1API_replacePodSecurityPolicy(apiClient_t *apiClient, char * name , 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

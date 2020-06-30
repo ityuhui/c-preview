@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "CustomObjectsAPI.h"
 
-
+#define MAX_NUMBER_LENGTH 16
 #define MAX_BUFFER_LENGTH 4096
 #define intToStr(dst, src) \
     do {\
@@ -111,8 +111,8 @@ CustomObjectsAPI_createClusterCustomObject(apiClient_t *apiClient, char * group 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -251,8 +251,8 @@ CustomObjectsAPI_createNamespacedCustomObject(apiClient_t *apiClient, char * gro
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -345,25 +345,27 @@ CustomObjectsAPI_deleteClusterCustomObject(apiClient_t *apiClient, char * group 
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -416,8 +418,8 @@ CustomObjectsAPI_deleteClusterCustomObject(apiClient_t *apiClient, char * group 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -536,25 +538,27 @@ CustomObjectsAPI_deleteNamespacedCustomObject(apiClient_t *apiClient, char * gro
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -607,8 +611,8 @@ CustomObjectsAPI_deleteNamespacedCustomObject(apiClient_t *apiClient, char * gro
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -744,8 +748,8 @@ CustomObjectsAPI_getClusterCustomObject(apiClient_t *apiClient, char * group , c
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -852,8 +856,8 @@ CustomObjectsAPI_getClusterCustomObjectScale(apiClient_t *apiClient, char * grou
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -960,8 +964,8 @@ CustomObjectsAPI_getClusterCustomObjectStatus(apiClient_t *apiClient, char * gro
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1076,8 +1080,8 @@ CustomObjectsAPI_getNamespacedCustomObject(apiClient_t *apiClient, char * group 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1195,8 +1199,8 @@ CustomObjectsAPI_getNamespacedCustomObjectScale(apiClient_t *apiClient, char * g
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1314,8 +1318,8 @@ CustomObjectsAPI_getNamespacedCustomObjectStatus(apiClient_t *apiClient, char * 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1433,13 +1437,14 @@ CustomObjectsAPI_listClusterCustomObject(apiClient_t *apiClient, char * group , 
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -1457,25 +1462,27 @@ CustomObjectsAPI_listClusterCustomObject(apiClient_t *apiClient, char * group , 
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -1508,8 +1515,8 @@ CustomObjectsAPI_listClusterCustomObject(apiClient_t *apiClient, char * group , 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1719,13 +1726,14 @@ CustomObjectsAPI_listNamespacedCustomObject(apiClient_t *apiClient, char * group
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -1743,25 +1751,27 @@ CustomObjectsAPI_listNamespacedCustomObject(apiClient_t *apiClient, char * group
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -1794,8 +1804,8 @@ CustomObjectsAPI_listNamespacedCustomObject(apiClient_t *apiClient, char * group
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1995,8 +2005,8 @@ CustomObjectsAPI_patchClusterCustomObject(apiClient_t *apiClient, char * group ,
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2116,8 +2126,8 @@ CustomObjectsAPI_patchClusterCustomObjectScale(apiClient_t *apiClient, char * gr
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2237,8 +2247,8 @@ CustomObjectsAPI_patchClusterCustomObjectStatus(apiClient_t *apiClient, char * g
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2366,8 +2376,8 @@ CustomObjectsAPI_patchNamespacedCustomObject(apiClient_t *apiClient, char * grou
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2498,8 +2508,8 @@ CustomObjectsAPI_patchNamespacedCustomObjectScale(apiClient_t *apiClient, char *
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2630,8 +2640,8 @@ CustomObjectsAPI_patchNamespacedCustomObjectStatus(apiClient_t *apiClient, char 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2748,8 +2758,8 @@ CustomObjectsAPI_replaceClusterCustomObject(apiClient_t *apiClient, char * group
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2870,8 +2880,8 @@ CustomObjectsAPI_replaceClusterCustomObjectScale(apiClient_t *apiClient, char * 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -2992,8 +3002,8 @@ CustomObjectsAPI_replaceClusterCustomObjectStatus(apiClient_t *apiClient, char *
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3119,8 +3129,8 @@ CustomObjectsAPI_replaceNamespacedCustomObject(apiClient_t *apiClient, char * gr
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3252,8 +3262,8 @@ CustomObjectsAPI_replaceNamespacedCustomObjectScale(apiClient_t *apiClient, char
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3385,8 +3395,8 @@ CustomObjectsAPI_replaceNamespacedCustomObjectStatus(apiClient_t *apiClient, cha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     

@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "FlowcontrolApiserverV1alpha1API.h"
 
-
+#define MAX_NUMBER_LENGTH 16
 #define MAX_BUFFER_LENGTH 4096
 #define intToStr(dst, src) \
     do {\
@@ -113,8 +113,8 @@ FlowcontrolApiserverV1alpha1API_createFlowSchema(apiClient_t *apiClient, v1alpha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -266,8 +266,8 @@ FlowcontrolApiserverV1alpha1API_createPriorityLevelConfiguration(apiClient_t *ap
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -352,13 +352,14 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionFlowSchema(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -400,13 +401,14 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionFlowSchema(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -424,25 +426,27 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionFlowSchema(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -472,25 +476,27 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionFlowSchema(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -533,8 +539,8 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionFlowSchema(apiClient_t *apiClien
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -715,13 +721,14 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionPriorityLevelConfiguration(apiCl
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -763,13 +770,14 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionPriorityLevelConfiguration(apiCl
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -787,25 +795,27 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionPriorityLevelConfiguration(apiCl
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -835,25 +845,27 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionPriorityLevelConfiguration(apiCl
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -896,8 +908,8 @@ FlowcontrolApiserverV1alpha1API_deleteCollectionPriorityLevelConfiguration(apiCl
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1100,25 +1112,27 @@ FlowcontrolApiserverV1alpha1API_deleteFlowSchema(apiClient_t *apiClient, char * 
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1176,8 +1190,8 @@ FlowcontrolApiserverV1alpha1API_deleteFlowSchema(apiClient_t *apiClient, char * 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1301,25 +1315,27 @@ FlowcontrolApiserverV1alpha1API_deletePriorityLevelConfiguration(apiClient_t *ap
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1377,8 +1393,8 @@ FlowcontrolApiserverV1alpha1API_deletePriorityLevelConfiguration(apiClient_t *ap
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1496,8 +1512,8 @@ FlowcontrolApiserverV1alpha1API_getAPIResources(apiClient_t *apiClient)
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -1544,13 +1560,14 @@ FlowcontrolApiserverV1alpha1API_listFlowSchema(apiClient_t *apiClient, char * pr
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1592,13 +1609,14 @@ FlowcontrolApiserverV1alpha1API_listFlowSchema(apiClient_t *apiClient, char * pr
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -1616,25 +1634,27 @@ FlowcontrolApiserverV1alpha1API_listFlowSchema(apiClient_t *apiClient, char * pr
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -1670,8 +1690,8 @@ FlowcontrolApiserverV1alpha1API_listFlowSchema(apiClient_t *apiClient, char * pr
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1810,13 +1830,14 @@ FlowcontrolApiserverV1alpha1API_listPriorityLevelConfiguration(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1858,13 +1879,14 @@ FlowcontrolApiserverV1alpha1API_listPriorityLevelConfiguration(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -1882,25 +1904,27 @@ FlowcontrolApiserverV1alpha1API_listPriorityLevelConfiguration(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -1936,8 +1960,8 @@ FlowcontrolApiserverV1alpha1API_listPriorityLevelConfiguration(apiClient_t *apiC
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2110,13 +2134,14 @@ FlowcontrolApiserverV1alpha1API_patchFlowSchema(apiClient_t *apiClient, char * n
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2163,8 +2188,8 @@ FlowcontrolApiserverV1alpha1API_patchFlowSchema(apiClient_t *apiClient, char * n
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2292,13 +2317,14 @@ FlowcontrolApiserverV1alpha1API_patchFlowSchemaStatus(apiClient_t *apiClient, ch
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2345,8 +2371,8 @@ FlowcontrolApiserverV1alpha1API_patchFlowSchemaStatus(apiClient_t *apiClient, ch
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2474,13 +2500,14 @@ FlowcontrolApiserverV1alpha1API_patchPriorityLevelConfiguration(apiClient_t *api
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2527,8 +2554,8 @@ FlowcontrolApiserverV1alpha1API_patchPriorityLevelConfiguration(apiClient_t *api
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2656,13 +2683,14 @@ FlowcontrolApiserverV1alpha1API_patchPriorityLevelConfigurationStatus(apiClient_
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -2709,8 +2737,8 @@ FlowcontrolApiserverV1alpha1API_patchPriorityLevelConfigurationStatus(apiClient_
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2814,25 +2842,27 @@ FlowcontrolApiserverV1alpha1API_readFlowSchema(apiClient_t *apiClient, char * na
 
     // query parameters
     char *keyQuery_exact = NULL;
-    int valueQuery_exact ;
+    char * valueQuery_exact ;
     keyValuePair_t *keyPairQuery_exact = 0;
     if (exact)
     {
         keyQuery_exact = strdup("exact");
-        valueQuery_exact = (exact);
-        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, &valueQuery_exact);
+        valueQuery_exact = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_exact, MAX_NUMBER_LENGTH, "%d", exact);
+        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, valueQuery_exact);
         list_addElement(localVarQueryParameters,keyPairQuery_exact);
     }
 
     // query parameters
     char *keyQuery_export = NULL;
-    int valueQuery_export ;
+    char * valueQuery_export ;
     keyValuePair_t *keyPairQuery_export = 0;
     if (export)
     {
         keyQuery_export = strdup("export");
-        valueQuery_export = (export);
-        keyPairQuery_export = keyValuePair_create(keyQuery_export, &valueQuery_export);
+        valueQuery_export = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_export, MAX_NUMBER_LENGTH, "%d", export);
+        keyPairQuery_export = keyValuePair_create(keyQuery_export, valueQuery_export);
         list_addElement(localVarQueryParameters,keyPairQuery_export);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -2866,8 +2896,8 @@ FlowcontrolApiserverV1alpha1API_readFlowSchema(apiClient_t *apiClient, char * na
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2981,8 +3011,8 @@ FlowcontrolApiserverV1alpha1API_readFlowSchemaStatus(apiClient_t *apiClient, cha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3052,25 +3082,27 @@ FlowcontrolApiserverV1alpha1API_readPriorityLevelConfiguration(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_exact = NULL;
-    int valueQuery_exact ;
+    char * valueQuery_exact ;
     keyValuePair_t *keyPairQuery_exact = 0;
     if (exact)
     {
         keyQuery_exact = strdup("exact");
-        valueQuery_exact = (exact);
-        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, &valueQuery_exact);
+        valueQuery_exact = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_exact, MAX_NUMBER_LENGTH, "%d", exact);
+        keyPairQuery_exact = keyValuePair_create(keyQuery_exact, valueQuery_exact);
         list_addElement(localVarQueryParameters,keyPairQuery_exact);
     }
 
     // query parameters
     char *keyQuery_export = NULL;
-    int valueQuery_export ;
+    char * valueQuery_export ;
     keyValuePair_t *keyPairQuery_export = 0;
     if (export)
     {
         keyQuery_export = strdup("export");
-        valueQuery_export = (export);
-        keyPairQuery_export = keyValuePair_create(keyQuery_export, &valueQuery_export);
+        valueQuery_export = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_export, MAX_NUMBER_LENGTH, "%d", export);
+        keyPairQuery_export = keyValuePair_create(keyQuery_export, valueQuery_export);
         list_addElement(localVarQueryParameters,keyPairQuery_export);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3104,8 +3136,8 @@ FlowcontrolApiserverV1alpha1API_readPriorityLevelConfiguration(apiClient_t *apiC
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3219,8 +3251,8 @@ FlowcontrolApiserverV1alpha1API_readPriorityLevelConfigurationStatus(apiClient_t
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3354,8 +3386,8 @@ FlowcontrolApiserverV1alpha1API_replaceFlowSchema(apiClient_t *apiClient, char *
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3515,8 +3547,8 @@ FlowcontrolApiserverV1alpha1API_replaceFlowSchemaStatus(apiClient_t *apiClient, 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3676,8 +3708,8 @@ FlowcontrolApiserverV1alpha1API_replacePriorityLevelConfiguration(apiClient_t *a
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3837,8 +3869,8 @@ FlowcontrolApiserverV1alpha1API_replacePriorityLevelConfigurationStatus(apiClien
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     

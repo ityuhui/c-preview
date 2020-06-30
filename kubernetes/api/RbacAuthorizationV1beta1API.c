@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "RbacAuthorizationV1beta1API.h"
 
-
+#define MAX_NUMBER_LENGTH 16
 #define MAX_BUFFER_LENGTH 4096
 #define intToStr(dst, src) \
     do {\
@@ -113,8 +113,8 @@ RbacAuthorizationV1beta1API_createClusterRole(apiClient_t *apiClient, v1beta1_cl
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -266,8 +266,8 @@ RbacAuthorizationV1beta1API_createClusterRoleBinding(apiClient_t *apiClient, v1b
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -429,8 +429,8 @@ RbacAuthorizationV1beta1API_createNamespacedRole(apiClient_t *apiClient, char * 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -593,8 +593,8 @@ RbacAuthorizationV1beta1API_createNamespacedRoleBinding(apiClient_t *apiClient, 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -702,25 +702,27 @@ RbacAuthorizationV1beta1API_deleteClusterRole(apiClient_t *apiClient, char * nam
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -778,8 +780,8 @@ RbacAuthorizationV1beta1API_deleteClusterRole(apiClient_t *apiClient, char * nam
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -903,25 +905,27 @@ RbacAuthorizationV1beta1API_deleteClusterRoleBinding(apiClient_t *apiClient, cha
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -979,8 +983,8 @@ RbacAuthorizationV1beta1API_deleteClusterRoleBinding(apiClient_t *apiClient, cha
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1082,13 +1086,14 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, 
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1130,13 +1135,14 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, 
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -1154,25 +1160,27 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, 
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1202,25 +1210,27 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, 
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -1263,8 +1273,8 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRole(apiClient_t *apiClient, 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1445,13 +1455,14 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1493,13 +1504,14 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -1517,25 +1529,27 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1565,25 +1579,27 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiC
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -1626,8 +1642,8 @@ RbacAuthorizationV1beta1API_deleteCollectionClusterRoleBinding(apiClient_t *apiC
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -1818,13 +1834,14 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -1866,13 +1883,14 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -1890,25 +1908,27 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -1938,25 +1958,27 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClien
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -1999,8 +2021,8 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRole(apiClient_t *apiClien
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2192,13 +2214,14 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *a
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -2240,13 +2263,14 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *a
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
@@ -2264,25 +2288,27 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *a
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -2312,25 +2338,27 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *a
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
 
@@ -2373,8 +2401,8 @@ RbacAuthorizationV1beta1API_deleteCollectionNamespacedRoleBinding(apiClient_t *a
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2588,25 +2616,27 @@ RbacAuthorizationV1beta1API_deleteNamespacedRole(apiClient_t *apiClient, char * 
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -2664,8 +2694,8 @@ RbacAuthorizationV1beta1API_deleteNamespacedRole(apiClient_t *apiClient, char * 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2800,25 +2830,27 @@ RbacAuthorizationV1beta1API_deleteNamespacedRoleBinding(apiClient_t *apiClient, 
 
     // query parameters
     char *keyQuery_gracePeriodSeconds = NULL;
-    int valueQuery_gracePeriodSeconds ;
+    char * valueQuery_gracePeriodSeconds = NULL;
     keyValuePair_t *keyPairQuery_gracePeriodSeconds = 0;
     if (gracePeriodSeconds)
     {
         keyQuery_gracePeriodSeconds = strdup("gracePeriodSeconds");
-        valueQuery_gracePeriodSeconds = (gracePeriodSeconds);
-        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, &valueQuery_gracePeriodSeconds);
+        valueQuery_gracePeriodSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_gracePeriodSeconds, MAX_NUMBER_LENGTH, "%d", gracePeriodSeconds);
+        keyPairQuery_gracePeriodSeconds = keyValuePair_create(keyQuery_gracePeriodSeconds, valueQuery_gracePeriodSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_gracePeriodSeconds);
     }
 
     // query parameters
     char *keyQuery_orphanDependents = NULL;
-    int valueQuery_orphanDependents ;
+    char * valueQuery_orphanDependents ;
     keyValuePair_t *keyPairQuery_orphanDependents = 0;
     if (orphanDependents)
     {
         keyQuery_orphanDependents = strdup("orphanDependents");
-        valueQuery_orphanDependents = (orphanDependents);
-        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, &valueQuery_orphanDependents);
+        valueQuery_orphanDependents = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_orphanDependents, MAX_NUMBER_LENGTH, "%d", orphanDependents);
+        keyPairQuery_orphanDependents = keyValuePair_create(keyQuery_orphanDependents, valueQuery_orphanDependents);
         list_addElement(localVarQueryParameters,keyPairQuery_orphanDependents);
     }
 
@@ -2876,8 +2908,8 @@ RbacAuthorizationV1beta1API_deleteNamespacedRoleBinding(apiClient_t *apiClient, 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -2996,8 +3028,8 @@ RbacAuthorizationV1beta1API_getAPIResources(apiClient_t *apiClient)
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     
     
     
@@ -3044,13 +3076,14 @@ RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient, char * prett
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -3092,13 +3125,14 @@ RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient, char * prett
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -3116,25 +3150,27 @@ RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient, char * prett
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3170,8 +3206,8 @@ RbacAuthorizationV1beta1API_listClusterRole(apiClient_t *apiClient, char * prett
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3310,13 +3346,14 @@ RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -3358,13 +3395,14 @@ RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -3382,25 +3420,27 @@ RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient, char 
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3436,8 +3476,8 @@ RbacAuthorizationV1beta1API_listClusterRoleBinding(apiClient_t *apiClient, char 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3586,13 +3626,14 @@ RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient, char * na
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -3634,13 +3675,14 @@ RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient, char * na
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -3658,25 +3700,27 @@ RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient, char * na
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3712,8 +3756,8 @@ RbacAuthorizationV1beta1API_listNamespacedRole(apiClient_t *apiClient, char * na
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -3863,13 +3907,14 @@ RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient, ch
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -3911,13 +3956,14 @@ RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient, ch
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -3935,25 +3981,27 @@ RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient, ch
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -3989,8 +4037,8 @@ RbacAuthorizationV1beta1API_listNamespacedRoleBinding(apiClient_t *apiClient, ch
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4118,13 +4166,14 @@ RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClie
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -4166,13 +4215,14 @@ RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClie
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -4202,25 +4252,27 @@ RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClie
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -4256,8 +4308,8 @@ RbacAuthorizationV1beta1API_listRoleBindingForAllNamespaces(apiClient_t *apiClie
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4384,13 +4436,14 @@ RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient, int
 
     // query parameters
     char *keyQuery_allowWatchBookmarks = NULL;
-    int valueQuery_allowWatchBookmarks ;
+    char * valueQuery_allowWatchBookmarks ;
     keyValuePair_t *keyPairQuery_allowWatchBookmarks = 0;
     if (allowWatchBookmarks)
     {
         keyQuery_allowWatchBookmarks = strdup("allowWatchBookmarks");
-        valueQuery_allowWatchBookmarks = (allowWatchBookmarks);
-        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, &valueQuery_allowWatchBookmarks);
+        valueQuery_allowWatchBookmarks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_allowWatchBookmarks, MAX_NUMBER_LENGTH, "%d", allowWatchBookmarks);
+        keyPairQuery_allowWatchBookmarks = keyValuePair_create(keyQuery_allowWatchBookmarks, valueQuery_allowWatchBookmarks);
         list_addElement(localVarQueryParameters,keyPairQuery_allowWatchBookmarks);
     }
 
@@ -4432,13 +4485,14 @@ RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient, int
 
     // query parameters
     char *keyQuery_limit = NULL;
-    int valueQuery_limit ;
+    char * valueQuery_limit = NULL;
     keyValuePair_t *keyPairQuery_limit = 0;
     if (limit)
     {
         keyQuery_limit = strdup("limit");
-        valueQuery_limit = (limit);
-        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, &valueQuery_limit);
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
         list_addElement(localVarQueryParameters,keyPairQuery_limit);
     }
 
@@ -4468,25 +4522,27 @@ RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient, int
 
     // query parameters
     char *keyQuery_timeoutSeconds = NULL;
-    int valueQuery_timeoutSeconds ;
+    char * valueQuery_timeoutSeconds = NULL;
     keyValuePair_t *keyPairQuery_timeoutSeconds = 0;
     if (timeoutSeconds)
     {
         keyQuery_timeoutSeconds = strdup("timeoutSeconds");
-        valueQuery_timeoutSeconds = (timeoutSeconds);
-        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, &valueQuery_timeoutSeconds);
+        valueQuery_timeoutSeconds = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_timeoutSeconds, MAX_NUMBER_LENGTH, "%d", timeoutSeconds);
+        keyPairQuery_timeoutSeconds = keyValuePair_create(keyQuery_timeoutSeconds, valueQuery_timeoutSeconds);
         list_addElement(localVarQueryParameters,keyPairQuery_timeoutSeconds);
     }
 
     // query parameters
     char *keyQuery_watch = NULL;
-    int valueQuery_watch ;
+    char * valueQuery_watch ;
     keyValuePair_t *keyPairQuery_watch = 0;
     if (watch)
     {
         keyQuery_watch = strdup("watch");
-        valueQuery_watch = (watch);
-        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, &valueQuery_watch);
+        valueQuery_watch = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_watch, MAX_NUMBER_LENGTH, "%d", watch);
+        keyPairQuery_watch = keyValuePair_create(keyQuery_watch, valueQuery_watch);
         list_addElement(localVarQueryParameters,keyPairQuery_watch);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -4522,8 +4578,8 @@ RbacAuthorizationV1beta1API_listRoleForAllNamespaces(apiClient_t *apiClient, int
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4696,13 +4752,14 @@ RbacAuthorizationV1beta1API_patchClusterRole(apiClient_t *apiClient, char * name
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -4749,8 +4806,8 @@ RbacAuthorizationV1beta1API_patchClusterRole(apiClient_t *apiClient, char * name
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -4878,13 +4935,14 @@ RbacAuthorizationV1beta1API_patchClusterRoleBinding(apiClient_t *apiClient, char
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -4931,8 +4989,8 @@ RbacAuthorizationV1beta1API_patchClusterRoleBinding(apiClient_t *apiClient, char
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5070,13 +5128,14 @@ RbacAuthorizationV1beta1API_patchNamespacedRole(apiClient_t *apiClient, char * n
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -5123,8 +5182,8 @@ RbacAuthorizationV1beta1API_patchNamespacedRole(apiClient_t *apiClient, char * n
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5263,13 +5322,14 @@ RbacAuthorizationV1beta1API_patchNamespacedRoleBinding(apiClient_t *apiClient, c
 
     // query parameters
     char *keyQuery_force = NULL;
-    int valueQuery_force ;
+    char * valueQuery_force ;
     keyValuePair_t *keyPairQuery_force = 0;
     if (force)
     {
         keyQuery_force = strdup("force");
-        valueQuery_force = (force);
-        keyPairQuery_force = keyValuePair_create(keyQuery_force, &valueQuery_force);
+        valueQuery_force = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_force, MAX_NUMBER_LENGTH, "%d", force);
+        keyPairQuery_force = keyValuePair_create(keyQuery_force, valueQuery_force);
         list_addElement(localVarQueryParameters,keyPairQuery_force);
     }
 
@@ -5316,8 +5376,8 @@ RbacAuthorizationV1beta1API_patchNamespacedRoleBinding(apiClient_t *apiClient, c
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5450,8 +5510,8 @@ RbacAuthorizationV1beta1API_readClusterRole(apiClient_t *apiClient, char * name 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5549,8 +5609,8 @@ RbacAuthorizationV1beta1API_readClusterRoleBinding(apiClient_t *apiClient, char 
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5658,8 +5718,8 @@ RbacAuthorizationV1beta1API_readNamespacedRole(apiClient_t *apiClient, char * na
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5768,8 +5828,8 @@ RbacAuthorizationV1beta1API_readNamespacedRoleBinding(apiClient_t *apiClient, ch
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -5904,8 +5964,8 @@ RbacAuthorizationV1beta1API_replaceClusterRole(apiClient_t *apiClient, char * na
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6065,8 +6125,8 @@ RbacAuthorizationV1beta1API_replaceClusterRoleBinding(apiClient_t *apiClient, ch
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6236,8 +6296,8 @@ RbacAuthorizationV1beta1API_replaceNamespacedRole(apiClient_t *apiClient, char *
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
@@ -6408,8 +6468,8 @@ RbacAuthorizationV1beta1API_replaceNamespacedRoleBinding(apiClient_t *apiClient,
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
     }
-    apiClient->dataReceivedLen = 0;
     list_free(localVarQueryParameters);
     
     
