@@ -9,6 +9,7 @@
 #include "kube_config_yaml.h"
 #include "kube_config_common.h"
 #include "exec_provider.h"
+#include "auth_plugin.h"
 
 #define ENV_KUBECONFIG "KUBECONFIG"
 #define ENV_HOME "HOME"
@@ -290,6 +291,51 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, con
     return rc;
 }
 
+static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeconfig_t *kubeconfig)
+{
+    if (!current_user || !current_user->auth_provider || !kubeconfig) {
+        return 0;
+    }
+
+    kubeconfig_property_t *auth_provider = current_user->auth_provider;
+    if (!auth_provider->name) {
+        fprintf(stderr, "%s: The name of auth provider is not specified.\n", fname);
+        return -1;
+    }
+
+    auth_plugin_t *auth_plugin = create_auth_plugin(auth_provider->name);
+    if (!auth_plugin) {
+        fprintf(stderr, "%s: Cannot instantiate the auth provider plugin for %s.\n", fname, auth_provider->name);
+        return -1;
+    }
+
+    int rc = 0;
+    if (auth_plugin->is_expired(auth_provider)) {
+        rc = auth_plugin->refresh(auth_provider);
+        if ( 0 != rc) {
+            fprintf(stderr, "%s: Cannot refresh token of auth provider: %s.\n", fname, auth_provider->name);
+            goto end;
+        }
+        rc = kubeconfig_persist_to_file(kubeconfig);
+        if (0 != rc) {
+            fprintf(stderr, "%s: Cannot persist to kubeconfig file: %s.\n", fname, kubeconfig->fileName);
+            goto end;
+        }
+    }
+    const char *token = auth_plugin->get_token(auth_provider);
+    if (!token) {
+        rc = -1;
+        fprintf(stderr, "%s: Cannot get token from auth provider: %s.\n", fname, auth_provider->name);
+        goto end;
+    }
+    current_user->token = strdup(token);
+
+end:
+    free_auth_plugin(auth_plugin);
+    auth_plugin = NULL;
+    return rc;
+}
+
 int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApiKeys, const char *configFileName)
 {
     static char fname[] = "load_kube_config()";
@@ -342,6 +388,14 @@ int load_kube_config(char **pBasePath, sslConfig_t ** pSslConfig, list_t ** pApi
         rc = kubeconfig_exec(current_user);
         if (0 != rc) {
             fprintf(stderr, "%s: Cannot exec command in kubeconfig.\n", fname);
+            goto end;
+        }
+    }
+
+    if (current_user && current_user->auth_provider) {
+        rc = kuberconfig_auth_provider(current_user, kubeconfig);
+        if (0 != rc) {
+            fprintf(stderr, "%s: Cannot get token from authentication provider.\n", fname);
             goto end;
         }
     }
