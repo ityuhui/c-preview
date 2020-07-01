@@ -27,6 +27,14 @@ mapping :: = MAPPING - START(node node) * MAPPING - END
 #define KEY_USER_EXEC_ENV_KEY "name"
 #define KEY_USER_EXEC_ENV_VALUE "value"
 #define KEY_USER_EXEC_ARGS "args"
+#define KEY_USER_AUTH_PROVIDER "auth-provider"
+#define KEY_USER_AUTH_PROVIDER_CONFIG "config"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_ID "client-id"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_SECRET "client-secret"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_ID_TOKEN "id-token"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY "idp-certificate-authority"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_IDP_ISSUE_URL "idp-issuer-url"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_REFRESH_TOKEN "refresh-token"
 #define KEY_CERTIFICATE_AUTHORITY_DATA "certificate-authority-data"
 #define KEY_SERVER "server"
 #define KEY_CLIENT_CERTIFICATE_DATA "client-certificate-data"
@@ -189,19 +197,46 @@ static int parse_kubeconfig_yaml_property_mapping(kubeconfig_property_t * proper
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_EXEC_COMMAND)) {
                     property->command = strdup(value->data.scalar.value);
                 }
+            } else if (KUBECONFIG_PROPERTY_TYPE_USER_AUTH_PROVIDER == property->type) {
+                if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_ID)) {
+                    property->client_id = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_SECRET)) {
+                    property->client_secret = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_ID_TOKEN)) {
+                    property->id_token = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY)) {
+                    property->idp_certificate_authority = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_ISSUE_URL)) {
+                    property->idp_issuer_url = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_REFRESH_TOKEN)) {
+                    property->refresh_token = strdup(value->data.scalar.value);
+                }
             }
         } else if (value->type == YAML_MAPPING_NODE) {
-            if ((KUBECONFIG_PROPERTY_TYPE_USER == property->type) && (0 == strcmp(key->data.scalar.value, KEY_USER_EXEC))) {
-                property->exec = kubeconfig_property_create(KUBECONFIG_PROPERTY_TYPE_USER_EXEC);
-                if (property->exec) {
-                    int rc = parse_kubeconfig_yaml_property_mapping(property->exec, document, value);
+            if (KUBECONFIG_PROPERTY_TYPE_USER == property->type) {
+                int rc = 0;
+                if (0 == strcmp(key->data.scalar.value, KEY_USER_EXEC) {
+                    property->exec = kubeconfig_property_create(KUBECONFIG_PROPERTY_TYPE_USER_EXEC);
+                    if (!property->exec) {
+                        fprintf(stderr, "Cannot allocate memory for kubeconfig exec for user %s.\n", property->name);
+                        return -1;
+                    }
+                    rc = parse_kubeconfig_yaml_property_mapping(property->exec, document, value);
                     if (0 != rc) {
                         fprintf(stderr, "Cannot parse kubeconfig exec for user %s.\n", property->name);
                         return -1;
                     }
-                } else {
-                    fprintf(stderr, "Cannot allocate memory for kubeconfig exec for user %s.\n", property->name);
-                    return -1;
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER) {
+                    property->auth_provider = kubeconfig_property_create(KUBECONFIG_PROPERTY_TYPE_USER_AUTH_PROVIDER);
+                    if (!property->auth_provider) {
+                        fprintf(stderr, "Cannot allocate memory for kubeconfig auth provider for user %s.\n", property->name);
+                        return -1;
+                    }
+                    rc = parse_kubeconfig_yaml_property_mapping(property->auth_provider, document, value);
+                    if (0 != rc) {
+                        fprintf(stderr, "Cannot parse kubeconfig auth provider for user %s.\n", property->name);
+                        return -1;
+                    }
                 }
             } else {
                 parse_kubeconfig_yaml_property_mapping(property, document, value);

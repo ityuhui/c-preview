@@ -75,7 +75,11 @@ extern "C" {
                 char *access_token;
                 char *expires_on;
                 char *expiry;
-                char *idp_certificate_authority_data;
+                char *idp_certificate_authority;
+                char *client_id;
+                char *client_secret;
+                char *idp_issuer_url;
+                char *refresh_token;
             };
         };
     } kubeconfig_property_t;
