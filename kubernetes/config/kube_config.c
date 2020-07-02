@@ -9,7 +9,7 @@
 #include "kube_config_yaml.h"
 #include "kube_config_common.h"
 #include "exec_provider.h"
-#include "auth_plugin.h"
+#include "authn_plugin/authn_plugin.h"
 
 #define ENV_KUBECONFIG "KUBECONFIG"
 #define ENV_HOME "HOME"
@@ -293,6 +293,8 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, con
 
 static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeconfig_t *kubeconfig)
 {
+    static char fname[] = "kuberconfig_auth_provider()";
+
     if (!current_user || !current_user->auth_provider || !kubeconfig) {
         return 0;
     }
@@ -303,26 +305,26 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
         return -1;
     }
 
-    auth_plugin_t *auth_plugin = create_auth_plugin(auth_provider->name);
-    if (!auth_plugin) {
+    authn_plugin_t *plugin = create_authn_plugin(auth_provider->name);
+    if (!plugin) {
         fprintf(stderr, "%s: Cannot instantiate the auth provider plugin for %s.\n", fname, auth_provider->name);
         return -1;
     }
 
     int rc = 0;
-    if (auth_plugin->is_expired(auth_provider)) {
-        rc = auth_plugin->refresh(auth_provider);
+    if (plugin->is_expired(auth_provider)) {
+        rc = plugin->refresh(auth_provider);
         if ( 0 != rc) {
             fprintf(stderr, "%s: Cannot refresh token of auth provider: %s.\n", fname, auth_provider->name);
             goto end;
         }
-        rc = kubeconfig_persist_to_file(kubeconfig);
+        rc = kubeyaml_update_kubeconfig(kubeconfig->fileName, );
         if (0 != rc) {
             fprintf(stderr, "%s: Cannot persist to kubeconfig file: %s.\n", fname, kubeconfig->fileName);
             goto end;
         }
     }
-    const char *token = auth_plugin->get_token(auth_provider);
+    const char *token = plugin->get_token(auth_provider);
     if (!token) {
         rc = -1;
         fprintf(stderr, "%s: Cannot get token from auth provider: %s.\n", fname, auth_provider->name);
@@ -331,8 +333,8 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
     current_user->token = strdup(token);
 
 end:
-    free_auth_plugin(auth_plugin);
-    auth_plugin = NULL;
+    free_authn_plugin(plugin);
+    plugin = NULL;
     return rc;
 }
 

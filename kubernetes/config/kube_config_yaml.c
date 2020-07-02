@@ -215,7 +215,7 @@ static int parse_kubeconfig_yaml_property_mapping(kubeconfig_property_t * proper
         } else if (value->type == YAML_MAPPING_NODE) {
             if (KUBECONFIG_PROPERTY_TYPE_USER == property->type) {
                 int rc = 0;
-                if (0 == strcmp(key->data.scalar.value, KEY_USER_EXEC) {
+                if (0 == strcmp(key->data.scalar.value, KEY_USER_EXEC)) {
                     property->exec = kubeconfig_property_create(KUBECONFIG_PROPERTY_TYPE_USER_EXEC);
                     if (!property->exec) {
                         fprintf(stderr, "Cannot allocate memory for kubeconfig exec for user %s.\n", property->name);
@@ -226,7 +226,7 @@ static int parse_kubeconfig_yaml_property_mapping(kubeconfig_property_t * proper
                         fprintf(stderr, "Cannot parse kubeconfig exec for user %s.\n", property->name);
                         return -1;
                     }
-                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER) {
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER)) {
                     property->auth_provider = kubeconfig_property_create(KUBECONFIG_PROPERTY_TYPE_USER_AUTH_PROVIDER);
                     if (!property->auth_provider) {
                         fprintf(stderr, "Cannot allocate memory for kubeconfig auth provider for user %s.\n", property->name);
@@ -564,4 +564,9 @@ int kubeyaml_parse_exec_crendential(ExecCredential_t * exec_credential, const ch
   error:
     yaml_parser_delete(&parser);
     return -1;
+}
+
+int kubeyaml_save_kubeconfig(kubeconfig_t* kubeconfig)
+{
+    return 0;
 }
