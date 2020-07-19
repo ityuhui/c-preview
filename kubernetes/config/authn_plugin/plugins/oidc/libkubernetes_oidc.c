@@ -4,6 +4,7 @@
 #include "cJSON.h"
 
 #define ID_TOKEN_EXP "exp"
+#define ID_TOKEN_DELIM "."
 
 static time_t get_token_expiration_time(const char *token_string)
 {
@@ -20,11 +21,11 @@ static time_t get_token_expiration_time(const char *token_string)
     }
 
     char *p = NULL:
-    p = strtok(dup_token_string, "."); /* jwt header */
+    p = strtok(dup_token_string, ID_TOKEN_DELIM); /* jwt header */
     if (!p) {
         goto end;
     }
-    p = strtok(NULL, ".");  /* jwt payload */
+    p = strtok(NULL, ID_TOKEN_DELIM);  /* jwt payload */
     if (!p) {
         goto end;
     }
@@ -42,7 +43,7 @@ static time_t get_token_expiration_time(const char *token_string)
         goto end;
     }
     json_value = cJSON_GetObjectItem(payload_JSON, ID_TOKEN_EXP);
-    if (json_value->type != cJSON_Number) {
+    if (!json_value || json_value->type != cJSON_Number) {
         fprintf(stderr, "%s: Cannot get expiration time in id token.\n", fname);
         goto end;
     }
@@ -83,10 +84,8 @@ bool is_expired(kubeconfig_property_t* auth_provider)
     return false;
 }
 
-int refresh(kubeconfig_property_t* auth_provider)
+static int refresh_oidc_token(kubeconfig_property_t* auth_provider, const char *token_endpoint, sslConfig_t *sc)
 {
-    http_request();
-
     if (auth_provider->id_token) {
         free(auth_provider->id_token);
         auth_provider->id_token = NULL;
@@ -97,6 +96,23 @@ int refresh(kubeconfig_property_t* auth_provider)
         auth_provider->refresh_token = NULL;
     }
     auth_provider->refresh_token = strdup("new_id_token");
+}
+
+int refresh(kubeconfig_property_t* auth_provider)
+{
+    sslConfig_t* sc = sslConfig_create(client_cert_file, client_key_file, ca_file, insecure_skip_tls_verify);
+    if (!sc) {
+        return -1;
+    }
+
+    int rc = get_token_endpoint(token_endpoint,auth_provider->idp_issuer_url, sc);
+    if (-1 == rc) {
+        return -1;
+    }
+    rc = refresh_oidc_token(auth_provider, token_endpoint, sc);
+    if (-1 == rc) {
+        return -1;
+    }
 
     return 0;
 }
