@@ -3,8 +3,9 @@
 #include "binary.h"
 #include "cJSON.h"
 
-#define ID_TOKEN_EXP "exp"
-#define ID_TOKEN_DELIM "."
+#define OIDC_ID_TOKEN_DELIM "."
+#define OIDC_ID_TOKEN_EXP "exp"
+#define OIDC_CONFIGURATION_URL_SUPFIX "/.well-known/openid-configuration"
 
 static time_t get_token_expiration_time(const char *token_string)
 {
@@ -21,11 +22,11 @@ static time_t get_token_expiration_time(const char *token_string)
     }
 
     char *p = NULL:
-    p = strtok(dup_token_string, ID_TOKEN_DELIM); /* jwt header */
+    p = strtok(dup_token_string, OIDC_ID_TOKEN_DELIM); /* jwt header */
     if (!p) {
         goto end;
     }
-    p = strtok(NULL, ID_TOKEN_DELIM);  /* jwt payload */
+    p = strtok(NULL, OIDC_ID_TOKEN_DELIM);  /* jwt part2 */
     if (!p) {
         goto end;
     }
@@ -42,7 +43,7 @@ static time_t get_token_expiration_time(const char *token_string)
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
         goto end;
     }
-    json_value = cJSON_GetObjectItem(payload_JSON, ID_TOKEN_EXP);
+    json_value = cJSON_GetObjectItem(payload_JSON, OIDC_ID_TOKEN_EXP);
     if (!json_value || json_value->type != cJSON_Number) {
         fprintf(stderr, "%s: Cannot get expiration time in id token.\n", fname);
         goto end;
@@ -98,23 +99,49 @@ static int refresh_oidc_token(kubeconfig_property_t* auth_provider, const char *
     auth_provider->refresh_token = strdup("new_id_token");
 }
 
+int get_token_endpoint(char *token_endpoint, int token_endpoint_buffer_size, const char *idp_issuer_url, const sslConfig_t *sc)
+{
+    static char fname[] = "get_token_endpoint()";
+
+    if (!token_endpoint || 
+        token_endpoint_buffer_size < 1 ||
+        !idp_issuer_url ||
+        !sc) {
+        return -1;
+    }
+
+
+
+}
+
 int refresh(kubeconfig_property_t* auth_provider)
 {
-    sslConfig_t* sc = sslConfig_create(client_cert_file, client_key_file, ca_file, insecure_skip_tls_verify);
+    int rc = 0;
+
+    sslConfig_t* sc = NULL;
+    if (auth_provider->idp_certificate_authority_data) {
+        sc = sslConfig_create(NULL, NULL, auth_provider->idp_certificate_authority_data, 0);
+    } else {
+        sc = sslConfig_create(NULL, NULL, NULL, 1);
+    }
     if (!sc) {
         return -1;
     }
 
-    int rc = get_token_endpoint(token_endpoint,auth_provider->idp_issuer_url, sc);
+    char token_endpoint[] = { 0 };
+    rc = get_token_endpoint(token_endpoint, sizeof(token_endpoint), auth_provider->idp_issuer_url, sc);
     if (-1 == rc) {
-        return -1;
+        goto end;
     }
     rc = refresh_oidc_token(auth_provider, token_endpoint, sc);
     if (-1 == rc) {
-        return -1;
+        goto end;
     }
 
-    return 0;
+end:
+    sslConfig_free(sc);
+    sc = NULL;
+    return rc;
 }
 
 
