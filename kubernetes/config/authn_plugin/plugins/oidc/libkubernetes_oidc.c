@@ -5,7 +5,8 @@
 
 #define OIDC_ID_TOKEN_DELIM "."
 #define OIDC_ID_TOKEN_EXP "exp"
-#define OIDC_CONFIGURATION_URL_SUPFIX "/.well-known/openid-configuration"
+#define OIDC_CONFIGURATION_URL_TEMPLATE "%s/.well-known/openid-configuration"
+#define TOKEN_ENDPOINT_BUFFER_SIZE 256
 
 static time_t get_token_expiration_time(const char *token_string)
 {
@@ -85,20 +86,6 @@ bool is_expired(kubeconfig_property_t* auth_provider)
     return false;
 }
 
-static int refresh_oidc_token(kubeconfig_property_t* auth_provider, const char *token_endpoint, sslConfig_t *sc)
-{
-    if (auth_provider->id_token) {
-        free(auth_provider->id_token);
-        auth_provider->id_token = NULL;
-    }
-    auth_provider->id_token = strdup("new_id_token");
-    if (auth_provider->refresh_token) {
-        free(auth_provider->refresh_token);
-        auth_provider->refresh_token = NULL;
-    }
-    auth_provider->refresh_token = strdup("new_id_token");
-}
-
 int get_token_endpoint(char *token_endpoint, int token_endpoint_buffer_size, const char *idp_issuer_url, const sslConfig_t *sc)
 {
     static char fname[] = "get_token_endpoint()";
@@ -110,8 +97,49 @@ int get_token_endpoint(char *token_endpoint, int token_endpoint_buffer_size, con
         return -1;
     }
 
+    char oidc_configuration_url[];
+    snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
+    
+    if ( 0 == shc_get_request(oidc_configuration_url, sc)) {
+        shc_parse_from_response(token_endpoint, token_endpoint_buffer_size, "");
+    } else {
+        return -1;
+    }
 
+    return 0;
+}
 
+static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *token_endpoint, const sslConfig_t *sc)
+{
+    if (!auth_provider ||
+        !token_endpoint ||
+        !sc) {
+        return -1;
+    }
+
+    char oidc_return[];
+    if (0 == shc_post_request(token_endpoint, sc)) {
+        shc_parse_from_response(oidc_return, sizeof(oidc_return), "");
+        if () {
+            if (auth_provider->id_token) {
+                free(auth_provider->id_token);
+                auth_provider->id_token = NULL;
+            }
+            auth_provider->id_token = strdup(oidc_return);
+        }
+        shc_parse_from_response(oidc_return, sizeof(oidc_return), "");
+        if () {
+            if (auth_provider->refresh_token) {
+                free(auth_provider->refresh_token);
+                auth_provider->refresh_token = NULL;
+            }
+            auth_provider->refresh_token = strdup(oidc_return);
+        }
+    } else {
+        return -1;
+    }
+
+    return 0;
 }
 
 int refresh(kubeconfig_property_t* auth_provider)
@@ -128,7 +156,7 @@ int refresh(kubeconfig_property_t* auth_provider)
         return -1;
     }
 
-    char token_endpoint[] = { 0 };
+    char token_endpoint[TOKEN_ENDPOINT_BUFFER_SIZE] = { 0 };
     rc = get_token_endpoint(token_endpoint, sizeof(token_endpoint), auth_provider->idp_issuer_url, sc);
     if (-1 == rc) {
         goto end;

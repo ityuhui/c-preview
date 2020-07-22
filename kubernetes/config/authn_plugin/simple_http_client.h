@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-    void http_request();
+    int shc_get_request(const char *, const sslConfig_t *);
 
 #ifdef  __cplusplus
 }
