@@ -6,7 +6,7 @@
 #define OIDC_ID_TOKEN_DELIM "."
 #define OIDC_ID_TOKEN_EXP "exp"
 #define OIDC_CONFIGURATION_URL_TEMPLATE "%s/.well-known/openid-configuration"
-#define TOKEN_ENDPOINT_BUFFER_SIZE 256
+#define OIDC_TOKEN_ENDPOINT "token_endpoint"
 
 static time_t get_token_expiration_time(const char *token_string)
 {
@@ -86,7 +86,7 @@ bool is_expired(kubeconfig_property_t* auth_provider)
     return false;
 }
 
-int get_token_endpoint(char *token_endpoint, int token_endpoint_buffer_size, const char *idp_issuer_url, const sslConfig_t *sc)
+char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
 {
     static char fname[] = "get_token_endpoint()";
 
@@ -94,19 +94,17 @@ int get_token_endpoint(char *token_endpoint, int token_endpoint_buffer_size, con
         token_endpoint_buffer_size < 1 ||
         !idp_issuer_url ||
         !sc) {
-        return -1;
+        return NULL;
     }
 
     char oidc_configuration_url[];
     snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
-    
-    if ( 0 == shc_get_request(oidc_configuration_url, sc)) {
-        shc_parse_from_response(token_endpoint, token_endpoint_buffer_size, "");
-    } else {
-        return -1;
-    }
 
-    return 0;
+    if ( 0 == shc_get_request(oidc_configuration_url, sc)) {
+        return shc_get_value_from_response(OIDC_TOKEN_ENDPOINT);
+    } else {
+        return NULL;
+    }
 }
 
 static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *token_endpoint, const sslConfig_t *sc)
@@ -146,7 +144,7 @@ int refresh(kubeconfig_property_t* auth_provider)
 {
     int rc = 0;
 
-    sslConfig_t* sc = NULL;
+    sslConfig_t *sc = NULL;
     if (auth_provider->idp_certificate_authority_data) {
         sc = sslConfig_create(NULL, NULL, auth_provider->idp_certificate_authority_data, 0);
     } else {
@@ -156,9 +154,9 @@ int refresh(kubeconfig_property_t* auth_provider)
         return -1;
     }
 
-    char token_endpoint[TOKEN_ENDPOINT_BUFFER_SIZE] = { 0 };
-    rc = get_token_endpoint(token_endpoint, sizeof(token_endpoint), auth_provider->idp_issuer_url, sc);
-    if (-1 == rc) {
+    char *token_endpoint = get_token_endpoint(auth_provider->idp_issuer_url, sc);
+    if (!token_endpoint) {
+        rc = -1;
         goto end;
     }
     rc = refresh_oidc_token(auth_provider, token_endpoint, sc);
@@ -167,8 +165,15 @@ int refresh(kubeconfig_property_t* auth_provider)
     }
 
 end:
-    sslConfig_free(sc);
-    sc = NULL;
+    if (token_endpoint) {
+        free(token_endpoint);
+        token_endpoint = NULL;
+    }
+    if (sc) {
+        sslConfig_free(sc);
+        sc = NULL;
+    }
+    
     return rc;
 }
 
