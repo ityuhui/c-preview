@@ -8,6 +8,10 @@
 #define OIDC_CONFIGURATION_URL_TEMPLATE "%s/.well-known/openid-configuration"
 #define OIDC_TOKEN_ENDPOINT "token_endpoint"
 
+#define REFRESH_TOKEN_CREDENTIAL_TEMPLATE "Basic %s:%s"
+#define REFRESH_TOKEN_POST_DATA_TEMPLATE "refresh_token=%s&grant_type=refresh_token"
+
+
 static time_t get_token_expiration_time(const char *token_string)
 {
     static char fname[] = "get_token_expiration_time()";
@@ -100,11 +104,23 @@ char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
     char oidc_configuration_url[];
     snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
 
-    if ( 0 == shc_get_request(oidc_configuration_url, sc)) {
-        return shc_get_value_from_response(OIDC_TOKEN_ENDPOINT);
-    } else {
+    apiClient_t *http_client = shc_get_request(oidc_configuration_url, sc);
+    if (!http_client) {
         return NULL;
     }
+    if(200 != http_client->response_code){
+        return NULL;
+    }
+    
+    char *token_endpoint = shc_get_string_from_response_json(http_client,OIDC_TOKEN_ENDPOINT);
+
+end:
+
+    if (http_client) {
+        apiClient_free(http_client);
+        http_client = NULL;
+    }
+    return token_endpoint;
 }
 
 static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *token_endpoint, const sslConfig_t *sc)
@@ -115,24 +131,38 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         return -1;
     }
 
-    char oidc_return[];
-    if (0 == shc_post_request(token_endpoint, sc)) {
-        shc_parse_from_response(oidc_return, sizeof(oidc_return), "");
-        if () {
-            if (auth_provider->id_token) {
-                free(auth_provider->id_token);
-                auth_provider->id_token = NULL;
-            }
-            auth_provider->id_token = strdup(oidc_return);
+    char refresh_token_credential[];
+    snprintf(refresh_token_credential, sizeof(refresh_token_credential), REFRESH_TOKEN_CREDENTIAL_TEMPLATE, auth_provider->client_id, auth_provider->client_secret);
+
+    char refresh_token_post_data[];
+    snprintf(refresh_token_post_data, sizeof(refresh_token_post_data), REFRESH_TOKEN_POST_DATA_TEMPLATE, auth_provider->refresh_token)
+
+    apiClient_t* http_client = shc_post_request(token_endpoint, sc, refresh_token_post_data);
+    if (!http_client) {
+        return -1;
+    }
+    if (200 != http_client->response_code) {
+        return -1;
+    }
+
+    char *new_id_token=shc_get_string_from_response_json("");
+    if (new_id_token) {
+        if (auth_provider->id_token) {
+            free(auth_provider->id_token);
+            auth_provider->id_token = NULL;
         }
-        shc_parse_from_response(oidc_return, sizeof(oidc_return), "");
-        if () {
-            if (auth_provider->refresh_token) {
-                free(auth_provider->refresh_token);
-                auth_provider->refresh_token = NULL;
-            }
-            auth_provider->refresh_token = strdup(oidc_return);
+        auth_provider->id_token = new_id_token;
+    } else {
+        return -1;
+    }
+
+    char* new_refresh_token= shc_get_string_from_response_json("");
+    if (new_refresh_token) {
+        if (auth_provider->refresh_token) {
+            free(auth_provider->refresh_token);
+            auth_provider->refresh_token = NULL;
         }
+        auth_provider->refresh_token = new_refresh_token;
     } else {
         return -1;
     }

@@ -5,7 +5,11 @@
 extern "C" {
 #endif
 
-    int shc_get_request(const char *, const sslConfig_t *);
+    apiClient_t* shc_get_request(const char* , const sslConfig_t*);
+
+    apiClient_t* shc_post_request(const char* , const sslConfig_t*);
+
+    char* shc_get_string_from_response_json(apiClient_t*, const char*);
 
 #ifdef  __cplusplus
 }
