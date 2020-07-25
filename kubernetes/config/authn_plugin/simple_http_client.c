@@ -1,21 +1,6 @@
 #include "simple_http_client.h"
 
-#define HTTP_REQUEST_GET "GET"
-#define HTTP_REQUEST_POST "POST"
-#define HTTP_REQUEST_DELETE "DELETE"
-#define HTTP_REQUEST_PATCH "PATCH"
-
-apiClient_t* shc_get_request(const char *url, const sslConfig_t *sc)
-{
-    return http_request(HTTP_REQUEST_GET, url, sc);
-}
-
-apiClient_t* shc_post_request(const char *url, const sslConfig_t *sc, const char *post_data)
-{
-    return http_request(HTTP_REQUEST_POST, url, sc, post_data);
-}
-
-static apiClient_t* http_request(const char *type, const char *url, const sslConfig_t *sc, const char *post_data)
+apiClient_t* shc_request(const char *type, const char *url, const sslConfig_t *sc, const char *post_data)
 {
     static char fname[] = "http_request()";
 
@@ -28,53 +13,62 @@ static apiClient_t* http_request(const char *type, const char *url, const sslCon
 
     switch (http_client->response_code) {
     case 200:
-        return http_client;
         break;
     case 400:
-        printf("%s: %s\n", "Unauthorized", fname);
+        printf("%s: Unauthorized\n", fname);
         break;
     default:
-        printf("%s response_code=%d\n", fname, http_client->response_code);
+        printf("%s: response_code=%d\n", fname, http_client->response_code);
         break;
     }
 
-    if (http_client) {
-        apiClient_free(http_client);
-        http_client = NULL;
-    }
-    return NULL;
+    return http_client;
 }
 
-char* shc_get_string_from_response_json(apiClient_t* http_client, const char* key)
+char* shc_get_string_from_json(const char *json_string, const char* key)
 {
-    static char fname[] = "shc_get_string_from_response_json()";
+    static char fname[] = "shc_get_string_from_json()";
 
-    if (!http_client ||
-        !http_client->dataReceived) {
+    if (!json_string) {
         return NULL;
     }
 
-    cJSON *json = cJSON_Parse(http_client->dataReceived);
+    char* res = NULL;
+    cJSON *json = cJSON_Parse(json_string);
     if (!json) {
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
-        goto error;
+        goto end;
     }
     value = cJSON_GetObjectItem(json, key);
     if (!value) {
         fprintf(stderr, "%s: Cannot get the value for %s.\n", fname, key);
-        goto error;
+        goto end;
     }
     if (!value->type != cJSON_String &&
         !value->type != cJSON_Object) {
         fprintf(stderr, "%s: The value for %s is invalid.\n", fname, key);
-        goto error;
+        goto end;
     }
-    return strdup(value->valuestring);
+    res=strdup(value->valuestring);
 
-error:
+end:
     if (json) {
         cJSON_Delete(json);
         json = NULL;
     }
-    return NULL;
+
+    return res;
+}
+
+void shc_reset_client(apiClient_t* http_client)
+{
+    if (!http_client) {
+        return;
+    }
+
+    if (http_client->dataReceived) {
+        free(http_client->dataReceived);
+        http_client->dataReceived = NULL;
+        http_client->dataReceivedLen = 0;
+    }
 }

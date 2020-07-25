@@ -104,18 +104,17 @@ char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
     char oidc_configuration_url[];
     snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
 
-    apiClient_t *http_client = shc_get_request(oidc_configuration_url, sc);
+    apiClient_t *http_client = shc_request(HTTP_REQUEST_GET,oidc_configuration_url, sc, NULL);
     if (!http_client) {
         return NULL;
     }
-    if(200 != http_client->response_code){
-        return NULL;
+    if (200 != http_client->response_code) {
+        goto end;
     }
     
-    char *token_endpoint = shc_get_string_from_response_json(http_client,OIDC_TOKEN_ENDPOINT);
-
+    char *token_endpoint = shc_get_string_from_json(http_client->dataReceived,OIDC_TOKEN_ENDPOINT);
+    shc_reset_client(http_client);
 end:
-
     if (http_client) {
         apiClient_free(http_client);
         http_client = NULL;
@@ -137,7 +136,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
     char refresh_token_post_data[];
     snprintf(refresh_token_post_data, sizeof(refresh_token_post_data), REFRESH_TOKEN_POST_DATA_TEMPLATE, auth_provider->refresh_token)
 
-    apiClient_t* http_client = shc_post_request(token_endpoint, sc, refresh_token_post_data);
+    apiClient_t* http_client = shc_request(HTTP_REQUEST_POST, token_endpoint, sc, refresh_token_post_data);
     if (!http_client) {
         return -1;
     }
@@ -145,7 +144,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         return -1;
     }
 
-    char *new_id_token=shc_get_string_from_response_json("");
+    char *new_id_token= shc_get_string_from_json(http_client->dataReceived,"");
     if (new_id_token) {
         if (auth_provider->id_token) {
             free(auth_provider->id_token);
@@ -156,7 +155,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         return -1;
     }
 
-    char* new_refresh_token= shc_get_string_from_response_json("");
+    char* new_refresh_token= shc_get_string_from_json(http_client->dataReceived,"");
     if (new_refresh_token) {
         if (auth_provider->refresh_token) {
             free(auth_provider->refresh_token);
@@ -167,6 +166,12 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         return -1;
     }
 
+    shc_reset_client(http_client);
+end:
+    if (http_client) {
+        apiClient_free(http_client);
+        http_client = NULL;
+    }
     return 0;
 }
 
