@@ -37,7 +37,7 @@ set(SRCS
     config/kube_config.c
     config/incluster_config.c
     config/exec_provider.c
-    config/authn_plugin/simple_http_client.c
+    config/authn_plugin/authn_plugin_util.c
     config/authn_plugin/authn_plugin.c
     src/list.c
     src/apiKey.c
@@ -797,7 +797,7 @@ set(HDRS
     config/kube_config.h
     config/incluster_config.h
     config/exec_provider.h
-    config/authn_plugin/simple_http_client.h
+    config/authn_plugin/authn_plugin_util.h
     config/authn_plugin/authn_plugin.h
     include/apiClient.h
     include/list.h

@@ -1,5 +1,6 @@
 #include "authn_plugin.h"
-#include "simple_http_client.h"
+#include "authn_plugin_util.h"
+#include "kube_config_util.h"
 #include "binary.h"
 #include "cJSON.h"
 
@@ -203,7 +204,10 @@ int refresh(kubeconfig_property_t* auth_provider)
 
     sslConfig_t *sc = NULL;
     if (auth_provider->idp_certificate_authority_data) {
-        sc = sslConfig_create(NULL, NULL, auth_provider->idp_certificate_authority_data, 0);
+        char *idp_certificate_file = kubeconfig_mk_cert_key_tempfile(user->idp_certificate_authority_data);
+        sc = sslConfig_create(NULL, NULL, idp_certificate_file, 0);
+        free(idp_certificate_file);
+        idp_certificate_file = NULL;
     } else {
         sc = sslConfig_create(NULL, NULL, NULL, 1);
     }

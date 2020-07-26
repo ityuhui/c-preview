@@ -1,4 +1,4 @@
-#include "simple_http_client.h"
+#include "authn_plugin_util.h"
 
 apiClient_t* shc_request(const char *type, const char *url, const sslConfig_t *sc, const list_t* contentType, const char *post_data)
 {

@@ -1,5 +1,5 @@
-#ifndef _SIMPLE_HTTP_CLIENT_H
-#define _SIMPLE_HTTP_CLIENT_H
+#ifndef _AUTHN_PLUGIN_UTIL_H
+#define _AUTHN_PLUGIN_UTIL_H
 
 #define HTTP_REQUEST_GET "GET"
 #define HTTP_REQUEST_POST "POST"
@@ -19,4 +19,4 @@ extern "C" {
 #ifdef  __cplusplus
 }
 #endif
-#endif                          /* _SIMPLE_HTTP_CLIENT_H */
+#endif                          /* _AUTHN_PLUGIN_UTIL_H */
