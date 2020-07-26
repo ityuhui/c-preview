@@ -7,10 +7,16 @@
 #define OIDC_ID_TOKEN_EXP "exp"
 #define OIDC_CONFIGURATION_URL_TEMPLATE "%s/.well-known/openid-configuration"
 #define OIDC_TOKEN_ENDPOINT "token_endpoint"
+#define OIDC_ID_TOKEN "id_token"
+#define OIDC_REFRESH_TOKEN "refresh_token"
 
+#define REFRESH_TOKEN_CONTENT_TYPE "application/x-www-form-urlencoded"
 #define REFRESH_TOKEN_CREDENTIAL_TEMPLATE "Basic %s:%s"
 #define REFRESH_TOKEN_POST_DATA_TEMPLATE "refresh_token=%s&grant_type=refresh_token"
 
+#define OIDC_CONFIGURATION_URL_BUFFER_SIZE 1024
+#define REFRESH_TOKEN_CREDENTIAL_BUFFER_SIZE 1024
+#define REFRESH_TOKEN_POST_DATA_BUFFER_SIZE 1024
 
 static time_t get_token_expiration_time(const char *token_string)
 {
@@ -101,7 +107,8 @@ char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
         return NULL;
     }
 
-    char oidc_configuration_url[];
+    char oidc_configuration_url[OIDC_CONFIGURATION_URL_BUFFER_SIZE];
+    memset(oidc_configuration_url,sizeof(oidc_configuration_url), 0);
     snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
 
     apiClient_t *http_client = shc_request(HTTP_REQUEST_GET,oidc_configuration_url, sc, NULL);
@@ -124,27 +131,38 @@ end:
 
 static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *token_endpoint, const sslConfig_t *sc)
 {
+    static char fname[] = "refresh_oidc_token()";
+
+    int rc = 0;
+
     if (!auth_provider ||
         !token_endpoint ||
         !sc) {
         return -1;
     }
 
-    char refresh_token_credential[];
+    list_t* content_type = list_create();
+    list_addElement(content_type, REFRESH_TOKEN_CONTENT_TYPE);
+
+    char refresh_token_credential[REFRESH_TOKEN_CREDENTIAL_BUFFER_SIZE];
+    memset(refresh_token_credential,sizeof(refresh_token_credential), 0);
     snprintf(refresh_token_credential, sizeof(refresh_token_credential), REFRESH_TOKEN_CREDENTIAL_TEMPLATE, auth_provider->client_id, auth_provider->client_secret);
 
-    char refresh_token_post_data[];
-    snprintf(refresh_token_post_data, sizeof(refresh_token_post_data), REFRESH_TOKEN_POST_DATA_TEMPLATE, auth_provider->refresh_token)
+    char refresh_token_post_data[REFRESH_TOKEN_POST_DATA_BUFFER_SIZE];
+    memset(refresh_token_post_data, sizeof(refresh_token_post_data), 0);
+    snprintf(refresh_token_post_data, sizeof(refresh_token_post_data), REFRESH_TOKEN_POST_DATA_TEMPLATE, auth_provider->refresh_token);
 
-    apiClient_t* http_client = shc_request(HTTP_REQUEST_POST, token_endpoint, sc, refresh_token_post_data);
+    apiClient_t* http_client = shc_request(HTTP_REQUEST_POST, token_endpoint, sc, content_type, refresh_token_post_data);
     if (!http_client) {
-        return -1;
+        rc = -1;
+        goto end;
     }
     if (200 != http_client->response_code) {
-        return -1;
+        rc = -1;
+        goto end;
     }
 
-    char *new_id_token= shc_get_string_from_json(http_client->dataReceived,"");
+    char *new_id_token= shc_get_string_from_json(http_client->dataReceived, OIDC_ID_TOKEN);
     if (new_id_token) {
         if (auth_provider->id_token) {
             free(auth_provider->id_token);
@@ -152,10 +170,11 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         }
         auth_provider->id_token = new_id_token;
     } else {
-        return -1;
+        rc = -1;
+        goto end;
     }
 
-    char* new_refresh_token= shc_get_string_from_json(http_client->dataReceived,"");
+    char *new_refresh_token= shc_get_string_from_json(http_client->dataReceived, OIDC_REFRESH_TOKEN);
     if (new_refresh_token) {
         if (auth_provider->refresh_token) {
             free(auth_provider->refresh_token);
@@ -163,16 +182,19 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         }
         auth_provider->refresh_token = new_refresh_token;
     } else {
-        return -1;
+        rc = -1;
+        goto end;
     }
 
     shc_reset_client(http_client);
+
 end:
+    list_free(content_type);
     if (http_client) {
         apiClient_free(http_client);
         http_client = NULL;
     }
-    return 0;
+    return rc;
 }
 
 int refresh(kubeconfig_property_t* auth_provider)

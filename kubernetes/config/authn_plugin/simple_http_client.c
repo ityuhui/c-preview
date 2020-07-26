@@ -1,15 +1,15 @@
 #include "simple_http_client.h"
 
-apiClient_t* shc_request(const char *type, const char *url, const sslConfig_t *sc, const char *post_data)
+apiClient_t* shc_request(const char *type, const char *url, const sslConfig_t *sc, const list_t* contentType, const char *post_data)
 {
-    static char fname[] = "http_request()";
+    static char fname[] = "shc_request()";
 
     apiClient_t *http_client = apiClient_create_with_base_path(url, sc, NULL);
     if (!http_client) {
         fprintf(stderr, "%s: Cannot create http client. [%s].\n", fname, strerror(errno));
         return NULL;
     }
-    apiClient_invoke(http_client, NULL, NULL, NULL, NULL, NULL, NULL, post_data, type);
+    apiClient_invoke(http_client, NULL, NULL, NULL, NULL, NULL, contentType, post_data, type);
 
     switch (http_client->response_code) {
     case 200:
