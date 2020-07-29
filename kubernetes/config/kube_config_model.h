@@ -45,6 +45,7 @@ extern "C" {
         union {
             struct {            /* context */
                 char *cluster;
+                char *namespace;
                 char *user;
             };
             struct {            /* cluster */
@@ -74,8 +75,8 @@ extern "C" {
                 char *client_id;
                 char *client_secret;
                 char *cmd_path;
-                char* expires_on;
-                char* expiry;
+                char *expires_on;
+                char *expiry;
                 char *id_token;
                 char *idp_certificate_authority_data;
                 char *idp_issuer_url;

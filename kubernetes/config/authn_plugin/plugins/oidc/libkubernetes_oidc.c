@@ -3,6 +3,7 @@
 #include "kube_config_util.h"
 #include "binary.h"
 #include "cJSON.h"
+#include <time.h>
 
 #define OIDC_ID_TOKEN_DELIM "."
 #define OIDC_ID_TOKEN_EXP "exp"
@@ -33,7 +34,7 @@ static time_t get_token_expiration_time(const char *token_string)
         return 0;
     }
 
-    char *p = NULL:
+    char *p = NULL;
     p = strtok(dup_token_string, OIDC_ID_TOKEN_DELIM); /* jwt header */
     if (!p) {
         fprintf(stderr, "%s: The token <%s> is not a valid JWT token.\n", fname, token_string);
@@ -57,7 +58,7 @@ static time_t get_token_expiration_time(const char *token_string)
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
         goto end;
     }
-    json_value = cJSON_GetObjectItem(payload_JSON, OIDC_ID_TOKEN_EXP);
+    cJSON *json_value = cJSON_GetObjectItem(payload_JSON, OIDC_ID_TOKEN_EXP);
     if (!json_value || json_value->type != cJSON_Number) {
         fprintf(stderr, "%s: Cannot get expiration time in id token.\n", fname);
         goto end;
@@ -103,9 +104,7 @@ char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
 {
     static char fname[] = "get_token_endpoint()";
 
-    if (!token_endpoint || 
-        token_endpoint_buffer_size < 1 ||
-        !idp_issuer_url ||
+    if (!idp_issuer_url ||
         !sc) {
         return NULL;
     }
@@ -116,13 +115,14 @@ char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
 
     char* http_response = NULL;
     int http_response_length = 0;
-    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET,oidc_configuration_url, sc, NULL);
+    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET,oidc_configuration_url, sc, NULL, NULL);
     if (200 != rc) {
         goto end;
     }
     
     char *token_endpoint = shc_get_string_from_json(http_response, OIDC_TOKEN_ENDPOINT);
-    
+
+end:
     if (http_response) {
         free(http_response);
         http_response_length = 0;
@@ -156,7 +156,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
 
     char* http_response = NULL;
     int http_response_length = 0;
-    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_POST, token_endpoint, sc, content_type, refresh_token_post_data);
+    rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_POST, token_endpoint, sc, content_type, refresh_token_post_data);
     if (200 != rc) {
         rc = -1;
         goto end;
@@ -201,7 +201,7 @@ int refresh(kubeconfig_property_t* auth_provider)
 
     sslConfig_t *sc = NULL;
     if (auth_provider->idp_certificate_authority_data) {
-        char *idp_certificate_file = kubeconfig_mk_cert_key_tempfile(user->idp_certificate_authority_data);
+        char *idp_certificate_file = kubeconfig_mk_cert_key_tempfile(auth_provider->idp_certificate_authority_data);
         sc = sslConfig_create(NULL, NULL, idp_certificate_file, 0);
         free(idp_certificate_file);
         idp_certificate_file = NULL;

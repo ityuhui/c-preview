@@ -259,7 +259,7 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
             fprintf(stderr, "%s: Cannot refresh token of auth provider: %s.\n", fname, auth_provider->name);
             goto end;
         }
-        rc = kubeyaml_save_kubeconfig(kubeconfig->fileName);
+        rc = kubeyaml_save_kubeconfig(kubeconfig);
         if (0 != rc) {
             fprintf(stderr, "%s: Cannot persist to kubeconfig file: %s.\n", fname, kubeconfig->fileName);
             goto end;

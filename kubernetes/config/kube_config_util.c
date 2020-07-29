@@ -1,3 +1,11 @@
+#include <stdio.h>
+#include <errno.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "../include/binary.h"
+
 #define KUBE_CONFIG_TEMPFILE_NAME_TEMPLATE "/tmp/kubeconfig-XXXXXX"
 
 static bool is_cert_or_key_base64_encoded(const char* data)

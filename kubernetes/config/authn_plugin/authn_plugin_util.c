@@ -1,6 +1,7 @@
 #include "authn_plugin_util.h"
+#include <errno.h>
 
-int shc_request(char **p_http_response, int *p_http_response_length, const char *type, const char *url, const sslConfig_t *sc, const list_t* contentType, const char *post_data)
+int shc_request(char **p_http_response, int *p_http_response_length, char *type, const char *url, sslConfig_t *sc, list_t* contentType, char *post_data)
 {
     static char fname[] = "shc_request()";
 
@@ -20,7 +21,7 @@ int shc_request(char **p_http_response, int *p_http_response_length, const char 
         printf("%s: Unauthorized\n", fname);
         break;
     default:
-        printf("%s: response_code=%d\n", fname, http_client->response_code);
+        printf("%s: response_code=%ld\n", fname, http_client->response_code);
         break;
     }
 
@@ -52,7 +53,7 @@ char* shc_get_string_from_json(const char *json_string, const char* key)
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
         goto end;
     }
-    value = cJSON_GetObjectItem(json, key);
+    cJSON *value = cJSON_GetObjectItem(json, key);
     if (!value) {
         fprintf(stderr, "%s: Cannot get the value for %s.\n", fname, key);
         goto end;
