@@ -207,10 +207,18 @@ static int parse_kubeconfig_yaml_property_mapping(kubeconfig_property_t * proper
                     property->command = strdup(value->data.scalar.value);
                 }
             } else if (KUBECONFIG_PROPERTY_TYPE_USER_AUTH_PROVIDER == property->type) {
-                if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_ID)) {
+                if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_ACCESS_TOKEN)) {
+                    property->access_token = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_ID)) {
                     property->client_id = strdup(value->data.scalar.value);
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_CLIENT_SECRET)) {
                     property->client_secret = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_CMD_PATH)) {
+                    property->cmd_path = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_EXPIRES_ON)) {
+                    property->expires_on = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_EXPIRY)) {
+                    property->expiry = strdup(value->data.scalar.value);
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_ID_TOKEN)) {
                     property->id_token = strdup(value->data.scalar.value);
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY_DATA)) {
