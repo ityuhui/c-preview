@@ -100,7 +100,7 @@ bool is_expired(kubeconfig_property_t* auth_provider)
     return false;
 }
 
-char *get_token_endpoint(const char *idp_issuer_url, const sslConfig_t *sc)
+char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
 {
     static char fname[] = "get_token_endpoint()";
 
@@ -131,7 +131,7 @@ end:
     return token_endpoint;
 }
 
-static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *token_endpoint, const sslConfig_t *sc)
+static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *token_endpoint, sslConfig_t *sc)
 {
     static char fname[] = "refresh_oidc_token()";
 

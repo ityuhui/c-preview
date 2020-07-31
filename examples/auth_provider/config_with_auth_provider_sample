@@ -16,6 +16,7 @@ users:
 - name: kubernetes-admin
   user:
     auth-provider:
+      name: oidc
       config:
         client-id: 
         client-secret:
