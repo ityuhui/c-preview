@@ -26,23 +26,6 @@ static int setBasePath(char **pBasePath, char *basePath)
     return -1;
 }
 
-static void unsetSslConfig(sslConfig_t * sslConfig)
-{
-    if (!sslConfig) {
-        return;
-    }
-
-    if (sslConfig->clientCertFile) {
-        kubeconfig_rm_tempfile(sslConfig->clientCertFile);
-    }
-    if (sslConfig->clientKeyFile) {
-        kubeconfig_rm_tempfile(sslConfig->clientKeyFile);
-    }
-    if (sslConfig->CACertFile) {
-        kubeconfig_rm_tempfile(sslConfig->CACertFile);
-    }
-}
-
 static int setSslConfig(sslConfig_t ** pSslConfig, const kubeconfig_property_t * cluster, const kubeconfig_property_t * user)
 {
     int rc = 0;
@@ -256,7 +239,7 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
     if (plugin->is_expired(auth_provider)) {
         rc = plugin->refresh(auth_provider);
         if ( 0 != rc) {
-            fprintf(stderr, "%s: Cannot refresh token of auth provider: %s.\n", fname, auth_provider->name);
+            fprintf(stderr, "%s: Cannot refresh token of auth provider <%s>.\n", fname, auth_provider->name);
             goto end;
         }
         rc = kubeyaml_save_kubeconfig(kubeconfig);
@@ -268,7 +251,7 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
     const char *token = plugin->get_token(auth_provider);
     if (!token) {
         rc = -1;
-        fprintf(stderr, "%s: Cannot get token from auth provider: %s.\n", fname, auth_provider->name);
+        fprintf(stderr, "%s: Cannot get token from auth provider <%s>.\n", fname, auth_provider->name);
         goto end;
     }
     current_user->token = strdup(token);

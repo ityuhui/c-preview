@@ -4,7 +4,7 @@
 #include <dlfcn.h> 
 #include <errno.h>
 
-#define PLUGIN_NAME_TEMPLATE "libkubernetes_%s"
+#define PLUGIN_NAME_TEMPLATE "libkubernetes_%s.so"
 #define PLUGIN_LIB_NAME_SIZE 64
 
 #define PLUGIN_FUNCTION_GET_TOKEN "get_token"

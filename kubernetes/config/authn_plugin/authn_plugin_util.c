@@ -12,7 +12,8 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
     }
     apiClient_invoke(http_client, NULL, NULL, NULL, NULL, NULL, contentType, post_data, type);
 
-    switch (http_client->response_code) {
+    int rc = http_client->response_code;
+    switch (rc) {
     case 200:
         *p_http_response = strdup(http_client->dataReceived);
         *p_http_response_length = http_client->dataReceivedLen;
@@ -36,7 +37,7 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
         http_client = NULL;
     }
 
-    return http_client->response_code;
+    return rc;
 }
 
 char* shc_get_string_from_json(const char *json_string, const char* key)

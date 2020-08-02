@@ -26,7 +26,8 @@ static time_t get_token_expiration_time(const char *token_string)
 
     time_t expiration_time = 0;
 
-    if (!token_string) {
+    if (!token_string ||
+        '\0' == token_string[0]) {
         return 0;
     }
     char *dup_token_string = strdup(token_string);
@@ -88,7 +89,13 @@ char* get_token(kubeconfig_property_t* auth_provider)
 
 bool is_expired(kubeconfig_property_t* auth_provider)
 {
-    if (!auth_provider->id_token) {
+    static char fname[] = "is_expired()";
+
+    if (NULL == auth_provider->id_token) {
+        fprintf(stderr, "%s: The id token is NULL.\n", fname);
+        return true;
+    } else if ('\0' == auth_provider->id_token[0]) {
+        fprintf(stderr, "%s: The id token is empty.\n", fname);
         return true;
     }
 
@@ -105,7 +112,12 @@ char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
     static char fname[] = "get_token_endpoint()";
 
     if (!idp_issuer_url ||
-        !sc) {
+        '\0' == idp_issuer_url[0]){
+        fprintf(stderr, "%s: The parameters idp_issuer_url is NULL or empty.\n", fname);
+        return NULL;
+    }
+    if (!sc) {
+        fprintf(stderr, "%s: SSL configuration is required.\n", fname);
         return NULL;
     }
 
@@ -117,6 +129,7 @@ char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
     int http_response_length = 0;
     int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET,oidc_configuration_url, sc, NULL, NULL);
     if (200 != rc) {
+        fprintf(stderr, "%s: Failed to get token endpoint.\n", fname);
         goto end;
     }
     
@@ -140,6 +153,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
     if (!auth_provider ||
         !token_endpoint ||
         !sc) {
+        fprintf(stderr, "%s: The parameters are not valid.\n", fname);
         return -1;
     }
 
@@ -159,6 +173,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
     rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_POST, token_endpoint, sc, content_type, refresh_token_post_data);
     if (200 != rc) {
         rc = -1;
+        fprintf(stderr, "%s: Failed to refresh OIDC token.\n", fname);
         goto end;
     }
 
@@ -171,6 +186,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         auth_provider->id_token = new_id_token;
     } else {
         rc = -1;
+        fprintf(stderr, "%s: Failed to get the new OIDC token from the response.\n", fname);
         goto end;
     }
 
@@ -183,6 +199,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         auth_provider->refresh_token = new_refresh_token;
     } else {
         rc = -1;
+        fprintf(stderr, "%s: Failed to get the new refresh token from the response.\n", fname);
         goto end;
     }
 
@@ -197,10 +214,13 @@ end:
 
 int refresh(kubeconfig_property_t* auth_provider)
 {
+    static char fname[] = "refresh()";
+
     int rc = 0;
 
     sslConfig_t *sc = NULL;
-    if (auth_provider->idp_certificate_authority_data) {
+    if (auth_provider->idp_certificate_authority_data &&
+        '\0' != auth_provider->idp_certificate_authority_data[0]) {
         char *idp_certificate_file = kubeconfig_mk_cert_key_tempfile(auth_provider->idp_certificate_authority_data);
         sc = sslConfig_create(NULL, NULL, idp_certificate_file, 0);
         free(idp_certificate_file);
@@ -209,16 +229,19 @@ int refresh(kubeconfig_property_t* auth_provider)
         sc = sslConfig_create(NULL, NULL, NULL, 1);
     }
     if (!sc) {
+        fprintf(stderr, "%s: Cannot create the SSL configuration.\n", fname);
         return -1;
     }
 
     char *token_endpoint = get_token_endpoint(auth_provider->idp_issuer_url, sc);
     if (!token_endpoint) {
         rc = -1;
+        fprintf(stderr, "%s: Cannot get the token endpoint.\n", fname);
         goto end;
     }
     rc = refresh_oidc_token(auth_provider, token_endpoint, sc);
     if (-1 == rc) {
+        fprintf(stderr, "%s: Failed to refresh OIDC token.\n", fname);
         goto end;
     }
 
@@ -228,6 +251,7 @@ end:
         token_endpoint = NULL;
     }
     if (sc) {
+        unsetSslConfig(sc);
         sslConfig_free(sc);
         sc = NULL;
     }

@@ -29,11 +29,11 @@ extern "C" {
     char* kubeconfig_mk_cert_key_tempfile(const char *data);
 
 /*
- * kubeconfig_rm_tempfile
+ * unsetSslConfig
  *
  * Description:
  *
- * Delete the temporary file
+ * unset the SSL configuration
  *
  * Return:
  * 
@@ -42,13 +42,13 @@ extern "C" {
  * Parameter:
  *
  * IN:
- * filename: The file name of temporary file
+ * sslConfig: The SSL configuration
  *
  * OUT:
  * None
  *
  */
-    void kubeconfig_rm_tempfile(const char *filename);
+    void unsetSslConfig(sslConfig_t* sslConfig);
 
 #ifdef  __cplusplus
 }

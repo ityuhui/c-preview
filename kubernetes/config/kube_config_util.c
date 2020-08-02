@@ -4,7 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../include/binary.h"
+#include "../include/apiClient.h"
 
 #define KUBE_CONFIG_TEMPFILE_NAME_TEMPLATE "/tmp/kubeconfig-XXXXXX"
 
@@ -60,9 +60,26 @@ char* kubeconfig_mk_cert_key_tempfile(const char* data)
     return strdup(tempfile_name_template);
 }
 
-void kubeconfig_rm_tempfile(const char* filename)
+static void kubeconfig_rm_tempfile(const char* filename)
 {
     if (filename) {
         unlink(filename);
+    }
+}
+
+void unsetSslConfig(sslConfig_t* sslConfig)
+{
+    if (!sslConfig) {
+        return;
+    }
+
+    if (sslConfig->clientCertFile) {
+        kubeconfig_rm_tempfile(sslConfig->clientCertFile);
+    }
+    if (sslConfig->clientKeyFile) {
+        kubeconfig_rm_tempfile(sslConfig->clientKeyFile);
+    }
+    if (sslConfig->CACertFile) {
+        kubeconfig_rm_tempfile(sslConfig->CACertFile);
     }
 }
