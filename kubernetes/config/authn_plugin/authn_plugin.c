@@ -24,7 +24,7 @@ authn_plugin_t* create_authn_plugin(const char *name)
     char plugin_lib_name[PLUGIN_LIB_NAME_SIZE];
     memset(plugin_lib_name,0, sizeof(plugin_lib_name));
     snprintf(plugin_lib_name, sizeof(plugin_lib_name), PLUGIN_NAME_TEMPLATE, name);
-    void* dlhandler = dlopen(plugin_lib_name, RTLD_LAZY);
+    void *dlhandler = dlopen(plugin_lib_name, RTLD_LAZY);
 
     if (!dlhandler) {
         fprintf(stderr, "%s: Cannot load the library %s.[%s]\n", fname, plugin_lib_name, dlerror());

@@ -250,8 +250,8 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
     }
     const char *token = plugin->get_token(auth_provider);
     if (!token) {
-        rc = -1;
         fprintf(stderr, "%s: Cannot get token from auth provider <%s>.\n", fname, auth_provider->name);
+        rc = -1;
         goto end;
     }
     current_user->token = strdup(token);

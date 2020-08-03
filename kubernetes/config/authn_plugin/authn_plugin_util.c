@@ -14,11 +14,11 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
 
     int rc = http_client->response_code;
     switch (rc) {
-    case 200:
+    case HTTP_RC_OK:
         *p_http_response = strdup(http_client->dataReceived);
         *p_http_response_length = http_client->dataReceivedLen;
         break;
-    case 400:
+    case HTTP_RC_UNAUTHORIZED:
         printf("%s: Unauthorized\n", fname);
         break;
     default:
@@ -44,15 +44,17 @@ char* shc_get_string_from_json(const char *json_string, const char* key)
 {
     static char fname[] = "shc_get_string_from_json()";
 
-    if (!json_string) {
+    char *res = NULL;
+
+    if (!json_string ||
+        !key) {
         return NULL;
     }
 
-    char* res = NULL;
     cJSON *json = cJSON_Parse(json_string);
     if (!json) {
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
-        goto end;
+        return NULL;
     }
     cJSON *value = cJSON_GetObjectItem(json, key);
     if (!value) {

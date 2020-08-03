@@ -4,6 +4,7 @@
 #include "binary.h"
 #include "cJSON.h"
 #include <time.h>
+#include <errno.h>
 
 #define OIDC_ID_TOKEN_DELIM "."
 #define OIDC_ID_TOKEN_EXP "exp"
@@ -48,7 +49,7 @@ static time_t get_token_expiration_time(const char *token_string)
     }
 
     int decoded_bytes = 0;
-    char* b64decode = base64decode(p, strlen(p), &decoded_bytes);
+    char *b64decode = base64decode(p, strlen(p), &decoded_bytes);
     if (!b64decode || 0 == decoded_bytes) {
         fprintf(stderr, "%s: Base64 decodes failed.\n", fname);
         goto end;
@@ -107,7 +108,7 @@ bool is_expired(kubeconfig_property_t* auth_provider)
     return false;
 }
 
-char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
+char* get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
 {
     static char fname[] = "get_token_endpoint()";
 
@@ -127,10 +128,10 @@ char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
     memset(oidc_configuration_url,sizeof(oidc_configuration_url), 0);
     snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
 
-    char* http_response = NULL;
+    char *http_response = NULL;
     int http_response_length = 0;
-    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET,oidc_configuration_url, sc, NULL, NULL);
-    if (200 != rc) {
+    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET, oidc_configuration_url, sc, NULL, NULL);
+    if (HTTP_RC_OK != rc) {
         fprintf(stderr, "%s: Failed to get token endpoint.\n", fname);
         goto end;
     }
@@ -160,6 +161,10 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
     }
 
     list_t* content_type = list_create();
+    if (!content_type) {
+        fprintf(stderr, "%s: Cannot create list for content type.[%s]\n", fname, strerror(errno));
+        return -1;
+    }
     list_addElement(content_type, REFRESH_TOKEN_CONTENT_TYPE);
 
     char refresh_token_credential[REFRESH_TOKEN_CREDENTIAL_BUFFER_SIZE];
@@ -170,12 +175,12 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
     memset(refresh_token_post_data, sizeof(refresh_token_post_data), 0);
     snprintf(refresh_token_post_data, sizeof(refresh_token_post_data), REFRESH_TOKEN_POST_DATA_TEMPLATE, auth_provider->refresh_token);
 
-    char* http_response = NULL;
+    char *http_response = NULL;
     int http_response_length = 0;
     rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_POST, token_endpoint, sc, content_type, refresh_token_post_data);
-    if (200 != rc) {
-        rc = -1;
+    if (HTTP_RC_OK != rc) {
         fprintf(stderr, "%s: Failed to refresh OIDC token.\n", fname);
+        rc = -1;
         goto end;
     }
 
@@ -187,8 +192,8 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         }
         auth_provider->id_token = new_id_token;
     } else {
-        rc = -1;
         fprintf(stderr, "%s: Failed to get the new OIDC token from the response.\n", fname);
+        rc = -1;
         goto end;
     }
 
@@ -208,9 +213,13 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
 end:
     if (http_response) {
         free(http_response);
+        http_response = NULL;
         http_response_length = 0;
     }
-    list_free(content_type);
+    if (content_type) {
+        list_free(content_type);
+        content_type = NULL;
+    }
     return rc;
 }
 
@@ -224,6 +233,10 @@ int refresh(kubeconfig_property_t* auth_provider)
     if (auth_provider->idp_certificate_authority_data &&
         '\0' != auth_provider->idp_certificate_authority_data[0]) {
         char *idp_certificate_file = kubeconfig_mk_cert_key_tempfile(auth_provider->idp_certificate_authority_data);
+        if (!idp_certificate_file) {
+            fprintf(stderr, "%s: Failed to create the temporary file for certificate.\n", fname);
+            return -1;
+        }
         sc = sslConfig_create(NULL, NULL, idp_certificate_file, 0);
         free(idp_certificate_file);
         idp_certificate_file = NULL;
@@ -237,8 +250,8 @@ int refresh(kubeconfig_property_t* auth_provider)
 
     char *token_endpoint = get_token_endpoint(auth_provider->idp_issuer_url, sc);
     if (!token_endpoint) {
-        rc = -1;
         fprintf(stderr, "%s: Cannot get the token endpoint.\n", fname);
+        rc = -1;
         goto end;
     }
     rc = refresh_oidc_token(auth_provider, token_endpoint, sc);

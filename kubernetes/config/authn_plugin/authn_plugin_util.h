@@ -1,16 +1,21 @@
 #ifndef _AUTHN_PLUGIN_UTIL_H
 #define _AUTHN_PLUGIN_UTIL_H
 
-#define HTTP_REQUEST_GET "GET"
-#define HTTP_REQUEST_POST "POST"
-#define HTTP_REQUEST_DELETE "DELETE"
-#define HTTP_REQUEST_PATCH "PATCH"
+#include "../../include/apiClient.h"
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
-#include "../../include/apiClient.h"
+    #define HTTP_REQUEST_GET "GET"
+    #define HTTP_REQUEST_POST "POST"
+    #define HTTP_REQUEST_DELETE "DELETE"
+    #define HTTP_REQUEST_PATCH "PATCH"
+
+    typedef enum shc_http_rc_t {
+        HTTP_RC_OK = 200,
+        HTTP_RC_UNAUTHORIZED = 400
+    } shc_http_rc_t;
 
 /*
  * shc_request
@@ -57,29 +62,6 @@ extern "C" {
  *
  */
     char* shc_get_string_from_json(const char *json_string, const char *key);
-
-/*
- * shc_reset_client
- *
- * Description:
- *
- * Reset a http client before next calling
- *
- * Return:
- *
- *  char *   :   File name of created temporary file
- *  NULL     :   Failed to create temporary file
- *
- * Parameter:
- *
- * IN:
- * data: raw data of SSL/TLS certificate or key
- *
- * OUT:
- * None
- *
- */
-    void shc_reset_client(apiClient_t*);
 
 #ifdef  __cplusplus
 }
