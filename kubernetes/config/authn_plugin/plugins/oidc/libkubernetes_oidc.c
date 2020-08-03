@@ -111,6 +111,8 @@ char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
 {
     static char fname[] = "get_token_endpoint()";
 
+    char *token_endpoint = NULL;
+
     if (!idp_issuer_url ||
         '\0' == idp_issuer_url[0]){
         fprintf(stderr, "%s: The parameters idp_issuer_url is NULL or empty.\n", fname);
@@ -133,7 +135,7 @@ char *get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
         goto end;
     }
     
-    char *token_endpoint = shc_get_string_from_json(http_response, OIDC_TOKEN_ENDPOINT);
+    token_endpoint = shc_get_string_from_json(http_response, OIDC_TOKEN_ENDPOINT);
 
 end:
     if (http_response) {
