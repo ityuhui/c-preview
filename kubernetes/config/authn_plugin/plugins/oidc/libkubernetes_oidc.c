@@ -125,7 +125,7 @@ char* get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
     }
 
     char oidc_configuration_url[OIDC_CONFIGURATION_URL_BUFFER_SIZE];
-    memset(oidc_configuration_url,sizeof(oidc_configuration_url), 0);
+    memset(oidc_configuration_url, 0, sizeof(oidc_configuration_url));
     snprintf(oidc_configuration_url, sizeof(oidc_configuration_url), OIDC_CONFIGURATION_URL_TEMPLATE, idp_issuer_url);
 
     char *http_response = NULL;
@@ -168,11 +168,11 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
     list_addElement(content_type, REFRESH_TOKEN_CONTENT_TYPE);
 
     char refresh_token_credential[REFRESH_TOKEN_CREDENTIAL_BUFFER_SIZE];
-    memset(refresh_token_credential,sizeof(refresh_token_credential), 0);
+    memset(refresh_token_credential, 0, sizeof(refresh_token_credential));
     snprintf(refresh_token_credential, sizeof(refresh_token_credential), REFRESH_TOKEN_CREDENTIAL_TEMPLATE, auth_provider->client_id, auth_provider->client_secret);
 
     char refresh_token_post_data[REFRESH_TOKEN_POST_DATA_BUFFER_SIZE];
-    memset(refresh_token_post_data, sizeof(refresh_token_post_data), 0);
+    memset(refresh_token_post_data, 0, sizeof(refresh_token_post_data));
     snprintf(refresh_token_post_data, sizeof(refresh_token_post_data), REFRESH_TOKEN_POST_DATA_TEMPLATE, auth_provider->refresh_token);
 
     char *http_response = NULL;
