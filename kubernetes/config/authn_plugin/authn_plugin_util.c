@@ -1,11 +1,11 @@
 #include "authn_plugin_util.h"
 #include <errno.h>
 
-int shc_request(char **p_http_response, int *p_http_response_length, char *type, const char *url, sslConfig_t *sc, list_t* contentType, char *post_data)
+int shc_request(char **p_http_response, int *p_http_response_length, char *type, const char *url, sslConfig_t *sc, list_t* apiKeys, list_t* contentType, char *post_data)
 {
     static char fname[] = "shc_request()";
 
-    apiClient_t *http_client = apiClient_create_with_base_path(url, sc, NULL);
+    apiClient_t *http_client = apiClient_create_with_base_path(url, sc, apiKeys);
     if (!http_client) {
         fprintf(stderr, "%s: Cannot create http client. [%s].\n", fname, strerror(errno));
         return -1;
@@ -18,11 +18,11 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
         *p_http_response = strdup(http_client->dataReceived);
         *p_http_response_length = http_client->dataReceivedLen;
         break;
-    case HTTP_RC_UNAUTHORIZED:
-        printf("%s: Unauthorized\n", fname);
-        break;
     default:
         printf("%s: response_code=%ld\n", fname, http_client->response_code);
+        if (http_client->dataReceived) {
+            printf("%s: %s\n", fname, http_client->dataReceived);
+        }
         break;
     }
 

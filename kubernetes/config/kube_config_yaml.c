@@ -39,6 +39,7 @@ mapping :: = MAPPING - START(node node) * MAPPING - END
 #define KEY_USER_AUTH_PROVIDER_CONFIG_EXPIRES_ON "expires-on"
 #define KEY_USER_AUTH_PROVIDER_CONFIG_EXPIRY "expiry"
 #define KEY_USER_AUTH_PROVIDER_CONFIG_ID_TOKEN "id-token"
+#define KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY "idp-certificate-authority"
 #define KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY_DATA "idp-certificate-authority-data"
 #define KEY_USER_AUTH_PROVIDER_CONFIG_IDP_ISSUE_URL "idp-issuer-url"
 #define KEY_USER_AUTH_PROVIDER_CONFIG_REFRESH_TOKEN "refresh-token"
@@ -221,6 +222,8 @@ static int parse_kubeconfig_yaml_property_mapping(kubeconfig_property_t * proper
                     property->expiry = strdup(value->data.scalar.value);
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_ID_TOKEN)) {
                     property->id_token = strdup(value->data.scalar.value);
+                } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY)) {
+                    property->idp_certificate_authority = strdup(value->data.scalar.value);
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY_DATA)) {
                     property->idp_certificate_authority_data = strdup(value->data.scalar.value);
                 } else if (0 == strcmp(key->data.scalar.value, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_ISSUE_URL)) {
@@ -693,6 +696,13 @@ int append_auth_provider_config_to_mapping_node(yaml_document_t* output_document
     }
 
     /* Add 'idp-certificate-authority': '' */
+    if (auth_provider_config->idp_certificate_authority) {
+        if (-1 == append_key_stringvalue_to_mapping_node(output_document, map, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY, auth_provider_config->idp_certificate_authority)) {
+            return -1;
+        }
+    }
+
+    /* Add 'idp-certificate-authority-data': '' */
     if (auth_provider_config->idp_certificate_authority_data) {
         if (-1 == append_key_stringvalue_to_mapping_node(output_document, map, KEY_USER_AUTH_PROVIDER_CONFIG_IDP_CERTIFICATE_AUTHORITY_DATA, auth_provider_config->idp_certificate_authority_data)) {
             return -1;

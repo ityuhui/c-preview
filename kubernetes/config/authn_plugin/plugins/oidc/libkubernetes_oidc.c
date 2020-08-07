@@ -1,6 +1,7 @@
 #include "authn_plugin.h"
 #include "authn_plugin_util.h"
 #include "kube_config_util.h"
+#include "kube_config_common.h"
 #include "binary.h"
 #include "cJSON.h"
 #include <time.h>
@@ -14,7 +15,7 @@
 #define OIDC_REFRESH_TOKEN "refresh_token"
 
 #define REFRESH_TOKEN_CONTENT_TYPE "application/x-www-form-urlencoded"
-#define REFRESH_TOKEN_CREDENTIAL_TEMPLATE "Basic %s:%s"
+#define REFRESH_TOKEN_CREDENTIAL_TEMPLATE "%s:%s"
 #define REFRESH_TOKEN_POST_DATA_TEMPLATE "refresh_token=%s&grant_type=refresh_token"
 
 #define OIDC_CONFIGURATION_URL_BUFFER_SIZE 1024
@@ -130,7 +131,7 @@ char* get_token_endpoint(const char *idp_issuer_url, sslConfig_t *sc)
 
     char *http_response = NULL;
     int http_response_length = 0;
-    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET, oidc_configuration_url, sc, NULL, NULL);
+    int rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_GET, oidc_configuration_url, sc, NULL, NULL, NULL);
     if (HTTP_RC_OK != rc) {
         fprintf(stderr, "%s: Failed to get token endpoint.\n", fname);
         goto end;
@@ -165,11 +166,29 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
         fprintf(stderr, "%s: Cannot create list for content type.[%s]\n", fname, strerror(errno));
         return -1;
     }
-    list_addElement(content_type, REFRESH_TOKEN_CONTENT_TYPE);
+    list_addElement(content_type, strdup(REFRESH_TOKEN_CONTENT_TYPE));
 
     char refresh_token_credential[REFRESH_TOKEN_CREDENTIAL_BUFFER_SIZE];
     memset(refresh_token_credential, 0, sizeof(refresh_token_credential));
     snprintf(refresh_token_credential, sizeof(refresh_token_credential), REFRESH_TOKEN_CREDENTIAL_TEMPLATE, auth_provider->client_id, auth_provider->client_secret);
+    char* base64_credential = base64encode(refresh_token_credential, strlen(refresh_token_credential));
+    if (!base64_credential) {
+        fprintf(stderr, "%s: Cannot encode refresh token with base64.\n", fname);
+        rc = -1;
+        goto end;
+    }
+    char basic_token_buffer[BASIC_TOKEN_BUFFER_SIZE];
+    memset(basic_token_buffer, 0, sizeof(basic_token_buffer));
+    snprintf(basic_token_buffer, sizeof(basic_token_buffer), BASIC_TOKEN_TEMPLATE, base64_credential);
+
+    list_t* api_keys = list_create();
+    if (!api_keys) {
+        fprintf(stderr, "%s: Cannot create list for refresh token.[%s]\n", fname, strerror(errno));
+        rc = -1;
+        goto end;
+    }
+    keyValuePair_t* keyPairToken = keyValuePair_create(strdup(AUTH_TOKEN_KEY), strdup(basic_token_buffer));
+    list_addElement(api_keys, keyPairToken);
 
     char refresh_token_post_data[REFRESH_TOKEN_POST_DATA_BUFFER_SIZE];
     memset(refresh_token_post_data, 0, sizeof(refresh_token_post_data));
@@ -177,7 +196,7 @@ static int refresh_oidc_token(kubeconfig_property_t *auth_provider, const char *
 
     char *http_response = NULL;
     int http_response_length = 0;
-    rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_POST, token_endpoint, sc, content_type, refresh_token_post_data);
+    rc = shc_request(&http_response, &http_response_length, HTTP_REQUEST_POST, token_endpoint, sc, api_keys, content_type, refresh_token_post_data);
     if (HTTP_RC_OK != rc) {
         fprintf(stderr, "%s: Failed to refresh OIDC token.\n", fname);
         rc = -1;
@@ -216,8 +235,16 @@ end:
         http_response = NULL;
         http_response_length = 0;
     }
+    if (base64_credential) {
+        free(base64_credential);
+        base64_credential = NULL;
+    }
+    if (api_keys) {
+        clear_and_free_string_pair_list(api_keys);
+        api_keys = NULL;
+    }
     if (content_type) {
-        list_free(content_type);
+        clear_and_free_string_list(content_type);
         content_type = NULL;
     }
     return rc;
@@ -230,7 +257,10 @@ int refresh(kubeconfig_property_t* auth_provider)
     int rc = 0;
 
     sslConfig_t *sc = NULL;
-    if (auth_provider->idp_certificate_authority_data &&
+    if (auth_provider->idp_certificate_authority &&
+        '\0' != auth_provider->idp_certificate_authority[0]) {
+        sc = sslConfig_create(NULL, NULL, auth_provider->idp_certificate_authority, 0);
+    } else if (auth_provider->idp_certificate_authority_data &&
         '\0' != auth_provider->idp_certificate_authority_data[0]) {
         char *idp_certificate_file = kubeconfig_mk_cert_key_tempfile(auth_provider->idp_certificate_authority_data);
         if (!idp_certificate_file) {
@@ -266,7 +296,11 @@ end:
         token_endpoint = NULL;
     }
     if (sc) {
-        unsetSslConfig(sc);
+        if ( NULL == auth_provider->idp_certificate_authority &&
+            auth_provider->idp_certificate_authority_data &&
+            '\0' != auth_provider->idp_certificate_authority_data[0]) {
+            unsetSslConfig(sc);
+        }
         sslConfig_free(sc);
         sc = NULL;
     }

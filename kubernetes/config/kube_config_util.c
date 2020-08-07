@@ -83,3 +83,41 @@ void unsetSslConfig(sslConfig_t* sslConfig)
         kubeconfig_rm_tempfile(sslConfig->CACertFile);
     }
 }
+
+void clear_and_free_string_pair_list(list_t* list)
+{
+    if (!list) {
+        return;
+    }
+
+    listEntry_t* listEntry = NULL;
+    list_ForEach(listEntry, list) {
+        keyValuePair_t* pair = listEntry->data;
+        if (pair->key) {
+            free(pair->key);
+            pair->key = NULL;
+        }
+        if (pair->value) {
+            free(pair->value);
+            pair->value = NULL;
+        }
+        keyValuePair_free(pair);
+        pair = NULL;
+    }
+    list_free(list);
+}
+
+void clear_and_free_string_list(list_t* list)
+{
+    if (!list) {
+        return;
+    }
+    
+    listEntry_t* listEntry = NULL;
+    list_ForEach(listEntry, list) {
+        char* list_item = listEntry->data;
+        free(list_item);
+        list_item = NULL;
+    }
+    list_free(list);
+}

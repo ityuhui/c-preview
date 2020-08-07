@@ -78,6 +78,7 @@ extern "C" {
                 char *expires_on;
                 char *expiry;
                 char *id_token;
+                char *idp_certificate_authority;
                 char *idp_certificate_authority_data;
                 char *idp_issuer_url;
                 char *refresh_token;

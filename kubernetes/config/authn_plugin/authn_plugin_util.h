@@ -38,7 +38,7 @@ extern "C" {
  * None
  *
  */
-    int shc_request(char** p_http_response, int* p_http_response_length, char *request_type, const char *url, sslConfig_t* sc, list_t* , char* post_data);
+    int shc_request(char** p_http_response, int* p_http_response_length, char *request_type, const char *url, sslConfig_t* sc, list_t* apiKeys, list_t* contentType, char* post_data);
 
 /*
  * shc_get_string_from_json

@@ -50,6 +50,10 @@ extern "C" {
  */
     void unsetSslConfig(sslConfig_t* sslConfig);
 
+    void clear_and_free_string_pair_list(list_t* list);
+
+    void clear_and_free_string_list(list_t* list);
+
 #ifdef  __cplusplus
 }
 #endif

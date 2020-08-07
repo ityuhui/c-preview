@@ -368,17 +368,6 @@ void free_client_config(char *basePath, sslConfig_t * sslConfig, list_t * apiKey
     }
 
     if (apiKeys) {
-        listEntry_t *listEntry = NULL;
-        list_ForEach(listEntry, apiKeys) {
-            keyValuePair_t *pair = listEntry->data;
-            if (pair->key) {
-                free(pair->key);
-            }
-            if (pair->value) {
-                free(pair->value);
-            }
-            keyValuePair_free(pair);
-        }
-        list_free(apiKeys);
+        clear_and_free_string_pair_list(apiKeys);
     }
 }
