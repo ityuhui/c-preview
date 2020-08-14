@@ -14,6 +14,10 @@
 #define OIDC_ID_TOKEN "id_token"
 #define OIDC_REFRESH_TOKEN "refresh_token"
 
+#define JWT_PART2_BUFFER_SIZE 1024
+#define BASE64_PADDING_STRING_SIZE 4
+#define BASE64_PADDING_CHAR "="
+
 #define REFRESH_TOKEN_CONTENT_TYPE "application/x-www-form-urlencoded"
 #define REFRESH_TOKEN_CREDENTIAL_TEMPLATE "%s:%s"
 #define REFRESH_TOKEN_POST_DATA_TEMPLATE "refresh_token=%s&grant_type=refresh_token"
@@ -49,8 +53,19 @@ static time_t get_token_expiration_time(const char *token_string)
         goto end;
     }
 
+    int base64_padding_length = 4 - strlen(p) % 4 ;
+    char base64_padding_string[BASE64_PADDING_STRING_SIZE];
+    memset(base64_padding_string, 0, sizeof(base64_padding_string));
+    for (int i = 0; i < base64_padding_length; i++) {
+        strncat(base64_padding_string, BASE64_PADDING_CHAR, 1);
+    }
+
+    char jwt_part2_string[JWT_PART2_BUFFER_SIZE];
+    memset(jwt_part2_string, 0, sizeof(jwt_part2_string));
+    snprintf(jwt_part2_string, sizeof(jwt_part2_string), "%s%s", p, base64_padding_string);
+
     int decoded_bytes = 0;
-    char *b64decode = base64decode(p, strlen(p), &decoded_bytes);
+    char *b64decode = base64decode(jwt_part2_string, strlen(jwt_part2_string), &decoded_bytes);
     if (!b64decode || 0 == decoded_bytes) {
         fprintf(stderr, "%s: Base64 decodes failed.\n", fname);
         goto end;
