@@ -83,6 +83,10 @@ void kubeconfig_property_free(kubeconfig_property_t * property)
             free(property->password);
             property->password = NULL;
         }
+        if (property->token) {
+            free(property->token);
+            property->token = NULL;
+        }
         if (property->auth_provider) {
             kubeconfig_property_free(property->auth_provider);
             property->auth_provider = NULL;

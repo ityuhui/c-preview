@@ -215,7 +215,7 @@ static int kubeconfig_update_exec_command_path(kubeconfig_property_t * exec, con
     return rc;
 }
 
-static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeconfig_t *kubeconfig)
+static int kuberconfig_auth_provider(kubeconfig_property_t * current_user, kubeconfig_t * kubeconfig)
 {
     static char fname[] = "kuberconfig_auth_provider()";
 
@@ -238,7 +238,7 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
     int rc = 0;
     if (plugin->is_expired(auth_provider)) {
         rc = plugin->refresh(auth_provider);
-        if ( 0 != rc) {
+        if (0 != rc) {
             fprintf(stderr, "%s: Cannot refresh token of auth provider <%s>.\n", fname, auth_provider->name);
             goto end;
         }
@@ -256,7 +256,7 @@ static int kuberconfig_auth_provider(kubeconfig_property_t* current_user, kubeco
     }
     current_user->token = strdup(token);
 
-end:
+  end:
     free_authn_plugin(plugin);
     plugin = NULL;
     return rc;

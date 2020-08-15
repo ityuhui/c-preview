@@ -1,7 +1,7 @@
 #include "authn_plugin_util.h"
 #include <errno.h>
 
-int shc_request(char **p_http_response, int *p_http_response_length, char *type, const char *url, sslConfig_t *sc, list_t* apiKeys, list_t* contentType, char *post_data)
+int shc_request(char **p_http_response, int *p_http_response_length, char *type, const char *url, sslConfig_t * sc, list_t * apiKeys, list_t * contentType, char *post_data)
 {
     static char fname[] = "shc_request()";
 
@@ -21,7 +21,7 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
     default:
         printf("%s: response_code=%ld\n", fname, http_client->response_code);
         if (http_client->dataReceived) {
-            printf("%s: %s\n", fname, http_client->dataReceived);
+            printf("%s: %s\n", fname, (char *)http_client->dataReceived);
         }
         break;
     }
@@ -40,14 +40,13 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
     return rc;
 }
 
-char* shc_get_string_from_json(const char *json_string, const char* key)
+char *shc_get_string_from_json(const char *json_string, const char *key)
 {
     static char fname[] = "shc_get_string_from_json()";
 
     char *res = NULL;
 
-    if (!json_string ||
-        !key) {
+    if (!json_string || !key) {
         return NULL;
     }
 
@@ -61,14 +60,13 @@ char* shc_get_string_from_json(const char *json_string, const char* key)
         fprintf(stderr, "%s: Cannot get the value for %s.\n", fname, key);
         goto end;
     }
-    if (value->type != cJSON_String &&
-        value->type != cJSON_Object) {
+    if (value->type != cJSON_String && value->type != cJSON_Object) {
         fprintf(stderr, "%s: The value for %s is invalid.\n", fname, key);
         goto end;
     }
-    res=strdup(value->valuestring);
+    res = strdup(value->valuestring);
 
-end:
+  end:
     if (json) {
         cJSON_Delete(json);
         json = NULL;

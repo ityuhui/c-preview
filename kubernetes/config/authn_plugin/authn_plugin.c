@@ -1,7 +1,7 @@
 #include "authn_plugin.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <dlfcn.h> 
+#include <dlfcn.h>
 #include <errno.h>
 
 #define PLUGIN_NAME_TEMPLATE "libkubernetes_%s.so"
@@ -11,18 +11,18 @@
 #define PLUGIN_FUNCTION_IS_EXPIRED "is_expired"
 #define PLUGIN_FUNCTION_REFRESH "refresh"
 
-authn_plugin_t* create_authn_plugin(const char *name)
+authn_plugin_t *create_authn_plugin(const char *name)
 {
     static char fname[] = "create_authn_plugin()";
 
-    authn_plugin_t* plugin = calloc(1, sizeof(authn_plugin_t));
+    authn_plugin_t *plugin = calloc(1, sizeof(authn_plugin_t));
     if (!plugin) {
         fprintf(stderr, "%s: Cannot allocate memory for plugin library %s.[%s]\n", fname, name, strerror(errno));
         return NULL;
     }
 
     char plugin_lib_name[PLUGIN_LIB_NAME_SIZE];
-    memset(plugin_lib_name,0, sizeof(plugin_lib_name));
+    memset(plugin_lib_name, 0, sizeof(plugin_lib_name));
     snprintf(plugin_lib_name, sizeof(plugin_lib_name), PLUGIN_NAME_TEMPLATE, name);
     void *dlhandler = dlopen(plugin_lib_name, RTLD_LAZY);
 
@@ -51,13 +51,13 @@ authn_plugin_t* create_authn_plugin(const char *name)
 
     return plugin;
 
-error:
+  error:
     free_authn_plugin(plugin);
     plugin = NULL;
     return plugin;
 }
 
-void free_authn_plugin(authn_plugin_t* plugin)
+void free_authn_plugin(authn_plugin_t * plugin)
 {
     if (!plugin) {
         return;
@@ -67,7 +67,7 @@ void free_authn_plugin(authn_plugin_t* plugin)
         dlclose(plugin->dlhandler);
         plugin->dlhandler = NULL;
     }
-    
+
     if (plugin->name) {
         free(plugin->name);
         plugin->name = NULL;
