@@ -131,14 +131,9 @@ char *assembleTargetUrl(char    *basePath,
 
     int operationParameterLength = 0;
     int basePathLength = strlen(basePath);
-    bool slashNeedsToBeAppendedToBasePath = false;
 
     if(operationParameter != NULL) {
         operationParameterLength = (1 + strlen(operationParameter));
-    }
-    if(basePath[strlen(basePath) - 1] != '/') {
-        slashNeedsToBeAppendedToBasePath = true;
-        basePathLength++;
     }
 
     char *targetUrl =
@@ -197,7 +192,6 @@ int lengthOfKeyPair(keyValuePair_t *keyPair) {
     return 0;
 }
 
-
 void apiClient_invoke(apiClient_t    *apiClient,
                       char        *operationParameter,
                       list_t        *queryParameters,
@@ -253,6 +247,8 @@ void apiClient_invoke(apiClient_t    *apiClient,
                             (char *) listEntry->data);
                     headers = curl_slist_append(headers,
                                                 buffContent);
+                    free(buffContent);
+                    buffContent = NULL;
                 }
             }
         } else {
@@ -266,8 +262,7 @@ void apiClient_invoke(apiClient_t    *apiClient,
         }
 
         if(formParameters != NULL) {
-            if(strstr(buffContent,
-                      "application/x-www-form-urlencoded") != NULL)
+            if(findStrInStrList(contentType, "application/x-www-form-urlencoded") !=NULL)
             {
                 long parameterLength = 0;
                 long keyPairLength = 0;
@@ -309,7 +304,7 @@ void apiClient_invoke(apiClient_t    *apiClient,
                 curl_easy_setopt(handle, CURLOPT_POSTFIELDS,
                                  formString);
             }
-            if(strstr(buffContent, "multipart/form-data") != NULL) {
+            if(findStrInStrList(contentType, "multipart/form-data") != NULL) {
                 mime = curl_mime_init(handle);
                 list_ForEach(listEntry, formParameters) {
                     keyValuePair_t *keyValuePair =
