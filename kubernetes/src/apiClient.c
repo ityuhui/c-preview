@@ -15,6 +15,7 @@ apiClient_t *apiClient_create() {
     apiClient->dataReceivedLen = 0;
     apiClient->response_code = 0;
     apiClient->apiKeys_BearerToken = NULL;
+    apiClient->watch_func = NULL;
 
     return apiClient;
 }
@@ -51,6 +52,7 @@ apiClient_t *apiClient_create_with_base_path(const char *basePath
     }else{
         apiClient->apiKeys_BearerToken = NULL;
     }
+    apiClient->watch_func = NULL;
 
     return apiClient;
 }
@@ -73,6 +75,8 @@ void apiClient_free(apiClient_t *apiClient) {
         }
         list_free(apiClient->apiKeys_BearerToken);
     }
+    apiClient->watch_func = NULL;
+
     free(apiClient);
     curl_global_cleanup();
 }
@@ -452,6 +456,9 @@ size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp) {
     apiClient->dataReceived = (char *)realloc( apiClient->dataReceived, apiClient->dataReceivedLen + size_this_time + 1);
     memcpy(apiClient->dataReceived + apiClient->dataReceivedLen, buffer, size_this_time);
     apiClient->dataReceivedLen += size_this_time;
+    if (apiClient->watch_func) {
+        apiClient->watch_func(apiClient->dataReceived, &apiClient->dataReceivedLen);
+    }
     return size_this_time;
 }
 
