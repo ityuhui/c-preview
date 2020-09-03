@@ -12,10 +12,10 @@ extern "C" {
 #define HTTP_REQUEST_DELETE "DELETE"
 #define HTTP_REQUEST_PATCH "PATCH"
 
-    typedef enum shc_http_rc_t {
-        HTTP_RC_OK = 200,
-        HTTP_RC_UNAUTHORIZED = 400
-    } shc_http_rc_t;
+typedef enum shc_http_rc_t {
+    HTTP_RC_OK = 200,
+    HTTP_RC_UNAUTHORIZED = 400
+} shc_http_rc_t;
 
 /*
  * shc_request
@@ -43,7 +43,7 @@ extern "C" {
  * p_http_response_length   : pointer that pointing to the length of p_http_response
  *
  */
-    int shc_request(char **p_http_response, int *p_http_response_length, char *request_type, const char *url, sslConfig_t * sc, list_t * apiKeys, list_t * contentType, char *post_data);
+int shc_request(char **p_http_response, int *p_http_response_length, char *request_type, const char *url, sslConfig_t * sc, list_t * apiKeys, list_t * contentType, char *post_data);
 
 /*
  * shc_get_string_from_json
@@ -67,7 +67,7 @@ extern "C" {
  * None
  *
  */
-    char *shc_get_string_from_json(const char *json_string, const char *key);
+char *shc_get_string_from_json(const char *json_string, const char *key);
 
 #ifdef  __cplusplus
 }

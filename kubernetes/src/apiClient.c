@@ -89,6 +89,7 @@ sslConfig_t *sslConfig_create(const char *clientCertFile, const char *clientKeyF
         sslConfig->CACertFile = strdup(CACertFile);
     }
     sslConfig->insecureSkipTlsVerify = insecureSkipTlsVerify;
+    return sslConfig;
 }
 
 void sslConfig_free(sslConfig_t *sslConfig) {
@@ -192,6 +193,7 @@ int lengthOfKeyPair(keyValuePair_t *keyPair) {
     return 0;
 }
 
+
 void apiClient_invoke(apiClient_t    *apiClient,
                       char        *operationParameter,
                       list_t        *queryParameters,
@@ -262,7 +264,8 @@ void apiClient_invoke(apiClient_t    *apiClient,
         }
 
         if(formParameters != NULL) {
-            if(findStrInStrList(contentType, "application/x-www-form-urlencoded") !=NULL)
+            if(contentType &&
+               findStrInStrList(contentType, "application/x-www-form-urlencoded") != NULL)
             {
                 long parameterLength = 0;
                 long keyPairLength = 0;
@@ -304,7 +307,8 @@ void apiClient_invoke(apiClient_t    *apiClient,
                 curl_easy_setopt(handle, CURLOPT_POSTFIELDS,
                                  formString);
             }
-            if(findStrInStrList(contentType, "multipart/form-data") != NULL) {
+            if(contentType &&
+               findStrInStrList(contentType, "multipart/form-data") != NULL) {
                 mime = curl_mime_init(handle);
                 list_ForEach(listEntry, formParameters) {
                     keyValuePair_t *keyValuePair =
@@ -420,10 +424,6 @@ void apiClient_invoke(apiClient_t    *apiClient,
         curl_slist_free_all(headers);
 
         free(targetUrl);
-
-        if(contentType != NULL) {
-            free(buffContent);
-        }
 
         if(res == CURLE_OK) {
             curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &apiClient->response_code);

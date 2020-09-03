@@ -12,7 +12,7 @@ extern "C" {
         char *name;
         void *dlhandler;
         char *(*get_token) (kubeconfig_property_t *);
-          bool(*is_expired) (kubeconfig_property_t *);
+        bool (*is_expired) (kubeconfig_property_t *);
         int (*refresh) (kubeconfig_property_t *);
     } authn_plugin_t;
 

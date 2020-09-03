@@ -15,7 +15,7 @@ int shc_request(char **p_http_response, int *p_http_response_length, char *type,
     int rc = http_client->response_code;
     switch (rc) {
     case HTTP_RC_OK:
-        *p_http_response = strdup(http_client->dataReceived);
+        *p_http_response = strndup((char *)http_client->dataReceived, http_client->dataReceivedLen);
         *p_http_response_length = http_client->dataReceivedLen;
         break;
     default:
