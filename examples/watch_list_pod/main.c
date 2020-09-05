@@ -5,53 +5,57 @@
 #include <stdio.h>
 #include <errno.h>
 
-#define JSON_ARRAY_DELIM "\n"
+#define JSON_ARRAY_DELIM "\r\n"
 
-void watch_pod_handler(void* data, long* pDataLen)
+int convert_to_json_array(char *json_string, list_t *json_array)
 {
-    char *raw_data= (char *)data;
-    if (!raw_data || '\0' == raw_data[0]) {
-        return;
+    if (!json_string || '\0' == json_string[0]) {
+        return -1;
     }
+    printf("strlen(json_string)=%ld\n", strlen(json_string));
+    //printf("json_string=%s\n", json_string);
 
-    char *token = NULL;
-    token = strtok(raw_data, JSON_ARRAY_DELIM);
+    int rc = 0;
+    char* json_string_dup = strndup(json_string, strlen(json_string));
+
+    char* token = NULL;
+    token = strtok(json_string_dup, JSON_ARRAY_DELIM);
     while (token) {
-        printf("%s\n", token);
-
-        malloc();
-        *pDataLen = *pDataLen - len;
-
+        cJSON* cjson = cJSON_Parse(token);
+        if (cjson == NULL) {
+            fprintf(stderr, "Cannot create a json object\n");
+            rc = false;
+            goto end;
+        }
         token = strtok(NULL, JSON_ARRAY_DELIM);
     }
 
-    return;
-
-
-    /*long dataLen = *pDataLen;
-    for (int i = 0; i < dataLen; i++) {
-        printf("data[%d]=%c\n", i, ((char *)data)[i]);
+end:
+    if (json_string_dup) {
+        free(json_string_dup);
+        json_string_dup = NULL;
     }
+    return rc;
+}
 
-    printf("\n");
-    */
-    //printf("%s\n", (char*)data);
-    printf("dataLen=%ld, strlen(data)=%ld\n", *pDataLen, strlen((char*)data));
+void watch_pod_handler(void** pdata, long* pDataLen)
+{
+    char *data = *(char **)pdata;
+    //printf("Debug--begin-----------\n");
+    //printf("%s\n", data);
+    printf("dataLen=%ld, strlen(data)=%ld\n", *pDataLen, strlen(data));
+    //printf("Debug--end-------------\n");
 
-    free((char *)data);
-    *pDataLen = 0;
+    int rc = convert_to_json_array(data);
+    if (0 == rc) {
+        printf("%s\n", data);
+        free(data);
+        *pdata = NULL;
+        *pDataLen = 0;
+    } else {
+        fprintf(stderr, "Not a valid json array\n");
+    }    
 
-    
-    
-
-    /*
-    cJSON* cjson = cJSON_Parse((char *)data);
-    if (cjson == NULL) {
-        fprintf(stderr, "Cannot create a json object\n");
-        return;
-    }
-    cJSON_Print(cjson);
-    */
 }
 
 void watch_list_pod(apiClient_t * apiClient)

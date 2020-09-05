@@ -25,7 +25,7 @@ typedef struct apiClient_t {
     long dataReceivedLen;
     long response_code;
     list_t *apiKeys_BearerToken;
-    void (*watch_func)(void*, long*);
+    void (*watch_func)(void**, long*);
 } apiClient_t;
 
 apiClient_t* apiClient_create();

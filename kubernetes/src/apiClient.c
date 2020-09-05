@@ -458,7 +458,7 @@ size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp) {
     apiClient->dataReceivedLen += size_this_time;
     ((char*)apiClient->dataReceived)[apiClient->dataReceivedLen] = '\0'; // the size of (apiClient->dataReceived) = dataReceivedLen + 1
     if (apiClient->watch_func) {
-        apiClient->watch_func(apiClient->dataReceived, &apiClient->dataReceivedLen);
+        apiClient->watch_func(&apiClient->dataReceived, &apiClient->dataReceivedLen);
     }
     return size_this_time;
 }
