@@ -72,28 +72,6 @@ extern "C" {
  */
     void clear_and_free_string_pair_list(list_t * list);
 
-/*
- * clear_and_free_string_list
- *
- * Description:
- *
- * clear the content and free the memory for a string list
- *
- * Return:
- * 
- * None
- *
- * Parameter:
- *
- * IN:
- * list: The string list needs to clear and free
- *
- * OUT:
- * None
- *
- */
-    void clear_and_free_string_list(list_t * list);
-
 #ifdef  __cplusplus
 }
 #endif

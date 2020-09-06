@@ -5,57 +5,39 @@
 #include <stdio.h>
 #include <errno.h>
 
-#define JSON_ARRAY_DELIM "\r\n"
-
-int convert_to_json_array(char *json_string, list_t *json_array)
+void process_one_watch_event(const char *wevent_string)
 {
-    if (!json_string || '\0' == json_string[0]) {
-        return -1;
+    static char fname[] = "process_one_watch_event()";
+
+    if (!wevent_string) {
+        return;
     }
-    printf("strlen(json_string)=%ld\n", strlen(json_string));
-    //printf("json_string=%s\n", json_string);
+    printf("event:\n%s\n\n", wevent_string);
 
-    int rc = 0;
-    char* json_string_dup = strndup(json_string, strlen(json_string));
-
-    char* token = NULL;
-    token = strtok(json_string_dup, JSON_ARRAY_DELIM);
-    while (token) {
-        cJSON* cjson = cJSON_Parse(token);
-        if (cjson == NULL) {
-            fprintf(stderr, "Cannot create a json object\n");
-            rc = false;
-            goto end;
-        }
-        token = strtok(NULL, JSON_ARRAY_DELIM);
+    cJSON *wevent_json_obj = cJSON_Parse(wevent_string);
+    if (!wevent_json_obj) {
+        fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
+        goto end;
+    }
+    cJSON *json_value = cJSON_GetObjectItem(wevent_json_obj, OIDC_ID_TOKEN_EXP);
+    if (!json_value || json_value->type != cJSON_Number) {
+        fprintf(stderr, "%s: Cannot get expiration time in id token.\n", fname);
+        goto end;
     }
 
-end:
-    if (json_string_dup) {
-        free(json_string_dup);
-        json_string_dup = NULL;
-    }
-    return rc;
 }
 
-void watch_pod_handler(void** pdata, long* pDataLen)
+void my_watch_pod_handler(list_t* watch_event_list)
 {
-    char *data = *(char **)pdata;
-    //printf("Debug--begin-----------\n");
-    //printf("%s\n", data);
-    printf("dataLen=%ld, strlen(data)=%ld\n", *pDataLen, strlen(data));
-    //printf("Debug--end-------------\n");
+    if (!watch_event_list) {
+        return;
+    }
 
-    int rc = convert_to_json_array(data);
-    if (0 == rc) {
-        printf("%s\n", data);
-        free(data);
-        *pdata = NULL;
-        *pDataLen = 0;
-    } else {
-        fprintf(stderr, "Not a valid json array\n");
-    }    
-
+    listEntry_t* listEntry = NULL;
+    list_ForEach(listEntry, watch_event_list) {
+        char *list_item = listEntry->data;
+        process_one_watch_event(list_item);
+    }
 }
 
 void watch_list_pod(apiClient_t * apiClient)
@@ -91,7 +73,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    apiClient->watch_func = watch_pod_handler;
+    apiClient->watch_func = my_watch_pod_handler;
     watch_list_pod(apiClient);
 
     apiClient_free(apiClient);
