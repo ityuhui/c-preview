@@ -14,6 +14,7 @@
 
 typedef struct object_t {
     void *temporary;
+    cJSON* json_obj;
 } object_t;
 
 object_t *object_create();

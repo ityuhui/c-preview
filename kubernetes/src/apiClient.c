@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include "../include/apiClient.h"
 
-#define JSON_ARRAY_DELIM "\r\n"
-
 size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp);
 
 apiClient_t *apiClient_create() {
@@ -452,65 +450,6 @@ void apiClient_invoke(apiClient_t    *apiClient,
     }
 }
 
-static int convert_to_json_array(list_t* json_array, const char* json_string)
-{
-    if (!json_string || '\0' == json_string[0] || !json_array) {
-        return -1;
-    }
-
-    int rc = 0;
-    char *json_string_dup = strdup(json_string);
-
-    char *token = NULL;
-    token = strtok(json_string_dup, JSON_ARRAY_DELIM);
-    while (token) {
-        cJSON* cjson = cJSON_Parse(token);
-        if (cjson == NULL) {
-            rc = -1;
-            goto end;
-        }
-        list_addElement(json_array, strdup(token));
-        token = strtok(NULL, JSON_ARRAY_DELIM);
-    }
-
-end:
-    if (json_string_dup) {
-        free(json_string_dup);
-        json_string_dup = NULL;
-    }
-    return rc;
-}
-
-static void http_watch_handler(void** pData, long* pDataLen, void (*watch_func)(const char*))
-{
-    char* data = *(char**)pData;
-    //printf("dataLen=%ld, strlen(data)=%ld\n", *pDataLen, strlen(data));
-
-    list_t *watch_event_list = list_create();
-    if (!watch_event_list) {
-        fprintf(stderr, "Cannot create a list for watch events.\n");
-        return;
-    }
-    int rc = convert_to_json_array(watch_event_list, data);
-    if (0 == rc) {
-
-        listEntry_t* listEntry = NULL;
-        list_ForEach(listEntry, watch_event_list) {
-            char *list_item = listEntry->data;
-            watch_func(list_item);
-        }
-
-        free(data);
-        *pData = NULL;
-        *pDataLen = 0;
-    } else {
-        //fprintf(stderr, "Not a valid json array\n");
-    }
-
-    clear_and_free_string_list(watch_event_list);
-    watch_event_list = NULL;
-}
-
 size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp) {
     size_t size_this_time = nmemb * size;
     apiClient_t *apiClient = (apiClient_t *)userp;
@@ -519,7 +458,7 @@ size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp) {
     apiClient->dataReceivedLen += size_this_time;
     ((char*)apiClient->dataReceived)[apiClient->dataReceivedLen] = '\0'; // the space size of (apiClient->dataReceived) = dataReceivedLen + 1
     if (apiClient->watch_func) {
-        http_watch_handler(&apiClient->dataReceived, &apiClient->dataReceivedLen, apiClient->watch_func);
+        apiClient->watch_func(&apiClient->dataReceived, &apiClient->dataReceivedLen);
     }
     return size_this_time;
 }

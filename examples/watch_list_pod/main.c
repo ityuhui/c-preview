@@ -4,33 +4,38 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <errno.h>
+#include <watch_util.h>
 
 #define WATCH_EVENT_KEY_TYPE "type"
 #define WATCH_EVENT_KEY_OBJECT "object"
 
-void process_one_watch_event(const char *wevent_string)
+void on_pod_event_comes(const char *event_string)
 {
     static char fname[] = "process_one_watch_event()";
 
-    if (!wevent_string) {
+    if (!event_string) {
         return;
     }
-    printf("watch event raw string:\n%s\n\n", wevent_string);
+    printf("\nwatch event raw string:\n%s\n\n", event_string);
 
-    cJSON *wevent_json_obj = cJSON_Parse(wevent_string);
-    if (!wevent_json_obj) {
+    cJSON *event_json_obj = cJSON_Parse(event_string);
+    if (!event_json_obj) {
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
         goto end;
     }
-    cJSON *json_value_type = cJSON_GetObjectItem(wevent_json_obj, WATCH_EVENT_KEY_TYPE);
+
+    v1_watch_event_t *we = v1_watch_event_parseFromJSON(event_json_obj);
+    printf("type: %s\n", we->type);
+    /*cJSON *json_value_type = cJSON_GetObjectItem(wevent_json_obj, WATCH_EVENT_KEY_TYPE);
     if (!json_value_type || json_value_type->type != cJSON_String) {
         fprintf(stderr, "%s: Cannot get type in watch event.\n", fname);
         goto end;
     }
     char *type = strdup(json_value_type->valuestring);
-    printf("type: %s\n", type);
+    printf("type: %s\n", type);*/
 
-    cJSON *json_value_object = cJSON_GetObjectItem(wevent_json_obj, WATCH_EVENT_KEY_OBJECT);
+
+    cJSON *json_value_object = cJSON_GetObjectItem(/*wevent_json_obj*/ we->object->json, WATCH_EVENT_KEY_OBJECT);
     if (!json_value_object || json_value_object->type != cJSON_Object) {
         fprintf(stderr, "%s: Cannot get object in watch event.\n", fname);
         goto end;
@@ -47,19 +52,25 @@ end:
         v1_pod_free(pod);
         pod = NULL;
     }
-    if (type) {
+    /*if (type) {
         free(type);
         type = NULL;
+    }*/
+    if (event_json_obj) {
+        cJSON_Delete(event_json_obj);
+        event_json_obj = NULL;
     }
-    if (wevent_json_obj) {
-        cJSON_Delete(wevent_json_obj);
-        wevent_json_obj = NULL;
-    }
+}
+
+void my_pod_watch_handler(void** pData, long* pDataLen)
+{
+    kubernets_watch_handler(pData, pDataLen, on_pod_event_comes);
 }
 
 void watch_list_pod(apiClient_t * apiClient)
 {
-    apiClient->watch_func = process_one_watch_event;
+    apiClient->watch_func = my_pod_watch_handler;
+
     CoreV1API_listNamespacedPod(apiClient, "default",    /*namespace */
                                            NULL,    /* pretty */
                                            0,   /* allowWatchBookmarks */
