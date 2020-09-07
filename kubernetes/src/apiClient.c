@@ -481,7 +481,7 @@ end:
     return rc;
 }
 
-static void http_watch_handler(void** pData, long* pDataLen, void (*watch_func)(list_t*))
+static void http_watch_handler(void** pData, long* pDataLen, void (*watch_func)(const char*))
 {
     char* data = *(char**)pData;
     //printf("dataLen=%ld, strlen(data)=%ld\n", *pDataLen, strlen(data));
@@ -493,13 +493,18 @@ static void http_watch_handler(void** pData, long* pDataLen, void (*watch_func)(
     }
     int rc = convert_to_json_array(watch_event_list, data);
     if (0 == rc) {
-        watch_func(watch_event_list);
+
+        listEntry_t* listEntry = NULL;
+        list_ForEach(listEntry, watch_event_list) {
+            char *list_item = listEntry->data;
+            watch_func(list_item);
+        }
 
         free(data);
         *pData = NULL;
         *pDataLen = 0;
     } else {
-        fprintf(stderr, "Not a valid json array\n");
+        //fprintf(stderr, "Not a valid json array\n");
     }
 
     clear_and_free_string_list(watch_event_list);
@@ -512,7 +517,7 @@ size_t writeDataCallback(void *buffer, size_t size, size_t nmemb, void *userp) {
     apiClient->dataReceived = (char *)realloc( apiClient->dataReceived, apiClient->dataReceivedLen + size_this_time + 1);
     memcpy(apiClient->dataReceived + apiClient->dataReceivedLen, buffer, size_this_time);
     apiClient->dataReceivedLen += size_this_time;
-    ((char*)apiClient->dataReceived)[apiClient->dataReceivedLen] = '\0'; // the size of (apiClient->dataReceived) = dataReceivedLen + 1
+    ((char*)apiClient->dataReceived)[apiClient->dataReceivedLen] = '\0'; // the space size of (apiClient->dataReceived) = dataReceivedLen + 1
     if (apiClient->watch_func) {
         http_watch_handler(&apiClient->dataReceived, &apiClient->dataReceivedLen, apiClient->watch_func);
     }

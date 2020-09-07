@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <errno.h>
 
+#define WATCH_EVENT_KEY_TYPE "type"
+#define WATCH_EVENT_KEY_OBJECT "object"
+
 void process_one_watch_event(const char *wevent_string)
 {
     static char fname[] = "process_one_watch_event()";
@@ -12,38 +15,52 @@ void process_one_watch_event(const char *wevent_string)
     if (!wevent_string) {
         return;
     }
-    printf("event:\n%s\n\n", wevent_string);
+    printf("watch event raw string:\n%s\n\n", wevent_string);
 
     cJSON *wevent_json_obj = cJSON_Parse(wevent_string);
     if (!wevent_json_obj) {
         fprintf(stderr, "%s: Cannot create JSON from string.[%s].\n", fname, cJSON_GetErrorPtr());
         goto end;
     }
-    cJSON *json_value = cJSON_GetObjectItem(wevent_json_obj, OIDC_ID_TOKEN_EXP);
-    if (!json_value || json_value->type != cJSON_Number) {
-        fprintf(stderr, "%s: Cannot get expiration time in id token.\n", fname);
+    cJSON *json_value_type = cJSON_GetObjectItem(wevent_json_obj, WATCH_EVENT_KEY_TYPE);
+    if (!json_value_type || json_value_type->type != cJSON_String) {
+        fprintf(stderr, "%s: Cannot get type in watch event.\n", fname);
         goto end;
     }
+    char *type = strdup(json_value_type->valuestring);
+    printf("type: %s\n", type);
 
-}
-
-void my_watch_pod_handler(list_t* watch_event_list)
-{
-    if (!watch_event_list) {
-        return;
+    cJSON *json_value_object = cJSON_GetObjectItem(wevent_json_obj, WATCH_EVENT_KEY_OBJECT);
+    if (!json_value_object || json_value_object->type != cJSON_Object) {
+        fprintf(stderr, "%s: Cannot get object in watch event.\n", fname);
+        goto end;
     }
+    v1_pod_t *pod = v1_pod_parseFromJSON(json_value_object);
+    if (!pod) {
+        fprintf(stderr, "%s: Cannot get pod from watch event object.\n", fname);
+        goto end;
+    }
+    printf("pod:\n\tname: %s\n", pod->metadata->name);
 
-    listEntry_t* listEntry = NULL;
-    list_ForEach(listEntry, watch_event_list) {
-        char *list_item = listEntry->data;
-        process_one_watch_event(list_item);
+end:
+    if (pod) {
+        v1_pod_free(pod);
+        pod = NULL;
+    }
+    if (type) {
+        free(type);
+        type = NULL;
+    }
+    if (wevent_json_obj) {
+        cJSON_Delete(wevent_json_obj);
+        wevent_json_obj = NULL;
     }
 }
 
 void watch_list_pod(apiClient_t * apiClient)
 {
-    v1_pod_list_t *pod_list = NULL;
-    pod_list = CoreV1API_listNamespacedPod(apiClient, "default",    /*namespace */
+    apiClient->watch_func = process_one_watch_event;
+    CoreV1API_listNamespacedPod(apiClient, "default",    /*namespace */
                                            NULL,    /* pretty */
                                            0,   /* allowWatchBookmarks */
                                            NULL,    /* continue */
@@ -54,7 +71,6 @@ void watch_list_pod(apiClient_t * apiClient)
                                            0,   /* timeoutSeconds */
                                            1    /* watch */
         );
-    printf("The return code of HTTP request=%ld\n", apiClient->response_code);
 }
 
 int main(int argc, char *argv[])
@@ -73,7 +89,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    apiClient->watch_func = my_watch_pod_handler;
     watch_list_pod(apiClient);
 
     apiClient_free(apiClient);
