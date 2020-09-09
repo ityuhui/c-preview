@@ -24,18 +24,15 @@ void on_pod_event_comes(const char *event_string)
         goto end;
     }
 
-    v1_watch_event_t *we = v1_watch_event_parseFromJSON(event_json_obj);
-    printf("type: %s\n", we->type);
-    /*cJSON *json_value_type = cJSON_GetObjectItem(wevent_json_obj, WATCH_EVENT_KEY_TYPE);
+    cJSON *json_value_type = cJSON_GetObjectItem(event_json_obj, WATCH_EVENT_KEY_TYPE);
     if (!json_value_type || json_value_type->type != cJSON_String) {
         fprintf(stderr, "%s: Cannot get type in watch event.\n", fname);
         goto end;
     }
     char *type = strdup(json_value_type->valuestring);
-    printf("type: %s\n", type);*/
+    printf("type: %s\n", type);
 
-
-    cJSON *json_value_object = cJSON_GetObjectItem(/*wevent_json_obj*/ we->object->json, WATCH_EVENT_KEY_OBJECT);
+    cJSON *json_value_object = cJSON_GetObjectItem(event_json_obj, WATCH_EVENT_KEY_OBJECT);
     if (!json_value_object || json_value_object->type != cJSON_Object) {
         fprintf(stderr, "%s: Cannot get object in watch event.\n", fname);
         goto end;
@@ -52,10 +49,10 @@ end:
         v1_pod_free(pod);
         pod = NULL;
     }
-    /*if (type) {
+    if (type) {
         free(type);
         type = NULL;
-    }*/
+    }
     if (event_json_obj) {
         cJSON_Delete(event_json_obj);
         event_json_obj = NULL;
